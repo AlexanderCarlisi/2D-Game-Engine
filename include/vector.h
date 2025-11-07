@@ -2,6 +2,7 @@
 #define VECTOR_H
 
 #include <stdbool.h>
+#include <stdlib.h> // ignore warning, it's wrong
 #include <stdio.h>
 
 // Layout: [ptr, size, size, float]
