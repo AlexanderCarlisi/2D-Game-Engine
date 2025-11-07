@@ -20,12 +20,17 @@ typedef struct Aspect {
 /// @struct WindowConfig
 /// Contains information consering that of a Window.
 /// This information is used the same across platforms.
+///
+/// @var world A pointer to the desired World to render. The purpose behind it
+///     being a pointer is so that you can have multiple windows render the same
+///     world. This does add additional complexity, TODO: Look into maybe making
+///     it easier to work with, but also test it out, see how bad it really is.
 typedef struct WindowConfig {
     char window_name[PLATFORM_MAX_WINDOW_NAME];
     struct Aspect window_aspect;
     struct Aspect render_aspect;
     float frames_per_second;
-    struct World world;
+    struct World* world;
 } WindowConfig;
 
 
@@ -35,7 +40,7 @@ bool platform_initialize();
 
 /// @brief Handles the creation and initialization of a new Window for the respective platform.
 /// @return WindowConfig pointer. Can be type casted to the specific platform's Window struct.
-/// @see X11Window TODO
+/// @see X11Window TODO:
 struct WindowConfig* platform_new_window(struct WindowConfig* config);
 
 /// @brief Flushes all changes of the Window Config to the platform.
@@ -79,7 +84,7 @@ bool platform_render(struct WindowConfig* config);
 /**
  * @struct X11Window
  * The container holding all information relevant to a single X11 Window.
- * Used for Rendering, Inputs, ---- and whatever else gets added. TODO
+ * Used for Rendering, Inputs, ---- and whatever else gets added. TODO:
  */
 typedef struct X11Window {
     struct WindowConfig config;
