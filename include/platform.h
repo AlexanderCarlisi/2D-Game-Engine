@@ -16,7 +16,6 @@ typedef struct Aspect {
     uint16_t height;
 } Aspect;
 
-
 /// @struct WindowConfig
 /// Contains information consering that of a Window.
 /// This information is used the same across platforms.
@@ -27,13 +26,16 @@ typedef struct Aspect {
 ///     it easier to work with, but also test it out, see how bad it really is.
 typedef struct WindowConfig {
     char window_name[PLATFORM_MAX_WINDOW_NAME];
+    uint32_t* framebuffer;
+    struct World* world;
     struct Aspect window_aspect;
     struct Aspect render_aspect;
     float frames_per_second;
-    uint32_t* framebuffer;
-    struct World* world;
+    float previous_time;
+    float accumulator;
 } WindowConfig;
 
+DECLARE_VECTOR(WindowConfigVector, vector_window_config, struct WindowConfig);
 
 /// @brief Startup the platform.
 /// @return Success.
@@ -64,16 +66,20 @@ bool platform_set_window_size(struct WindowConfig* config, struct Aspect size);
 /// @see platform_new_window for changing multiple fields at once.
 bool platform_set_window_resolution(struct WindowConfig* config, struct Aspect res);
 
+/// @brief Renders the World assigned to the WindowConfig.
+/// @param config The WindowConfig to render.
+/// @return False if an error occurs.
+bool platform_render(struct WindowConfig* config, float alpha);
+
 /// @brief Performs an iteration platform side.
 /// Checks for client side inputs and requests.
 /// @param config The window to perform checks on.
 /// @return False if an error occurs.
 bool platform_iterate(struct WindowConfig* config);
 
-/// @brief Renders the World assigned to the WindowConfig.
-/// @param config The WindowConfig to render.
-/// @return False if an error occurs.
-bool platform_render(struct WindowConfig* config);
+/// @brief Deallocates all dynamic memory of the platform
+/// @see engine_close
+void platform_free();
 
 // TODO: WINDOWS
 #ifdef _WIN32
