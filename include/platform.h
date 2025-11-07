@@ -30,6 +30,7 @@ typedef struct WindowConfig {
     struct Aspect window_aspect;
     struct Aspect render_aspect;
     float frames_per_second;
+    uint32_t* framebuffer;
     struct World* world;
 } WindowConfig;
 
@@ -92,7 +93,6 @@ typedef struct X11Window {
     xcb_screen_t* screen;
     xcb_window_t window;
     xcb_pixmap_t pixmap;
-    uint32_t* framebuffer;
 } X11Window;
 
 #endif // __linux__
