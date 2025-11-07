@@ -47,7 +47,7 @@ typedef struct Pose {
 /// @param pose Pose Pointer to update.
 /// @param xMeters
 /// @param yMeters
-void pose_update_meters(struct Pose* pose, float xMeters, float yMeters);
+void pose_update_meters(struct Pose* pose, int pixelsPerMeter, float xMeters, float yMeters);
 
 /// @brief Updates the Pose on new Pixel coordinates.
 /// @param pose Pose Pointer to update.
@@ -55,7 +55,7 @@ void pose_update_meters(struct Pose* pose, float xMeters, float yMeters);
 /// @param yPixels
 /// @warning It's suggested to stick with the Meters system, instead of manipulating
 /// pixels directly.
-void pose_update_pixels(struct Pose* pose, float xPixels, float yPixels);
+void pose_update_pixels(struct Pose* pose, int pixelsPerMeter, float xPixels, float yPixels);
 
 /// @brief Checks if two poses are equal in Meter Positions.
 /// @return True | False

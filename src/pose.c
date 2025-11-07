@@ -1,18 +1,15 @@
 #include "pose.h"
-#include "world_config.h"
 
-void pose_update_meters(struct Pose* pose, float xMeters, float yMeters) {
-	float ppm = worldconfig_get_ppm();
+void pose_update_meters(struct Pose* pose, int pixelsPerMeter, float xMeters, float yMeters) {
 	pose->x_meters = xMeters;
 	pose->y_meters = yMeters;
-	pose->x_pixels = xMeters * ppm;
-	pose->y_pixels = yMeters * ppm;
+	pose->x_pixels = xMeters * pixelsPerMeter;
+	pose->y_pixels = yMeters * pixelsPerMeter;
 }
 
-void pose_update_pixels(struct Pose* pose, float xPixels, float yPixels) {
-	float ppm = worldconfig_get_ppm();
-	pose->x_meters = xPixels / ppm;
-	pose->y_meters = yPixels / ppm;
+void pose_update_pixels(struct Pose* pose, int pixelsPerMeters, float xPixels, float yPixels) {
+	pose->x_meters = xPixels / pixelsPerMeters;
+	pose->y_meters = yPixels / pixelsPerMeters;
 	pose->x_pixels = xPixels;
 	pose->y_pixels = yPixels;
 }

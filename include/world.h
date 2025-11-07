@@ -38,7 +38,6 @@ typedef struct Interval {
  *
  * @var WorldConfig::pixels_per_meter
  * Pixels / Meter conversion, this is used in Pose math. @see struct Pose
- * TODO: Contemplate this some more, this being a float doesn't really make sense 10.5 / 1 is a weird fraction, and there is no half pixel.
  *
  * @var WorldConfig::gravity_field
  * The applied Gravity on Dynamic GameObjects. In units of Newtons/Kg || Meters per Second/Second
@@ -48,8 +47,8 @@ typedef struct WorldConfig {
 	struct Interval pool_interval;
 	size_t pool_size;
   float reallocation_ratio;
-	float pixels_per_meter;
   float gravity_field;
+	int pixels_per_meter;
 } WorldConfig;
 
 
