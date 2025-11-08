@@ -3,9 +3,8 @@
 #include "time.h"
 #include "render.h"
 
-// TODO: Actually implement the different window configs
-DEFINE_VECTOR(WindowConfigVector, vector_window_config, struct WindowConfig);
-static WindowConfigVector window_configs;
+#define WINDOWS_AMOUNT 1
+static WindowConfig* window_configs[WINDOWS_AMOUNT];
 
 
 #ifdef _WIN32
@@ -203,7 +202,7 @@ void _rename_window(struct X11Window* window, const char* name) {
         window->window,
         XCB_ATOM_WM_NAME, XCB_ATOM_STRING,
         8, strlen(name), name
-    );   
+    );
 }
 
 /// @brief Request an atom from the X11 instance using XCB.
@@ -219,7 +218,52 @@ xcb_atom_t _xcb_request(struct X11Window* window, const char* name) {
 }
 
 bool platform_initialize() {
-    return false;
+    // Start engine
+    engine_start();
+    
+    // Loop
+    while (engine_is_running()) {
+
+        for (size_t i = 0; i < WINDOWS_AMOUNT; i++) {
+            X11Window* window = _cast_window(window_configs[i]);
+            xcb_generic_event_t *event;
+            while ((event = xcb_poll_for_event(window->connection))) {
+                switch (event->response_type & ~0x80) {
+                    case XCB_EXPOSE:
+                        // Could trigger a redraw
+                        break;
+                    case XCB_CONFIGURE_NOTIFY: {
+                        // Window resized
+                        xcb_configure_notify_event_t* cfg = (xcb_configure_notify_event_t*)event;
+                        // appconfig_platform_resized_window_px(cfg->width, cfg->height);
+                        break;
+                    }
+                    case XCB_CLIENT_MESSAGE: {
+                        xcb_client_message_event_t* cm = (xcb_client_message_event_t*) event;
+                        if (cm->data.data32[0] == ATOM_WM_DELETE_WINDOW) {
+                            printf("User clicked X, closing window..\n");
+                            goto end;
+                        }
+                    }
+                    // case XCB_KEY_PRESS:
+                    //     // Could handle keys or just exit
+                    //     printf("Key pressed, exiting...\n");
+                    //     engine_close();
+                    //     free(event);
+                    //     goto end;
+                }
+                free(event);
+            }
+            engine_tick(&window->config);
+        }
+    }
+
+end:
+    engine_close();
+    for (int i = 0; i < WINDOWS_AMOUNT; i++) {
+        X11Window* window = _cast_window(window_configs[i]);
+        xcb_disconnect(window->connection);
+    }
 }
 
 struct WindowConfig* platform_new_window(struct WindowConfig config) {
@@ -304,9 +348,6 @@ struct WindowConfig* platform_new_window(struct WindowConfig config) {
 
     platform_set_window_resolution(&window->config, window->config.render_aspect);
     
-    // Start engine
-    // Loop
-    
     return &window->config;
 }
 
@@ -364,7 +405,6 @@ bool platform_render(struct WindowConfig* config, float alpha) {
     
     render_draw(config, alpha);
     
-    // TODO: Pixmap
     uint16_t width  = window->config.render_aspect.width;
     uint16_t height = window->config.render_aspect.height;
     uint32_t* framebuffer = window->config.framebuffer;

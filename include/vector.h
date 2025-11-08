@@ -92,7 +92,6 @@
     }\
 
 
-/*
 // #define DECLARE_VECTOR_PTR(vector_name, func_prefix, type_ptr)\
 //     typedef struct vector_name {\
 //         type_ptr* data;\
@@ -107,8 +106,8 @@
 //     int func_prefix##_realloc(vector_name* arr);\
 //     int func_prefix##_realloc_set(vector_name* arr, size_t newSize);\
 //     type_ptr func_prefix##_pop_swap(vector_name* arr, int index);\
-
-    
+//
+//
 // #define DEFINE_VECTOR_PTR(vector_name, func_prefix, type_ptr)\
 //     void func_prefix##_init(vector_name* arr) {\
 //         arr->count = 0;\
@@ -170,13 +169,12 @@
 //             printf("\n>>> Pop-Swap Failure <<<\n...Index out of Bounds...");\
 //             return NULL;\
 //         }\
-// \
 //         type_ptr popped = arr->data[index];\
 //         int last = arr->count - 1;\
 //         arr->data[index] = arr->data[last];\
 //         arr->data[last] = NULL;\
 //         arr->count--;\
-//         return popped;
+//         return popped;\
 //     }\
-*/
+        
 #endif // VECTOR_H
