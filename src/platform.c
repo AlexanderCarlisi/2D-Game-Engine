@@ -1,8 +1,6 @@
 #include "platform.h"
 #include "engine.h"
 #include "time.h"
-#include <windows.h>
-#include <wingdi.h>
 
 // TODO: Actually implement the different window configs
 DEFINE_VECTOR(WindowConfigVector, vector_window_config, struct WindowConfig);
