@@ -1,5 +1,8 @@
 CompileFlags:
   Add: [
     "-D__linux__",
-    "-D_WIN32",
+    # "-target", "x86_64-w64-mingw32",
+    # "-I/usr/x86_64-w64-mingw32/include",
+    # "-D_WIN32",
+    # "-D_WINDOWS"
   ]
