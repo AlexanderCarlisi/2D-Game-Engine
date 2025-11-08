@@ -7,6 +7,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <windef.h>
 #include "world.h"
 
 #define PLATFORM_MAX_WINDOW_NAME 256    // Should be max Window Name length for Windows and Unix, needs to be tested.
@@ -97,6 +98,10 @@ void platform_free();
 typedef struct W32Window {
     struct WindowConfig config;
     HWND hwnd;
+    HDC hdc;
+    HBITMAP bitmap;
+    BITMAPINFO bitmapInfo;
+    HBITMAP oldBitMap;
 } W32Window;
 
 #endif

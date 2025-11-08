@@ -2,6 +2,7 @@
 #include "engine.h"
 #include "time.h"
 #include <windows.h>
+#include <wingdi.h>
 
 // TODO: Actually implement the different window configs
 DEFINE_VECTOR(WindowConfigVector, vector_window_config, struct WindowConfig);
@@ -71,9 +72,12 @@ struct WindowConfig* platform_new_window(struct WindowConfig config) {
         return NULL;
     }
 
+    window->hdc = GetDC(window->hwnd);
+    platform_set_window_resolution(&window->config, window->config.render_aspect);
+
     ShowWindow(window->hwnd, SW_SHOW);
     initialize_time_frequency();
-
+    
     // engine start
     // engine loop
 
@@ -101,8 +105,42 @@ bool platform_set_window_size(struct WindowConfig* config, struct Aspect size) {
 }
 
 bool platform_set_window_resolution(struct WindowConfig* config, struct Aspect res) {
-    // TODO:
-    return false;
+    W32Window* window = _cast_window(config);
+    if (window == NULL) return false;
+
+    if (window->bitmap) {
+        DeleteObject(window->bitmap);
+        window->bitmap = NULL;
+    }
+    
+    // Not a memory leak, framebuffer is owned by DIB
+    window->config.framebuffer = NULL;
+
+    memset(&window->bitmapInfo, 0, sizeof(BITMAPINFO));
+    window->bitmapInfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    window->bitmapInfo.bmiHeader.biWidth = res.width;
+    window->bitmapInfo.bmiHeader.biHeight = -res.height; // top-down DIB
+    window->bitmapInfo.bmiHeader.biPlanes = 1;
+    window->bitmapInfo.bmiHeader.biBitCount = 32;
+    window->bitmapInfo.bmiHeader.biCompression = BI_RGB;
+
+    window->bitmap = CreateDIBSection(
+        window->hdc,
+        &window->bitmapInfo,
+        DIB_RGB_COLORS,
+        (void**) &window->config.framebuffer,
+        NULL,
+        0
+    );
+    
+    // There is a Bitmap that gets assigned automatically cannot be deallocated, 
+    // as its within context, so we store its address and free it once the program quits
+    if (window->oldBitMap == NULL) {
+        window->oldBitMap = SelectObject(window->hdc, window->bitmap);
+        return true;
+    } else {
+        return SelectObject(window->hdc, window->bitmap);
+    }
 }
 
 bool platform_update_window(struct WindowConfig* config) {
