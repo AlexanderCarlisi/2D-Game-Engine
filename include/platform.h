@@ -1,6 +1,10 @@
 #ifndef PLATFORM_H
 #define PLATFORM_H
 
+// X11: 
+// Read about x11: https://www.x.org/archive/X11R7.5/doc/libX11/libX11.html
+// Somewhat read a somewhat documented lib XCB: https://xcb.freedesktop.org/
+
 #include <stdint.h>
 #include <stdbool.h>
 #include "world.h"
@@ -42,9 +46,13 @@ DECLARE_VECTOR(WindowConfigVector, vector_window_config, struct WindowConfig);
 bool platform_initialize();
 
 /// @brief Handles the creation and initialization of a new Window for the respective platform.
-/// @return WindowConfig pointer. Can be type casted to the specific platform's Window struct.
-/// @see X11Window TODO:
-struct WindowConfig* platform_new_window(struct WindowConfig* config);
+/// @param config An uninitialized WindowConfig reference.
+/// @return Respective Platforms Window struct. The return can be cast to platform's Window struct.
+///     ; NULL if malloc error occurs
+/// @see X11Window
+/// @see TODO: Window's Window
+/// @note config param is deep copied into return value.
+struct WindowConfig* platform_new_window(struct WindowConfig config);
 
 /// @brief Flushes all changes of the Window Config to the platform.
 /// @param config WindowConfig with changes you wish to see implemented.

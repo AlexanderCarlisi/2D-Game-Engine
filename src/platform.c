@@ -1,6 +1,9 @@
 #include "platform.h"
 #include "engine.h"
+#include <sched.h>
 #include <stdio.h>
+#include <xcb/xcb.h>
+#include <xcb/xproto.h>
 #include "time.h"
 
 // TODO: Actually implement the different window configs
@@ -126,17 +129,136 @@ bool platform_render(struct WindowConfig* config, float alpha) {
 #include <stdlib.h>
 #include <string.h>
 
+// Atoms are global to the X Server instance
+xcb_atom_t ATOM_WM_PROTOCOLS = XCB_NONE;
+xcb_atom_t ATOM_WM_DELETE_WINDOW = XCB_NONE;
+
+/// @brief XCB Window Resize Helper function, doesn't flush.
+void _resize_window(struct X11Window* window, struct Aspect* windowSize) {
+    if (!window->connection) return;
+    xcb_configure_window(
+        window->connection,
+        window->window,
+        XCB_CONFIG_WINDOW_WIDTH | XCB_CONFIG_WINDOW_HEIGHT,
+        (uint32_t[]){windowSize->width, windowSize->height}
+    );
+}
+
+/// @brief XCB Window Rename Helper function, doesn't flush.
+void _rename_window(struct X11Window* window, const char* name) {
+    if (!window->connection) return;
+
+    xcb_change_property(
+        window->connection,
+        XCB_PROP_MODE_REPLACE,
+        window->window,
+        XCB_ATOM_WM_NAME, XCB_ATOM_STRING,
+        8, strlen(name), name
+    );   
+}
+
+/// @brief Request an atom from the X11 instance using XCB.
+/// @return The requested atom response. 
+/// @note Flushes, and Blocking. Deallocs Reply.
+xcb_atom_t _xcb_request(struct X11Window* window, const char* name) {
+    xcb_intern_atom_cookie_t cookie = xcb_intern_atom(window->connection, 0, strlen(name), name);
+    xcb_intern_atom_reply_t* reply = xcb_intern_atom_reply(window->connection, cookie, NULL); // FLUSHES
+    if (!reply) return XCB_ATOM_NONE;
+    xcb_atom_t atom = reply->atom;
+    free(reply);
+    return atom;
+}
 
 bool platform_initialize() {
     return false;
 }
 
-struct WindowConfig* platform_new_window(struct WindowConfig* config) {
-    return NULL;
+struct WindowConfig* platform_new_window(struct WindowConfig config) {
+    // Pass in a generic WindowConfig, return a X11Window that can be cast to WindowConfig vise versa
+    struct X11Window* window = (X11Window*) malloc(sizeof(X11Window));
+    if (window == NULL) {
+        printf("\n>>> Window Malloc Error <<<\n");
+        free(window);
+        return NULL;
+    }
+    window->config = config;
+
+    // Connect to the X server
+    int screenNum;
+    window->connection = xcb_connect(NULL, &screenNum);
+    if (xcb_connection_has_error(window->connection)) {
+        printf("\n>>> Failed to connect to X Server <<<\n");
+        free(window);
+        return NULL;
+    }
+    const xcb_setup_t* setup = xcb_get_setup(window->connection);
+
+    // Get the desired screen
+    xcb_screen_iterator_t iter = xcb_setup_roots_iterator(setup);
+    for (int i = 0; i < screenNum; i++) {
+        xcb_screen_next(&iter);
+    }
+    window->screen = iter.data;
+
+    window->window = xcb_generate_id(window->connection);
+
+    uint32_t mask = XCB_CW_BACK_PIXEL | XCB_CW_EVENT_MASK;
+    uint32_t values[2] = {
+        window->screen->black_pixel,
+        XCB_EVENT_MASK_EXPOSURE |
+        XCB_EVENT_MASK_KEY_PRESS | 
+        XCB_EVENT_MASK_STRUCTURE_NOTIFY // RESIZE
+    };
+
+    xcb_create_window(
+        window->connection,
+        XCB_COPY_FROM_PARENT,
+        window->window,
+        window->screen->root,
+        100, 100,
+        window->config.window_aspect.width,
+        window->config.window_aspect.height,
+        0,
+        XCB_WINDOW_CLASS_INPUT_OUTPUT,
+        window->screen->root_visual,
+        mask, values
+    );
+
+    _rename_window(window, window->config.window_name);
+    
+    if (ATOM_WM_PROTOCOLS == XCB_ATOM_NONE) 
+        ATOM_WM_PROTOCOLS = _xcb_request(window, "WM_PROTOCOLS");
+
+    if (ATOM_WM_DELETE_WINDOW == XCB_ATOM_NONE)
+        ATOM_WM_DELETE_WINDOW = _xcb_request(window, "WM_DELETE_WINDOW");
+
+    // Now an atom will be sent when user hits X so we can close properly.
+    // TODO: magic numbers
+    xcb_change_property(
+        window->connection,
+        XCB_PROP_MODE_REPLACE,
+        window->window,
+        ATOM_WM_PROTOCOLS,
+        XCB_ATOM_ATOM,
+        32,
+        1,
+        &ATOM_WM_DELETE_WINDOW
+    );
+    
+    // Send to window manager
+    xcb_map_window(window->connection, window->window);
+    xcb_flush(window->connection);
+    
+    // Start engine
+    // Loop
+    
+    return &window->config;
 }
 
 bool platform_set_window_name(struct WindowConfig* config, const char* name) {
-    return false;
+    X11Window* window = (X11Window*) config;
+    _rename_window(window, name);
+    return xcb_flush(window->connection);
 }
 
 bool platform_set_window_size(struct WindowConfig* config, struct Aspect size) {
