@@ -5,6 +5,7 @@
 
 #define WINDOWS_AMOUNT 1
 static WindowConfig* window_configs[WINDOWS_AMOUNT];
+static size_t window_configs_count = 0;
 
 
 #ifdef _WIN32
@@ -37,7 +38,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
     }
 }
 
-bool platform_initialize() {
+void platform_initialize() {
     return false;
 }
 
@@ -217,7 +218,7 @@ xcb_atom_t _xcb_request(struct X11Window* window, const char* name) {
     return atom;
 }
 
-bool platform_initialize() {
+void platform_initialize() {
     // Start engine
     engine_start();
     
@@ -267,6 +268,13 @@ end:
 }
 
 struct WindowConfig* platform_new_window(struct WindowConfig config) {
+    // Don't index out of bounds, you should know how many windows you want.
+    // Else, rewrite the engine yourself for a dynamic amount
+    if (window_configs_count >= WINDOWS_AMOUNT) {
+        printf("\n>>> Out of Space for WindowConfigs <<<\n");
+        return NULL;
+    }
+    
     // Pass in a generic WindowConfig, return a X11Window that can be cast to WindowConfig vise versa
     struct X11Window* window = (X11Window*) malloc(sizeof(X11Window));
     if (window == NULL) {
@@ -348,6 +356,8 @@ struct WindowConfig* platform_new_window(struct WindowConfig config) {
 
     platform_set_window_resolution(&window->config, window->config.render_aspect);
     
+    window_configs[window_configs_count] = &window->config;
+    window_configs_count++;
     return &window->config;
 }
 

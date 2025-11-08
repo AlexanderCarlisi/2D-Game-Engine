@@ -44,7 +44,7 @@ DECLARE_VECTOR(WindowConfigVector, vector_window_config, struct WindowConfig);
 
 /// @brief Startup the platform.
 /// @return Success.
-bool platform_initialize();
+void platform_initialize();
 
 /// @brief Handles the creation and initialization of a new Window for the respective platform.
 /// @param config An uninitialized WindowConfig reference.
