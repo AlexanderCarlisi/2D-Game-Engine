@@ -1,6 +1,7 @@
 #include "platform.h"
 #include "engine.h"
 #include "time.h"
+#include "render.h"
 
 // TODO: Actually implement the different window configs
 DEFINE_VECTOR(WindowConfigVector, vector_window_config, struct WindowConfig);
@@ -164,6 +165,7 @@ bool platform_render(struct WindowConfig* config, float alpha) {
 #include <stdio.h>
 #include <xcb/xcb.h>
 #include <xcb/xproto.h>
+#include <xcb/xcb_image.h>
 
 // Atoms are global to the X Server instance
 xcb_atom_t ATOM_WM_PROTOCOLS = XCB_NONE;
@@ -295,6 +297,13 @@ struct WindowConfig* platform_new_window(struct WindowConfig config) {
     xcb_map_window(window->connection, window->window);
     xcb_flush(window->connection);
     
+    window->gc = xcb_generate_id(window->connection);
+    mask = XCB_GC_FOREGROUND | XCB_GC_BACKGROUND;
+    uint32_t valuesGC[2] = { window->screen->black_pixel, window->screen->white_pixel };
+    xcb_create_gc(window->connection, window->gc, window->window, mask, valuesGC);
+
+    platform_set_window_resolution(&window->config, window->config.render_aspect);
+    
     // Start engine
     // Loop
     
@@ -318,8 +327,24 @@ bool platform_set_window_size(struct WindowConfig* config, struct Aspect size) {
 }
 
 bool platform_set_window_resolution(struct WindowConfig* config, struct Aspect res) {
-    // TODO: 
-    return false;
+    X11Window* window = _cast_window(config);
+    if (window == NULL) return false;
+        
+    if (window->pixmap != XCB_PIXMAP_NONE) {
+        xcb_free_pixmap(window->connection, window->pixmap);
+        window->pixmap = XCB_PIXMAP_NONE;
+    }
+
+    window->pixmap = xcb_generate_id(window->connection);
+    window->config.render_aspect = res;
+    xcb_create_pixmap(
+        window->connection,
+        window->screen->root_depth,
+        window->pixmap,
+        window->window,
+        res.width, res.height
+    );
+    return true;
 }
 
 bool platform_update_window(struct WindowConfig* config) {
@@ -334,8 +359,41 @@ bool platform_iterate(struct WindowConfig* config) {
 }
 
 bool platform_render(struct WindowConfig* config, float alpha) {
-    // TODO: Pass into render.h?
-    return false;
+    struct X11Window* window = _cast_window(config);
+    if (window == NULL) return false;
+    
+    render_draw(config, alpha);
+    
+    // TODO: Pixmap
+    uint16_t width  = window->config.render_aspect.width;
+    uint16_t height = window->config.render_aspect.height;
+    uint32_t* framebuffer = window->config.framebuffer;
+
+    // Send framebuffer as image
+    xcb_put_image(
+        window->connection,
+        XCB_IMAGE_FORMAT_Z_PIXMAP,
+        window->pixmap,
+        window->gc,
+        width, height,
+        0, 0, 0,
+        32,
+        width * height * 4,
+        (uint8_t*)framebuffer
+    );
+
+    // Copy to actual window
+    xcb_copy_area(
+        window->connection,
+        window->pixmap,
+        window->window,
+        window->gc,
+        0, 0, 0, 0,
+        width, height
+    );
+
+    xcb_flush(window->connection);
+    return true;
 }
 
 #endif

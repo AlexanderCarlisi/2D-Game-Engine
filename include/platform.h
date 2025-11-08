@@ -7,6 +7,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <xcb/xproto.h>
 #include "world.h"
 
 #define PLATFORM_MAX_WINDOW_NAME 256    // Should be max Window Name length for Windows and Unix, needs to be tested.
@@ -122,6 +123,7 @@ typedef struct X11Window {
     xcb_screen_t* screen;
     xcb_window_t window;
     xcb_pixmap_t pixmap;
+    xcb_gcontext_t gc;
 } X11Window;
 
 #endif // __linux__

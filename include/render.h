@@ -11,8 +11,4 @@ void render_interpolate_pixel(struct WindowConfig* window, struct Pose* point1, 
 void render_draw_shape(struct WindowConfig* window, struct Shape* shape, uint32_t color, int vertices);
 void render_draw(struct WindowConfig* window, float alpha);
 
-// TODO: More OS Specific
-// void render_display(struct WindowConfig* window);
-// void render_free(struct WindowConfig* window);
-
 #endif
