@@ -91,6 +91,14 @@ void platform_free();
 
 // TODO: WINDOWS
 #ifdef _WIN32
+
+#include <windows.h>
+
+typedef struct W32Window {
+    struct WindowConfig config;
+    HWND hwnd;
+} W32Window;
+
 #endif
 
 #ifdef __linux__
