@@ -3,7 +3,11 @@
 #include <stdio.h>
 
 void render_clear(struct WindowConfig* window, uint32_t color) {
-  if (window == NULL) return;
+  if (window == NULL) {
+    printf("\n>>> render_clear: NULL WINDOW <<<\n");
+    return;
+  }
+  
   size_t size = window->render_aspect.width * window->render_aspect.height;
   uint32_t* framebuffer = window->framebuffer;
 
@@ -13,12 +17,17 @@ void render_clear(struct WindowConfig* window, uint32_t color) {
   }
 
   // Fill a small buffer with the color, then copy across
+  size_t i = 0;
   uint32_t buffer[8];
-  for (int i = 0; i < 8; i++) {
-    buffer[i] = color;
-  }
-  for (size_t i = 0; i < size; i += 8) {
+  for (int j = 0; j < 8; j++) buffer[j] = color;
+
+  for (; i + 8 <= size; i += 8) {
     memcpy(&framebuffer[i], buffer, sizeof(buffer));
+  }
+
+  // Copy remaining pixels
+  for (; i < size; i++) {
+    framebuffer[i] = color;
   }
 }
 

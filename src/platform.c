@@ -409,6 +409,7 @@ bool platform_set_window_resolution(struct WindowConfig* config, struct Aspect r
     
     if (window->config.framebuffer != NULL) {
         free(window->config.framebuffer);
+        window->config.framebuffer = NULL;
     }
         
     window->config.framebuffer = malloc(res.width * res.height * sizeof(uint32_t));
@@ -429,7 +430,7 @@ bool platform_set_window_resolution(struct WindowConfig* config, struct Aspect r
         res.width, res.height
     );
 
-    printf("\n>>> NEW RES <<<\n");
+    printf("\n>>> NEW RES: %d, %d <<<\n", res.width, res.height);
     return true;
 }
 
@@ -453,11 +454,13 @@ bool platform_render(struct WindowConfig* config, float alpha) {
     if (window == NULL) return false;
     
     render_clear(config, rgba(255, 255, 0, 255));
-    render_draw(config, alpha);
+    // render_draw(config, alpha);
     
     uint16_t width  = window->config.render_aspect.width;
     uint16_t height = window->config.render_aspect.height;
     uint32_t* framebuffer = window->config.framebuffer;
+
+    // printf("%d", window->screen->root_depth);
 
     // Send framebuffer as image
     xcb_put_image(
@@ -467,8 +470,8 @@ bool platform_render(struct WindowConfig* config, float alpha) {
         window->gc,
         width, height,
         0, 0, 0,
-        32,
-        width * height * 4,
+        window->screen->root_depth,
+        width * height * window->screen->root_depth / 8,
         (uint8_t*)framebuffer
     );
 
@@ -492,23 +495,23 @@ void platform_free() {
         X11Window* window = _cast_window(window_configs[i]);
         if (window == NULL) continue;
 
-        // Disconnect from X server
         if (window->connection)
             xcb_disconnect(window->connection);
 
-        // Free the framebuffer if it exists
         if (window->config.framebuffer != NULL) {
             free(window->config.framebuffer);
             window->config.framebuffer = NULL; // prevent accidental reuse
         }
 
-        // Free the world handler if used
         if (window->config.world_handler != NULL) {
             world_handler_free(window->config.world_handler);
             window->config.world_handler = NULL;
         }
+        
+        if (window->screen != NULL) {
+            free(window->screen);
+        }
 
-        // Free the X11Window itself
         free(window);
         window_configs[i] = NULL; // mark as freed
     }
