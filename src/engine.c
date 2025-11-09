@@ -1,5 +1,7 @@
 #include "engine.h"
+#include "engine_options.h"
 #include "time.h"
+#include EO_PROJECT_MAIN
 
 static bool is_running = false;
 
@@ -10,7 +12,7 @@ void engine_start() {
 bool engine_tick(struct WindowConfig* window) {
     float currentTime = get_current_time();
     float frameTime = currentTime - window->previous_time;
-    float fixedTimeStep = 1 / window->frames_per_second;
+    float fixedTimeStep = window->frames_per_second;
     window->previous_time = currentTime;
     window->accumulator += frameTime;
 
@@ -18,6 +20,7 @@ bool engine_tick(struct WindowConfig* window) {
     while (window->accumulator >= fixedTimeStep) {
         // Update Game Logic
         platform_iterate(window);
+        EO_PROJECT_MAIN_LOOP;
         window->accumulator -= fixedTimeStep;
     }
 

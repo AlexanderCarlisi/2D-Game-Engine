@@ -2,6 +2,7 @@
 #include "engine.h"
 #include "time.h"
 #include "render.h"
+#include <string.h>
 
 #define WINDOWS_AMOUNT 1
 static WindowConfig* window_configs[WINDOWS_AMOUNT];
@@ -267,7 +268,13 @@ end:
     }
 }
 
-struct WindowConfig* platform_new_window(struct WindowConfig config) {
+struct WindowConfig* platform_new_window(
+        char* windowName,
+        struct Aspect windowSize,
+        struct Aspect resolution,
+        float fps
+    ) {
+    
     // Don't index out of bounds, you should know how many windows you want.
     // Else, rewrite the engine yourself for a dynamic amount
     if (window_configs_count >= WINDOWS_AMOUNT) {
@@ -275,14 +282,21 @@ struct WindowConfig* platform_new_window(struct WindowConfig config) {
         return NULL;
     }
     
-    // Pass in a generic WindowConfig, return a X11Window that can be cast to WindowConfig vise versa
+    // Dynamically allocate a X11Window Instance
     struct X11Window* window = (X11Window*) malloc(sizeof(X11Window));
     if (window == NULL) {
         printf("\n>>> Window Malloc Error <<<\n");
         free(window);
         return NULL;
     }
-    window->config = config;
+    
+    // Setup Config
+    window->config = (struct WindowConfig) {
+        .window_aspect = windowSize,
+        .render_aspect = resolution,
+        .frames_per_second = fps
+    };
+    strcpy(window->config.window_name, windowName);
 
     // Connect to the X server
     int screenNum;

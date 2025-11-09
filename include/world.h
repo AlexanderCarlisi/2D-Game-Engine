@@ -1,15 +1,18 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include "engine_options.h"
 #include "game_object.h"
 
-#define WORLD_OBJECT_BUFFER_SIZE 255
+#define WORLD_OBJECT_BUFFER_SIZE EO_GAME_OBJECT_BUFFER
 DECLARE_VECTOR(GameObjectVector, vector_game_object, struct GameObject);
 
 
 /**
  * @struct Interval
- * @brief An inclusive interval, generally used for Buffers and Pools.
+ * @brief An interval, generally used for Buffers and Pools.
+ * @var start Inclusive
+ * @var end Exclusive
  * Layout: [size_t, size_t]
  * Size: 16, 8
 */
@@ -91,6 +94,9 @@ typedef struct WorldConfig {
  * world.
  * @see world_set_active
  *
+ * @var World::dealloc
+ *
+ *
 */
 typedef struct World {
 	struct WorldConfig config;
@@ -105,6 +111,11 @@ typedef struct World {
 	void (*dealloc)();
 } World;
 
+
+/// @brief Initializes a new World with default parameters.
+/// @param world To be initialized.
+/// @param config WorldConfig to initialize with. Deepcopied.
+bool world_new(struct World* world, struct WorldConfig config);
 
 /// @brief Reallocate the Object Pool.
 /// @param newSize

@@ -2,10 +2,11 @@
 #include "string.h"
 
 void render_clear(struct WindowConfig* window, uint32_t color) {
+  if (window == NULL) return;
   size_t size = window->render_aspect.width * window->render_aspect.height;
   uint32_t* framebuffer = window->framebuffer;
 
-  // Fill a small buffer witht he color, then copy across
+  // Fill a small buffer with the color, then copy across
   uint32_t buffer[8];
   for (int i = 0; i < 8; i++) {
     buffer[i] = color;
@@ -16,12 +17,14 @@ void render_clear(struct WindowConfig* window, uint32_t color) {
 }
 
 void render_draw_pixel(struct WindowConfig* window, Pose* point, uint32_t color) {
+  if (window == NULL) return;
   struct Aspect res = window->render_aspect;
   if (!pose_pixels_in_bounds(point, res.width, res.height)) return;
   window->framebuffer[point->y_pixels * res.width + point->x_pixels] = color;
 }
 
 void render_interpolate_pixel(struct WindowConfig* window, struct Pose* point1, struct Pose* point2, uint32_t color, float alpha) {
+  if (window == NULL) return;
   int x = (int) ((point2->x_pixels - point1->x_pixels) * alpha);
   int y = (int) ((point2->y_pixels - point1->x_pixels) * alpha);
   Pose p = pose_from_pixels(x, y);
@@ -44,6 +47,7 @@ void _draw_object(struct WindowConfig* window, struct GameObject* object, float 
 }
 
 void render_draw(struct WindowConfig* window, float alpha) {
+  if (window == NULL || window->world == NULL) return;
   struct Interval interval_buffer = window->world->interval_buffer;
   struct Interval interval_pool = window->world->interval_pool;
 

@@ -8,7 +8,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <xcb/xproto.h>
-#include "world.h"
+#include "world_handler.h"
 
 #define PLATFORM_MAX_WINDOW_NAME 256    // Should be max Window Name length for Windows and Unix, needs to be tested.
 
@@ -32,7 +32,7 @@ typedef struct Aspect {
 typedef struct WindowConfig {
     char window_name[PLATFORM_MAX_WINDOW_NAME];
     uint32_t* framebuffer;
-    struct World* world;
+    struct WorldHandler* world_handler;
     struct Aspect window_aspect;
     struct Aspect render_aspect;
     float frames_per_second;
@@ -47,13 +47,11 @@ DECLARE_VECTOR(WindowConfigVector, vector_window_config, struct WindowConfig);
 void platform_initialize();
 
 /// @brief Handles the creation and initialization of a new Window for the respective platform.
-/// @param config An uninitialized WindowConfig reference.
-/// @return Respective Platforms Window struct. The return can be cast to platform's Window struct.
-///     ; NULL if malloc error occurs
+/// TODO: doxy
 /// @see X11Window
 /// @see TODO: Window's Window
 /// @note config param is deep copied into return value.
-struct WindowConfig* platform_new_window(struct WindowConfig config);
+struct WindowConfig* platform_new_window(char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps);
 
 /// @brief Flushes all changes of the Window Config to the platform.
 /// @param config WindowConfig with changes you wish to see implemented.
