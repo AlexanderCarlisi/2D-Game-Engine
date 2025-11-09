@@ -47,17 +47,18 @@ void _draw_object(struct WindowConfig* window, struct GameObject* object, float 
 }
 
 void render_draw(struct WindowConfig* window, float alpha) {
-  if (window == NULL || window->world == NULL) return;
-  struct Interval interval_buffer = window->world->interval_buffer;
-  struct Interval interval_pool = window->world->interval_pool;
+  if (window == NULL || window->world_handler == NULL) return;
+  struct World* world = window->world_handler->active;
+  struct Interval interval_buffer = world->interval_buffer;
+  struct Interval interval_pool = world->interval_pool;
 
   for (size_t i = interval_buffer.start; i < interval_buffer.end; i++) {
-    struct GameObject* object = world_buffer_get_object(window->world, i);
+    struct GameObject* object = world_buffer_get_object(world, i);
     _draw_object(window, object, alpha);
   }
 
   for (size_t i = interval_pool.start; i < interval_pool.end; i++) {
-    struct GameObject* object = world_pool_get_object(window->world, i);
+    struct GameObject* object = world_pool_get_object(world, i);
     _draw_object(window, object, alpha);
   }
 }
