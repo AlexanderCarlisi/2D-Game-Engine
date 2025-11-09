@@ -9,23 +9,23 @@ void engine_start() {
     is_running = true;
 }
 
-bool engine_tick(struct WindowConfig* window) {
+bool engine_tick(struct WINDOWINFO* window) {
     float currentTime = get_current_time();
-    float frameTime = currentTime - window->previous_time;
-    float fixedTimeStep = window->frames_per_second;
-    window->previous_time = currentTime;
-    window->accumulator += frameTime;
+    float frameTime = currentTime - window->config.previous_time;
+    float fixedTimeStep = window->config.frames_per_second;
+    window->config.previous_time = currentTime;
+    window->config.accumulator += frameTime;
 
     // Fixed Update
-    while (window->accumulator >= fixedTimeStep) {
+    while (window->config.accumulator >= fixedTimeStep) {
         // Update Game Logic
         platform_iterate(window);
         EO_PROJECT_MAIN_LOOP;
-        window->accumulator -= fixedTimeStep;
+        window->config.accumulator -= fixedTimeStep;
     }
 
     // Variable Update
-    float alpha = window->accumulator / fixedTimeStep;
+    float alpha = window->config.accumulator / fixedTimeStep;
     platform_render(window, alpha);
     
     return false;

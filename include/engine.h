@@ -8,7 +8,7 @@ void engine_start();
 
 /// @brief Update GameLogic, Physics, and Renderer.
 /// @param window Collection of Renderer and World to perform with.
-bool engine_tick(struct WindowConfig* window);
+bool engine_tick(struct WINDOWINFO* window);
 
 /// @brief Set the running state of the engine
 /// @param state Running or Not Running

@@ -38,7 +38,7 @@ void overworld_dealloc() { }
 void init() {
   printf("Hello World!");
 
-  WindowConfig* window = platform_new_window(
+  WINDOWINFO* window = platform_new_window(
     "MyGame",
     (Aspect) {.width=1280, .height=720},
     (Aspect) {.width=1280, .height=720},
@@ -53,19 +53,21 @@ void init() {
   // You should instantiate your worlds asap.
   // They wont actually be 'loaded' until you explictily call it to be.
   // To 'load' a world, you will implement what that means in a world's init function.
-  window->world_handler = world_handler_new();
+  window->config.world_handler = world_handler_new();
   
-  if (window->world_handler == NULL) {
+  if (window->config.world_handler == NULL) {
     printf("\n>>> Handler is NULL <<<\n");
     return;
   }
 
-  world_handler_new_world(window->world_handler, overworld_config);
-  world_handler_new_world(window->world_handler, neth_end_config); // configs are deepcopied
-  world_handler_new_world(window->world_handler, neth_end_config); // so they can be changed independantly later
+  WorldHandler* whand = window->config.world_handler;
+
+  world_handler_new_world(whand, overworld_config);
+  world_handler_new_world(whand, neth_end_config); // configs are deepcopied
+  world_handler_new_world(whand, neth_end_config); // so they can be changed independantly later
   
   // Store pointers to worlds if you want
-  World* overworld = &window->world_handler->worlds.data[WORLD_OVERWORLD];
+  World* overworld = &whand->worlds.data[WORLD_OVERWORLD];
 
   // Setup how worlds will operate
   // These functions are called automatically by the WorldHandler
@@ -137,7 +139,7 @@ void init() {
   
   // Set worlds as active
   overworld->init(); // LOAD THE WORLD, YOU CALL THIS
-  world_handler_set_active(window->world_handler, overworld); // Calls START
+  world_handler_set_active(whand, overworld); // Calls START
   // Now the world will be handled by the Handler.
   
   // So, how does the engine work its magic?
