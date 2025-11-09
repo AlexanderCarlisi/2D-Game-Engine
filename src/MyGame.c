@@ -44,11 +44,22 @@ void init() {
     (Aspect) {.width=1280, .height=720},
     1.0/60
   );
+
+  if (window == NULL) {
+    printf("\n>>> Window is NULL <<<\n");
+    return;
+  }
   
   // You should instantiate your worlds asap.
   // They wont actually be 'loaded' until you explictily call it to be.
   // To 'load' a world, you will implement what that means in a world's init function.
   window->world_handler = world_handler_new();
+  
+  if (window->world_handler == NULL) {
+    printf("\n>>> Handler is NULL <<<\n");
+    return;
+  }
+
   world_handler_new_world(window->world_handler, overworld_config);
   world_handler_new_world(window->world_handler, neth_end_config); // configs are deepcopied
   world_handler_new_world(window->world_handler, neth_end_config); // so they can be changed independantly later
@@ -81,25 +92,39 @@ void init() {
   // Generally in the Buffer, you want to keep Object locations consitent, as
   // the purpose of the Buffer is to be persistent memory.
   const int PLAYER_SPRITE = 0; // Index in buffer representing the player sprite
+  if (overworld == NULL) {
+    printf("\n>>> overworld is NULL <<<\n");
+    return;
+  }
   GameObject* player = world_buffer_get_object(overworld, PLAYER_SPRITE);
+  if (player == NULL) {
+    printf("\n>>> player is NULL <<<\n");
+    return;
+  }
   
   // Define the Collision Box of the player
   // TODO: Currently just a shape :|
   CollisionBoxVector cbv = create_empty_collision_box_vector(1); // TODO: fix inconsistant name
   cbv.data[0] = collision_box_create_debug(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), pose_from_meters(PPM, 1, 1));
+
+  // CollisionBoxVector cbv;
+  // vector_collision_box_init(&cbv, 1);
+  // cbv.data[0] = collision_box_create_debug(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), pose_from_meters(PPM, 1, 1));
   
   // You should initialize your gameobjects.
   // Wink wink, init function, start function is a little late, but probably fine
-  gameobject_init(player, &(GameObjectConfig) {
+  GameObjectConfig goc = {
     .collider_vector = create_empty_collision_box_vector(1),
     .object_type = DYNAMIC,
     .starting_pose = pose_from_pixels(PPM, 480, 480),
     .starting_rotation = 0
-  });
+  };
+  printf("player=%p, &goc=%p\n", (void*)player, (void*)&goc);
+  gameobject_init(player, &goc);
 
   int floor_sprite = 0;
   GameObject* floor = world_pool_get_object(overworld, floor_sprite);
-  gameobject_init(floor, NULL); // dont do this, its stupid, it will probably break something
+  gameobject_init(floor, &goc);
   // TODO: actually make GameObjectConfig 's be passed as referense to deepcopy, so this cant happen
   // and gameobjects can all start with the same config, but have different settings as time goes on.
   
