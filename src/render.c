@@ -1,10 +1,16 @@
 #include "render.h"
 #include "string.h"
+#include <stdio.h>
 
 void render_clear(struct WindowConfig* window, uint32_t color) {
   if (window == NULL) return;
   size_t size = window->render_aspect.width * window->render_aspect.height;
   uint32_t* framebuffer = window->framebuffer;
+
+  if (framebuffer == NULL) {
+    printf("\n>>> FRAMEBUFFER NULL <<<\n");
+    return;
+  }
 
   // Fill a small buffer with the color, then copy across
   uint32_t buffer[8];
@@ -47,7 +53,11 @@ void _draw_object(struct WindowConfig* window, struct GameObject* object, float 
 }
 
 void render_draw(struct WindowConfig* window, float alpha) {
-  if (window == NULL || window->world_handler == NULL) return;
+  if (window == NULL || window->world_handler == NULL) {
+    printf("\n>>> WINDOW or HANDLER is NULL <<<\n");
+    return;
+  }
+  
   struct World* world = window->world_handler->active;
   struct Interval interval_buffer = world->interval_buffer;
   struct Interval interval_pool = world->interval_pool;

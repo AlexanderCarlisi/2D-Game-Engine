@@ -32,7 +32,7 @@ bool engine_tick(struct WindowConfig* window) {
 }
 
 void engine_close() {
-    platform_free();
+    // platform_free();
 }
 
 void engine_set_running(bool state) {

@@ -2,7 +2,9 @@
 #include "engine.h"
 #include "time.h"
 #include "render.h"
+#include <stdint.h>
 #include <string.h>
+#include "color.h"
 
 #define WINDOWS_AMOUNT 1
 static WindowConfig* window_configs[WINDOWS_AMOUNT];
@@ -237,7 +239,7 @@ void platform_initialize() {
                     case XCB_CONFIGURE_NOTIFY: {
                         // Window resized
                         xcb_configure_notify_event_t* cfg = (xcb_configure_notify_event_t*)event;
-                        // appconfig_platform_resized_window_px(cfg->width, cfg->height);
+                        platform_set_window_resolution(&window->config, (struct Aspect) {.width=cfg->width, .height=cfg->height});
                         break;
                     }
                     case XCB_CLIENT_MESSAGE: {
@@ -246,13 +248,15 @@ void platform_initialize() {
                             printf("User clicked X, closing window..\n");
                             goto end;
                         }
+                        break;
                     }
-                    // case XCB_KEY_PRESS:
-                    //     // Could handle keys or just exit
-                    //     printf("Key pressed, exiting...\n");
-                    //     engine_close();
-                    //     free(event);
-                    //     goto end;
+                    case XCB_KEY_PRESS: {
+                        // Could handle keys or just exit
+                        printf("Key pressed, exiting...\n");
+                        // engine_close();
+                        goto end;
+                        break;
+                    }
                 }
                 free(event);
             }
@@ -261,7 +265,7 @@ void platform_initialize() {
     }
 
 end:
-    engine_close();
+    // engine_close();
     platform_free();
 }
 
@@ -283,9 +287,9 @@ struct WindowConfig* platform_new_window(
     struct X11Window* window = (X11Window*) malloc(sizeof(X11Window));
     if (window == NULL) {
         printf("\n>>> Window Malloc Error <<<\n");
-        free(window);
         return NULL;
     }
+    printf("\n>>> Allocated Window <<<\n");
     
     // Setup Config
     window->config = (struct WindowConfig) {
@@ -294,6 +298,9 @@ struct WindowConfig* platform_new_window(
         .frames_per_second = fps
     };
     strcpy(window->config.window_name, windowName);
+    // printf("\n>>> strcopied <<<\n");
+    window->config.framebuffer = malloc(resolution.width * resolution.height * sizeof(uint32_t));
+    memset(window->config.framebuffer, 0, resolution.width * resolution.height * sizeof(uint32_t));
 
     // Connect to the X server
     int screenNum;
@@ -304,6 +311,7 @@ struct WindowConfig* platform_new_window(
         return NULL;
     }
     const xcb_setup_t* setup = xcb_get_setup(window->connection);
+    printf("\n>>> settedup <<<\n");
 
     // Get the desired screen
     xcb_screen_iterator_t iter = xcb_setup_roots_iterator(setup);
@@ -335,8 +343,10 @@ struct WindowConfig* platform_new_window(
         window->screen->root_visual,
         mask, values
     );
+    printf("\n>>> creatded bindow <<<\n");
 
     _rename_window(window, window->config.window_name);
+    printf("\n>>> renamed window <<<\n");
     
     if (ATOM_WM_PROTOCOLS == XCB_ATOM_NONE) 
         ATOM_WM_PROTOCOLS = _xcb_request(window, "WM_PROTOCOLS");
@@ -355,21 +365,26 @@ struct WindowConfig* platform_new_window(
         1,
         &ATOM_WM_DELETE_WINDOW
     );
+    printf("\n>>> deletewindow <<<\n");
     
     // Send to window manager
     xcb_map_window(window->connection, window->window);
     xcb_flush(window->connection);
     
+    printf("\n>>> map and flush <<<\n");
+    
     window->gc = xcb_generate_id(window->connection);
     mask = XCB_GC_FOREGROUND | XCB_GC_BACKGROUND;
     uint32_t valuesGC[2] = { window->screen->black_pixel, window->screen->white_pixel };
     xcb_create_gc(window->connection, window->gc, window->window, mask, valuesGC);
+    printf("\n>>> gc <<<\n");
 
     platform_set_window_resolution(&window->config, window->config.render_aspect);
+    printf("\n>>> res <<<\n");
     
-    window_configs[window_configs_count] = &window->config;
+    window_configs[window_configs_count] = (WindowConfig*) window;
     window_configs_count++;
-    return &window->config;
+    return window_configs[window_configs_count-1];
 }
 
 bool platform_set_window_name(struct WindowConfig* config, const char* name) {
@@ -391,7 +406,14 @@ bool platform_set_window_size(struct WindowConfig* config, struct Aspect size) {
 bool platform_set_window_resolution(struct WindowConfig* config, struct Aspect res) {
     X11Window* window = _cast_window(config);
     if (window == NULL) return false;
+    
+    if (window->config.framebuffer != NULL) {
+        free(window->config.framebuffer);
+    }
         
+    window->config.framebuffer = malloc(res.width * res.height * sizeof(uint32_t));
+    memset(window->config.framebuffer, 0, res.width * res.height * sizeof(uint32_t));
+    
     if (window->pixmap != XCB_PIXMAP_NONE) {
         xcb_free_pixmap(window->connection, window->pixmap);
         window->pixmap = XCB_PIXMAP_NONE;
@@ -406,6 +428,8 @@ bool platform_set_window_resolution(struct WindowConfig* config, struct Aspect r
         window->window,
         res.width, res.height
     );
+
+    printf("\n>>> NEW RES <<<\n");
     return true;
 }
 
@@ -421,9 +445,14 @@ bool platform_iterate(struct WindowConfig* config) {
 }
 
 bool platform_render(struct WindowConfig* config, float alpha) {
+    if (config == NULL) {
+        printf("\n>>> platform_render: CONFIG NULL <<<\n");
+        return false;
+    }
     struct X11Window* window = _cast_window(config);
     if (window == NULL) return false;
     
+    render_clear(config, rgba(255, 255, 0, 255));
     render_draw(config, alpha);
     
     uint16_t width  = window->config.render_aspect.width;
@@ -458,10 +487,34 @@ bool platform_render(struct WindowConfig* config, float alpha) {
 }
 
 void platform_free() {
-    for (int i = 0; i < WINDOWS_AMOUNT; i++) {
+    // Only loop over the number of windows actually created
+    for (size_t i = 0; i < window_configs_count; i++) {
         X11Window* window = _cast_window(window_configs[i]);
-        xcb_disconnect(window->connection);
+        if (window == NULL) continue;
+
+        // Disconnect from X server
+        if (window->connection)
+            xcb_disconnect(window->connection);
+
+        // Free the framebuffer if it exists
+        if (window->config.framebuffer != NULL) {
+            free(window->config.framebuffer);
+            window->config.framebuffer = NULL; // prevent accidental reuse
+        }
+
+        // Free the world handler if used
+        if (window->config.world_handler != NULL) {
+            world_handler_free(window->config.world_handler);
+            window->config.world_handler = NULL;
+        }
+
+        // Free the X11Window itself
+        free(window);
+        window_configs[i] = NULL; // mark as freed
     }
+
+    // Reset the window count
+    window_configs_count = 0;
 }
 
 #endif
