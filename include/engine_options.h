@@ -1,7 +1,7 @@
 #ifndef ENGINE_OPTIONS_H
 #define ENGINE_OPTIONS_H
 
-#define EO_PROJECT_MAIN         "../test/MyGame.c"
+#define EO_PROJECT_MAIN         "MyGame.h"
 #define EO_PROJECT_MAIN_START   init()
 #define EO_PROJECT_MAIN_LOOP    loop()
 

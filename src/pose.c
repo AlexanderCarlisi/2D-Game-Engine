@@ -25,3 +25,15 @@ bool pose_pixels_in_bounds(struct Pose* pose, uint16_t xUpper, uint16_t yUpper) 
 	if (pose == NULL) return false;
 	return pose->x_pixels <= xUpper && pose->y_pixels <= yUpper;
 }
+
+struct Pose pose_from_pixels(int ppm, uint16_t x, uint16_t y) {
+	struct Pose p;
+	pose_update_pixels(&p, ppm, x, y);
+	return p;
+}
+
+struct Pose pose_from_meters(int ppm, float x, float y) {
+	struct Pose p;
+	pose_update_meters(&p, ppm, x, y);
+	return p;
+}

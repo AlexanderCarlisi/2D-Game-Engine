@@ -44,10 +44,10 @@ typedef struct Pose {
 } Pose;
 
 /// @brief Generate a new Pose struct from given Pixels.
-Pose pose_from_pixels(uint16_t x, uint16_t y);
+Pose pose_from_pixels(int ppm, uint16_t x, uint16_t y);
 
 /// @brief Generate a new Pose struct from given Meters.
-Pose pose_from_meters(float x, float y);
+Pose pose_from_meters(int ppm, float x, float y);
 
 /// @brief Updates the Pose on new Meter coordinates.
 /// @param pose Pose Pointer to update.

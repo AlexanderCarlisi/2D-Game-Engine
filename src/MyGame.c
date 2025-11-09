@@ -1,3 +1,4 @@
+#include "MyGame.h"
 #include <stdio.h>
 
 #include <platform.h>
@@ -8,13 +9,14 @@
 #define WORLD_OVERWORLD   0
 #define WORLD_NETHER      1
 #define WORLD_END         2
+#define PPM               20 // probably a nice idea
 
 WorldConfig overworld_config = {
   .buffer_interval = (Interval) {.start = 0, .end = 0},
   .pool_interval = (Interval) {.start = 0, .end = 0},
   .pool_size = 10,
   .gravity_field = 9.8,
-  .pixels_per_meter = 30,
+  .pixels_per_meter = PPM,
   .reallocation_ratio = 1.5
 };
 
@@ -23,15 +25,15 @@ WorldConfig neth_end_config = {
   .pool_interval = (Interval) {.start = 0, .end = 0},
   .pool_size = 50,
   .gravity_field = 5.3,
-  .pixels_per_meter = 20,
+  .pixels_per_meter = PPM,
   .reallocation_ratio = 1.5
 };
 
-void overworld_init();
-void overworld_start();
-void overworld_loop();
-void overworld_close();
-void overworld_dealloc();
+void overworld_init() { }
+void overworld_start() { }
+void overworld_loop() { }
+void overworld_close() { }
+void overworld_dealloc() { }
 
 void init() {
   printf("Hello World!");
@@ -84,14 +86,14 @@ void init() {
   // Define the Collision Box of the player
   // TODO: Currently just a shape :|
   CollisionBoxVector cbv = create_empty_collision_box_vector(1); // TODO: fix inconsistant name
-  cbv.data[0] = collision_box_create_debug(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), pose_from_meters(1, 1));
+  cbv.data[0] = collision_box_create_debug(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), pose_from_meters(PPM, 1, 1));
   
   // You should initialize your gameobjects.
   // Wink wink, init function, start function is a little late, but probably fine
   gameobject_init(player, &(GameObjectConfig) {
     .collider_vector = create_empty_collision_box_vector(1),
     .object_type = DYNAMIC,
-    .starting_pose = pose_from_pixels(480, 480),
+    .starting_pose = pose_from_pixels(PPM, 480, 480),
     .starting_rotation = 0
   });
 

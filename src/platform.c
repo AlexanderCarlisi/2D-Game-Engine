@@ -262,10 +262,7 @@ void platform_initialize() {
 
 end:
     engine_close();
-    for (int i = 0; i < WINDOWS_AMOUNT; i++) {
-        X11Window* window = _cast_window(window_configs[i]);
-        xcb_disconnect(window->connection);
-    }
+    platform_free();
 }
 
 struct WindowConfig* platform_new_window(
@@ -458,6 +455,13 @@ bool platform_render(struct WindowConfig* config, float alpha) {
 
     xcb_flush(window->connection);
     return true;
+}
+
+void platform_free() {
+    for (int i = 0; i < WINDOWS_AMOUNT; i++) {
+        X11Window* window = _cast_window(window_configs[i]);
+        xcb_disconnect(window->connection);
+    }
 }
 
 #endif

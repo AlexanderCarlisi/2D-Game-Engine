@@ -27,7 +27,7 @@ void render_interpolate_pixel(struct WindowConfig* window, struct Pose* point1, 
   if (window == NULL) return;
   int x = (int) ((point2->x_pixels - point1->x_pixels) * alpha);
   int y = (int) ((point2->y_pixels - point1->x_pixels) * alpha);
-  Pose p = pose_from_pixels(x, y);
+  Pose p = pose_from_pixels(window->world_handler->active->config.pixels_per_meter, x, y); // defeated the entire purpose lmao
   render_draw_pixel(window, &p, color);
 }
 

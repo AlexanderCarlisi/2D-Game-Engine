@@ -51,7 +51,7 @@ typedef struct WorldConfig {
 	size_t pool_size;
   float reallocation_ratio;
   float gravity_field;
-	int pixels_per_meter;
+	int pixels_per_meter; // TODO: uint bozo
 } WorldConfig;
 
 
