@@ -39,7 +39,7 @@ typedef struct Aspect {
 ///     world. This does add additional complexity, TODO: Look into maybe making
 ///     it easier to work with, but also test it out, see how bad it really is.
 typedef struct WindowConfig {
-    char window_name[PLATFORM_MAX_WINDOW_NAME];
+    const char* window_name;
     uint32_t* framebuffer;
     struct WorldHandler* world_handler;
     struct Aspect window_aspect;
@@ -60,7 +60,7 @@ void platform_initialize();
 /// @see X11Window
 /// @see TODO: Window's Window
 /// @note config param is deep copied into return value.
-struct WINDOWINFO* platform_new_window(char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps);
+struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps);
 
 /// @brief Flushes all changes of the Window Config to the platform.
 /// @param config WindowConfig with changes you wish to see implemented.
@@ -134,9 +134,8 @@ typedef struct X11Window {
     xcb_window_t window;
     
     xcb_gcontext_t gc;
-    xcb_image_t* image;
-    xcb_shm_seg_t shm_seg;
-    int shm_id;
+    xcb_shm_segment_info_t info;
+    xcb_pixmap_t pixmap;
 } X11Window;
 
 #endif // __linux__
