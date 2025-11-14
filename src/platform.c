@@ -302,7 +302,18 @@ void _init_loop() {
                         // TODO: Update this to be NON FLUSHING, since many updates can occur
                         // only update the resolution once the user has stopped changing window
                         // size for a given time.
+                        printf("\n>>> Resized Window <<<\n");
+                        printf("\n>>>> WIN: %d, %d < > REN: %d, %d\n",
+                               window->config.window_aspect.width,
+                               window->config.window_aspect.height,
+                               window->config.render_aspect.width,
+                               window->config.render_aspect.height);
                         platform_set_window_resolution(window, window->config.window_aspect);
+                        printf("\n>>>>> WIN: %d, %d < > REN: %d, %d\n",
+                               window->config.window_aspect.width,
+                               window->config.window_aspect.height,
+                               window->config.render_aspect.width,
+                               window->config.render_aspect.height);
                     }
                 }
             }
@@ -447,7 +458,7 @@ bool platform_render(struct X11Window* window, float alpha) {
     
     for (int y = 0; y < window->config.render_aspect.height; y++) {
         for (int x = 0; x < window->config.render_aspect.width; x++) {
-            // window->config.framebuffer[y * window->config.render_aspect.height + x] = rgba(255, 255, 255, 255);
+            window->config.framebuffer[y * window->config.render_aspect.width + x] = rgba(255, 255, 255, 255);
         }
     }
     
