@@ -192,8 +192,8 @@ bool _check_window(struct X11Window* window) {
 }
 
 /// Helper function, names without flushing
-void _name_window(struct X11Window* window, const char* name) {
-    if (!_check_window(window)) return;
+bool _name_window(struct X11Window* window, const char* name) {
+    if (!_check_window(window)) return false;
     window->config.window_name = name;
     xcb_change_property(
         window->connection,
@@ -202,17 +202,71 @@ void _name_window(struct X11Window* window, const char* name) {
         XCB_ATOM_WM_NAME, XCB_ATOM_STRING,
         8, strlen(name), name
     );
+    return true;
+}
+
+/// Helper function, changes resolution without flushing
+bool _update_resolution(struct X11Window* window, struct Aspect res) {
+    if (!_check_window(window)) return false;
+    if (res.width > window->config.window_aspect.width
+        || res.height > window->config.window_aspect.height) {
+        printf("\n>>> _update_resolution: INVALID RES PARAM <<<\n");
+        return false;
+    }
+    window->config.render_aspect = res;
+
+    // Delloc old SHM
+    if (_check_shm(&window->info)) {
+        xcb_shm_detach(window->connection, window->info.shmseg);
+        shmdt(window->info.shmaddr);
+        shmctl(window->info.shmid, IPC_RMID, 0);
+        xcb_free_pixmap(window->connection, window->pixmap);
+    }
+
+    // Allocate SHM
+    window->info.shmid = shmget(
+        IPC_PRIVATE,
+        4 * window->config.render_aspect.width * window->config.render_aspect.height,
+        IPC_CREAT | 0600
+    );
+    
+    // Attach Segment to Server
+    window->info.shmaddr = shmat(window->info.shmid, 0, 0); // framebuffer addr
+    window->info.shmseg = xcb_generate_id(window->connection);
+    xcb_shm_attach(window->connection, window->info.shmseg, window->info.shmid, 0);
+    
+    // Create Pixmap
+    window->config.framebuffer = (uint32_t*) window->info.shmaddr;
+    window->pixmap = xcb_generate_id(window->connection);
+    xcb_shm_create_pixmap(
+        window->connection,
+        window->pixmap,
+        window->window,
+        window->config.render_aspect.width,
+        window->config.render_aspect.height,
+        window->screen->root_depth,
+        window->info.shmseg,
+        0
+    );
+    
+    if (!_check_shm(&window->info)) {
+        printf("\n>>> _update_resolution : FAILED SHM SETUP <<<\n");
+        return false;
+    }
+
+    return true;
 }
 
 /// Helper function, resizes window, handles res safely, no flush
-void _resize_window(struct X11Window* window, struct Aspect size) {
-    if (!_check_window(window)) return;
+bool _resize_window(struct X11Window* window, struct Aspect size) {
+    if (!_check_window(window)) return false;
     
     // If theres a conflict, set Res to Window Size
     if (window->config.render_aspect.height > size.height 
         || window->config.render_aspect.width > size.width) {
         window->config.render_aspect.width = size.width;
         window->config.render_aspect.height = size.height;
+        _update_resolution(window, window->config.render_aspect);
     }
 
     window->config.window_aspect = size;
@@ -223,6 +277,36 @@ void _resize_window(struct X11Window* window, struct Aspect size) {
         XCB_CONFIG_WINDOW_WIDTH | XCB_CONFIG_WINDOW_HEIGHT,
         (uint32_t[]){size.width, size.height}
     );
+
+    return true;
+}
+
+void platform_initialize() {
+    engine_start();
+    while (engine_is_running()) {
+        xcb_generic_event_t* event;
+        for (size_t i = 0; i < window_configs_count; i++) {
+            X11Window* window = window_configs[i];
+            while ((event = xcb_poll_for_event(window->connection))) {
+                switch(event->response_type & ~0x80) {
+                    case XCB_CONFIGURE_NOTIFY: {
+                        // Window Resized
+                        xcb_configure_notify_event_t* cfg = (xcb_configure_notify_event_t*) event;
+                        window->config.window_aspect.width = cfg->width;
+                        window->config.window_aspect.height = cfg->height;
+
+                        // TODO: Update this to be NON FLUSHING, since many updates can occur
+                        // only update the resolution once the user has stopped changing window
+                        // size for a given time.
+                        platform_set_window_resolution(window, window->config.window_aspect);
+                    }
+                }
+                free(event);
+            }
+            engine_tick(window); // Render, Physics, Inputs, Game
+        }
+    }
+    engine_close();
 }
 
 struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps) {
@@ -281,32 +365,9 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
         printf("\n>>> platform_new_window : SHM NOT AVAILABLE <<<\n");
         return NULL;
     }
-
-    // Allocate SHM
-    window->info.shmid = shmget(
-        IPC_PRIVATE,
-        4 * window->config.render_aspect.width * window->config.render_aspect.height,
-        IPC_CREAT | 0600
-    );
     
-    // Attach Segment to Server
-    window->info.shmaddr = shmat(window->info.shmid, 0, 0); // framebuffer addr
-    window->info.shmseg = xcb_generate_id(window->connection);
-    xcb_shm_attach(window->connection, window->info.shmseg, window->info.shmid, 0);
-    
-    // Create Pixmap
-    window->config.framebuffer = (uint32_t*) window->info.shmaddr;
-    window->pixmap = xcb_generate_id(window->connection);
-    xcb_shm_create_pixmap(
-        window->connection,
-        window->pixmap,
-        window->window,
-        window->config.render_aspect.width,
-        window->config.render_aspect.height,
-        window->screen->root_depth,
-        window->info.shmseg,
-        0
-    );
+    // Set Resolution, Size, and Name of the Window
+    platform_update_window(window);
     
     window_configs[window_configs_count] = window;
     window_configs_count++;
@@ -327,62 +388,38 @@ bool platform_set_window_size(struct X11Window* window, struct Aspect size) {
 
 bool platform_set_window_resolution(struct X11Window* window, struct Aspect res) {
     if (!_check_window(window)) return false;
-    if (res.width > window->config.window_aspect.width
-        || res.height > window->config.window_aspect.height) {
-        printf("\n>>> platform_set_window_resolution: INVALID RES PARAM <<<\n");
-        return false;
-    }
-    window->config.render_aspect = res;
-
-    // Delloc old SHM
-    if (_check_shm(&window->info)) {
-        xcb_shm_detach(window->connection, window->info.shmseg);
-        shmdt(window->info.shmaddr);
-        shmctl(window->info.shmid, IPC_RMID, 0);
-        xcb_free_pixmap(window->connection, window->pixmap);
-    }
-
-    // Allocate SHM
-    window->info.shmid = shmget(
-        IPC_PRIVATE,
-        4 * window->config.render_aspect.width * window->config.render_aspect.height,
-        IPC_CREAT | 0600
-    );
-    
-    // Attach Segment to Server
-    window->info.shmaddr = shmat(window->info.shmid, 0, 0); // framebuffer addr
-    window->info.shmseg = xcb_generate_id(window->connection);
-    xcb_shm_attach(window->connection, window->info.shmseg, window->info.shmid, 0);
-    
-    // Create Pixmap
-    window->config.framebuffer = (uint32_t*) window->info.shmaddr;
-    window->pixmap = xcb_generate_id(window->connection);
-    xcb_shm_create_pixmap(
-        window->connection,
-        window->pixmap,
-        window->window,
-        window->config.render_aspect.width,
-        window->config.render_aspect.height,
-        window->screen->root_depth,
-        window->info.shmseg,
-        0
-    );
-    
-    if (!_check_shm(&window->info)) {
-        printf("\n>>> platform_set_window_resolution : FAILED SHM SETUP <<<\n");
-        return false;
-    }
-
+    _update_resolution(window, res);
     return xcb_flush(window->connection);
 }
 
 bool platform_update_window(struct X11Window* window) {
     if (!_check_window(window)) return false;
+
+    bool status = _update_resolution(window, window->config.render_aspect);
+    if (!status) return false;
+    status = _resize_window(window, window->config.window_aspect);
+    if (!status) return false;
+    status = _name_window(window, window->config.window_name);
+    if (!status) return false;
+
     return xcb_flush(window->connection);
 }
 
 bool platform_render(struct X11Window* window, float alpha) {
-    return false;
+    render_draw(&window->config, alpha);
+    
+    // Copy pixmap to Window
+    xcb_copy_area(
+        window->connection,
+        window->pixmap,
+        window->window,
+        window->gc,
+        0, 0, 0, 0,
+        window->config.render_aspect.width,
+        window->config.render_aspect.height
+    );
+
+    return xcb_flush(window->connection);
 }
 
 bool platform_iterate(struct X11Window* window) {
