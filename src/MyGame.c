@@ -35,7 +35,7 @@ void overworld_loop() { }
 void overworld_close() { }
 void overworld_dealloc() { }
 
-void init() {
+void game_init() {
   printf("Hello World!");
 
   WINDOWINFO* window = platform_new_window(
@@ -153,11 +153,17 @@ void init() {
   printf("Startup!");
 }
 
-void loop() {
+void game_loop() {
   // Loop is called every fixed update. @see engine_tick
   // Its called after Inputs are handled from the platform
   // called before things are rendered.
   //
   // Handle all your logic here, but keep in mind, things WILL get messy.
   printf("Loop!");
+}
+
+void game_free() {
+  // Deallocate any Resources not managed by the Engine
+  // What resources are managed by the Engine? Basically anything u got from the engine.
+  // TODO: Better docs on what is and isnt managed by the engine
 }

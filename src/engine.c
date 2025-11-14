@@ -32,7 +32,8 @@ bool engine_tick(struct WINDOWINFO* window) {
 }
 
 void engine_close() {
-    // platform_free();
+    platform_free();
+    EO_PROJECT_MAIN_FREE;
 }
 
 void engine_set_running(bool state) {
