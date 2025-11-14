@@ -1,4 +1,5 @@
 // gcc src/*.c -Iinclude -o 2DGameEngine -lgdi32
+// gcc src/*.c -Iinclude -o 2DGameEngine -lxcb -lxcb-shm -lm
 
 // TODO: REFACTOR/ADDITION World Handler
 // TODO: ADDITION: GameObject Shapes

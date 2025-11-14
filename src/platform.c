@@ -173,6 +173,8 @@ bool platform_render(struct WindowConfig* config, float alpha) {
 #include <sys/shm.h>
 #include <sys/ipc.h>
 
+#define XCB_EVENT_RESPONSE_TYPE_MASK    ~0x80
+
 bool _check_shm(struct xcb_shm_segment_info_t* info) {
     return info != NULL
         && info->shmaddr != NULL
@@ -183,6 +185,7 @@ bool _check_shm(struct xcb_shm_segment_info_t* info) {
 
 /// Helper function, dont segfault
 bool _check_window(struct X11Window* window) {
+    
     return window != NULL
         && window->connection != NULL
         && window->window != XCB_ATOM_NONE
@@ -193,6 +196,7 @@ bool _check_window(struct X11Window* window) {
 
 /// Helper function, names without flushing
 bool _name_window(struct X11Window* window, const char* name) {
+    printf("here");
     if (!_check_window(window)) return false;
     window->config.window_name = name;
     xcb_change_property(
@@ -202,12 +206,12 @@ bool _name_window(struct X11Window* window, const char* name) {
         XCB_ATOM_WM_NAME, XCB_ATOM_STRING,
         8, strlen(name), name
     );
+    printf("here");
     return true;
 }
 
 /// Helper function, changes resolution without flushing
 bool _update_resolution(struct X11Window* window, struct Aspect res) {
-    if (!_check_window(window)) return false;
     if (res.width > window->config.window_aspect.width
         || res.height > window->config.window_aspect.height) {
         printf("\n>>> _update_resolution: INVALID RES PARAM <<<\n");
@@ -281,17 +285,17 @@ bool _resize_window(struct X11Window* window, struct Aspect size) {
     return true;
 }
 
-void platform_initialize() {
-    engine_start();
-    while (engine_is_running()) {
-        xcb_generic_event_t* event;
-        for (size_t i = 0; i < window_configs_count; i++) {
-            X11Window* window = window_configs[i];
-            while ((event = xcb_poll_for_event(window->connection))) {
-                switch(event->response_type & ~0x80) {
-                    case XCB_CONFIGURE_NOTIFY: {
-                        // Window Resized
-                        xcb_configure_notify_event_t* cfg = (xcb_configure_notify_event_t*) event;
+/// Helper function to declutter platform_initialize
+void _init_loop() {
+    xcb_generic_event_t* event;
+    for (size_t i = 0; i < window_configs_count; i++) {
+        X11Window* window = window_configs[i];
+        while ((event = xcb_poll_for_event(window->connection))) {
+            switch(event->response_type & XCB_EVENT_RESPONSE_TYPE_MASK) {
+                case XCB_CONFIGURE_NOTIFY: {
+                    // Window Resized
+                    xcb_configure_notify_event_t* cfg = (xcb_configure_notify_event_t*) event;
+                    if (cfg->window == window->window) {
                         window->config.window_aspect.width = cfg->width;
                         window->config.window_aspect.height = cfg->height;
 
@@ -301,15 +305,24 @@ void platform_initialize() {
                         platform_set_window_resolution(window, window->config.window_aspect);
                     }
                 }
-                free(event);
             }
-            engine_tick(window); // Render, Physics, Inputs, Game
+            free(event);
         }
+        engine_tick(window); // Render, Physics, Inputs, Game
+    }
+}
+
+void platform_initialize() {
+    engine_start();
+    while (engine_is_running()) {
+        _init_loop();
+        // printf("\n>>> TICK <<<\n");
     }
     engine_close();
 }
 
 struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps) {
+    // TODO: fix all the memory leaks when erroring out
     // https://stackoverflow.com/questions/27745131/how-to-use-shm-pixmap-with-xcb
     if (window_configs_count >= EO_WINDOWS_AMOUNT) {
         printf("\n>>> platform_new_window: ATTEMPT TO EXCEED MAX WINDOWS <<<\n");
@@ -322,6 +335,8 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
         return NULL;
     }
 
+    printf("\n>>> Alloc New Window <<<\n");
+
     window->config = (struct WindowConfig) {
         .window_aspect = windowSize,
         .render_aspect = resolution,
@@ -333,8 +348,10 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
     window->connection = xcb_connect(NULL, NULL);
     window->screen = xcb_setup_roots_iterator(xcb_get_setup(window->connection)).data;
 
+    printf("\n>>> XCB Connection Setup <<<\n");
+
     uint32_t window_mask = XCB_CW_EVENT_MASK;
-    uint32_t window_values[] = {XCB_EVENT_MASK_EXPOSURE};
+    uint32_t window_values[] = {XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_STRUCTURE_NOTIFY};
     window->window = xcb_generate_id(window->connection);
     xcb_create_window(
         window->connection,
@@ -349,6 +366,8 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
         window->screen->root_visual,
         window_mask, window_values
     );
+
+    printf("\n>>> XCB Create Window <<<");
     
     // Create a Graphics Context
     window->gc = xcb_generate_id(window->connection);
@@ -359,15 +378,28 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
     xcb_map_window(window->connection, window->window);
     xcb_flush(window->connection);
 
+    printf("\n>>> Flushed and Instantiated GC <<<\n");
+
     // Query SHM availability
     const xcb_query_extension_reply_t* shm_extension = xcb_get_extension_data(window->connection, &xcb_shm_id);
-    if (shm_extension || !shm_extension->present) {
+    if (!shm_extension || !shm_extension->present) {
         printf("\n>>> platform_new_window : SHM NOT AVAILABLE <<<\n");
         return NULL;
     }
+
+    printf("\n>>> Passed SHM Availability Check <<<\n");
     
-    // Set Resolution, Size, and Name of the Window
-    platform_update_window(window);
+    if (!_update_resolution(window, window->config.render_aspect)) {
+        printf("\n>>> platform_new_window : Failed to init resolution <<<\n");
+        return NULL;
+    }
+
+    if (!_name_window(window, window->config.window_name)) {
+        printf("\n>>> platform_new_window : Failed to init name <<<\n");
+        return NULL;
+    }
+
+    printf("\n>>> Updated Window Paramters ... DONE! <<<\n");
     
     window_configs[window_configs_count] = window;
     window_configs_count++;
@@ -375,7 +407,12 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
 }
 
 bool platform_set_window_name(struct WINDOWINFO* window, const char* name) {
-    if (!_check_window(window)) return false;
+    printf("here");
+    if (!_check_window(window)) {
+        printf("\n>>> platform_set_window_name : Failed <<<\n");
+        return false;
+    }
+    printf("here");
     _name_window(window, name);
     return xcb_flush(window->connection);
 }
@@ -406,7 +443,13 @@ bool platform_update_window(struct X11Window* window) {
 }
 
 bool platform_render(struct X11Window* window, float alpha) {
-    render_draw(&window->config, alpha);
+    // render_draw(&window->config, alpha);
+    
+    for (int y = 0; y < window->config.render_aspect.height; y++) {
+        for (int x = 0; x < window->config.render_aspect.width; x++) {
+            // window->config.framebuffer[y * window->config.render_aspect.height + x] = rgba(255, 255, 255, 255);
+        }
+    }
     
     // Copy pixmap to Window
     xcb_copy_area(
