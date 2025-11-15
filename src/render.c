@@ -1,6 +1,7 @@
 #include "render.h"
 #include "string.h"
 #include <stdio.h>
+#include "render_algorithms.h"
 
 void render_clear(struct WindowConfig* config, uint32_t color) {
   for (int y = 0; y < config->render_aspect.height; y++) {
@@ -25,18 +26,21 @@ void render_interpolate_pixel(struct WindowConfig* config, struct Pose* point1, 
   render_draw_pixel(config, &p, color);
 }
 
-void render_draw_shape(struct WindowConfig* config, struct Shape* shape, uint32_t color, int vertices) {
-  // TODO:
+void render_draw_shape(struct WindowConfig* config, struct Shape* shape, uint32_t color) {
+  render_algo_test(config, shape, color);
 }
 
 /// @brief Helper function for drawing Game Objects
 /// TODO: Shape Rendering
 void _draw_object(struct WindowConfig* config, struct GameObject* object, float alpha) {
+  // printf("\n\n_draw_object");
     for (size_t i = 0; i < object->collider_vector.count; i++) {
+      // printf("\n\n_draw_object");
       struct CollisionBox cb = object->collider_vector.data[i];
 
       // TESTING
-      render_interpolate_pixel(config, &object->pose, &object->previous_pose, cb.shape.color, alpha);
+      // render_interpolate_pixel(config, &object->pose, &object->previous_pose, cb.shape.color, alpha);
+      render_algo_test(config, &cb.shape, cb.debug_color);
     }
 }
 

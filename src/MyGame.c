@@ -107,7 +107,11 @@ void game_init() {
   // Define the Collision Box of the player
   // TODO: Currently just a shape :|
   CollisionBoxVector cbv = create_empty_collision_box_vector(1); // TODO: fix inconsistant name
-  cbv.data[0] = collision_box_create_debug(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), pose_from_meters(PPM, 1, 1));
+  // cbv.data[0] = collision_box_create_debug(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), pose_from_meters(PPM, 1, 1));
+  vector_collision_box_add(
+    &cbv,
+    collision_box_create_debug(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), pose_from_meters(PPM, 15, 15))
+  );
 
   // CollisionBoxVector cbv;
   // vector_collision_box_init(&cbv, 1);
@@ -116,12 +120,12 @@ void game_init() {
   // You should initialize your gameobjects.
   // Wink wink, init function, start function is a little late, but probably fine
   GameObjectConfig goc = {
-    .collider_vector = create_empty_collision_box_vector(1),
+    .collider_vector = cbv,
     .object_type = DYNAMIC,
     .starting_pose = pose_from_pixels(PPM, 480, 480),
     .starting_rotation = 0
   };
-  printf("player=%p, &goc=%p\n", (void*)player, (void*)&goc);
+  // printf("player=%p, &goc=%p\n", (void*)player, (void*)&goc);
   gameobject_init(player, &goc);
 
   int floor_sprite = 0;
