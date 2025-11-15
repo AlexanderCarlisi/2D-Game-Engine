@@ -36,11 +36,19 @@ bool world_handler_free(struct WorldHandler* handler) {
   if (handler != NULL) {
     for (size_t i = 0; i < handler->worlds.count; i++) {
       struct World* wptr = &handler->worlds.data[i];
+
       if (wptr != NULL) {
-        wptr->dealloc();
+        if (wptr->dealloc != NULL)
+          wptr->dealloc();
+        printf("\n>>> world_handler_free : dealloc %zu world <<<\n", i);
       }
     }
+    
+    vector_world_free(&handler->worlds);
+    printf("\n>>> world_handler_free : dealloc worlds vec <<<\n");
+    
     free(handler);
+    printf("\n>>> world_handler_free : dealloc handler <<<\n");
   }
   return true;
 }
