@@ -52,3 +52,48 @@ bool world_handler_free(struct WorldHandler* handler) {
   }
   return true;
 }
+
+void _update_vertex_poses(struct World* world, struct GameObject* object) {
+  if (world == NULL || object == NULL) return;
+  CollisionBoxVector* cbv = &object->collider_vector;
+  struct Pose* origin = &object->pose;
+  
+  for (size_t c = 0; c < cbv->count; c++) {
+    struct CollisionBox* cb = &cbv->data[c];
+    for (size_t i = 0; i < cb->shape.vertex_poses.count; i++) {
+      struct PoseVector* pv = &cb->shape.vertex_poses;
+      struct VertexVector* vv = &cb->shape.normalized_vertices;
+      
+      if (cb == NULL || vv == NULL || pv == NULL) return;
+      int xPixels = origin->x_pixels + cb->shape.size.x_pixels * vv->data[i].x;
+      int yPixels = origin->y_pixels + cb->shape.size.y_pixels * vv->data[i].y;
+
+      // printf("%zu vv(%f, %f) pv(%d, %d)\n", i, vv->data[i].x, vv->data[i].y, xPixels, yPixels);
+      
+      pv->data[i] = pose_from_pixels(
+        world->config.pixels_per_meter,
+        xPixels,
+        yPixels
+      );
+    }
+  }
+}
+
+bool world_handler_update_active(struct WorldHandler* handler) {
+  if (handler == NULL || handler->active == NULL) return false;
+  
+  // For each game object
+  //  for each collision box
+  //    update their Shape's vertex poses
+  struct World* w = handler->active;
+  for (size_t i = w->interval_buffer.start; i < w->interval_buffer.end; i++) {
+    _update_vertex_poses(w, world_buffer_get_object(w, i));
+  }
+  for (size_t i = w->interval_pool.start; i < w->interval_pool.end; i++) {
+    _update_vertex_poses(w, world_pool_get_object(w, i));
+  }
+
+  handler->active->loop();
+
+  return true;
+}

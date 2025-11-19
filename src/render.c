@@ -12,14 +12,12 @@ void render_clear(struct WindowConfig* config, uint32_t color) {
 }
 
 void render_draw_pixel(struct WindowConfig* config, Pose* point, uint32_t color) {
-  if (config == NULL) return;
   struct Aspect res = config->render_aspect;
   if (!pose_pixels_in_bounds(point, res.width, res.height)) return;
   config->framebuffer[point->y_pixels * res.width + point->x_pixels] = color;
 }
 
 void render_interpolate_pixel(struct WindowConfig* config, struct Pose* point1, struct Pose* point2, uint32_t color, float alpha) {
-  if (config == NULL) return;
   int x = (int) ((point2->x_pixels - point1->x_pixels) * alpha);
   int y = (int) ((point2->y_pixels - point1->x_pixels) * alpha);
   Pose p = pose_from_pixels(config->world_handler->active->config.pixels_per_meter, x, y); // defeated the entire purpose lmao
@@ -31,22 +29,20 @@ void render_draw_shape(struct WindowConfig* config, struct Shape* shape, uint32_
 }
 
 /// @brief Helper function for drawing Game Objects
-/// TODO: Shape Rendering
 void _draw_object(struct WindowConfig* config, struct GameObject* object, float alpha) {
-  // printf("\n\n_draw_object");
     for (size_t i = 0; i < object->collider_vector.count; i++) {
-      // printf("\n\n_draw_object");
       struct CollisionBox cb = object->collider_vector.data[i];
 
       // TESTING
-      // render_interpolate_pixel(config, &object->pose, &object->previous_pose, cb.shape.color, alpha);
-      render_algo_test(config, &cb.shape, cb.debug_color);
+      // render_interpolate_pixel(window, &object->pose, &object->previous_pose, cb.shape.color, alpha);
+      render_draw_shape(config, &cb.shape, cb.shape.color);
     }
 }
 
+// TODO: make this config not WINDOWINFO
 void render_draw(struct WindowConfig* config, float alpha) {
   if (config == NULL || config->world_handler == NULL) {
-    printf("\n>>> config or HANDLER is NULL <<<\n");
+    printf("\n>>> WINDOW or HANDLER is NULL <<<\n");
     return;
   }
   

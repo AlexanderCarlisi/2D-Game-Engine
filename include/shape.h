@@ -18,11 +18,11 @@ struct World; // WORLD_H
 // (x, y) : [0, 1]
 // Bottom Left = (0, 0)
 // Top Right = (1, 1)
-// Layout: [int, int]
+// Layout: [float, float]
 // Size: 8
 typedef struct Vertex {
-    int x;
-    int y;
+    float x;
+    float y;
 } Vertex;
 
 DECLARE_VECTOR(VertexVector, vector_vertex, struct Vertex)
@@ -37,13 +37,14 @@ DECLARE_VECTOR(PoseVector, vector_pose, struct Pose)
 // A dynamic array of Verticies. Normalized between [0, 1], (0, 0) being bottom left.
 // This way the size of your Object doesn't matter, and can be transposed to whatever Size freely.
 // Each vertici needs to be processed anyways to place onto the screen, and for collision checks. So it really shouldn't add any overhead.
-// ^ Requires one loop through the Array to be true, so gotta handle rendering and collisions in that one for loop.
-// ^^ Simply find the proper pixel positions in Fixed Update, but only render them in the variable update.
+//
+// Shapes need to be deallocated.
+//
 // Layout: [Vector, Pose, uint32, bool]
 // Size: 85(88), 53(56)
 typedef struct Shape {
-    struct VertexVector normalized_vertices;    // Dynamic Array of Normalized Verticies.
-    struct PoseVector vertex_poses;             // Dynamic Array of Vertex Positions.
+    struct VertexVector normalized_vertices;    // Dynamic Array of Normalized Verticies. This defines the shape.
+    struct PoseVector vertex_poses;             // Dynamic Array of Vertex Positions. This is the vertices position in world. Don't manipulate
     struct Pose size;                           // Size of Shape, used to Transpose the Normalized Verticies.
     uint32_t color;                             // *Until Textures become a thing.
     bool convex;                                // Whether a Shape is Convex or Concave.
@@ -64,16 +65,23 @@ bool shape_is_convex(struct VertexVector vertices);
 /// @param color To display the shape as in the Renderer.
 /// @param convex Wether the shape is Convex or Concave.
 /// @param vertices Dynamic Array of Normalized Vertices to define the outline of the Shape.
-void shape_init(struct Shape* shape, struct Pose size, uint32_t color, bool convex, struct VertexVector vertices);
-
-/// @brief Creates a Dynamic Array of Convex Vertices, for regular shape.
-/// @param vertices 
-VertexVector shape_create_vertices(int vertices);
+void shape_init(struct Shape* shape, size_t vertices);
 
 /// @brief Initializes a new Shape, that's vertices are of a Square.
 /// @param size To manipulate the width and height of the Box.
 /// @param color To display the shape as in the Renderer.
 struct Shape shape_create_box(struct Pose size, uint32_t color);
 
+/// @brief Add a new Vertex to the normalized_vertices dyn arr.
+/// Updates the vertex_poses count properly, which is why this func is preferred.
+/// @param shape Shape to add to.
+/// @param vertex Vertex to deepcopy into vertex_poses.
+bool shape_add_vertex(struct Shape* shape, struct Vertex vertex);
+
+/// @brief Create the vertices for a convex shape, adding them to the current shape.
+void shape_create_convex_vertices(struct Shape* shape, size_t vertices);
+
+/// @brief Deallocate provided shape, and its members
+void shape_free(struct Shape* shape);
 
 #endif // SHAPE_H

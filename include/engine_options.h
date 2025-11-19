@@ -15,6 +15,6 @@
 
 /// The Color to render undrawn over pixels as.
 /// The framebuffer is cleared with this color before calling rendering over it.
-#define EO_RENDER_CLEAR         rgba(255, 255, 0, 255)
+#define EO_RENDER_CLEAR         rgba(255, 255, 255, 255)
 
 #endif // ENGINE_OPTIONS_H

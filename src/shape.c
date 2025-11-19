@@ -138,38 +138,42 @@ bool shape_is_convex(struct VertexVector vertices) {
     return false;
 }
 
-
-void shape_init(struct Shape* shape, struct Pose size, uint32_t color, bool convex, struct VertexVector vertices) {
-    shape->size = size;
-    shape->color = color;
-    shape->convex = convex;
-    shape->normalized_vertices = vertices;
-    struct PoseVector pv;
-    vector_pose_init(&pv, 4);
-    vector_pose_add(&pv, (struct Pose) {0, 0, 0, 0});
-    vector_pose_add(&pv, (struct Pose) {0, 0, 0, 0});
-    vector_pose_add(&pv, (struct Pose) {0, 0, 0, 0});
-    vector_pose_add(&pv, (struct Pose) {0, 0, 0, 0});
-    shape->vertex_poses = pv;
+void shape_init(struct Shape* shape, size_t vertices) {
+    vector_vertex_init(&shape->normalized_vertices, vertices);
+    vector_pose_init(&shape->vertex_poses, vertices);
 }
 
+bool shape_add_vertex(struct Shape* shape, struct Vertex vertex) {
+    if (shape == NULL) return false;
 
-struct VertexVector shape_create_vertices(int vertices) {
-    struct VertexVector vv;
-    vector_vertex_init(&vv, vertices);
+    vector_vertex_add(&shape->normalized_vertices, vertex);
+    vector_pose_add(&shape->vertex_poses, (struct Pose) {0});
+    return true;
+}
+
+void shape_add_convex_vertices(struct Shape* shape, size_t vertices) {
     // theta(i) = 2pi*i/n
-    for (int i = 0; i < vertices; i++) {
+    for (size_t i = 0; i < vertices; i++) {
         float theta = (2.0f * SHAPE_PI * i) / vertices;
         float x = (cos(theta) + 1.0f) / 2.0f;
         float y = (sin(theta) + 1.0f) / 2.0f;
-        vector_vertex_add(&vv, (struct Vertex) {x, y});
+        shape_add_vertex(shape, (struct Vertex) {x, y});
+        printf("%f, %f \n", x, y);
     }
-    return vv;
 }
-
 
 struct Shape shape_create_box(struct Pose size, uint32_t color) {
     struct Shape shape;
-    shape_init(&shape, size, color, true, shape_create_vertices(4));
+    shape.size = size;
+    shape.color = color;
+    shape_init(&shape, 4);
+    shape_add_convex_vertices(&shape, 4);
+    
     return shape;
+}
+
+void shape_free(struct Shape* shape) {
+    vector_vertex_free(&shape->normalized_vertices);
+    vector_pose_free(&shape->vertex_poses);
+    free(shape);
 }

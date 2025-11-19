@@ -199,7 +199,6 @@ bool _check_window(struct X11Window* window) {
 
 /// Helper function, names without flushing
 bool _name_window(struct X11Window* window, const char* name) {
-    printf("here");
     if (!_check_window(window)) return false;
     window->config.window_name = name;
     xcb_change_property(
@@ -209,7 +208,6 @@ bool _name_window(struct X11Window* window, const char* name) {
         XCB_ATOM_WM_NAME, XCB_ATOM_STRING,
         8, strlen(name), name
     );
-    printf("here");
     return true;
 }
 
@@ -580,7 +578,8 @@ bool platform_render(struct X11Window* window, float alpha) {
 }
 
 bool platform_iterate(struct X11Window* window) {
-    return false;
+    world_handler_update_active(window->config.world_handler);
+    return true;
 }
 
 void platform_free() {

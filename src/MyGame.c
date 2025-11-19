@@ -29,11 +29,29 @@ WorldConfig neth_end_config = {
   .reallocation_ratio = 1.5
 };
 
-void overworld_init() { }
-void overworld_start() { }
+void overworld_init() { printf("\n>>> OW_INIT <<<\n"); }
+void overworld_start() { printf("\n>>> OW_START <<<\n"); }
+// void overworld_loop() { printf("\n>>> OW_LOOP <<<\n"); }
 void overworld_loop() { }
-void overworld_close() { }
-void overworld_dealloc() { }
+void overworld_close() { printf("\n>>> OW_CLOSE <<<\n"); }
+void overworld_dealloc() { printf("\n>>> OW_DEALLOC <<<\n"); }
+
+
+static GameObjectConfig goc = (GameObjectConfig) {
+  .num_colliders = 1,
+  .object_type = DYNAMIC,
+  .starting_pose = {0},
+  .starting_rotation = 0
+};
+void load_player(GameObject* obj) {
+  gameobject_init(obj, &goc);
+  gameobject_add_collider(obj, collision_box_create_debug(
+    rgba(255, 0, 0, 255),
+    rgba(255, 0, 0, 255),
+    pose_from_meters(PPM, 25, 25)
+  ));
+}
+
 
 void game_init() {
   printf("Hello World!");
@@ -75,7 +93,7 @@ void game_init() {
   overworld->start = overworld_start;     // world is now active, do this
   overworld->loop = overworld_loop;       // Called every frame
   overworld->close = overworld_close;     // world is no longer active, do this
-  overworld->dealloc = overworld_dealloc; // deallocate ALL dynamic memory
+  overworld->dealloc = overworld_dealloc; // deallocate ALL dynamic memory you owm
   
   // You have two main allocations of Memory for GameObjects in a World.
   // The Buffer, and the Pool.
@@ -104,35 +122,13 @@ void game_init() {
     return;
   }
   
-  // Define the Collision Box of the player
-  // TODO: Currently just a shape :|
-  CollisionBoxVector cbv = create_empty_collision_box_vector(1); // TODO: fix inconsistant name
-  // cbv.data[0] = collision_box_create_debug(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), pose_from_meters(PPM, 1, 1));
-  vector_collision_box_add(
-    &cbv,
-    collision_box_create_debug(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), pose_from_meters(PPM, 15, 15))
-  );
-
-  // CollisionBoxVector cbv;
-  // vector_collision_box_init(&cbv, 1);
-  // cbv.data[0] = collision_box_create_debug(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), pose_from_meters(PPM, 1, 1));
-  
-  // You should initialize your gameobjects.
-  // Wink wink, init function, start function is a little late, but probably fine
-  GameObjectConfig goc = {
-    .collider_vector = cbv,
-    .object_type = DYNAMIC,
-    .starting_pose = pose_from_pixels(PPM, 480, 480),
-    .starting_rotation = 0
-  };
-  // printf("player=%p, &goc=%p\n", (void*)player, (void*)&goc);
-  gameobject_init(player, &goc);
+  // Stay clean, its C, the safer I make it, the more verbose it gets
+  load_player(player);
+  pose_update_meters(&player->pose, PPM, 10, 10);
 
   int floor_sprite = 0;
   GameObject* floor = world_pool_get_object(overworld, floor_sprite);
   gameobject_init(floor, &goc);
-  // TODO: actually make GameObjectConfig 's be passed as referense to deepcopy, so this cant happen
-  // and gameobjects can all start with the same config, but have different settings as time goes on.
   
   // Set the invervals on the World, so it knows whats active.
   // Active objects get rendered and have physics updates
@@ -154,7 +150,6 @@ void game_init() {
 
   // Additional Notes:
   // Want Windows to use the same Worlds? WorldHandler is a Pointer for that very reason!
-  printf("Startup!");
 }
 
 void game_loop() {
@@ -162,8 +157,10 @@ void game_loop() {
   // Its called after Inputs are handled from the platform
   // called before things are rendered.
   //
-  // Handle all your logic here, but keep in mind, things WILL get messy.
-  printf("Loop!");
+  // Handle additional logic here, but keep in mind, things WILL get messy.
+  // Worlds have a Loop function, for organization.
+  // This gets called after platform_iterate, in engine.c
+  // printf("Loop!");
 }
 
 void game_free() {

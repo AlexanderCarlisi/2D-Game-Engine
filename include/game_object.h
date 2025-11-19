@@ -53,8 +53,8 @@ typedef struct GameObject {
 // Layout: [Vector, Pose, float, 1bEnum]
 // Size: 53(56), 37(40)
 typedef struct GameObjectConfig {
-    struct CollisionBoxVector collider_vector;
     struct Pose starting_pose;
+    size_t num_colliders;       // Amount of colliders to pre-alloc for
     float starting_rotation;
     enum ObjectType object_type;
 } GameObjectConfig;
@@ -65,5 +65,8 @@ CollisionBoxVector create_empty_collision_box_vector(size_t size);
 
 /// @brief Initializes the GameObject with the provided Config.
 void gameobject_init(struct GameObject* obj, struct GameObjectConfig* config);
+
+/// @brief Add a collision box to the collider_vector. Deepcopy.
+void gameobject_add_collider(struct GameObject* obj, CollisionBox cb);
 
 #endif // GAME_OBJECT_H

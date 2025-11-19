@@ -1,6 +1,6 @@
 #include "engine.h"
 #include "engine_options.h"
-#include "time.h"
+#include "e_time.h"
 #include EO_PROJECT_MAIN
 
 static bool is_running = false;
@@ -11,8 +11,10 @@ void engine_start() {
 }
 
 bool engine_tick(struct WINDOWINFO* window) {
-    float currentTime = get_current_time();
-    float frameTime = currentTime - window->config.previous_time;
+    if (window->config.previous_time == 0)
+        window->config.previous_time = etime_ms();
+    uint64_t currentTime = etime_ms();
+    uint64_t frameTime = currentTime - window->config.previous_time;
     float fixedTimeStep = window->config.frames_per_second;
     window->config.previous_time = currentTime;
     window->config.accumulator += frameTime;

@@ -3,7 +3,7 @@
 void render_algo_test(struct WindowConfig* config, struct Shape* shape, uint32_t color) {
   if (shape == NULL) return;
   
-  struct VertexVector* vertices = &shape->normalized_vertices;
+  struct PoseVector* vertices = &shape->vertex_poses;
   if (vertices == NULL) return;
   
   size_t n = vertices->count;
@@ -19,27 +19,43 @@ void render_algo_test(struct WindowConfig* config, struct Shape* shape, uint32_t
   // or find the slope between p0 and p1, draw that.
 
   for (size_t i = 0; i < n; i++) {
-    const struct Vertex* p0 = &vertices->data[i];
+    const struct Pose* p0 = &vertices->data[i];
     if (p0 == NULL) continue;
     
-    const struct Vertex* p1 = (i == n - 1) // Wrap to 0
+    const struct Pose* p1 = (i == n - 1) // Wrap to 0
       ? &vertices->data[0]
       : &vertices->data[i];
     if (p1 == NULL) continue;
     
-    float dy = (float) p1->y - p0->y;
-    float dx = (float) p1->x - p0->x;
-    struct Vertex cursor = {.x=p0->x, .y=p0->y};
+    float dy = (float) p1->y_pixels - p0->y_pixels;
+    float dx = (float) p1->x_pixels - p0->x_pixels;
     
-    // printf("dy: %f, dx: %f, cursor: %d, %d", dy, dx, cursor.x, cursor.y);
+    struct Pose cursor = {.x_pixels=p0->x_pixels, .y_pixels=p0->y_pixels};
+    // printf("curse: (%d, %d)", cursor.x_pixels, cursor.y_pixels);
+    // printf("Slope: (%f, %f)", dy, dx);
+    // printf("p0: %zu (%d, %d)\n", i, p0->x_pixels, p0->y_pixels);
+    // printf("p1: %zu (%d, %d)\n", i, p1->x_pixels, p1->y_pixels);
+    while (
+      (dx > 0 && cursor.x_pixels < p1->x_pixels)
+      || (dx < 0 && cursor.x_pixels > p1->x_pixels)
+      || (dy > 0 && cursor.y_pixels < p1->y_pixels)
+      || (dy < 0 && cursor.y_pixels > p1->y_pixels)
+    ) {
+      // printf("cursor: (%d, %d)\n", cursor.x_pixels, cursor.y_pixels);
+      // printf("DY,DX: (%f, %f)\n", dy, dx);
+      // printf("p0: (%d, %d)\n", p0->x_pixels, p0->y_pixels);
+      // printf("p1: (%d, %d)\n", p1->x_pixels, p1->y_pixels);
+      render_draw_pixel(config, &cursor, color);
 
-    while (cursor.x < p1->x && cursor.y < p1->y) {
-      struct Pose cursorPose = pose_from_pixels(20, cursor.x, cursor.y);
-      render_draw_pixel(config, &cursorPose, color);
-      cursor.x += dx;
-      cursor.y += dy;
+      if (dx > 0)
+        cursor.x_pixels++;
+      else if (dx < 0)
+        cursor.x_pixels--;
+      
+      if (dy > 0)
+        cursor.y_pixels++;
+      else if (dy < 0)
+        cursor.y_pixels--;
     }
-
-    printf("done");
   }
 }

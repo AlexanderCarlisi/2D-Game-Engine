@@ -39,14 +39,14 @@ typedef struct Aspect {
 ///     world. This does add additional complexity, TODO: Look into maybe making
 ///     it easier to work with, but also test it out, see how bad it really is.
 typedef struct WindowConfig {
+    uint64_t previous_time;
+    uint64_t accumulator;
     const char* window_name;
     uint32_t* framebuffer;
     struct WorldHandler* world_handler;
     struct Aspect window_aspect;
     struct Aspect render_aspect;
     float frames_per_second;
-    float previous_time;
-    float accumulator;
 } WindowConfig;
 
 DECLARE_VECTOR(WindowConfigVector, vector_window_config, struct WindowConfig);

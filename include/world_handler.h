@@ -41,4 +41,8 @@ bool world_handler_new_world(struct WorldHandler* handler, struct WorldConfig co
 /// @brief Deallocates all worlds stored in the handler's worlds vector.
 bool world_handler_free(struct WorldHandler* handler);
 
+/// @brief Update the current active world. Runs world->loop.
+/// Handles physics updates, updates shape poses
+bool world_handler_update_active(struct WorldHandler* handler);
+
 #endif // WORLD_HANDLER_H
