@@ -21,6 +21,13 @@
 //  - Implement Rendering of Shapes / Collision Boxes
 //      - Possibly start implementing the rotation on them.
 //
+//      TODO: NEW STANDARD: TOP LEFT IS (0, 0) for everything,
+//      (0, 0) being the bottom right for vertices of shapes no longer.
+//      It gets confusing, but if everything is just (0, 0) top left like
+//      the framebuffer, life is more simple.
+//
+//      TODO: Update doxys ^, code will work itself out eventually
+//
 //  - Implementing Unix support
 
 #include "engine_options.h"

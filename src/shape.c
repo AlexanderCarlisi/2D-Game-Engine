@@ -3,9 +3,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-DEFINE_VECTOR(VertexVector, vector_vertex, struct Vertex)
-DEFINE_VECTOR(PoseVector, vector_pose, struct Pose)
-
+DEFINE_VECTOR(VertexVector, vector_vertex, struct Vertex);
+DEFINE_VECTOR(PoseVector, vector_pose, struct Pose);
 
 // Function to calculate polar angle with respect to P0
 // float calculatePolarAngle(Pose* p0, Pose* p1) {
@@ -152,13 +151,15 @@ bool shape_add_vertex(struct Shape* shape, struct Vertex vertex) {
 }
 
 void shape_add_convex_vertices(struct Shape* shape, size_t vertices) {
-    // theta(i) = 2pi*i/n
-    for (size_t i = 0; i < vertices; i++) {
+    float x = 0;
+    float y = 0;
+    shape_add_vertex(shape, (struct Vertex) {x, y});
+    for (size_t i = 0; i < vertices - 1; i++) {
         float theta = (2.0f * SHAPE_PI * i) / vertices;
-        float x = (cos(theta) + 1.0f) / 2.0f;
-        float y = (sin(theta) + 1.0f) / 2.0f;
+        x += cos(theta);
+        y += sin(theta);
         shape_add_vertex(shape, (struct Vertex) {x, y});
-        printf("%f, %f \n", x, y);
+        // printf("%f, %f \n", x, y);
     }
 }
 

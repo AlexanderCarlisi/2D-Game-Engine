@@ -34,9 +34,12 @@ DECLARE_VECTOR(PoseVector, vector_pose, struct Pose)
 // Do note that having a lot of verticies is performance intensive, and its not suggested to run isConvex too much
 // if possible know if the shape is convex or not, or just simplify the collisions to always be or not be convex
 // 
-// A dynamic array of Verticies. Normalized between [0, 1], (0, 0) being bottom left.
+// A dynamic array of Verticies. Normalized between [0, 1], (0, 0) being top left.
 // This way the size of your Object doesn't matter, and can be transposed to whatever Size freely.
-// Each vertici needs to be processed anyways to place onto the screen, and for collision checks. So it really shouldn't add any overhead.
+//
+// @var normalized_vertices defines the shape. With a literal line being drawn from each point to the next.
+//  The vertices don't need to be sorted in any specific order, since its however you want your shape to be defined as.
+//  The last vertex in the vector of vertices will automatically be drawn to the [0]th index vertex.
 //
 // Shapes need to be deallocated.
 //

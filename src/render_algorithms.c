@@ -24,27 +24,27 @@ void render_algo_test(struct WindowConfig* config, struct Shape* shape, uint32_t
     
     const struct Pose* p1 = (i == n - 1) // Wrap to 0
       ? &vertices->data[0]
-      : &vertices->data[i];
+      : &vertices->data[i + 1];
     if (p1 == NULL) continue;
     
-    float dy = (float) p1->y_pixels - p0->y_pixels;
-    float dx = (float) p1->x_pixels - p0->x_pixels;
-    
+    float dy = (float) p1->y_pixels - (float) p0->y_pixels;
+    float dx = (float) p1->x_pixels - (float) p0->x_pixels;
     struct Pose cursor = {.x_pixels=p0->x_pixels, .y_pixels=p0->y_pixels};
+    
     // printf("curse: (%d, %d)", cursor.x_pixels, cursor.y_pixels);
-    // printf("Slope: (%f, %f)", dy, dx);
+    // printf("Slope: %zu (%f, %f)\n", i, dx, dy);
     // printf("p0: %zu (%d, %d)\n", i, p0->x_pixels, p0->y_pixels);
     // printf("p1: %zu (%d, %d)\n", i, p1->x_pixels, p1->y_pixels);
-    while (
-      (dx > 0 && cursor.x_pixels < p1->x_pixels)
-      || (dx < 0 && cursor.x_pixels > p1->x_pixels)
-      || (dy > 0 && cursor.y_pixels < p1->y_pixels)
-      || (dy < 0 && cursor.y_pixels > p1->y_pixels)
-    ) {
+    
+    while (dy != 0 || dx != 0) {
+      dy = (float) p1->y_pixels - cursor.y_pixels;
+      dx = (float) p1->x_pixels - cursor.x_pixels;
+      
       // printf("cursor: (%d, %d)\n", cursor.x_pixels, cursor.y_pixels);
-      // printf("DY,DX: (%f, %f)\n", dy, dx);
+      // printf("Slope: (%f, %f)\n", dx, dy);
       // printf("p0: (%d, %d)\n", p0->x_pixels, p0->y_pixels);
       // printf("p1: (%d, %d)\n", p1->x_pixels, p1->y_pixels);
+      
       render_draw_pixel(config, &cursor, color);
 
       if (dx > 0)

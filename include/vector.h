@@ -90,6 +90,10 @@
         arr->count--;\
 		return true;\
     }\
+    \
+    // bool func_prefix##_insertion_sort(vector_name* arr) {\
+    //     \
+    // }\
 
 
 // #define DECLARE_VECTOR_PTR(vector_name, func_prefix, type_ptr)\
