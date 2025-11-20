@@ -14,3 +14,13 @@ CollisionBox collision_box_create_debug(uint32_t debugColor, uint32_t shapeColor
     };
     return collisionBox;
 }
+
+void collision_box_health_check(struct CollisionBox* cb) {
+    // TODO: Add checks for if enter and exit methods are null pointers
+    if (cb == NULL) {
+        printf("\n<DEBUG>\t CollisionBox NULL Obj");
+        return;
+    }
+
+    shape_health_check(&cb->shape);
+}

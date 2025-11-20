@@ -27,3 +27,19 @@ void gameobject_add_collider(struct GameObject* obj, CollisionBox cb) {
     if (obj == NULL) return;
     vector_collision_box_add(&obj->collider_vector, cb);
 }
+
+void gameobject_health_check(struct GameObject* obj) {
+    if (obj == NULL) {
+        printf("\n<DEBUG>\t OBJ NULL");
+        return;
+    }
+    if (obj->collider_vector.size == 0) {
+        printf("\n<DEBUG>\t OBJ collider uninitialized");
+        return;
+    }
+    
+    for (size_t i = 0; i < obj->collider_vector.count; i++) {
+        printf("\n<DEBUG>\t OBJ CollisionBox %zu", i);
+        collision_box_health_check(&obj->collider_vector.data[i]);
+    }
+}

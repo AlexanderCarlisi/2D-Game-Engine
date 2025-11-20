@@ -82,9 +82,12 @@ struct Shape shape_create_box(struct Pose size, uint32_t color);
 bool shape_add_vertex(struct Shape* shape, struct Vertex vertex);
 
 /// @brief Create the vertices for a convex shape, adding them to the current shape.
-void shape_create_convex_vertices(struct Shape* shape, size_t vertices);
+void shape_add_convex_vertices(struct Shape* shape, size_t vertices);
 
 /// @brief Deallocate provided shape, and its members
 void shape_free(struct Shape* shape);
+
+/// @brief Prints to term debug info on Shape.
+void shape_health_check(struct Shape* shape);
 
 #endif // SHAPE_H

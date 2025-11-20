@@ -1,7 +1,7 @@
 #include "MyGame.h"
 #include <stdio.h>
 
-#include <platform.h>
+#include "platform.h"
 #include "color.h"
 
 /// You should know the index you want each world to represent
@@ -45,11 +45,33 @@ static GameObjectConfig goc = (GameObjectConfig) {
 };
 void load_player(GameObject* obj) {
   gameobject_init(obj, &goc);
-  gameobject_add_collider(obj, collision_box_create_debug(
-    rgba(255, 0, 0, 255),
-    rgba(255, 0, 0, 255),
-    pose_from_meters(PPM, 25, 25)
-  ));
+
+  // Creates a Square Box for testing.
+  // gameobject_add_collider(obj, collision_box_create_debug(
+  //   rgba(255, 0, 0, 255),
+  //   rgba(255, 0, 0, 255),
+  //   pose_from_meters(PPM, 25, 25)
+  // ));
+  
+  Shape shape = {
+    .size = pose_from_meters(PPM, 10, 10),
+    .color = rgba(255, 0, 0, 255)
+  };
+  shape_init(&shape, 3);
+  shape_add_convex_vertices(&shape, 3);
+  
+  gameobject_add_collider(
+    obj, 
+    (CollisionBox) {
+      .shape = shape,
+      .on_collision_enter = 0,
+      .on_collision_exit = 0,
+      .debug_color = rgba(0, 255, 0, 255)
+    }
+  );
+  
+  // Unexpected Behavior? Debug it
+  gameobject_health_check(obj);
 }
 
 

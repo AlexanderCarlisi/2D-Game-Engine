@@ -7,7 +7,10 @@ void render_algo_test(struct WindowConfig* config, struct Shape* shape, uint32_t
   if (vertices == NULL) return;
   
   size_t n = vertices->count;
-  if (n < 3) return;
+  if (n < 3) {
+    printf("\n\t Not enough Verticies \n");
+    return;
+  }
 
   // Simple idea
   // Vertices go from left to right
@@ -40,7 +43,7 @@ void render_algo_test(struct WindowConfig* config, struct Shape* shape, uint32_t
       dy = (float) p1->y_pixels - cursor.y_pixels;
       dx = (float) p1->x_pixels - cursor.x_pixels;
       
-      // printf("cursor: (%d, %d)\n", cursor.x_pixels, cursor.y_pixels);
+      printf("cursor: (%d, %d)\n", cursor.x_pixels, cursor.y_pixels);
       // printf("Slope: (%f, %f)\n", dx, dy);
       // printf("p0: (%d, %d)\n", p0->x_pixels, p0->y_pixels);
       // printf("p1: (%d, %d)\n", p1->x_pixels, p1->y_pixels);

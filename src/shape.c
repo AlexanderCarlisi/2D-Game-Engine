@@ -178,3 +178,34 @@ void shape_free(struct Shape* shape) {
     vector_pose_free(&shape->vertex_poses);
     free(shape);
 }
+
+void shape_health_check(struct Shape* shape) {
+    if (shape == NULL) {
+        printf("\n<DEBUG>\t Shape obj is NULL");
+        return;
+    }
+    
+    struct Pose p = {0};
+    if (pose_equals(&shape->size, &p)) {
+        printf("\n<DEBUG>\t Shape has no Size");
+    }
+
+    if (shape->vertex_poses.size == 0) {
+        printf("\n<DEBUG>\t Shape vertex poses uninitialized");
+    }
+
+    if (shape->normalized_vertices.size == 0) {
+        printf("\n<DEBUG>\t Shape normalized vertices uninitialized");
+    }
+
+    printf("\n<DEBUG>\t Shape vertices_normalized: %zu", shape->normalized_vertices.count);
+    printf("\n<DEBUG>\t Shape vertex poses: %zu", shape->vertex_poses.count);
+
+    for (size_t i = 0; i < shape->normalized_vertices.count; i++) {
+        printf("\n<DEBUG>\t normalized_vertices (%zu) : {%f, %f}", i, shape->normalized_vertices.data[i].x, shape->normalized_vertices.data[i].y);
+    }
+    
+    // for (size_t i = 0; i < shape->vertex_poses.count; i++) {
+    //     printf("\n<DEBUG>\t normalized_vertices (%zu) : {%f, %f}", i, shape->normalized_vertices.data[i].x, shape->normalized_vertices.data[i].y);
+    // }
+}

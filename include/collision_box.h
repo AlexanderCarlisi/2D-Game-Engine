@@ -19,4 +19,7 @@ typedef struct CollisionBox {
 
 CollisionBox collision_box_create_debug(uint32_t debugColor, uint32_t shapeColor, struct Pose shapeSize);
 
+/// @brief Prints to Terminal debug information about the object
+void collision_box_health_check(struct CollisionBox* cb);
+
 #endif // COLLISION_BOX_H
