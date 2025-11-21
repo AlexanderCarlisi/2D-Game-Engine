@@ -13,4 +13,12 @@
 /// @param color Color to render Convex Hull as
 void render_algo_test(struct WindowConfig* config, struct Shape* shape, uint32_t color);
 
+/// Scanline algorithm for drawing shapes
+/// Calls render_draw_pixel
+/// @param config
+/// @param origin
+/// @param shape
+/// @param color
+void render_algo_scanline(struct WindowConfig* config, struct Shape* shape, uint32_t color);
+
 #endif // RENDER_ALGO_H

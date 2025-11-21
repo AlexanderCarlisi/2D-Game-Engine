@@ -1,5 +1,6 @@
 #include "render.h"
 #include "string.h"
+#include <iso646.h>
 #include <stdio.h>
 #include "render_algorithms.h"
 
@@ -25,7 +26,8 @@ void render_interpolate_pixel(struct WindowConfig* config, struct Pose* point1, 
 }
 
 void render_draw_shape(struct WindowConfig* config, struct Shape* shape, uint32_t color) {
-  render_algo_test(config, shape, color);
+  // render_algo_test(config, shape, color);
+  render_algo_scanline(config, shape, color);
 }
 
 /// @brief Helper function for drawing Game Objects
@@ -39,7 +41,6 @@ void _draw_object(struct WindowConfig* config, struct GameObject* object, float 
     }
 }
 
-// TODO: make this config not WINDOWINFO
 void render_draw(struct WindowConfig* config, float alpha) {
   if (config == NULL || config->world_handler == NULL) {
     printf("\n>>> WINDOW or HANDLER is NULL <<<\n");
