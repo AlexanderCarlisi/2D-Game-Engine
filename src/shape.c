@@ -151,13 +151,10 @@ bool shape_add_vertex(struct Shape* shape, struct Vertex vertex) {
 }
 
 void shape_add_convex_vertices(struct Shape* shape, size_t vertices) {
-    float x = 0;
-    float y = 0;
-    shape_add_vertex(shape, (struct Vertex) {x, y});
-    for (size_t i = 0; i < vertices - 1; i++) {
+    for (size_t i = 1; i < vertices + 1; i++) {
         float theta = (2.0f * SHAPE_PI * i) / vertices;
-        x += cos(theta);
-        y += sin(theta);
+        float x = cos(theta);
+        float y = sin(theta);
         shape_add_vertex(shape, (struct Vertex) {x, y});
         // printf("%f, %f \n", x, y);
     }

@@ -54,11 +54,13 @@ void load_player(GameObject* obj) {
   // ));
   
   Shape shape = {
-    .size = pose_from_meters(PPM, 10, 10),
+    .size = pose_from_meters(PPM, 5, 5),
     .color = rgba(255, 0, 0, 255)
   };
-  shape_init(&shape, 9);
-  shape_add_convex_vertices(&shape, 9);
+  shape_init(&shape, 4);
+  shape_add_convex_vertices(&shape, 4);
+
+  obj->rotation_degrees = 45;
 
   // shape_add_vertex(&shape, (Vertex) {.x=0, .y=0});
   // shape_add_vertex(&shape, (Vertex) {.x=0.5, .y=0.25});

@@ -1,4 +1,5 @@
 #include "world_handler.h"
+#include <math.h>
 #include <stdio.h>
 
 DEFINE_VECTOR(WorldVector, vector_world, struct World);
@@ -65,8 +66,14 @@ void _update_vertex_poses(struct World* world, struct GameObject* object) {
       struct VertexVector* vv = &cb->shape.normalized_vertices;
       
       if (cb == NULL || vv == NULL || pv == NULL) return;
+
+      // int xPixels = origin->x_pixels + cb->shape.size.x_pixels * vv->data[i].x * cos(object->rotation_degrees * SHAPE_PI / 180);
+      // int yPixels = origin->y_pixels + cb->shape.size.y_pixels * vv->data[i].y * sin(object->rotation_degrees * SHAPE_PI / 180);
       int xPixels = origin->x_pixels + cb->shape.size.x_pixels * vv->data[i].x;
       int yPixels = origin->y_pixels + cb->shape.size.y_pixels * vv->data[i].y;
+
+      xPixels += (cb->shape.size.x_pixels * vv->data[i].x * cos(object->rotation_degrees * SHAPE_PI / 180));
+      yPixels += cb->shape.size.y_pixels * vv->data[i].y * sin(object->rotation_degrees * SHAPE_PI / 180);
 
       // printf("%zu vv(%f, %f) pv(%d, %d)\n", i, vv->data[i].x, vv->data[i].y, xPixels, yPixels);
       
