@@ -21,10 +21,8 @@
 #ifndef GAME_OBJECT_H
 #define GAME_OBJECT_H
 
-// Includes
 #include "collision_box.h"
 
-struct World; // WORLD_H
 
 // Dynamic Array for Collision Boxes
 DECLARE_VECTOR(CollisionBoxVector, vector_collision_box, struct CollisionBox)
@@ -45,7 +43,7 @@ typedef struct GameObject {
     struct Pose pose; // Bottom Left relative to CollionBox
     struct Pose previous_pose;
     int world_index;
-    float rotation;
+    float rotation_degrees;
     enum ObjectType object_type;
 } GameObject;
 

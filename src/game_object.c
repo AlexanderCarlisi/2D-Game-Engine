@@ -18,7 +18,7 @@ void gameobject_init(struct GameObject* obj, struct GameObjectConfig* config) {
     obj->object_type = config->object_type;
     obj->pose = config->starting_pose;
     obj->previous_pose = config->starting_pose;
-    obj->rotation = config->starting_rotation;
+    obj->rotation_degrees = config->starting_rotation;
     
     vector_collision_box_init(&obj->collider_vector, config->num_colliders);
 }
