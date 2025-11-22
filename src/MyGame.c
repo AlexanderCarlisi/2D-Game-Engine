@@ -57,8 +57,8 @@ void load_player(GameObject* obj) {
     .size = pose_from_meters(PPM, 10, 10),
     .color = rgba(255, 0, 0, 255)
   };
-  shape_init(&shape, 6);
-  shape_add_convex_vertices(&shape, 6);
+  shape_init(&shape, 4);
+  shape_add_convex_vertices(&shape, 4);
   
   gameobject_add_collider(
     obj, 

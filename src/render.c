@@ -26,7 +26,6 @@ void render_interpolate_pixel(struct WindowConfig* config, struct Pose* point1, 
 }
 
 void render_draw_shape(struct WindowConfig* config, struct Shape* shape, uint32_t color) {
-  // render_algo_test(config, shape, color);
   render_algo_scanline(config, shape, color);
 }
 
@@ -34,9 +33,6 @@ void render_draw_shape(struct WindowConfig* config, struct Shape* shape, uint32_
 void _draw_object(struct WindowConfig* config, struct GameObject* object, float alpha) {
     for (size_t i = 0; i < object->collider_vector.count; i++) {
       struct CollisionBox cb = object->collider_vector.data[i];
-
-      // TESTING
-      // render_interpolate_pixel(window, &object->pose, &object->previous_pose, cb.shape.color, alpha);
       render_draw_shape(config, &cb.shape, cb.shape.color);
     }
 }
