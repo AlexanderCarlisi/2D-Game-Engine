@@ -213,6 +213,7 @@ bool _name_window(struct X11Window* window, const char* name) {
 
 /// Helper function, changes resolution without flushing
 bool _update_resolution(struct X11Window* window, struct Aspect res) {
+    printf("\n\n\n\n\n RESOLUTION RESIZED");
     if (res.width > window->config.window_aspect.width
         || res.height > window->config.window_aspect.height) {
         printf("\n>>> _update_resolution: INVALID RES PARAM <<<\n");
@@ -271,6 +272,7 @@ bool _resize_window(struct X11Window* window, struct Aspect size) {
         || window->config.render_aspect.width > size.width) {
         window->config.render_aspect.width = size.width;
         window->config.render_aspect.height = size.height;
+        printf("\n\n\n\n\n CUCKED BY _RESIZE");
         _update_resolution(window, window->config.render_aspect);
     }
 
@@ -548,6 +550,7 @@ bool platform_set_window_resolution(struct X11Window* window, struct Aspect res)
 
 bool platform_update_window(struct X11Window* window) {
     if (!_check_window(window)) return false;
+    printf("\n\n\n\nCUCKED BY UPDATE");
 
     bool status = _update_resolution(window, window->config.render_aspect);
     if (!status) return false;

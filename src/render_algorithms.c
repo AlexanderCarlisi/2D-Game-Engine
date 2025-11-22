@@ -78,7 +78,7 @@ void render_algo_test(struct WindowConfig* config, struct Shape* shape, uint32_t
 
 /// helper function, is point XY to the left of edge AB
 bool _is_left(int x, int y, struct Pose a, struct Pose b) {
-  return ((b.x_pixels - a.x_pixels) * (y - a.y_pixels) - (x - a.x_pixels) * (b.y_pixels - a.y_pixels)) > 0;
+  return (( b.x_pixels - a.x_pixels) * (y - a.y_pixels) - (x - a.x_pixels) * (b.y_pixels - a.y_pixels)) > 0;
 }
 
 /// helper function
@@ -91,51 +91,140 @@ bool _nonzero_rule(int x, int y, struct Pose* vertices, int n) {
     struct Pose a = vertices[i];
     struct Pose b = vertices[(i + 1) % n];
 
-    if (a.y_pixels <= y && b.y_pixels >= y) {
+    if (a.y_pixels < y && b.y_pixels >= y) {
       // is point left of edge AB
       if (_is_left(x, y, a, b)) windingNumber++;
       
     } else if (b.y_pixels < y) {
-        if (!_is_left(x, y, a, b)) windingNumber--;
+      if (!_is_left(x, y, a, b)) windingNumber--;
     }
   }
 
   return windingNumber != 0;
 }
 
+
 void render_algo_scanline(struct WindowConfig* config, struct Shape* shape, uint32_t color) {
-  // Index on framebuffer to draw
-  struct Pose* origin = &shape->vertex_poses.data[0];
-  
-  float maxWidth = 0;
-  float maxHeight = 0;
-  for (size_t i = 0; i < shape->normalized_vertices.count; i++) {
-    if (shape->normalized_vertices.data[i].x > maxWidth)
-      maxWidth = shape->normalized_vertices.data[i].x;
-    
-    if (shape->normalized_vertices.data[i].y > maxHeight)
-      maxHeight = shape->normalized_vertices.data[i].y;
+  // only check pixels around Shape bounds
+
+  // Find shape bounds
+  struct Pose max = shape->vertex_poses.data[0];
+  struct Pose min = shape->vertex_poses.data[0];
+  for (size_t i = 1; i < shape->vertex_poses.count; i++) {
+    struct Pose p = shape->vertex_poses.data[i];
+
+    if (max.x_pixels < p.x_pixels) {
+      max.x_pixels = p.x_pixels;
+    }
+
+    if (max.y_pixels < p.y_pixels) {
+      max.y_pixels = p.y_pixels;
+    }
+
+    if (min.x_pixels > p.x_pixels) {
+      min.x_pixels = p.x_pixels;
+    }
+
+    if (min.y_pixels > p.y_pixels) {
+      min.y_pixels = p.y_pixels;
+    }
   }
-  
-  struct Interval bounds = (Interval) {
-    .start = origin->y_pixels * config->render_aspect.width + origin->x_pixels,
-    .end = (origin->y_pixels * config->render_aspect.width + origin->x_pixels) 
-      + ((shape->size.y_pixels * maxHeight) * config->render_aspect.width + (shape->size.x_pixels * maxWidth))
+
+  // Render
+  struct Pose cursor = {
+    .x_pixels = min.x_pixels,
+    .y_pixels = min.y_pixels
   };
+  
+  while (cursor.y_pixels <= max.y_pixels) {
+    if (_nonzero_rule(cursor.x_pixels, cursor.y_pixels, shape->vertex_poses.data, shape->vertex_poses.count)) {
+      render_draw_pixel(config, &cursor, color);
+    }
 
-  for (size_t i = bounds.start; i < bounds.end; i++) {
-    // rows 5, cols 4
-    // 5 * 4 = 20 pixels
-    // @17
-    // 17 / 5 = 3.truncated = y
-    // 17 % 5 = 2 = x
-    struct Pose pose = (struct Pose) {
-      .x_pixels = i % config->render_aspect.width,
-      .y_pixels = i / config->render_aspect.width
-    };
-
-    if (_nonzero_rule(pose.x_pixels, pose.y_pixels, shape->vertex_poses.data, shape->vertex_poses.count)) {
-      render_draw_pixel(config, &pose, color);
+    cursor.x_pixels++;
+    if (cursor.x_pixels > max.x_pixels) {
+      cursor.x_pixels = min.x_pixels;
+      cursor.y_pixels++;
     }
   }
 }
+
+
+// void render_algo_scanline(struct WindowConfig* config, struct Shape* shape, uint32_t color) {
+//   // float maxWidth = 0;
+//   // float maxHeight = 0;
+//   // for (size_t i = 0; i < shape->normalized_vertices.count; i++) {
+//   //   if (shape->normalized_vertices.data[i].x > maxWidth)
+//   //     maxWidth = shape->normalized_vertices.data[i].x;
+//   //
+//   //   if (shape->normalized_vertices.data[i].y > maxHeight)
+//   //     maxHeight = shape->normalized_vertices.data[i].y;
+//   // }
+//
+//   struct Pose* leftMost = &shape->vertex_poses.data[0];
+//   struct Pose* rightMost = &shape->vertex_poses.data[0];
+//   for (size_t i = 1; i < shape->vertex_poses.count; i++) {
+//     struct Pose* pose = &shape->vertex_poses.data[i];
+//
+//     if (leftMost->x_pixels < pose->x_pixels) {
+//       leftMost->x_pixels = pose->x_pixels;
+//     }
+//     if (leftMost->y_pixels < pose->y_pixels) {
+//       leftMost->y_pixels = pose->y_pixels;
+//     }
+//
+//     if (rightMost->x_pixels < pose->x_pixels) {
+//       rightMost->x_pixels = pose->x_pixels;
+//     }
+//     if (rightMost->y_pixels < pose->y_pixels) {
+//       rightMost->y_pixels = pose->y_pixels;
+//     }
+//
+//     printf("%zu : (%d, %d)", i, pose->x_pixels, pose->y_pixels);
+//   }
+//
+//   uint16_t x = leftMost->x_pixels;
+//   uint16_t y = leftMost->y_pixels;
+//   printf("%d, %d", x, y);
+//
+//   while (x != rightMost->x_pixels || y != rightMost->y_pixels) {
+//     printf("here");
+//     if (_nonzero_rule(x, y, shape->vertex_poses.data, shape->vertex_poses.count)) {
+//       struct Pose p = (struct Pose) {.x_pixels=x, .y_pixels=y};
+//       render_draw_pixel(config, &p, color);
+//     }
+//     if ((x + 1) % rightMost->x_pixels == 0) {
+//       y++;
+//       x = leftMost->x_pixels;
+//       continue;
+//     }
+//     x++;
+//   }
+//
+//   // struct Interval bounds = (Interval) {
+//   //   .start = origin->y_pixels * config->render_aspect.width + origin->x_pixels,
+//   //   .end = (origin->y_pixels * config->render_aspect.width + origin->x_pixels) 
+//   //     + ((shape->size.y_pixels * maxHeight) * config->render_aspect.width + (shape->size.x_pixels * maxWidth))
+//   // };
+//   //
+//   // for (size_t i = bounds.start; i < bounds.end; i++) {
+//   //   // rows 5, cols 4
+//   //   // 5 * 4 = 20 pixels
+//   //   // @17
+//   //   // 17 / 5 = 3.truncated = y
+//   //   // 17 % 5 = 2 = x
+//   //   struct Pose pose = (struct Pose) {
+//   //     .x_pixels = i % config->render_aspect.width,
+//   //     .y_pixels = i / config->render_aspect.width
+//   //   };
+//   //
+//   //   if (_nonzero_rule(pose.x_pixels, pose.y_pixels, shape->vertex_poses.data, shape->vertex_poses.count)) {
+//   //     render_draw_pixel(config, &pose, color);
+//   //   }
+//   // }
+// }
+
+
+
+
+
