@@ -11,23 +11,29 @@ bool _is_left(int x, int y, struct Pose a, struct Pose b) {
 /// helper function
 /// NoneZero Algorithm: https://en.wikipedia.org/wiki/Nonzero-rule
 /// @return true if inside polygon; false otherwise
-bool _nonzero_rule(int x, int y, struct Pose* vertices, int n) {
-  int windingNumber = 0;
+bool _nonzero_rule(int x, int y, struct Pose* v, int n) {
+    float px = x + 0.5f;
+    float py = y + 0.5f;
 
-  for (int i = 0; i < n; i++) {
-    struct Pose a = vertices[i];
-    struct Pose b = vertices[(i + 1) % n];
+    int windingNumber = 0;
+    for (int i = 0; i < n; i++) {
+        struct Pose a = v[i];
+        struct Pose b = v[(i + 1) % n];
 
-    if (a.y_pixels < y && b.y_pixels >= y) {
-      // is point left of edge AB
-      if (_is_left(x, y, a, b)) windingNumber++;
-      
-    } else if (b.y_pixels < y) {
-      if (!_is_left(x, y, a, b)) windingNumber--;
+        if (a.y_pixels <= py) {
+            if (b.y_pixels > py) {
+                if (_is_left(px, py, a, b)) 
+                    windingNumber++;
+            }
+        } else {
+            if (b.y_pixels <= py) {
+                if (!_is_left(px, py, a, b)) 
+                    windingNumber--;
+            }
+        }
     }
-  }
 
-  return windingNumber != 0;
+    return windingNumber != 0;
 }
 
 
