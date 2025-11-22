@@ -90,7 +90,7 @@ void game_init() {
     "MyGame",
     (Aspect) {.width=1280, .height=720},
     (Aspect) {.width=1280, .height=720},
-    1.0/60
+    60
   );
 
   if (window == NULL) {

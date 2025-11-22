@@ -388,6 +388,19 @@ void _init_loop() {
                     }
                     break;
                 }
+
+                case XCB_KEY_PRESS: {
+                    xcb_key_press_event_t* kp = (xcb_key_press_event_t*) event;
+                    logger_write(1, 1, "KeyCode: %d", kp->detail);
+                    printf("Key Press: %d\n", kp->detail);
+                    break;
+                }
+
+                case XCB_KEY_RELEASE: {
+                    xcb_key_release_event_t* kr = (xcb_key_release_event_t*) event;
+                    // printf("Key Release: %d\n", kr->detail);
+                    break;
+                }
             }
             free(event);
         }
@@ -444,7 +457,12 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
     logger_write(1, 0, "X11 connection instantiated", false);
 
     uint32_t window_mask = XCB_CW_EVENT_MASK;
-    uint32_t window_values[] = {XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_STRUCTURE_NOTIFY};
+    uint32_t window_values[] = {
+        XCB_EVENT_MASK_EXPOSURE 
+        | XCB_EVENT_MASK_STRUCTURE_NOTIFY
+        | XCB_EVENT_MASK_KEY_PRESS
+        | XCB_EVENT_MASK_KEY_RELEASE
+    };
     window->window = xcb_generate_id(window->connection);
     xcb_create_window(
         window->connection,

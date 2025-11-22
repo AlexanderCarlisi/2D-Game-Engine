@@ -7,6 +7,7 @@
 //
 // TODO: EDIT: Logging
 //          Can be cleaned up a bit, less verbose
+//          Logs directory, filename dates
 //
 //
 // Currently Implementing:
