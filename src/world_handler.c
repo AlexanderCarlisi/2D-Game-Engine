@@ -1,13 +1,14 @@
 #include "world_handler.h"
 #include <math.h>
 #include <stdio.h>
+#include "logger.h"
 
 DEFINE_VECTOR(WorldVector, vector_world, struct World);
 
 struct WorldHandler* world_handler_new() {
   WorldHandler* wh = (WorldHandler*) calloc(1, sizeof(WorldHandler));
   if (wh == NULL) {
-    printf("\n>>> world_handler_new: Calloc Fail <<<\n");
+    logger_write(2, 1, "world_handler_new: Calloc Fail", true);
     return NULL;
   }
   wh->active = NULL;
@@ -39,17 +40,29 @@ bool world_handler_free(struct WorldHandler* handler) {
       struct World* wptr = &handler->worlds.data[i];
 
       if (wptr != NULL) {
-        if (wptr->dealloc != NULL)
-          wptr->dealloc();
-        printf("\n>>> world_handler_free : dealloc %zu world <<<\n", i);
+        for (size_t i = 0; i < WORLD_OBJECT_BUFFER_SIZE; i++) {
+          struct GameObject* obj = world_buffer_get_object(wptr, i);
+          gameobject_free(obj);
+        }
+
+        for (size_t i = 0; i < wptr->object_pool.count; i++) {
+          struct GameObject* obj = world_pool_get_object(wptr, i);
+          gameobject_free(obj);
+        }
+
+        vector_game_object_free(&wptr->object_pool);
+        wptr->object_pool.data = NULL;
+        if (wptr->dealloc != NULL) wptr->dealloc();
+        
+        logger_write(2, 1, "world_handler_free: world deallocated", false);
       }
     }
     
     vector_world_free(&handler->worlds);
-    printf("\n>>> world_handler_free : dealloc worlds vec <<<\n");
+    logger_write(2, 1, "world_handler_free: deallocated worlds vector", false);
     
     free(handler);
-    printf("\n>>> world_handler_free : dealloc handler <<<\n");
+    logger_write(2, 1, "world_handler_free: deallocated world handler", false);
   }
   return true;
 }

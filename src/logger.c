@@ -42,12 +42,11 @@ void logger_write(int encapsulationDepth, int tabDepth, const char* message, boo
     close[i] = '<';
   }
 
-  printf("open %s \n", open);
-  printf("close %s \n", close);
   fprintf(file, out, (error) ? errOut : "", open, message, close);
 }
 
 void logger_free() {
   fprintf(file, "\n[LOG CLOSE]\n\n");
   fclose(file);
+  file = NULL;
 }

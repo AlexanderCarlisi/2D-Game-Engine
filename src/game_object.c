@@ -1,17 +1,18 @@
 #include "game_object.h"
 #include "shape.h"
 #include <stdio.h>
+#include "logger.h"
 
 DEFINE_VECTOR(CollisionBoxVector, vector_collision_box, struct CollisionBox)
 
 void gameobject_init(struct GameObject* obj, struct GameObjectConfig* config) {
     if (obj == NULL) {
-        printf("\n>>> gameobject_init NULL OBJ <<<\n");
+        logger_write(2, 1, "gameobject_init: NULL obj", true);
         return;   
     }
 
     if (config == NULL) {
-        printf("\n>>> gameobject_init config NULL<<<\n");
+        logger_write(2, 1, "gameobject_init: NULL config", true);
         return;
     }
     
@@ -30,16 +31,23 @@ void gameobject_add_collider(struct GameObject* obj, CollisionBox cb) {
 
 void gameobject_health_check(struct GameObject* obj) {
     if (obj == NULL) {
-        printf("\n<DEBUG>\t OBJ NULL");
+        logger_write(2, 2, "gameobject_health: obj null", true);
         return;
     }
     if (obj->collider_vector.size == 0) {
-        printf("\n<DEBUG>\t OBJ collider uninitialized");
+        logger_write(2, 2, "gameobject_health: collider vector uninitialized", true);
         return;
     }
     
     for (size_t i = 0; i < obj->collider_vector.count; i++) {
-        printf("\n<DEBUG>\t OBJ CollisionBox %zu", i);
+        logger_write(2, 2, "gameobject_health: collision box", false);
         collision_box_health_check(&obj->collider_vector.data[i]);
+    }
+}
+
+void gameobject_free(struct GameObject* obj) {
+    for (size_t c = 0; c < obj->collider_vector.count; c++) {
+        struct CollisionBox collisionBox = obj->collider_vector.data[c];
+        shape_free(&collisionBox.shape);
     }
 }

@@ -4,6 +4,7 @@
 #include "render.h"
 #include <stdint.h>
 #include <string.h>
+#include "logger.h"
 #include "color.h"
 
 #define WINDOWS_AMOUNT 1
@@ -161,7 +162,6 @@ bool platform_render(struct WindowConfig* config, float alpha) {
 }
 
 #else
-// TODO: Linux
 #include <stdlib.h>
 #include <string.h>
 #include <sched.h>
@@ -215,7 +215,7 @@ bool _name_window(struct X11Window* window, const char* name) {
 bool _update_resolution(struct X11Window* window, struct Aspect res) {
     if (res.width > window->config.window_aspect.width
         || res.height > window->config.window_aspect.height) {
-        printf("\n>>> _update_resolution: INVALID RES PARAM <<<\n");
+        logger_write(2, 1, "_update_resolution: Invalid Res Param", true);
         return false;
     }
     window->config.render_aspect = res;
@@ -255,7 +255,7 @@ bool _update_resolution(struct X11Window* window, struct Aspect res) {
     );
     
     if (!_check_shm(&window->info)) {
-        printf("\n>>> _update_resolution : FAILED SHM SETUP <<<\n");
+        logger_write(2, 1, "_update_resolution: Failed SMH Setup", true);
         return false;
     }
 
@@ -302,46 +302,46 @@ void _free_window(struct X11Window* window) {
     
     if (window->info.shmseg != XCB_ATOM_NONE) {
         xcb_shm_detach(window->connection, window->info.shmseg);
-        printf("\n>>> detach shmseg <<<\n");
+        logger_write(2, 1, "detach shmseg", false);
     }
     
     if (window->info.shmaddr != NULL) {
         shmdt(window->info.shmaddr);
-        printf("\n>>> dealloc shmaddr <<<\n");
+        logger_write(2, 1, "dealloc shmaddr", false);
     }
     
     if (window->info.shmid != XCB_ATOM_NONE) {
         shmctl(window->info.shmid, IPC_RMID, 0);
-        printf("\n>>> shmid ctl'd <<<\n");
+        logger_write(2, 1, "shmid ctl", false);
     }
     
     if (window->pixmap != XCB_PIXMAP_NONE) {
         xcb_free_pixmap(window->connection, window->pixmap);
-        printf("\n>>> pixmap free'd <<<\n");
+        logger_write(2, 1, "pixmap dealloc", false);
     }
     
     if (window->window != XCB_ATOM_NONE) {
         xcb_destroy_window(window->connection, window->window);
-        printf("\n>>> Destory'd Window <<<\n");
+        logger_write(2, 1, "Destroy Window", false);
     }
     
     if (window->connection != NULL) {
         xcb_disconnect(window->connection);
-        printf("\n>>> disconnect connection <<<\n");
+        logger_write(2, 1, "Connection Disconnected", false);
     }
     
     if (window->config.world_handler != NULL) {
         world_handler_free(window->config.world_handler);
-        printf("\n>>> dealloc world <<<\n");
+        logger_write(2, 1, "Deallocated world_handler", false);
     }
     
     free(window);
-    printf("\n>>> _free_window : dealloc finish <<<\n");
+    logger_write(1, 0, "_free_window: dealloc finish", false);
 }
 
 void _free_window_i(size_t i) {
     if (i < window_configs_count && window_configs[i] != NULL) {
-        printf("\n>>> _free_window_i : Dealloc %zu <<<\n", i);
+        logger_write(2, 1, "_free_window_i: Dealloc %zu", false);
         _free_window(window_configs[i]);
         window_configs[i] = NULL;
     }
@@ -366,12 +366,8 @@ void _init_loop() {
                         // TODO: Update this to be NON FLUSHING, since many updates can occur
                         // only update the resolution once the user has stopped changing window
                         // size for a given time.
-                        printf("\n>>> Resized Window <<<\n");
-                        // printf("\n>>>> WIN: %d, %d < > REN: %d, %d\n",
-                        //        window->config.window_aspect.width,
-                        //        window->config.window_aspect.height,
-                        //        window->config.render_aspect.width,
-                        //        window->config.render_aspect.height);
+                        
+                        logger_write(2, 1, "Resized Window", false);
                         platform_set_window_resolution(window, window->config.window_aspect);
                     }
                 }
@@ -379,14 +375,14 @@ void _init_loop() {
                 case XCB_CLIENT_MESSAGE: {
                     xcb_client_message_event_t* cm = (xcb_client_message_event_t*) event;
                     if (cm->data.data32[0] == ATOM_WM_DELETE_WINDOW) {
-                        printf("\n>>> Close Window <<<\n");
+                        logger_write(2, 1, "DELETE WINDOW", false);
                         if (i == 0) {
                             // Shutdown
                             engine_set_running(false);
-                            printf("\n>>> _init_loop : Engine Off <<<\n");
-                        }
-                        else {
+                            logger_write(2, 1, "Engine Off", false);
+                        } else {
                             _free_window_i(i);
+                            logger_write(2, 1, "Dealloc %zu", false);
                             printf("\n>>> _init_loop : Dealloc %zu <<<\n", i);
                         }
                     }
@@ -408,21 +404,20 @@ void platform_initialize() {
 }
 
 struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps) {
-    // TODO: fix all the memory leaks when erroring out
     // XCB-SHM https://stackoverflow.com/questions/27745131/how-to-use-shm-pixmap-with-xcb
     // WM_PROTO and DELETE WINDOW https://marc.info/?l=freedesktop-xcb&m=129381953404497
     if (window_configs_count >= EO_WINDOWS_AMOUNT) {
-        printf("\n>>> platform_new_window: ATTEMPT TO EXCEED MAX WINDOWS <<<\n");
+        logger_write(1, 0, "platform_new_window: attempted to exceed max windows allocated", true);
         return NULL;
     }
 
     struct X11Window* window = calloc(1, sizeof(struct X11Window));
     if (window == NULL) {
-        printf("\n>>> platform_new_window : NULL ALLOC <<<\n");
+        logger_write(1, 0, "platform_new_window: Window alloc failed", true);
         return NULL;
     }
 
-    printf("\n>>> Alloc New Window <<<\n");
+    logger_write(1, 0, "Allocated new Window", false);
 
     window->config = (struct WindowConfig) {
         .window_aspect = windowSize,
@@ -434,19 +429,19 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
     // Setup x11 Connection and Window
     window->connection = xcb_connect(NULL, NULL);
     if (window->connection == NULL) {
-        printf("\n>>> XCB Connection Failed <<<\n");
+        logger_write(1, 0, "platform_new_window: X11 connection failed", true);
         _free_window(window);
         return NULL;
     }
 
     window->screen = xcb_setup_roots_iterator(xcb_get_setup(window->connection)).data;
     if (window->screen == NULL) {
-        printf("\n>>> XCB Screen Iteration Failed <<<\n");
+        logger_write(1, 0, "platform_new_window: XCB screen iteration failed", true);
         _free_window(window);
         return NULL;
     }
 
-    printf("\n>>> XCB Connection Setup <<<\n");
+    logger_write(1, 0, "X11 connection instantiated", false);
 
     uint32_t window_mask = XCB_CW_EVENT_MASK;
     uint32_t window_values[] = {XCB_EVENT_MASK_EXPOSURE | XCB_EVENT_MASK_STRUCTURE_NOTIFY};
@@ -465,7 +460,7 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
         window_mask, window_values
     );
 
-    printf("\n>>> XCB Create Window <<<\n");
+    logger_write(1, 0, "X11 Window instantiated", false);
     
     // Create a Graphics Context
     window->gc = xcb_generate_id(window->connection);
@@ -476,7 +471,7 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
     xcb_map_window(window->connection, window->window);
     xcb_flush(window->connection);
 
-    printf("\n>>> Flushed and Instantiated GC <<<\n");
+    logger_write(1, 0, "Flushed and Instantiated GC", false);
 
     // Setup extra contexts
     if (ATOM_WM_PROTOCOLS == XCB_ATOM_NONE)
@@ -499,26 +494,26 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
     // Query SHM availability
     const xcb_query_extension_reply_t* shm_extension = xcb_get_extension_data(window->connection, &xcb_shm_id);
     if (!shm_extension || !shm_extension->present) {
-        printf("\n>>> platform_new_window : SHM NOT AVAILABLE <<<\n");
+        logger_write(1, 0, "platform_new_window: SHM not availible", true);
         _free_window(window);
         return NULL;
     }
 
-    printf("\n>>> Passed SHM Availability Check <<<\n");
+    logger_write(1, 0, "Passed SHM availability check", false);
     
     if (!_update_resolution(window, window->config.render_aspect)) {
-        printf("\n>>> platform_new_window : Failed to init resolution <<<\n");
+        logger_write(1, 0, "platform_new_window: Failed to init resolution", true);
         _free_window(window);
         return NULL;
     }
 
     if (!_name_window(window, window->config.window_name)) {
-        printf("\n>>> platform_new_window : Failed to init name <<<\n");
+        logger_write(1, 0, "platform_new_window: Failed to init name", true);
         _free_window(window);
         return NULL;
     }
 
-    printf("\n>>> Updated Window Paramters ... DONE! <<<\n");
+    logger_write(1, 0, "Updated Window Paramters", false);
     
     window_configs[window_configs_count] = window;
     window_configs_count++;
@@ -528,6 +523,7 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
 bool platform_set_window_name(struct WINDOWINFO* window, const char* name) {
     if (!_check_window(window)) {
         printf("\n>>> platform_set_window_name : Failed <<<\n");
+        logger_write(1, 0, "platform_set_window_name: failed", true);
         return false;
     }
     _name_window(window, name);

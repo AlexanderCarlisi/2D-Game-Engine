@@ -45,6 +45,9 @@ void gameobject_init(struct GameObject* obj, struct GameObjectConfig* config);
 /// @brief Add a collision box to the collider_vector. Deepcopy.
 void gameobject_add_collider(struct GameObject* obj, CollisionBox cb);
 
+/// @brief Deallocate Dyn memory in GameObject. I.e collider vector + shapes
+void gameobject_free(struct GameObject* obj);
+
 /// @brief Prints debug information about a GameObject.
 void gameobject_health_check(struct GameObject* obj);
 

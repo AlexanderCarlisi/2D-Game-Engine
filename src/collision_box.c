@@ -1,5 +1,6 @@
 #include "collision_box.h"
 #include <stdio.h>
+#include "logger.h"
 
 void debug_collision_enter_function(struct GameObject* self, struct GameObject* collidedObject) { printf("\n>> Collision Enter <<"); }
 void debug_collision_exit_function(struct GameObject* self, struct GameObject* collidedObject) { printf("\n>> Collision Exit <<"); }
@@ -17,7 +18,7 @@ CollisionBox collision_box_create_debug(uint32_t debugColor, uint32_t shapeColor
 void collision_box_health_check(struct CollisionBox* cb) {
     // TODO: Add checks for if enter and exit methods are null pointers
     if (cb == NULL) {
-        printf("\n<DEBUG>\t CollisionBox NULL Obj");
+        logger_write(3, 3, "collision_box_health: NULL obj", true);
         return;
     }
 
