@@ -17,4 +17,7 @@
 /// The framebuffer is cleared with this color before calling rendering over it.
 #define EO_RENDER_CLEAR         rgba(255, 255, 255, 255)
 
+/// Path to log file
+#define EO_LOG_FILE             "log.txt"
+
 #endif // ENGINE_OPTIONS_H

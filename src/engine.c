@@ -1,6 +1,7 @@
 #include "engine.h"
 #include "engine_options.h"
 #include "e_time.h"
+#include "logger.h"
 #include EO_PROJECT_MAIN
 
 static bool is_running = false;
@@ -37,6 +38,7 @@ bool engine_tick(struct WINDOWINFO* window) {
 void engine_close() {
     platform_free();
     EO_PROJECT_MAIN_FREE;
+    logger_free();
 }
 
 void engine_set_running(bool state) {
