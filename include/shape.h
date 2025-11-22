@@ -11,9 +11,6 @@
 #define SHAPE_PI 3.14159265358979323846
 #endif // SHAPE_PI
 
-struct World; // WORLD_H
-
-
 // A normalized magnitude, representing the Vertex of a Shape. 
 // (x, y) : [0, 1]
 // Bottom Left = (0, 0)
@@ -52,7 +49,6 @@ typedef struct Shape {
     uint32_t color;                             // *Until Textures become a thing.
     bool convex;                                // Whether a Shape is Convex or Concave.
 } Shape;
-
 
 // Uses the Graham Scan algorithm to determine if the provided set of Vertices forms a convex shape.
 // This engine allows users to have a lot of freedom with what

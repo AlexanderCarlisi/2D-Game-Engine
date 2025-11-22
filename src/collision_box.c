@@ -1,5 +1,4 @@
 #include "collision_box.h"
-#include "color.h"
 #include <stdio.h>
 
 void debug_collision_enter_function(struct GameObject* self, struct GameObject* collidedObject) { printf("\n>> Collision Enter <<"); }

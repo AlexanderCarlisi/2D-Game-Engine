@@ -7,7 +7,6 @@
 #define WORLD_OBJECT_BUFFER_SIZE EO_GAME_OBJECT_BUFFER
 DECLARE_VECTOR(GameObjectVector, vector_game_object, struct GameObject);
 
-
 /**
  * @struct Interval
  * @brief An interval, generally used for Buffers and Pools.
@@ -20,7 +19,6 @@ typedef struct Interval {
 	size_t start;
 	size_t end;
 } Interval;
-
 
 /**
  * @struct WorldConfig
@@ -51,52 +49,47 @@ typedef struct WorldConfig {
 	size_t pool_size;
   float reallocation_ratio;
   float gravity_field;
-	int pixels_per_meter; // TODO: uint bozo
+	uint pixels_per_meter;
 } WorldConfig;
 
 
 /**
- * TODO: Update Doxys for this whole damn file
+ * TODO: Remove WorldConfig from World. It's unnecessary
  * @struct World
- * @brief Container for a 'World', holds functions and a WorldConfig used by
- * the world.
  *
- * @note For adding GameObjects to the Buffer and Pool @see world
+ * <p>
+ * A World is a collection of Game Object. Split into a Statically allocated
+ * 	buffer, and dynamically allocated pool.
  *
- * @var World::config
- * The WorldConfig used by the World. This will be set to the Active 
- * WorldConfig when this World is set as the Active World in world.
- * @see world_set_active
+ * <p>
+ * There are intervals for the respective Game Object collections denoting 
+ * 	what indices are active. Active game object will have physics updates
+ * 	and be rendered.
  *
- * @var World::init
- * Function Pointer to the World's initialization function. This function is
- * called the moment the World is loaded using @see world_load.
- * This should be used to place GameObjects on the Buffer and Pool, as the
- * space has been delegated for the World when this function is called.
- * @see worldconfig_get_buffer_interval
- * @see worldconfig_get_pool_interval
+ * <p>
+ * There are 5 functions pointers for you to implement.
+ * <p> init : Preload any dynamic memory or light/heavy data, the intention
+ * 	behind this function is just a suggestion for loading things as the game
+ * 	is played, its not a strict requirement. You are responsible for calling
+ * 	this function, if ever.
  *
- * @var World::start
- * Function Pointer to the World's start function. This function is called
- * when the World is set as the Active World in the world.
- * This should be used to set the Starting States of concurrent GameObjects
- * or finish up any buisness in init.
- * @see world_set_active
+ * <p> start : This function is called whenever the World is set as active in
+ * 	the WorldHandler, @see world_handler.h
  *
- * @var World::loop
- * Function Pointer to the World's loop function. This function is called
- * every Fixed Update, when the World is set as the Active World in world.
- * @see world_set_active
+ * <p> loop : This function is called automatically every loop when the world
+ * 	is active.
  *
- * @var World::close
- * Function Pointer to the World's close function. This function is called
- * when this World was the active one, until the active world changed in
- * world.
- * @see world_set_active
+ * <p> close : This function is caleld automatically when you set anther world
+ * 	as active.
  *
- * @var World::dealloc
+ * <p> Dealloc : This function is called automatically on clean exit. You can
+ * 	call this function yourself, just make sure to remove the world from the 
+ * 	world handler after.
  *
- *
+ * @warning object_pool is deallocated automatically for you on clean exit.
+ * 	This is not the case if you call dealloc yourself. Make sure to NULL check
+ * 	the object_pool.data member, and use the appropriate @see vector.h function
+ * 	for dellocating its resources.
 */
 typedef struct World {
 	struct WorldConfig config;
@@ -111,7 +104,6 @@ typedef struct World {
 	void (*dealloc)();
 } World;
 
-
 /// @brief Initializes a new World with default parameters.
 /// @param world To be initialized.
 /// @param config WorldConfig to initialize with. Deepcopied.
@@ -120,7 +112,6 @@ bool world_new(struct World* world, struct WorldConfig config);
 /// @brief Reallocate the Object Pool.
 /// @param newSize
 /// @return Success of Reallocation.
-/// @warning
 bool world_realloc_pool(struct World* world, size_t newSize);
 
 /// @brief Nullifies Objects within the Interval of the Object Buffer.

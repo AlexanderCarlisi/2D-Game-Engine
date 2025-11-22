@@ -36,7 +36,6 @@ bool _nonzero_rule(int x, int y, struct Pose* v, int n) {
     return windingNumber != 0;
 }
 
-
 void render_algo_scanline(struct WindowConfig* config, struct Shape* shape, uint32_t color) {
   // only check pixels around Shape bounds
 

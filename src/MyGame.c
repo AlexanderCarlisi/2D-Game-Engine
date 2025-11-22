@@ -57,8 +57,8 @@ void load_player(GameObject* obj) {
     .size = pose_from_meters(PPM, 5, 5),
     .color = rgba(255, 0, 0, 255)
   };
-  shape_init(&shape, 4);
-  shape_add_convex_vertices(&shape, 4);
+  shape_init(&shape, 5);
+  shape_add_convex_vertices(&shape, 5);
 
   obj->rotation_degrees = 45;
 

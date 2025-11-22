@@ -16,7 +16,6 @@ bool world_realloc_pool(struct World* world, size_t newSize) {
 	}
 }
 
-
 bool world_remove_from_buffer(struct World* world, struct Interval* interval) {
 	if (interval->end >= WORLD_OBJECT_BUFFER_SIZE) {
 		return false;
@@ -28,7 +27,6 @@ bool world_remove_from_buffer(struct World* world, struct Interval* interval) {
 	}
 	return true;
 }
-
 
 bool world_remove_from_pool(struct World* world, struct Interval* interval) {
 	if (interval->end >= WORLD_OBJECT_BUFFER_SIZE) {
@@ -42,24 +40,19 @@ bool world_remove_from_pool(struct World* world, struct Interval* interval) {
 	return true;
 }
 
-
 struct GameObject* world_buffer_get_object(struct World* world, size_t index) {
 	if (index >= WORLD_OBJECT_BUFFER_SIZE) return NULL;
 	return &world->object_buffer[index];
 }
-
 
 struct GameObject* world_pool_get_object(struct World* world, size_t index) {
 	if (index >= WORLD_OBJECT_BUFFER_SIZE) return NULL;
 	return &world->object_pool.data[index];
 }
 
-
 bool world_new(struct World* world, struct WorldConfig config) {
 	if (world == NULL) return false;
 	
-	// TODO: Fix naming inconsistances
-	// TODO: You can probably remove worldconfig from a world and not feel bad about it
 	world->interval_buffer = config.buffer_interval;
 	world->interval_pool = config.pool_interval;
 	world->object_pool.realloc_ratio = config.reallocation_ratio;

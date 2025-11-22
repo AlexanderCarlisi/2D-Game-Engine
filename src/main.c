@@ -5,9 +5,6 @@
 // TODO: ADDITION: World Physics, Collisions, CollisionBoxes
 // TODO: ADDITION/REFAC: Error Logging to File.
 
-// CURRENT GOALS:
-// ROTATION OF SHAPES
-
 #include "engine_options.h"
 #include EO_PROJECT_MAIN
 

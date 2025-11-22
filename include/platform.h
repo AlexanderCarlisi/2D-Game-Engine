@@ -14,12 +14,9 @@
 
 #ifdef _WIN32
 #define WINDOWINFO W32Window
-
 #else
 #define WINDOWINFO X11Window
-
 #endif
-
 
 /// @struct Aspect
 /// A width and height representing pixels.
@@ -123,8 +120,9 @@ typedef struct W32Window {
 
 /**
  * @struct X11Window
- * The container holding all information relevant to a single X11 Window.
- * Used for Rendering, Inputs, ---- and whatever else gets added. TODO:
+ * 
+ * Contains info relevant for platform.c
+ * You shouldn't mess with this stuff.
  */
 typedef struct X11Window {
     struct WindowConfig config;
