@@ -8,7 +8,7 @@ static bool is_running = false;
 
 void engine_start() {
     is_running = true;
-    printf("\n>>> Engine Started! <<<\n");
+    logger_write(1, 0, "Engine Started", false);
 }
 
 bool engine_tick(struct WINDOWINFO* window) {

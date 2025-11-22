@@ -31,7 +31,7 @@ void logger_write(int encapsulationDepth, int tabDepth, const char* message, boo
 
   // char* out = calloc(encapsulationDepth * 2 + tabDepth + strlen(message) + (error) ? 7 : 0 + 2, sizeof(char));
 
-  const char* out = "%s%s %s %s %s\n";
+  const char* out = "%s%s %s %s\n";
   const char* errOut = "[ERROR]";
   char* open = calloc(tabDepth + encapsulationDepth, sizeof(char));
   for (int i = 0; i < tabDepth + encapsulationDepth; i++) {
@@ -39,9 +39,11 @@ void logger_write(int encapsulationDepth, int tabDepth, const char* message, boo
   }
   char* close = calloc(encapsulationDepth, sizeof(char));
   for (int i = 0; i < encapsulationDepth; i++) {
-    open[i] = '<';
+    close[i] = '<';
   }
 
+  printf("open %s \n", open);
+  printf("close %s \n", close);
   fprintf(file, out, (error) ? errOut : "", open, message, close);
 }
 
