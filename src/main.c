@@ -2,8 +2,15 @@
 // LINUX: gcc src/*.c -Iinclude -o 2DGameEngine -lxcb -lxcb-shm -lm
 
 // TODO: ADDITION: GameObject Textures
+// 
 // TODO: ADDITION: World Physics, Collisions, CollisionBoxes
-// TODO: ADDITION/REFAC: Error Logging to File.
+//
+// TODO: EDIT: Logging
+//          Can be cleaned up a bit, less verbose
+//
+//
+// Currently Implementing:
+//  Inputs
 
 #include "engine_options.h"
 #include "logger.h"
