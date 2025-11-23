@@ -44,8 +44,8 @@ void overworld_loop() {
   // Inputs!
   GameObject* player = world_buffer_get_object(overworld_ptr, PLAYER_BUFFER_INDEX);
   Pose* p = &player->pose;
-  float mps = 12.0 / 60; // Meters per Second
-  float dtheta = 45 / 60.0; // Degrees per Second
+  float mps = 20.0 / 60; // Meters per Second
+  float dtheta = 5 / 60.0; // Degrees per Second
 
   if (input_kb_pressed(INPUT_KEYB_W)) {
     pose_update_meters(&player->pose, PPM, p->x_meters, p->y_meters - mps);
