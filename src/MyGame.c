@@ -2,14 +2,19 @@
 #include <stdio.h>
 
 #include "platform.h"
+#include "input.h"
 #include "color.h"
 
 /// You should know the index you want each world to represent
 /// Since it wont change :)
-#define WORLD_OVERWORLD   0
+#define WORLD_OVERWORLD     0
+#define PLAYER_BUFFER_INDEX 0
+
+
 #define WORLD_NETHER      1
 #define WORLD_END         2
 #define PPM               20 // probably a nice idea
+
 
 WorldConfig overworld_config = {
   .buffer_interval = (Interval) {.start = 0, .end = 0},
@@ -29,10 +34,35 @@ WorldConfig neth_end_config = {
   .reallocation_ratio = 1.5
 };
 
+World* overworld_ptr = NULL;
+
 void overworld_init() { printf("\n>>> OW_INIT <<<\n"); }
 void overworld_start() { printf("\n>>> OW_START <<<\n"); }
 // void overworld_loop() { printf("\n>>> OW_LOOP <<<\n"); }
-void overworld_loop() { }
+ 
+void overworld_loop() {
+  // Inputs!
+  GameObject* player = world_buffer_get_object(overworld_ptr, PLAYER_BUFFER_INDEX);
+  Pose* p = &player->pose;
+  float mps = 3 / 60.0; // Meters per Second
+
+  if (input_kb_pressed(INPUT_KEYB_W)) {
+    pose_update_meters(&player->pose, PPM, p->x_meters, p->y_meters - mps);
+  }
+  
+  if (input_kb_pressed(INPUT_KEYB_S)) {
+    pose_update_meters(&player->pose, PPM, p->x_meters, p->y_meters + mps);
+  }
+  
+  if (input_kb_pressed(INPUT_KEYB_A)) {
+    pose_update_meters(&player->pose, PPM, p->x_meters - mps, p->y_meters);
+  }
+  
+  if (input_kb_pressed(INPUT_KEYB_D)) {
+    pose_update_meters(&player->pose, PPM, p->x_meters + mps, p->y_meters);
+  }
+}
+
 void overworld_close() { printf("\n>>> OW_CLOSE <<<\n"); }
 void overworld_dealloc() { printf("\n>>> OW_DEALLOC <<<\n"); }
 
@@ -115,15 +145,15 @@ void game_init() {
   world_handler_new_world(whand, neth_end_config); // so they can be changed independantly later
   
   // Store pointers to worlds if you want
-  World* overworld = &whand->worlds.data[WORLD_OVERWORLD];
+  overworld_ptr = &whand->worlds.data[WORLD_OVERWORLD];
 
   // Setup how worlds will operate
   // These functions are called automatically by the WorldHandler
-  overworld->init = overworld_init;       // 'load' the world, allocate memory
-  overworld->start = overworld_start;     // world is now active, do this
-  overworld->loop = overworld_loop;       // Called every frame
-  overworld->close = overworld_close;     // world is no longer active, do this
-  overworld->dealloc = overworld_dealloc; // deallocate ALL dynamic memory you owm
+  overworld_ptr->init = overworld_init;       // 'load' the world, allocate memory
+  overworld_ptr->start = overworld_start;     // world is now active, do this
+  overworld_ptr->loop = overworld_loop;       // Called every frame
+  overworld_ptr->close = overworld_close;     // world is no longer active, do this
+  overworld_ptr->dealloc = overworld_dealloc; // deallocate ALL dynamic memory you owm
   
   // You have two main allocations of Memory for GameObjects in a World.
   // The Buffer, and the Pool.
@@ -141,12 +171,11 @@ void game_init() {
 
   // Generally in the Buffer, you want to keep Object locations consitent, as
   // the purpose of the Buffer is to be persistent memory.
-  const int PLAYER_SPRITE = 0; // Index in buffer representing the player sprite
-  if (overworld == NULL) {
+  if (overworld_ptr == NULL) {
     printf("\n>>> overworld is NULL <<<\n");
     return;
   }
-  GameObject* player = world_buffer_get_object(overworld, PLAYER_SPRITE);
+  GameObject* player = world_buffer_get_object(overworld_ptr, PLAYER_BUFFER_INDEX);
   if (player == NULL) {
     printf("\n>>> player is NULL <<<\n");
     return;
@@ -157,19 +186,19 @@ void game_init() {
   pose_update_meters(&player->pose, PPM, 10, 10);
 
   int floor_sprite = 0;
-  GameObject* floor = world_pool_get_object(overworld, floor_sprite);
+  GameObject* floor = world_pool_get_object(overworld_ptr, floor_sprite);
   gameobject_init(floor, &goc);
   
   // Set the invervals on the World, so it knows whats active.
   // Active objects get rendered and have physics updates
   // You an have a Object declared as STATIC if you want NO physics updates.
   // You can also not give Objects 0 colliders. NOT NULL, 0
-  overworld->interval_buffer = bufferInterval;
-  overworld->interval_pool = poolInterval;
+  overworld_ptr->interval_buffer = bufferInterval;
+  overworld_ptr->interval_pool = poolInterval;
   
   // Set worlds as active
-  overworld->init(); // LOAD THE WORLD, YOU CALL THIS
-  world_handler_set_active(whand, overworld); // Calls START
+  overworld_ptr->init(); // LOAD THE WORLD, YOU CALL THIS
+  world_handler_set_active(whand, overworld_ptr); // Calls START
   // Now the world will be handled by the Handler.
   
   // So, how does the engine work its magic?

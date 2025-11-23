@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <string.h>
 #include "logger.h"
+#include "input.h"
 #include "color.h"
 
 #define WINDOWS_AMOUNT 1
@@ -391,13 +392,17 @@ void _init_loop() {
 
                 case XCB_KEY_PRESS: {
                     xcb_key_press_event_t* kp = (xcb_key_press_event_t*) event;
-                    logger_write(1, 1, "KeyCode: %d", kp->detail);
-                    printf("Key Press: %d\n", kp->detail);
+                    input_kb_set_press(kp->detail);
+                    
+                    // logger_write(1, 1, "KeyCode: %d", kp->detail);
+                    // printf("Key Press: %d\n", kp->detail);
                     break;
                 }
 
                 case XCB_KEY_RELEASE: {
                     xcb_key_release_event_t* kr = (xcb_key_release_event_t*) event;
+                    input_kb_set_release(kr->detail);
+                    
                     // printf("Key Release: %d\n", kr->detail);
                     break;
                 }
