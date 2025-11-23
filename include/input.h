@@ -1,6 +1,8 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#ifdef __linux__
+
 #define INPUT_KEYB_Q      24
 #define INPUT_KEYB_W      25
 #define INPUT_KEYB_E      26
@@ -85,7 +87,8 @@
 #define INPUT_KEYB_NUMMI  82
 #define INPUT_KEYB_NUMPL  86
 #define INPUT_KEYB_NUMEN  104
-#define INPUT_KEYB_NUMDL  90
+#define INPUT_KEYB_NUMDL  91
 
+#endif // __linux__
 
 #endif // INPUT_H
