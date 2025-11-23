@@ -582,6 +582,25 @@ bool platform_render(struct X11Window* window, float alpha) {
     render_clear(&window->config, EO_RENDER_CLEAR);
     render_draw(&window->config, alpha);
     
+    // xcb_shm_put_image(
+    //     window->connection,
+    //     window->pixmap,          // destination drawable
+    //     window->gc,
+    //     window->config.render_aspect.width,
+    //     window->config.render_aspect.height,
+    //     0,                       // dst_x
+    //     0,                       // dst_y
+    //     window->config.render_aspect.width,
+    //     window->config.render_aspect.height,
+    //     0,                       // src_x
+    //     0,                       // src_y
+    //     32,                      // depth (match your pixmap depth)
+    //     XCB_IMAGE_FORMAT_Z_PIXMAP,
+    //     0, // uint8_t sendevent
+    //     window->info.shmseg,          // shared memory segment
+    //     0                        // offset into SHM
+    // );
+    
     // Copy pixmap to Window
     xcb_copy_area(
         window->connection,

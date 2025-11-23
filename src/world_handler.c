@@ -80,10 +80,18 @@ void _update_vertex_poses(struct World* world, struct GameObject* object) {
       
       if (cb == NULL || vv == NULL || pv == NULL) return;
 
-      int xPixels = origin->x_pixels + cb->shape.size.x_pixels * vv->data[i].x;
-      int yPixels = origin->y_pixels + cb->shape.size.y_pixels * vv->data[i].y;
-      xPixels += (cb->shape.size.x_pixels * vv->data[i].x * cos(object->rotation_degrees * SHAPE_PI / 180));
-      yPixels += cb->shape.size.y_pixels * vv->data[i].y * sin(object->rotation_degrees * SHAPE_PI / 180);
+      // int xPixels = origin->x_pixels + cb->shape.size.x_pixels * vv->data[i].x;
+      // int yPixels = origin->y_pixels + cb->shape.size.y_pixels * vv->data[i].y;
+      // xPixels += (cb->shape.size.x_pixels * vv->data[i].x * cos(object->rotation_degrees * SHAPE_PI / 180));
+      // yPixels += cb->shape.size.y_pixels * vv->data[i].y * sin(object->rotation_degrees * SHAPE_PI / 180);
+      
+      int radius = sqrt(cb->shape.size.x_pixels * cb->shape.size.x_pixels + cb->shape.size.y_pixels * cb->shape.size.y_pixels);
+      int xCenter = (origin->x_pixels + cb->shape.size.x_pixels) / 2;
+      int yCenter = (origin->y_pixels + cb->shape.size.y_pixels) / 2;
+      float vTheta = atan2(vv->data[i].y, vv->data[i].x);
+
+      int xPixels = radius * cos(vTheta + object->rotation_degrees) + xCenter;
+      int yPixels = radius * sin(vTheta + object->rotation_degrees) + yCenter;
       
       pv->data[i] = pose_from_pixels(
         world->config.pixels_per_meter,

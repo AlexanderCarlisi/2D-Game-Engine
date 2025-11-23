@@ -44,7 +44,8 @@ void overworld_loop() {
   // Inputs!
   GameObject* player = world_buffer_get_object(overworld_ptr, PLAYER_BUFFER_INDEX);
   Pose* p = &player->pose;
-  float mps = 3 / 60.0; // Meters per Second
+  float mps = 12.0 / 60; // Meters per Second
+  float dtheta = 45 / 60.0; // Degrees per Second
 
   if (input_kb_pressed(INPUT_KEYB_W)) {
     pose_update_meters(&player->pose, PPM, p->x_meters, p->y_meters - mps);
@@ -60,6 +61,14 @@ void overworld_loop() {
   
   if (input_kb_pressed(INPUT_KEYB_D)) {
     pose_update_meters(&player->pose, PPM, p->x_meters + mps, p->y_meters);
+  }
+
+  if (input_kb_pressed(INPUT_KEYB_Q)) {
+    player->rotation_degrees += dtheta;
+  }
+  
+  if (input_kb_pressed(INPUT_KEYB_E)) {
+    player->rotation_degrees -= dtheta;
   }
 }
 
@@ -90,7 +99,7 @@ void load_player(GameObject* obj) {
   shape_init(&shape, 5);
   shape_add_convex_vertices(&shape, 5);
 
-  obj->rotation_degrees = 45;
+  obj->rotation_degrees = 0;
 
   // shape_add_vertex(&shape, (Vertex) {.x=0, .y=0});
   // shape_add_vertex(&shape, (Vertex) {.x=0.5, .y=0.25});
