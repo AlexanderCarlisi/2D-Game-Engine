@@ -1,7 +1,35 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#include <stdint.h>
+#include <stdbool.h>
+
+#define keycode_t uint32_t
+
+/// @struct Trigger
+/// TODO: doxy
+typedef struct Trigger {
+  bool pressed;
+  int64_t pressed_since; // miliseconds: Set when pressed and released
+} Trigger;
+
+
+/// @brief return true if the keycode's held value is greater than zero. KEYBOARD
+bool input_kb_pressed(keycode_t key);
+
+/// @brief return true if the keycode's held value is greather than provided threshold. KEYBOARD
+bool input_kb_held(keycode_t key, uint64_t thresholdMs);
+
+/// @brief set to current time, if not already currently held. KEYBOARD
+void input_kb_set_press(keycode_t key);
+
+/// @brief set pressed to false. KEYBOARD
+void input_kb_set_release(keycode_t key);
+
+
 #ifdef __linux__
+
+#define INPUT_KEYBOARD_MAX    133
 
 #define INPUT_KEYB_Q      24
 #define INPUT_KEYB_W      25
