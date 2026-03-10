@@ -5,6 +5,8 @@
 #include "stdint.h"
 
 struct World; // WORLD_H
+typedef int16_t pixel_t;
+typedef float meter_t;
 
 /// @struct Pose
 /// @brief A position in the World.
@@ -37,40 +39,46 @@ struct World; // WORLD_H
 /// Layout: [float, float, ui16, ui16]
 /// Size: 12(18), 12 bytes
 typedef struct Pose {
-    float x_meters;
-    float y_meters;
-    uint16_t x_pixels;
-    uint16_t y_pixels;
+    meter_t x_meters;
+    meter_t y_meters;
+    pixel_t x_pixels;
+    pixel_t y_pixels;
 } Pose;
 
 /// @brief Generate a new Pose struct from given Pixels.
-Pose pose_from_pixels(int ppm, uint16_t x, uint16_t y);
+Pose pose_from_pixels(pixel_t ppm, pixel_t x, pixel_t y);
 
 /// @brief Generate a new Pose struct from given Meters.
-Pose pose_from_meters(int ppm, float x, float y);
+Pose pose_from_meters(pixel_t ppm, meter_t x, meter_t y);
 
 /// @brief Updates the Pose on new Meter coordinates.
 /// @param pose Pose Pointer to update.
-/// @param xMeters
-/// @param yMeters
-void pose_update_meters(struct Pose* pose, int pixelsPerMeter, float xMeters, float yMeters);
+/// @param ppm Pixels Per Meters
+/// @param x in meters
+/// @param y in meters
+void pose_update_meters(struct Pose* pose, pixel_t ppm, meter_t x, meter_t y);
 
 /// @brief Updates the Pose on new Pixel coordinates.
 /// @param pose Pose Pointer to update.
-/// @param xPixels
-/// @param yPixels
+/// @param ppm Pixels Per Meters
+/// @param x in pixels
+/// @param y in pixels
 /// @warning It's suggested to stick with the Meters system, instead of manipulating
 /// pixels directly.
-void pose_update_pixels(struct Pose* pose, int pixelsPerMeter, uint16_t xPixels, uint16_t yPixels);
+void pose_update_pixels(struct Pose* pose, pixel_t ppm, pixel_t xPixels, pixel_t yPixels);
 
 /// @brief Checks if two poses are equal in Meter Positions.
+/// @param pose1
+/// @param pose2
 /// @return True | False
 bool pose_equals(struct Pose* pose1, struct Pose* pose2);
 
 /// @brief Checks if the pixels of pose and within the bounds of xUpper and yUpper.
 /// @param pose Pose to check with
-/// @param xUpper | yUpper Upper bound in pixels
+/// @param xUpper upper boundary in pixels (exclusive)
+/// @param yUpper upper boundary in pixels (exclusive)
 /// @return true if the pose is valid, false otherwise
-bool pose_pixels_in_bounds(struct Pose* pose, uint16_t xUpper, uint16_t yUpper);
+/// @note lower bound: [(0,0),(xUpper,yUpper))
+bool pose_pixels_in_bounds(struct Pose* pose, pixel_t xUpper, pixel_t yUpper);
 
 #endif // POSE_H
