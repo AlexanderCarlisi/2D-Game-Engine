@@ -2,16 +2,20 @@
 // LINUX: gcc src/*.c -Iinclude -o 2DGameEngine -lxcb -lxcb-shm -lm
 
 // TODO: ADDITION: GameObject Textures
-// 
+//
 // TODO: ADDITION: World Physics, Collisions, CollisionBoxes
 //
 // TODO: EDIT: Logging
 //          Can be cleaned up a bit, less verbose
 //          Logs directory, filename dates
 //
+// TODO: Incorperate alpha param into Render algo
 //
 // Currently Implementing:
 //  Fix FB Issues
+//  Fix Shape out of bounds issues (thought this was fixed already?)
+//    - Issue with Datatypes? uint pixels?
+//  Fix program not closing properly?
 
 #include "engine_options.h"
 #include "logger.h"
@@ -21,14 +25,16 @@
 /// args[1] = Log to file property
 ///     '0': Append to file
 ///     '1': Clear file, Write
-int main(int argc, char* argv[]) {
-    if (argc > 1) {
-        if (argv[1][0] == '0') {
-            logger_init(0);
-        } else if(argv[1][0] == '1') {
-            logger_init(1);
-        }
+int main(int argc, char *argv[]) {
+  if (argc > 1) {
+    if (argv[1][0] == '0') {
+      logger_init(0);
+    } else if (argv[1][0] == '1') {
+      logger_init(1);
     }
-    EO_PROJECT_MAIN_START;
+  } else {
     return 0;
+  }
+  EO_PROJECT_MAIN_START;
+  return 0;
 }
