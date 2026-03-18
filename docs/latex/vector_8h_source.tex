@@ -1,185 +1,190 @@
 \doxysection{vector.\+h}
 \hypertarget{vector_8h_source}{}\label{vector_8h_source}\index{include/vector.h@{include/vector.h}}
-\mbox{\hyperlink{vector_8h}{Go to the documentation of this file.}}
+\doxymbox{\hyperlink{vector_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VECTOR\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VECTOR\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}stdlib.h"{}}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
-\DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{comment}{//\ Layout:\ [ptr,\ size,\ size,\ float]}}
-\DoxyCodeLine{00008\ \textcolor{comment}{//\ Size:\ 28(32),\ 16}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ DECLARE\_VECTOR(vector\_name,\ func\_prefix,\ type)\(\backslash\)}}
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\ \ \ \ typedef\ struct\ vector\_name\ \{\(\backslash\)}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ size\_t\ count;\(\backslash\)}}
-\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ size\_t\ size;\(\backslash\)}}
-\DoxyCodeLine{00013\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ type*\ data;\(\backslash\)}}
-\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ float\ realloc\_ratio;\(\backslash\)}}
-\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ \ \ \}\ vector\_name;\(\backslash\)}}
-\DoxyCodeLine{00016\ \textcolor{preprocessor}{\(\backslash\)}}
-\DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ \ \ void\ func\_prefix\#\#\_init(vector\_name*\ arr,\ size\_t\ size);\(\backslash\)}}
-\DoxyCodeLine{00018\ \textcolor{preprocessor}{\ \ \ \ void\ func\_prefix\#\#\_free(vector\_name*\ arr);\(\backslash\)}}
-\DoxyCodeLine{00019\ \textcolor{preprocessor}{\ \ \ \ int\ func\_prefix\#\#\_add(vector\_name*\ arr,\ type\ item);\(\backslash\)}}
-\DoxyCodeLine{00020\ \textcolor{preprocessor}{\ \ \ \ int\ func\_prefix\#\#\_realloc(vector\_name*\ arr);\(\backslash\)}}
-\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \ \ \ int\ func\_prefix\#\#\_realloc\_set(vector\_name*\ arr,\ size\_t\ newSize);\(\backslash\)}}
-\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ \ \ void\ func\_prefix\#\#\_pop\_swap(vector\_name*\ arr,\ int\ index);\(\backslash\)}}
-\DoxyCodeLine{00023\ \textcolor{preprocessor}{}}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ DEFINE\_VECTOR(vector\_name,\ func\_prefix,\ type)\(\backslash\)}}
-\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \ \ void\ func\_prefix\#\#\_init(vector\_name*\ arr,\ size\_t\ size)\ \{\(\backslash\)}}
-\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>count\ =\ 0;\(\backslash\)}}
-\DoxyCodeLine{00028\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>size\ =\ size;\(\backslash\)}}
-\DoxyCodeLine{00029\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>realloc\_ratio\ =\ 2.0f;\(\backslash\)}}
-\DoxyCodeLine{00030\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>data\ =\ (type*)\ calloc(arr-\/>size,\ sizeof(type));\(\backslash\)}}
-\DoxyCodeLine{00031\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00032\ \textcolor{preprocessor}{\(\backslash\)}}
-\DoxyCodeLine{00033\ \textcolor{preprocessor}{\ \ \ \ void\ func\_prefix\#\#\_free(vector\_name*\ arr)\ \{\(\backslash\)}}
-\DoxyCodeLine{00034\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ free(arr-\/>data);\(\backslash\)}}
-\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>data\ =\ NULL;\(\backslash\)}}
-\DoxyCodeLine{00036\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>count\ =\ 0;\(\backslash\)}}
-\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>size\ =\ 0;\(\backslash\)}}
-\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>realloc\_ratio\ =\ 0;\(\backslash\)}}
-\DoxyCodeLine{00039\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00040\ \textcolor{preprocessor}{\(\backslash\)}}
-\DoxyCodeLine{00041\ \textcolor{preprocessor}{\ \ \ \ int\ func\_prefix\#\#\_realloc(vector\_name*\ arr)\ \{\(\backslash\)}}
-\DoxyCodeLine{00042\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>size\ *=\ arr-\/>realloc\_ratio;\(\backslash\)}}
-\DoxyCodeLine{00043\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ type*\ reallocated\ =\ (type*)\ realloc(arr-\/>data,\ arr-\/>size\ *\ sizeof(type));\(\backslash\)}}
-\DoxyCodeLine{00044\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (reallocated\ ==\ NULL)\ \{\(\backslash\)}}
-\DoxyCodeLine{00045\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Reallocation\ Failure\ <<<\(\backslash\)n"{});\(\backslash\)}}
-\DoxyCodeLine{00046\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ return\ 0;\(\backslash\)}}
-\DoxyCodeLine{00047\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>data\ =\ reallocated;\(\backslash\)}}
-\DoxyCodeLine{00049\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ 1;\(\backslash\)}}
-\DoxyCodeLine{00050\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00051\ \textcolor{preprocessor}{\(\backslash\)}}
-\DoxyCodeLine{00052\ \textcolor{preprocessor}{\ \ \ \ int\ func\_prefix\#\#\_realloc\_set(vector\_name*\ arr,\ size\_t\ newSize)\ \{\(\backslash\)}}
-\DoxyCodeLine{00053\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>size\ =\ newSize;\(\backslash\)}}
-\DoxyCodeLine{00054\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ type*\ reallocated\ =\ (type*)\ realloc(arr-\/>data,\ arr-\/>size\ *\ sizeof(type));\(\backslash\)}}
-\DoxyCodeLine{00055\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (reallocated\ ==\ NULL)\ \{\(\backslash\)}}
-\DoxyCodeLine{00056\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Reallocation\ Failure\ <<<\(\backslash\)n"{});\(\backslash\)}}
-\DoxyCodeLine{00057\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ return\ 0;\(\backslash\)}}
-\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00059\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>data\ =\ reallocated;\(\backslash\)}}
-\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ 1;\(\backslash\)}}
-\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00062\ \textcolor{preprocessor}{\(\backslash\)}}
-\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \ \ int\ func\_prefix\#\#\_add(vector\_name*\ arr,\ type\ item)\ \{\(\backslash\)}}
-\DoxyCodeLine{00064\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>count++;\(\backslash\)}}
-\DoxyCodeLine{00065\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (arr-\/>count\ >\ arr-\/>size)\ \{\(\backslash\)}}
-\DoxyCodeLine{00066\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if(!func\_prefix\#\#\_realloc(arr))\ \{\(\backslash\)}}
-\DoxyCodeLine{00067\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Add\ Failure,\ due\ to\ Reallocation\ Failure.\ <<<\(\backslash\)n"{});\(\backslash\)}}
-\DoxyCodeLine{00068\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ 0;\(\backslash\)}}
-\DoxyCodeLine{00069\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00070\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00071\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>data[arr-\/>count\ -\/\ 1]\ =\ item;\(\backslash\)}}
-\DoxyCodeLine{00072\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ 1;\(\backslash\)}}
-\DoxyCodeLine{00073\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00074\ \textcolor{preprocessor}{\(\backslash\)}}
-\DoxyCodeLine{00075\ \textcolor{preprocessor}{\ \ \ \ void\ func\_prefix\#\#\_pop\_swap(vector\_name*\ arr,\ int\ index)\ \{\(\backslash\)}}
-\DoxyCodeLine{00076\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (index\ <\ 0\ ||\ index\ >=\ arr-\/>count)\ \{\(\backslash\)}}
-\DoxyCodeLine{00077\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Pop-\/Swap\ Failure\ <<<\(\backslash\)n...Index\ out\ of\ Bounds..."{});\(\backslash\)}}
-\DoxyCodeLine{00078\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ return;\(\backslash\)}}
-\DoxyCodeLine{00079\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00080\ \textcolor{preprocessor}{\(\backslash\)}}
-\DoxyCodeLine{00081\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ type\ pop\ =\ arr-\/>data[index];\(\backslash\)}}
-\DoxyCodeLine{00082\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ int\ lastIndex\ =\ arr-\/>count\ -\/\ 1;\(\backslash\)}}
-\DoxyCodeLine{00083\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ type\ swap\ =\ arr-\/>data[lastIndex];\(\backslash\)}}
-\DoxyCodeLine{00084\ \textcolor{preprocessor}{\(\backslash\)}}
-\DoxyCodeLine{00085\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (index\ !=\ lastIndex)\ \{\(\backslash\)}}
-\DoxyCodeLine{00086\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ arr-\/>data[index]\ =\ swap;\(\backslash\)}}
-\DoxyCodeLine{00087\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00088\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>count-\/-\/;\(\backslash\)}}
-\DoxyCodeLine{00089\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00090\ \textcolor{preprocessor}{}}
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00092\ }
-\DoxyCodeLine{00093\ \textcolor{comment}{//\ \#define\ DECLARE\_VECTOR\_PTR(vector\_name,\ func\_prefix,\ type\_ptr)\(\backslash\)}}
-\DoxyCodeLine{00094\ \textcolor{comment}{//\ \ \ \ \ typedef\ struct\ vector\_name\ \{\(\backslash\)}}
-\DoxyCodeLine{00095\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ type\_ptr*\ data;\(\backslash\)}}
-\DoxyCodeLine{00096\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ size\_t\ count;\(\backslash\)}}
-\DoxyCodeLine{00097\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ size\_t\ size;\(\backslash\)}}
-\DoxyCodeLine{00098\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ float\ realloc\_ratio;\(\backslash\)}}
-\DoxyCodeLine{00099\ \textcolor{comment}{//\ \ \ \ \ \}\ vector\_name;\(\backslash\)}}
-\DoxyCodeLine{00100\ \textcolor{comment}{//\ \(\backslash\)}}
-\DoxyCodeLine{00101\ \textcolor{comment}{//\ \ \ \ \ void\ func\_prefix\#\#\_init(vector\_name*\ arr);\(\backslash\)}}
-\DoxyCodeLine{00102\ \textcolor{comment}{//\ \ \ \ \ void\ func\_prefix\#\#\_free(vector\_name*\ arr);\(\backslash\)}}
-\DoxyCodeLine{00103\ \textcolor{comment}{//\ \ \ \ \ int\ func\_prefix\#\#\_add(vector\_name*\ arr,\ type\_ptr\ item);\(\backslash\)}}
-\DoxyCodeLine{00104\ \textcolor{comment}{//\ \ \ \ \ int\ func\_prefix\#\#\_realloc(vector\_name*\ arr);\(\backslash\)}}
-\DoxyCodeLine{00105\ \textcolor{comment}{//\ \ \ \ \ int\ func\_prefix\#\#\_realloc\_set(vector\_name*\ arr,\ size\_t\ newSize);\(\backslash\)}}
-\DoxyCodeLine{00106\ \textcolor{comment}{//\ \ \ \ \ type\_ptr\ func\_prefix\#\#\_pop\_swap(vector\_name*\ arr,\ int\ index);\(\backslash\)}}
-\DoxyCodeLine{00107\ \textcolor{comment}{}}
-\DoxyCodeLine{00108\ \ \ \ \ }
-\DoxyCodeLine{00109\ \textcolor{comment}{//\ \#define\ DEFINE\_VECTOR\_PTR(vector\_name,\ func\_prefix,\ type\_ptr)\(\backslash\)}}
-\DoxyCodeLine{00110\ \textcolor{comment}{//\ \ \ \ \ void\ func\_prefix\#\#\_init(vector\_name*\ arr)\ \{\(\backslash\)}}
-\DoxyCodeLine{00111\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>count\ =\ 0;\(\backslash\)}}
-\DoxyCodeLine{00112\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>size\ =\ 1;\(\backslash\)}}
-\DoxyCodeLine{00113\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>realloc\_ratio\ =\ 2.0f;\(\backslash\)}}
-\DoxyCodeLine{00114\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data\ =\ (type\_ptr*)\ calloc(arr-\/>size,\ sizeof(type\_ptr));\(\backslash\)}}
-\DoxyCodeLine{00115\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (arr-\/>data\ ==\ NULL)\ \{\(\backslash\)}}
-\DoxyCodeLine{00116\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Initial\ Allocation\ of\ Vector\ Failed\ <<<\(\backslash\)n"{});\(\backslash\)}}
-\DoxyCodeLine{00117\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00118\ \textcolor{comment}{//\ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00119\ \textcolor{comment}{//\ \(\backslash\)}}
-\DoxyCodeLine{00120\ \textcolor{comment}{//\ \ \ \ \ void\ func\_prefix\#\#\_free(vector\_name*\ arr)\ \{\(\backslash\)}}
-\DoxyCodeLine{00121\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ for\ (size\_t\ i\ =\ 0;\ i\ <\ arr-\/>count;\ i++)\ \{\(\backslash\)}}
-\DoxyCodeLine{00122\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ free(arr-\/>data[i]);\(\backslash\)}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdlib.h>}\ \textcolor{comment}{//\ ignore\ warning,\ it's\ wrong}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ Layout:\ [ptr,\ size,\ size,\ float]}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Size:\ 28(32),\ 16}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ DECLARE\_VECTOR(vector\_name,\ func\_prefix,\ type)\(\backslash\)}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ \ \ typedef\ struct\ vector\_name\ \{\(\backslash\)}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ size\_t\ count;\(\backslash\)}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ size\_t\ size;\(\backslash\)}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ type*\ data;\(\backslash\)}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ float\ realloc\_ratio;\(\backslash\)}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ \ \ \}\ vector\_name;\(\backslash\)}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\(\backslash\)}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\ \ \ \ bool\ func\_prefix\#\#\_init(vector\_name*\ arr,\ size\_t\ size);\(\backslash\)}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\ \ \ \ bool\ func\_prefix\#\#\_free(vector\_name*\ arr);\(\backslash\)}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\ \ \ \ bool\ func\_prefix\#\#\_add(vector\_name*\ arr,\ type\ item);\(\backslash\)}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \ \ \ bool\ func\_prefix\#\#\_realloc(vector\_name*\ arr);\(\backslash\)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ \ \ bool\ func\_prefix\#\#\_realloc\_set(vector\_name*\ arr,\ size\_t\ newSize);\(\backslash\)}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ \ \ bool\ func\_prefix\#\#\_pop\_swap(vector\_name*\ arr,\ size\_t\ index);\(\backslash\)}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ DEFINE\_VECTOR(vector\_name,\ func\_prefix,\ type)\(\backslash\)}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ \ \ bool\ func\_prefix\#\#\_init(vector\_name*\ arr,\ size\_t\ size)\ \{\(\backslash\)}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>count\ =\ 0;\(\backslash\)}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>size\ =\ size;\(\backslash\)}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>realloc\_ratio\ =\ 2.0f;\(\backslash\)}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>data\ =\ (type*)\ calloc(arr-\/>size,\ sizeof(type));\(\backslash\)}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ arr-\/>data\ !=\ NULL;\(\backslash\)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\(\backslash\)}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ \ \ \ bool\ func\_prefix\#\#\_free(vector\_name*\ arr)\ \{\(\backslash\)}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (arr-\/>data\ !=\ NULL)\ free(arr-\/>data);\(\backslash\)}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>data\ =\ NULL;\(\backslash\)}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>count\ =\ 0;\(\backslash\)}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>size\ =\ 0;\(\backslash\)}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>realloc\_ratio\ =\ 0;\(\backslash\)}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ arr-\/>data\ ==\ NULL;\(\backslash\)}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\(\backslash\)}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\ \ \ \ bool\ func\_prefix\#\#\_realloc(vector\_name*\ arr)\ \{\(\backslash\)}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>size\ *=\ arr-\/>realloc\_ratio;\(\backslash\)}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ type*\ reallocated\ =\ (type*)\ realloc(arr-\/>data,\ arr-\/>size\ *\ sizeof(type));\(\backslash\)}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (reallocated\ ==\ NULL)\ \{\(\backslash\)}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Reallocation\ Failure\ <<<\(\backslash\)n"{});\(\backslash\)}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ return\ false;\(\backslash\)}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>data\ =\ reallocated;\(\backslash\)}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ true;\(\backslash\)}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\(\backslash\)}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\ \ \ \ bool\ func\_prefix\#\#\_realloc\_set(vector\_name*\ arr,\ size\_t\ newSize)\ \{\(\backslash\)}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>size\ =\ newSize;\(\backslash\)}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ type*\ reallocated\ =\ (type*)\ realloc(arr-\/>data,\ arr-\/>size\ *\ sizeof(type));\(\backslash\)}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (reallocated\ ==\ NULL)\ \{\(\backslash\)}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Reallocation\ Failure\ <<<\(\backslash\)n"{});\(\backslash\)}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ return\ false;\(\backslash\)}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>data\ =\ reallocated;\(\backslash\)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ true;\(\backslash\)}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\(\backslash\)}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\ \ \ \ bool\ func\_prefix\#\#\_add(vector\_name*\ arr,\ type\ item)\ \{\(\backslash\)}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>count++;\(\backslash\)}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (arr-\/>count\ >\ arr-\/>size)\ \{\(\backslash\)}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if(!func\_prefix\#\#\_realloc(arr))\ \{\(\backslash\)}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Add\ Failure,\ due\ to\ Reallocation\ Failure.\ <<<\(\backslash\)n"{});\(\backslash\)}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ false;\(\backslash\)}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>data[arr-\/>count\ -\/\ 1]\ =\ item;\(\backslash\)}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ true;\(\backslash\)}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\(\backslash\)}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\ \ \ \ bool\ func\_prefix\#\#\_pop\_swap(vector\_name*\ arr,\ size\_t\ index)\ \{\(\backslash\)}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (index\ >=\ arr-\/>count)\ \{\(\backslash\)}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Pop-\/Swap\ Failure\ <<<\(\backslash\)n...Index\ out\ of\ Bounds..."{});\(\backslash\)}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ return\ false;\(\backslash\)}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\(\backslash\)}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ size\_t\ lastIndex\ =\ arr-\/>count\ -\/\ 1;\(\backslash\)}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ type\ swap\ =\ arr-\/>data[lastIndex];\(\backslash\)}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\(\backslash\)}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (index\ !=\ lastIndex)\ \{\(\backslash\)}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ arr-\/>data[index]\ =\ swap;\(\backslash\)}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ arr-\/>count-\/-\/;\(\backslash\)}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ return\ true;\(\backslash\)}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\ \ \ \ }\textcolor{comment}{//\ bool\ func\_prefix\#\#\_insertion\_sort(vector\_name*\ arr)\ \{\(\backslash\)}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ //\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ //\ \}\(\backslash\)}}
+\DoxyCodeLine{00097\ \textcolor{comment}{}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{comment}{//\ \#define\ DECLARE\_VECTOR\_PTR(vector\_name,\ func\_prefix,\ type\_ptr)\(\backslash\)}}
+\DoxyCodeLine{00100\ \textcolor{comment}{//\ \ \ \ \ typedef\ struct\ vector\_name\ \{\(\backslash\)}}
+\DoxyCodeLine{00101\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ type\_ptr*\ data;\(\backslash\)}}
+\DoxyCodeLine{00102\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ size\_t\ count;\(\backslash\)}}
+\DoxyCodeLine{00103\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ size\_t\ size;\(\backslash\)}}
+\DoxyCodeLine{00104\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ float\ realloc\_ratio;\(\backslash\)}}
+\DoxyCodeLine{00105\ \textcolor{comment}{//\ \ \ \ \ \}\ vector\_name;\(\backslash\)}}
+\DoxyCodeLine{00106\ \textcolor{comment}{//\ \(\backslash\)}}
+\DoxyCodeLine{00107\ \textcolor{comment}{//\ \ \ \ \ void\ func\_prefix\#\#\_init(vector\_name*\ arr);\(\backslash\)}}
+\DoxyCodeLine{00108\ \textcolor{comment}{//\ \ \ \ \ void\ func\_prefix\#\#\_free(vector\_name*\ arr);\(\backslash\)}}
+\DoxyCodeLine{00109\ \textcolor{comment}{//\ \ \ \ \ int\ func\_prefix\#\#\_add(vector\_name*\ arr,\ type\_ptr\ item);\(\backslash\)}}
+\DoxyCodeLine{00110\ \textcolor{comment}{//\ \ \ \ \ int\ func\_prefix\#\#\_realloc(vector\_name*\ arr);\(\backslash\)}}
+\DoxyCodeLine{00111\ \textcolor{comment}{//\ \ \ \ \ int\ func\_prefix\#\#\_realloc\_set(vector\_name*\ arr,\ size\_t\ newSize);\(\backslash\)}}
+\DoxyCodeLine{00112\ \textcolor{comment}{//\ \ \ \ \ type\_ptr\ func\_prefix\#\#\_pop\_swap(vector\_name*\ arr,\ int\ index);\(\backslash\)}}
+\DoxyCodeLine{00113\ \textcolor{comment}{//}}
+\DoxyCodeLine{00114\ \textcolor{comment}{//}}
+\DoxyCodeLine{00115\ \textcolor{comment}{//\ \#define\ DEFINE\_VECTOR\_PTR(vector\_name,\ func\_prefix,\ type\_ptr)\(\backslash\)}}
+\DoxyCodeLine{00116\ \textcolor{comment}{//\ \ \ \ \ void\ func\_prefix\#\#\_init(vector\_name*\ arr)\ \{\(\backslash\)}}
+\DoxyCodeLine{00117\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>count\ =\ 0;\(\backslash\)}}
+\DoxyCodeLine{00118\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>size\ =\ 1;\(\backslash\)}}
+\DoxyCodeLine{00119\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>realloc\_ratio\ =\ 2.0f;\(\backslash\)}}
+\DoxyCodeLine{00120\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data\ =\ (type\_ptr*)\ calloc(arr-\/>size,\ sizeof(type\_ptr));\(\backslash\)}}
+\DoxyCodeLine{00121\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (arr-\/>data\ ==\ NULL)\ \{\(\backslash\)}}
+\DoxyCodeLine{00122\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Initial\ Allocation\ of\ Vector\ Failed\ <<<\(\backslash\)n"{});\(\backslash\)}}
 \DoxyCodeLine{00123\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00124\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ free(arr-\/>data);\(\backslash\)}}
-\DoxyCodeLine{00125\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data\ =\ NULL;\(\backslash\)}}
-\DoxyCodeLine{00126\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>count\ =\ 0;\(\backslash\)}}
-\DoxyCodeLine{00127\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>size\ =\ 0;\(\backslash\)}}
-\DoxyCodeLine{00128\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>realloc\_ratio\ =\ 0;\(\backslash\)}}
-\DoxyCodeLine{00129\ \textcolor{comment}{//\ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00130\ \textcolor{comment}{//\ \(\backslash\)}}
-\DoxyCodeLine{00131\ \textcolor{comment}{//\ \ \ \ \ int\ func\_prefix\#\#\_realloc(vector\_name*\ arr)\ \{\(\backslash\)}}
-\DoxyCodeLine{00132\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>size\ *=\ arr-\/>realloc\_ratio;\(\backslash\)}}
-\DoxyCodeLine{00133\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ type\_ptr*\ reallocated\ =\ (type\_ptr*)\ realloc(arr-\/>data,\ arr-\/>size\ *\ sizeof(type\_ptr));\(\backslash\)}}
-\DoxyCodeLine{00134\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (reallocated\ ==\ NULL)\ \{\(\backslash\)}}
-\DoxyCodeLine{00135\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Reallocation\ Failure\ <<<\(\backslash\)n"{});\(\backslash\)}}
-\DoxyCodeLine{00136\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ return\ 0;\(\backslash\)}}
-\DoxyCodeLine{00137\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00138\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data\ =\ reallocated;\(\backslash\)}}
-\DoxyCodeLine{00139\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ return\ 1;\(\backslash\)}}
-\DoxyCodeLine{00140\ \textcolor{comment}{//\ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00141\ \textcolor{comment}{//\ \(\backslash\)}}
-\DoxyCodeLine{00142\ \textcolor{comment}{//\ \ \ \ \ int\ func\_prefix\#\#\_realloc\_set(vector\_name*\ arr,\ size\_t\ newSize)\ \{\(\backslash\)}}
-\DoxyCodeLine{00143\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>size\ =\ newSize;\(\backslash\)}}
-\DoxyCodeLine{00144\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ type\_ptr*\ reallocated\ =\ (type\_ptr*)\ realloc(arr-\/>data,\ arr-\/>size\ *\ sizeof(type\_ptr));\(\backslash\)}}
-\DoxyCodeLine{00145\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (reallocated\ ==\ NULL)\ \{\(\backslash\)}}
-\DoxyCodeLine{00146\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Reallocation\ Failure\ <<<\(\backslash\)n"{});\(\backslash\)}}
-\DoxyCodeLine{00147\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ return\ 0;\(\backslash\)}}
-\DoxyCodeLine{00148\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00149\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data\ =\ reallocated;\(\backslash\)}}
-\DoxyCodeLine{00150\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ return\ 1;\(\backslash\)}}
-\DoxyCodeLine{00151\ \textcolor{comment}{//\ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00152\ \textcolor{comment}{//\ \(\backslash\)}}
-\DoxyCodeLine{00153\ \textcolor{comment}{//\ \ \ \ \ int\ func\_prefix\#\#\_add(vector\_name*\ arr,\ type\_ptr\ item)\ \{\(\backslash\)}}
-\DoxyCodeLine{00154\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>count++;\(\backslash\)}}
-\DoxyCodeLine{00155\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (arr-\/>count\ >\ arr-\/>size)\ \{\(\backslash\)}}
-\DoxyCodeLine{00156\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ if(!func\_prefix\#\#\_realloc(arr))\ \{\(\backslash\)}}
-\DoxyCodeLine{00157\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Add\ Failure,\ due\ to\ Reallocation\ Failure.\ <<<\(\backslash\)n"{});\(\backslash\)}}
-\DoxyCodeLine{00158\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ 0;\(\backslash\)}}
-\DoxyCodeLine{00159\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00160\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00161\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data[arr-\/>count\ -\/\ 1]\ =\ item;\(\backslash\)}}
-\DoxyCodeLine{00162\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ return\ 1;\(\backslash\)}}
-\DoxyCodeLine{00163\ \textcolor{comment}{//\ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00164\ \textcolor{comment}{//\ \(\backslash\)}}
-\DoxyCodeLine{00165\ \textcolor{comment}{//\ \ \ \ \ type\_ptr\ func\_prefix\#\#\_pop\_swap(vector\_name*\ arr,\ int\ index)\ \{\(\backslash\)}}
-\DoxyCodeLine{00166\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (index\ <\ 0\ ||\ index\ >=\ arr-\/>count)\ \{\(\backslash\)}}
-\DoxyCodeLine{00167\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Pop-\/Swap\ Failure\ <<<\(\backslash\)n...Index\ out\ of\ Bounds..."{});\(\backslash\)}}
-\DoxyCodeLine{00168\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ return\ NULL;\(\backslash\)}}
-\DoxyCodeLine{00169\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00124\ \textcolor{comment}{//\ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00125\ \textcolor{comment}{//\ \(\backslash\)}}
+\DoxyCodeLine{00126\ \textcolor{comment}{//\ \ \ \ \ void\ func\_prefix\#\#\_free(vector\_name*\ arr)\ \{\(\backslash\)}}
+\DoxyCodeLine{00127\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ for\ (size\_t\ i\ =\ 0;\ i\ <\ arr-\/>count;\ i++)\ \{\(\backslash\)}}
+\DoxyCodeLine{00128\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ free(arr-\/>data[i]);\(\backslash\)}}
+\DoxyCodeLine{00129\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00130\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ free(arr-\/>data);\(\backslash\)}}
+\DoxyCodeLine{00131\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data\ =\ NULL;\(\backslash\)}}
+\DoxyCodeLine{00132\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>count\ =\ 0;\(\backslash\)}}
+\DoxyCodeLine{00133\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>size\ =\ 0;\(\backslash\)}}
+\DoxyCodeLine{00134\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>realloc\_ratio\ =\ 0;\(\backslash\)}}
+\DoxyCodeLine{00135\ \textcolor{comment}{//\ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00136\ \textcolor{comment}{//\ \(\backslash\)}}
+\DoxyCodeLine{00137\ \textcolor{comment}{//\ \ \ \ \ int\ func\_prefix\#\#\_realloc(vector\_name*\ arr)\ \{\(\backslash\)}}
+\DoxyCodeLine{00138\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>size\ *=\ arr-\/>realloc\_ratio;\(\backslash\)}}
+\DoxyCodeLine{00139\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ type\_ptr*\ reallocated\ =\ (type\_ptr*)\ realloc(arr-\/>data,\ arr-\/>size\ *\ sizeof(type\_ptr));\(\backslash\)}}
+\DoxyCodeLine{00140\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (reallocated\ ==\ NULL)\ \{\(\backslash\)}}
+\DoxyCodeLine{00141\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Reallocation\ Failure\ <<<\(\backslash\)n"{});\(\backslash\)}}
+\DoxyCodeLine{00142\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ return\ 0;\(\backslash\)}}
+\DoxyCodeLine{00143\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00144\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data\ =\ reallocated;\(\backslash\)}}
+\DoxyCodeLine{00145\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ return\ 1;\(\backslash\)}}
+\DoxyCodeLine{00146\ \textcolor{comment}{//\ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00147\ \textcolor{comment}{//\ \(\backslash\)}}
+\DoxyCodeLine{00148\ \textcolor{comment}{//\ \ \ \ \ int\ func\_prefix\#\#\_realloc\_set(vector\_name*\ arr,\ size\_t\ newSize)\ \{\(\backslash\)}}
+\DoxyCodeLine{00149\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>size\ =\ newSize;\(\backslash\)}}
+\DoxyCodeLine{00150\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ type\_ptr*\ reallocated\ =\ (type\_ptr*)\ realloc(arr-\/>data,\ arr-\/>size\ *\ sizeof(type\_ptr));\(\backslash\)}}
+\DoxyCodeLine{00151\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (reallocated\ ==\ NULL)\ \{\(\backslash\)}}
+\DoxyCodeLine{00152\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Reallocation\ Failure\ <<<\(\backslash\)n"{});\(\backslash\)}}
+\DoxyCodeLine{00153\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ return\ 0;\(\backslash\)}}
+\DoxyCodeLine{00154\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00155\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data\ =\ reallocated;\(\backslash\)}}
+\DoxyCodeLine{00156\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ return\ 1;\(\backslash\)}}
+\DoxyCodeLine{00157\ \textcolor{comment}{//\ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00158\ \textcolor{comment}{//\ \(\backslash\)}}
+\DoxyCodeLine{00159\ \textcolor{comment}{//\ \ \ \ \ int\ func\_prefix\#\#\_add(vector\_name*\ arr,\ type\_ptr\ item)\ \{\(\backslash\)}}
+\DoxyCodeLine{00160\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>count++;\(\backslash\)}}
+\DoxyCodeLine{00161\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (arr-\/>count\ >\ arr-\/>size)\ \{\(\backslash\)}}
+\DoxyCodeLine{00162\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ if(!func\_prefix\#\#\_realloc(arr))\ \{\(\backslash\)}}
+\DoxyCodeLine{00163\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Add\ Failure,\ due\ to\ Reallocation\ Failure.\ <<<\(\backslash\)n"{});\(\backslash\)}}
+\DoxyCodeLine{00164\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ return\ 0;\(\backslash\)}}
+\DoxyCodeLine{00165\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00166\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00167\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data[arr-\/>count\ -\/\ 1]\ =\ item;\(\backslash\)}}
+\DoxyCodeLine{00168\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ return\ 1;\(\backslash\)}}
+\DoxyCodeLine{00169\ \textcolor{comment}{//\ \ \ \ \ \}\(\backslash\)}}
 \DoxyCodeLine{00170\ \textcolor{comment}{//\ \(\backslash\)}}
-\DoxyCodeLine{00171\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ type\_ptr\ popped\ =\ arr-\/>data[index];\(\backslash\)}}
-\DoxyCodeLine{00172\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ int\ last\ =\ arr-\/>count\ -\/\ 1;\(\backslash\)}}
-\DoxyCodeLine{00173\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data[index]\ =\ arr-\/>data[last];\(\backslash\)}}
-\DoxyCodeLine{00174\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data[last]\ =\ NULL;\(\backslash\)}}
-\DoxyCodeLine{00175\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>count-\/-\/;\(\backslash\)}}
-\DoxyCodeLine{00176\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ return\ popped;}}
-\DoxyCodeLine{00177\ \textcolor{comment}{//\ \ \ \ \ \}\(\backslash\)}}
-\DoxyCodeLine{00178\ \textcolor{comment}{}}
-\DoxyCodeLine{00179\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ VECTOR\_H}}
+\DoxyCodeLine{00171\ \textcolor{comment}{//\ \ \ \ \ type\_ptr\ func\_prefix\#\#\_pop\_swap(vector\_name*\ arr,\ int\ index)\ \{\(\backslash\)}}
+\DoxyCodeLine{00172\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ if\ (index\ <\ 0\ ||\ index\ >=\ arr-\/>count)\ \{\(\backslash\)}}
+\DoxyCodeLine{00173\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}\(\backslash\)n>>>\ Pop-\/Swap\ Failure\ <<<\(\backslash\)n...Index\ out\ of\ Bounds..."{});\(\backslash\)}}
+\DoxyCodeLine{00174\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ return\ NULL;\(\backslash\)}}
+\DoxyCodeLine{00175\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00176\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ type\_ptr\ popped\ =\ arr-\/>data[index];\(\backslash\)}}
+\DoxyCodeLine{00177\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ int\ last\ =\ arr-\/>count\ -\/\ 1;\(\backslash\)}}
+\DoxyCodeLine{00178\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data[index]\ =\ arr-\/>data[last];\(\backslash\)}}
+\DoxyCodeLine{00179\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>data[last]\ =\ NULL;\(\backslash\)}}
+\DoxyCodeLine{00180\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ arr-\/>count-\/-\/;\(\backslash\)}}
+\DoxyCodeLine{00181\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ return\ popped;\(\backslash\)}}
+\DoxyCodeLine{00182\ \textcolor{comment}{//\ \ \ \ \ \}\(\backslash\)}}
+\DoxyCodeLine{00183\ \textcolor{comment}{\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00184\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ VECTOR\_H}}
 
 \end{DoxyCode}

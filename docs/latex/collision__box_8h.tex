@@ -1,54 +1,62 @@
-\doxysection{include/collision\+\_\+box.h File Reference}
+\doxysection{include/\+collision\+\_\+box.h File Reference}
 \hypertarget{collision__box_8h}{}\label{collision__box_8h}\index{include/collision\_box.h@{include/collision\_box.h}}
-{\ttfamily \#include "{}shape.\+h"{}}\newline
-{\ttfamily \#include "{}stdint.\+h"{}}\newline
-{\ttfamily \#include "{}stdbool.\+h"{}}\newline
-Include dependency graph for collision\+\_\+box.\+h\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=325pt]{collision__box_8h__incl}
-\end{center}
-\end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{collision__box_8h__dep__incl}
-\end{center}
-\end{figure}
+{\ttfamily \+\#include "{}shape.\+h"{}}\newline
+{\ttfamily \+\#include "{}stdint.\+h"{}}\newline
+{\ttfamily \+\#include "{}stdbool.\+h"{}}\newline
+Include dependency graph for collision\+\_\+box.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
 \doxysubsubsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structCollisionBox}{Collision\+Box}}
+struct \doxymbox{\hyperlink{structCollisionBox}{Collision\+Box}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef struct \mbox{\hyperlink{structCollisionBox}{Collision\+Box}} \mbox{\hyperlink{collision__box_8h_afca8eb5da995cc07e3c41532c053ab33}{Collision\+Box}}
+typedef struct Collision\+Box \doxymbox{\hyperlink{collision__box_8h_afca8eb5da995cc07e3c41532c053ab33}{Collision\+Box}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structCollisionBox}{Collision\+Box}} \mbox{\hyperlink{collision__box_8h_a92e9df6fbad82605d70d3bb7a1e2bd95}{collision\+\_\+box\+\_\+create\+\_\+debug}} (uint32\+\_\+t debug\+Color, uint32\+\_\+t shape\+Color, struct \mbox{\hyperlink{structPose}{Pose}} shape\+Size)
-\end{DoxyCompactItemize}
+\doxymbox{\hyperlink{structCollisionBox}{Collision\+Box}} \doxymbox{\hyperlink{collision__box_8h_a92e9df6fbad82605d70d3bb7a1e2bd95}{collision\+\_\+box\+\_\+create\+\_\+debug}} (uint32\+\_\+t debug\+Color, uint32\+\_\+t shape\+Color, struct \doxymbox{\hyperlink{structPose}{Pose}} shape\+Size)
+\begin{DoxyCompactList}\small\item\em creates a simple debug collision box, its a square. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{collision__box_8h_a98c32ad175718a0ac2fddbab4de5db6d}{collision\+\_\+box\+\_\+health\+\_\+check}} (struct \doxymbox{\hyperlink{structCollisionBox}{Collision\+Box}} \texorpdfstring{$\ast$}{*}cb)
+\begin{DoxyCompactList}\small\item\em Prints to Terminal debug information about the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\label{doc-typedef-members}
+\Hypertarget{collision__box_8h_doc-typedef-members}
 \doxysubsection{Typedef Documentation}
-\Hypertarget{collision__box_8h_afca8eb5da995cc07e3c41532c053ab33}\label{collision__box_8h_afca8eb5da995cc07e3c41532c053ab33} 
-\index{collision\_box.h@{collision\_box.h}!CollisionBox@{CollisionBox}}
+\Hypertarget{collision__box_8h_afca8eb5da995cc07e3c41532c053ab33}\index{collision\_box.h@{collision\_box.h}!CollisionBox@{CollisionBox}}
 \index{CollisionBox@{CollisionBox}!collision\_box.h@{collision\_box.h}}
 \doxysubsubsection{\texorpdfstring{CollisionBox}{CollisionBox}}
-{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structCollisionBox}{Collision\+Box}} \mbox{\hyperlink{structCollisionBox}{Collision\+Box}}}
+{\footnotesize\ttfamily \label{collision__box_8h_afca8eb5da995cc07e3c41532c053ab33} 
+typedef struct Collision\+Box Collision\+Box}
 
 
 
+\label{doc-func-members}
+\Hypertarget{collision__box_8h_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{collision__box_8h_a92e9df6fbad82605d70d3bb7a1e2bd95}\label{collision__box_8h_a92e9df6fbad82605d70d3bb7a1e2bd95} 
-\index{collision\_box.h@{collision\_box.h}!collision\_box\_create\_debug@{collision\_box\_create\_debug}}
+\Hypertarget{collision__box_8h_a92e9df6fbad82605d70d3bb7a1e2bd95}\index{collision\_box.h@{collision\_box.h}!collision\_box\_create\_debug@{collision\_box\_create\_debug}}
 \index{collision\_box\_create\_debug@{collision\_box\_create\_debug}!collision\_box.h@{collision\_box.h}}
 \doxysubsubsection{\texorpdfstring{collision\_box\_create\_debug()}{collision\_box\_create\_debug()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structCollisionBox}{Collision\+Box}} collision\+\_\+box\+\_\+create\+\_\+debug (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{debug\+Color,  }\item[{uint32\+\_\+t}]{shape\+Color,  }\item[{struct \mbox{\hyperlink{structPose}{Pose}}}]{shape\+Size }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{collision__box_8h_a92e9df6fbad82605d70d3bb7a1e2bd95} 
+\doxymbox{\hyperlink{structCollisionBox}{Collision\+Box}} collision\+\_\+box\+\_\+create\+\_\+debug (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{debug\+Color}{, }\item[{uint32\+\_\+t}]{shape\+Color}{, }\item[{struct \doxymbox{\hyperlink{structPose}{Pose}}}]{shape\+Size}{}\end{DoxyParamCaption})}
+
+
+
+creates a simple debug collision box, its a square. 
+
+\Hypertarget{collision__box_8h_a98c32ad175718a0ac2fddbab4de5db6d}\index{collision\_box.h@{collision\_box.h}!collision\_box\_health\_check@{collision\_box\_health\_check}}
+\index{collision\_box\_health\_check@{collision\_box\_health\_check}!collision\_box.h@{collision\_box.h}}
+\doxysubsubsection{\texorpdfstring{collision\_box\_health\_check()}{collision\_box\_health\_check()}}
+{\footnotesize\ttfamily \label{collision__box_8h_a98c32ad175718a0ac2fddbab4de5db6d} 
+void collision\+\_\+box\+\_\+health\+\_\+check (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structCollisionBox}{Collision\+Box}} \texorpdfstring{$\ast$}{*}}]{cb}{}\end{DoxyParamCaption})}
+
+
+
+Prints to Terminal debug information about the object. 
 

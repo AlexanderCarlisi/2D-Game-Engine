@@ -1,16 +1,100 @@
 \doxysection{platform.\+h}
 \hypertarget{platform_8h_source}{}\label{platform_8h_source}\index{include/platform.h@{include/platform.h}}
-\mbox{\hyperlink{platform_8h}{Go to the documentation of this file.}}
+\doxymbox{\hyperlink{platform_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLATFORM\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLATFORM\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structAspect}{Aspect}};\ \textcolor{comment}{//\ APP\_CONFIG\_H}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{platform_8h_a2412cf308a84d40ab8cb2f5dc39a492b}{platform\_start}}();}
-\DoxyCodeLine{00007\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{platform_8h_ab1c8a93db7ac7cc38f8da19527fddaa9}{platform\_resize\_window}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structAspect}{Aspect}}*\ windowSize);}
-\DoxyCodeLine{00008\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{platform_8h_a2dd0ac1b68daa781ebf06b60113d3a38}{platform\_name\_window}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name);}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PLATFORM\_H}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ X11:\ }}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ Read\ about\ x11:\ https://www.x.org/archive/X11R7.5/doc/libX11/libX11.html}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ Somewhat\ read\ a\ somewhat\ documented\ lib\ XCB:\ https://xcb.freedesktop.org/}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <xcb/xproto.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{world__handler_8h}{world\_handler.h}}"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ PLATFORM\_MAX\_WINDOW\_NAME\ 256\ \ \ \ }\textcolor{comment}{//\ Should\ be\ max\ Window\ Name\ length\ for\ Windows\ and\ Unix,\ needs\ to\ be\ tested.}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifdef\ \_WIN32}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ WINDOWINFO\ W32Window}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ WINDOWINFO\ X11Window}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structAspect}{Aspect}}\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ int16\_t\ \doxymbox{\hyperlink{structAspect_ae88fabb47dfdfe2280cc77a6bef8b52f}{width}};}
+\DoxyCodeLine{00027\ \ \ \ \ int16\_t\ \doxymbox{\hyperlink{structAspect_a671b34adffbcbd816a621f9adc184d8e}{height}};}
+\DoxyCodeLine{00028\ \}\ \doxymbox{\hyperlink{structAspect}{Aspect}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structWindowConfig}{WindowConfig}}\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ uint64\_t\ \doxymbox{\hyperlink{structWindowConfig_abd756e31f0d363fedef2a717a8ca0f9d}{previous\_time}};}
+\DoxyCodeLine{00040\ \ \ \ \ uint64\_t\ \doxymbox{\hyperlink{structWindowConfig_af2d53f3dafdc13e5840b1970f7d899a3}{accumulator}};}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \doxymbox{\hyperlink{structWindowConfig_a713b397992a0cdea5591442e0bb3f411}{window\_name}};}
+\DoxyCodeLine{00042\ \ \ \ \ uint32\_t*\ \doxymbox{\hyperlink{structWindowConfig_afa2c5bfabad58ac64e9a7ff831847f58}{framebuffer}};}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structWorldHandler}{WorldHandler}}*\ \doxymbox{\hyperlink{structWindowConfig_a755d26d9139c10d74a35a8dbe5553d5b}{world\_handler}};}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structAspect}{Aspect}}\ \doxymbox{\hyperlink{structWindowConfig_a92ab6b0ff819b5ec59b78790cff4ae35}{window\_aspect}};}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structAspect}{Aspect}}\ \doxymbox{\hyperlink{structWindowConfig_a679ba799d758151098dd652d36316d0d}{render\_aspect}};}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{structWindowConfig_aa16d9ad88c1446dc166721ca59d213de}{frames\_per\_second}};}
+\DoxyCodeLine{00047\ \}\ \doxymbox{\hyperlink{structWindowConfig}{WindowConfig}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \doxymbox{\hyperlink{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}{DECLARE\_VECTOR}}(WindowConfigVector,\ vector\_window\_config,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWindowConfig}{WindowConfig}});}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00053\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{platform_8h_a059f118f7663d071e7294ed6afdd3626}{platform\_initialize}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}}*\ \doxymbox{\hyperlink{platform_8h_a09af272af11c02534fa85121806f7bb8}{platform\_new\_window}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ windowName,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structAspect}{Aspect}}\ windowSize,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structAspect}{Aspect}}\ resolution,\ \textcolor{keywordtype}{float}\ fps);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00065\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{platform_8h_a6b2f7ee595b3d1f9380464fe75681e70}{platform\_update\_window}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}}*\ window);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00070\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{platform_8h_a3ce6a032d11a0ec121ad2db35786865d}{platform\_set\_window\_name}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}}*\ window,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00075\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{platform_8h_a837afdd4109dc355af4e0ebcfce7b712}{platform\_set\_window\_size}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}}*\ window,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structAspect}{Aspect}}\ size);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00080\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{platform_8h_a42230200f2bdd1d46f63b484293bd48a}{platform\_set\_window\_resolution}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}}*\ window,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structAspect}{Aspect}}\ res);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00085\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{platform_8h_a6d4c7002175a56588610334b048f2ce6}{platform\_render}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}}*\ window,\ \textcolor{keywordtype}{float}\ alpha);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00091\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{platform_8h_aab4b3f97a83b6062a96b79af32585b2f}{platform\_iterate}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}}*\ window);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00095\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{platform_8h_a1f31a5e79b6e14e51c07cc6497209bb3}{platform\_free}}();}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ TODO:\ WINDOWS}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#ifdef\ \_WIN32}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#include\ <wingdi.h>}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#include\ <windef.h>}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }W32Window\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structWindowConfig}{WindowConfig}}\ config;}
+\DoxyCodeLine{00107\ \ \ \ \ HWND\ hwnd;}
+\DoxyCodeLine{00108\ \ \ \ \ HDC\ hdc;}
+\DoxyCodeLine{00109\ \ \ \ \ HBITMAP\ bitmap;}
+\DoxyCodeLine{00110\ \ \ \ \ BITMAPINFO\ bitmapInfo;}
+\DoxyCodeLine{00111\ \ \ \ \ HBITMAP\ oldBitMap;}
+\DoxyCodeLine{00112\ \}\ W32Window;}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#ifdef\ \_\_linux\_\_}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#include\ <xcb/xcb.h>}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#include\ <xcb/shm.h>}}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#include\ <xcb/xcb\_image.h>}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00127\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }X11Window\ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{platform_8h_aa55a4e0dac412d6cc8373e53e495a24f}{WindowConfig}}\ config;}
+\DoxyCodeLine{00129\ \ \ \ \ }
+\DoxyCodeLine{00130\ \ \ \ \ xcb\_connection\_t*\ connection;}
+\DoxyCodeLine{00131\ \ \ \ \ xcb\_screen\_t*\ screen;}
+\DoxyCodeLine{00132\ \ \ \ \ xcb\_window\_t\ window;}
+\DoxyCodeLine{00133\ \ \ \ \ }
+\DoxyCodeLine{00134\ \ \ \ \ xcb\_gcontext\_t\ gc;}
+\DoxyCodeLine{00135\ \ \ \ \ xcb\_shm\_segment\_info\_t\ info;}
+\DoxyCodeLine{00136\ \ \ \ \ xcb\_pixmap\_t\ pixmap;}
+\DoxyCodeLine{00137\ \}\ X11Window;}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_\_linux\_\_}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PLATFORM\_H}}
 
 \end{DoxyCode}

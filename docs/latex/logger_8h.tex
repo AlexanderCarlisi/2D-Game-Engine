@@ -1,0 +1,65 @@
+\doxysection{include/\+logger.h File Reference}
+\hypertarget{logger_8h}{}\label{logger_8h}\index{include/logger.h@{include/logger.h}}
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for logger.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{logger_8h_a8c786694f6dce0f7c2fa78c5576e9ca8}{logger\+\_\+init}} (int log\+Level)
+\begin{DoxyCompactList}\small\item\em Initialize the Logger. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{logger_8h_aae1a6690dab49c960744cb6a7116a673}{logger\+\_\+write}} (int encapsulation\+Depth, int tab\+Depth, const char \texorpdfstring{$\ast$}{*}message, bool error)
+\begin{DoxyCompactList}\small\item\em Write message to log file. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{logger_8h_ae5e35a3029f6ff8fe753528772646eba}{logger\+\_\+free}} ()
+\begin{DoxyCompactList}\small\item\em deallocate logger resources \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{logger_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{logger_8h_ae5e35a3029f6ff8fe753528772646eba}\index{logger.h@{logger.h}!logger\_free@{logger\_free}}
+\index{logger\_free@{logger\_free}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{logger\_free()}{logger\_free()}}
+{\footnotesize\ttfamily \label{logger_8h_ae5e35a3029f6ff8fe753528772646eba} 
+void logger\+\_\+free (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+deallocate logger resources 
+
+\Hypertarget{logger_8h_a8c786694f6dce0f7c2fa78c5576e9ca8}\index{logger.h@{logger.h}!logger\_init@{logger\_init}}
+\index{logger\_init@{logger\_init}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{logger\_init()}{logger\_init()}}
+{\footnotesize\ttfamily \label{logger_8h_a8c786694f6dce0f7c2fa78c5576e9ca8} 
+void logger\+\_\+init (\begin{DoxyParamCaption}\item[{int}]{log\+Level}{}\end{DoxyParamCaption})}
+
+
+
+Initialize the Logger. 
+
+\begin{DoxyNote}{Note}
+called by engine on start 
+\end{DoxyNote}
+\Hypertarget{logger_8h_aae1a6690dab49c960744cb6a7116a673}\index{logger.h@{logger.h}!logger\_write@{logger\_write}}
+\index{logger\_write@{logger\_write}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{logger\_write()}{logger\_write()}}
+{\footnotesize\ttfamily \label{logger_8h_aae1a6690dab49c960744cb6a7116a673} 
+void logger\+\_\+write (\begin{DoxyParamCaption}\item[{int}]{encapsulation\+Depth}{, }\item[{int}]{tab\+Depth}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{message}{, }\item[{bool}]{error}{}\end{DoxyParamCaption})}
+
+
+
+Write message to log file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em encapsulation\+Depth} & Amount of \textquotesingle{}\texorpdfstring{$>$}{>}\textquotesingle{} and \textquotesingle{}\texorpdfstring{$<$}{<}\textquotesingle{} to place message between \\
+\hline
+{\em tab\+Depth} & Amount of tab spaces at start of write. \\
+\hline
+{\em message} & Message to write. \\
+\hline
+{\em error} & Append {\itshape ERROR} to start of message. \\
+\hline
+\end{DoxyParams}

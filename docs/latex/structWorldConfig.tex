@@ -7,88 +7,82 @@ Settings and Information on a \doxylink{structWorld}{World} and it\textquotesing
 
 
 
-{\ttfamily \#include $<$world\+\_\+config.\+h$>$}
+{\ttfamily \+\#include $<$world.\+h$>$}
 
 
 
-Collaboration diagram for World\+Config\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=193pt]{structWorldConfig__coll__graph}
-\end{center}
-\end{figure}
+Collaboration diagram for World\+Config:\+
+% FIG 0
 \doxysubsubsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structInterval}{Interval}} \mbox{\hyperlink{structWorldConfig_a6ae0fa7b5fa38da0340d7a8e30cd16ae}{buffer\+\_\+interval}}
+struct \doxymbox{\hyperlink{structInterval}{Interval}} \doxymbox{\hyperlink{structWorldConfig_a6ae0fa7b5fa38da0340d7a8e30cd16ae}{buffer\+\_\+interval}}
 \item 
-struct \mbox{\hyperlink{structInterval}{Interval}} \mbox{\hyperlink{structWorldConfig_aa76b3613528708eed7ea9f9bf6806c6e}{pool\+\_\+interval}}
+struct \doxymbox{\hyperlink{structInterval}{Interval}} \doxymbox{\hyperlink{structWorldConfig_a4697d0b5a07ce94ac4d91a50ed79fa71}{pool\+\_\+interval}}
 \item 
-size\+\_\+t \mbox{\hyperlink{structWorldConfig_aac7ebcb8035125b85413a9040181ab16}{pool\+\_\+size}}
+size\+\_\+t \doxymbox{\hyperlink{structWorldConfig_a03ece8fcf8f07dd2264f605af6f56b9b}{pool\+\_\+size}}
 \item 
-float \mbox{\hyperlink{structWorldConfig_a4e90a83f4277d8f5c88eec069bce92ba}{reallocation\+\_\+ratio}}
+float \doxymbox{\hyperlink{structWorldConfig_a6c4a5be90ceb5f830142f93e8c2248ec}{reallocation\+\_\+ratio}}
 \item 
-float \mbox{\hyperlink{structWorldConfig_a7a6ef532265f05b0855eab3ffa1b3681}{pixels\+\_\+per\+\_\+meter}}
+float \doxymbox{\hyperlink{structWorldConfig_aaee2c8e1796b1cc662d65cdaf8528774}{gravity\+\_\+field}}
 \item 
-float \mbox{\hyperlink{structWorldConfig_af33dc154c47f34ca089746a0e9dce52c}{gravity\+\_\+field}}
+uint \doxymbox{\hyperlink{structWorldConfig_a05233d5f5cc8e9492abd8a292afce000}{pixels\+\_\+per\+\_\+meter}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Settings and Information on a \doxylink{structWorld}{World} and it\textquotesingle{}s data. 
 
-\doxylink{structWorldConfig_a6ae0fa7b5fa38da0340d7a8e30cd16ae}{World\+Config\+::buffer\+\_\+interval} \doxylink{structInterval}{Interval} of Active Game Objects on the Buffer. Objects outside of this \doxylink{structInterval}{Interval} are not considered for Physics Updates, or Rendering. 
-
+\label{doc-variable-members}
+\Hypertarget{structWorldConfig_doc-variable-members}
 \doxysubsection{Field Documentation}
-\Hypertarget{structWorldConfig_a6ae0fa7b5fa38da0340d7a8e30cd16ae}\label{structWorldConfig_a6ae0fa7b5fa38da0340d7a8e30cd16ae} 
-\index{WorldConfig@{WorldConfig}!buffer\_interval@{buffer\_interval}}
+\Hypertarget{structWorldConfig_a6ae0fa7b5fa38da0340d7a8e30cd16ae}\index{WorldConfig@{WorldConfig}!buffer\_interval@{buffer\_interval}}
 \index{buffer\_interval@{buffer\_interval}!WorldConfig@{WorldConfig}}
 \doxysubsubsection{\texorpdfstring{buffer\_interval}{buffer\_interval}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{structInterval}{Interval}} World\+Config\+::buffer\+\_\+interval}
+{\footnotesize\ttfamily \label{structWorldConfig_a6ae0fa7b5fa38da0340d7a8e30cd16ae} 
+struct \doxymbox{\hyperlink{structInterval}{Interval}} World\+Config::\+buffer\+\_\+interval}
 
-\Hypertarget{structWorldConfig_af33dc154c47f34ca089746a0e9dce52c}\label{structWorldConfig_af33dc154c47f34ca089746a0e9dce52c} 
-\index{WorldConfig@{WorldConfig}!gravity\_field@{gravity\_field}}
+\doxylink{structInterval}{Interval} of Active Game Objects on the Buffer. Objects outside of this \doxylink{structInterval}{Interval} are not considered for Physics Updates, or Rendering. \Hypertarget{structWorldConfig_aaee2c8e1796b1cc662d65cdaf8528774}\index{WorldConfig@{WorldConfig}!gravity\_field@{gravity\_field}}
 \index{gravity\_field@{gravity\_field}!WorldConfig@{WorldConfig}}
 \doxysubsubsection{\texorpdfstring{gravity\_field}{gravity\_field}}
-{\footnotesize\ttfamily World\+Config\+::gravity\+\_\+field}
+{\footnotesize\ttfamily \label{structWorldConfig_aaee2c8e1796b1cc662d65cdaf8528774} 
+float World\+Config::\+gravity\+\_\+field}
 
-The applied Gravity on Dynamic Game\+Objects. In units of Newtons/\+Kg \texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|} Meters per Second/\+Second \Hypertarget{structWorldConfig_a7a6ef532265f05b0855eab3ffa1b3681}\label{structWorldConfig_a7a6ef532265f05b0855eab3ffa1b3681} 
-\index{WorldConfig@{WorldConfig}!pixels\_per\_meter@{pixels\_per\_meter}}
+The applied Gravity on Dynamic Game\+Objects. In units of Newtons/\+\+Kg \texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|} Meters per Second/\+\+Second \Hypertarget{structWorldConfig_a05233d5f5cc8e9492abd8a292afce000}\index{WorldConfig@{WorldConfig}!pixels\_per\_meter@{pixels\_per\_meter}}
 \index{pixels\_per\_meter@{pixels\_per\_meter}!WorldConfig@{WorldConfig}}
 \doxysubsubsection{\texorpdfstring{pixels\_per\_meter}{pixels\_per\_meter}}
-{\footnotesize\ttfamily World\+Config\+::pixels\+\_\+per\+\_\+meter}
+{\footnotesize\ttfamily \label{structWorldConfig_a05233d5f5cc8e9492abd8a292afce000} 
+uint World\+Config::\+pixels\+\_\+per\+\_\+meter}
 
-Pixels / Meter conversion, this is used in \doxylink{structPose}{Pose} math. \begin{DoxySeeAlso}{See also}
-struct \doxylink{structPose}{Pose} TODO\+: Contemplate this some more, this being a float doesn\textquotesingle{}t really make sense 10.\+5 / 1 is a weird fraction, and there is no half pixel. 
+Pixels /\+ Meter conversion, this is used in \doxylink{structPose}{Pose} math. \begin{DoxySeeAlso}{See also}
+struct \doxylink{structPose}{Pose} 
 \end{DoxySeeAlso}
-\Hypertarget{structWorldConfig_aa76b3613528708eed7ea9f9bf6806c6e}\label{structWorldConfig_aa76b3613528708eed7ea9f9bf6806c6e} 
-\index{WorldConfig@{WorldConfig}!pool\_interval@{pool\_interval}}
+\Hypertarget{structWorldConfig_a4697d0b5a07ce94ac4d91a50ed79fa71}\index{WorldConfig@{WorldConfig}!pool\_interval@{pool\_interval}}
 \index{pool\_interval@{pool\_interval}!WorldConfig@{WorldConfig}}
 \doxysubsubsection{\texorpdfstring{pool\_interval}{pool\_interval}}
-{\footnotesize\ttfamily World\+Config\+::pool\+\_\+interval}
+{\footnotesize\ttfamily \label{structWorldConfig_a4697d0b5a07ce94ac4d91a50ed79fa71} 
+struct \doxymbox{\hyperlink{structInterval}{Interval}} World\+Config::\+pool\+\_\+interval}
 
-\doxylink{structInterval}{Interval} of Active Game Objects on the Pool. Objects outside of this \doxylink{structInterval}{Interval} are not considered for Physics Updates, or Rendering. \Hypertarget{structWorldConfig_aac7ebcb8035125b85413a9040181ab16}\label{structWorldConfig_aac7ebcb8035125b85413a9040181ab16} 
-\index{WorldConfig@{WorldConfig}!pool\_size@{pool\_size}}
+\doxylink{structInterval}{Interval} of Active Game Objects on the Pool. Objects outside of this \doxylink{structInterval}{Interval} are not considered for Physics Updates, or Rendering. \Hypertarget{structWorldConfig_a03ece8fcf8f07dd2264f605af6f56b9b}\index{WorldConfig@{WorldConfig}!pool\_size@{pool\_size}}
 \index{pool\_size@{pool\_size}!WorldConfig@{WorldConfig}}
 \doxysubsubsection{\texorpdfstring{pool\_size}{pool\_size}}
-{\footnotesize\ttfamily World\+Config\+::pool\+\_\+size}
+{\footnotesize\ttfamily \label{structWorldConfig_a03ece8fcf8f07dd2264f605af6f56b9b} 
+size\+\_\+t World\+Config::\+pool\+\_\+size}
 
-Starting size of the World\+Handler\textquotesingle{}s Pool when this Config is Loaded. Will not realloc unless necessary. \begin{DoxyNote}{Note}
-this value does not update to changes in the World\+Handler. 
+Starting size of the \doxylink{structWorldHandler}{World\+Handler}\textquotesingle{}s Pool when this Config is Loaded. Will not realloc unless necessary. \begin{DoxyNote}{Note}
+this value does not update to changes in the \doxylink{structWorldHandler}{World\+Handler}. 
 \end{DoxyNote}
 \begin{DoxySeeAlso}{See also}
 world\+\_\+handler\+\_\+get\+\_\+pool\+\_\+size 
 \end{DoxySeeAlso}
-\Hypertarget{structWorldConfig_a4e90a83f4277d8f5c88eec069bce92ba}\label{structWorldConfig_a4e90a83f4277d8f5c88eec069bce92ba} 
-\index{WorldConfig@{WorldConfig}!reallocation\_ratio@{reallocation\_ratio}}
+\Hypertarget{structWorldConfig_a6c4a5be90ceb5f830142f93e8c2248ec}\index{WorldConfig@{WorldConfig}!reallocation\_ratio@{reallocation\_ratio}}
 \index{reallocation\_ratio@{reallocation\_ratio}!WorldConfig@{WorldConfig}}
 \doxysubsubsection{\texorpdfstring{reallocation\_ratio}{reallocation\_ratio}}
-{\footnotesize\ttfamily World\+Config\+::reallocation\+\_\+ratio}
+{\footnotesize\ttfamily \label{structWorldConfig_a6c4a5be90ceb5f830142f93e8c2248ec} 
+float World\+Config::\+reallocation\+\_\+ratio}
 
 Ratio to use when automatically reallocating the Object Pool. This is only used when attempting to overflow the Pool. 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-include/\mbox{\hyperlink{world__config_8h}{world\+\_\+config.\+h}}\end{DoxyCompactItemize}
+include/\+\doxymbox{\hyperlink{world_8h}{world.\+h}}\end{DoxyCompactItemize}

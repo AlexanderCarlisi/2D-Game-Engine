@@ -2,58 +2,59 @@
 \hypertarget{structCollisionBox}{}\label{structCollisionBox}\index{CollisionBox@{CollisionBox}}
 
 
-{\ttfamily \#include $<$collision\+\_\+box.\+h$>$}
+{\ttfamily \+\#include $<$collision\+\_\+box.\+h$>$}
 
 
 
-Collaboration diagram for Collision\+Box\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=157pt]{structCollisionBox__coll__graph}
-\end{center}
-\end{figure}
+Collaboration diagram for Collision\+Box:\+
+% FIG 0
 \doxysubsubsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structShape}{Shape}} \mbox{\hyperlink{structCollisionBox_ac0efb25764eded07b12fd75fc206501f}{shape}}
+struct \doxymbox{\hyperlink{structShape}{Shape}} \doxymbox{\hyperlink{structCollisionBox_ac0efb25764eded07b12fd75fc206501f}{shape}}
 \item 
-void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structCollisionBox_abd93bd0b4a6b060b00374a418dea4691}{on\+\_\+collision\+\_\+enter}} )(struct \mbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}self, struct \mbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}collided\+Object)
+void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structCollisionBox_abd93bd0b4a6b060b00374a418dea4691}{on\+\_\+collision\+\_\+enter}} )(struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}self, struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}collided\+Object)
 \item 
-void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structCollisionBox_a5c2eb43bf609522bdc2556c833efd5c9}{on\+\_\+collision\+\_\+exit}} )(struct \mbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}self, struct \mbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}collided\+Object)
+void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structCollisionBox_a5c2eb43bf609522bdc2556c833efd5c9}{on\+\_\+collision\+\_\+exit}} )(struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}self, struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}collided\+Object)
 \item 
-uint32\+\_\+t \mbox{\hyperlink{structCollisionBox_a5b52666dd1a3ec41becf5bc2a2f64665}{debug\+\_\+color}}
+uint32\+\_\+t \doxymbox{\hyperlink{structCollisionBox_a5b52666dd1a3ec41becf5bc2a2f64665}{debug\+\_\+color}}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+TODO:\+ Mainly unimplemented
+
+Layout:\+ \+[\doxylink{structShape}{Shape}, funcptr, funcptr, uint32]\+ Size:\+ 124(128), 76 
+
+\label{doc-variable-members}
+\Hypertarget{structCollisionBox_doc-variable-members}
 \doxysubsection{Field Documentation}
-\Hypertarget{structCollisionBox_a5b52666dd1a3ec41becf5bc2a2f64665}\label{structCollisionBox_a5b52666dd1a3ec41becf5bc2a2f64665} 
-\index{CollisionBox@{CollisionBox}!debug\_color@{debug\_color}}
+\Hypertarget{structCollisionBox_a5b52666dd1a3ec41becf5bc2a2f64665}\index{CollisionBox@{CollisionBox}!debug\_color@{debug\_color}}
 \index{debug\_color@{debug\_color}!CollisionBox@{CollisionBox}}
 \doxysubsubsection{\texorpdfstring{debug\_color}{debug\_color}}
-{\footnotesize\ttfamily uint32\+\_\+t Collision\+Box\+::debug\+\_\+color}
+{\footnotesize\ttfamily \label{structCollisionBox_a5b52666dd1a3ec41becf5bc2a2f64665} 
+uint32\+\_\+t Collision\+Box::\+debug\+\_\+color}
 
-\Hypertarget{structCollisionBox_abd93bd0b4a6b060b00374a418dea4691}\label{structCollisionBox_abd93bd0b4a6b060b00374a418dea4691} 
-\index{CollisionBox@{CollisionBox}!on\_collision\_enter@{on\_collision\_enter}}
+\Hypertarget{structCollisionBox_abd93bd0b4a6b060b00374a418dea4691}\index{CollisionBox@{CollisionBox}!on\_collision\_enter@{on\_collision\_enter}}
 \index{on\_collision\_enter@{on\_collision\_enter}!CollisionBox@{CollisionBox}}
 \doxysubsubsection{\texorpdfstring{on\_collision\_enter}{on\_collision\_enter}}
-{\footnotesize\ttfamily void(\texorpdfstring{$\ast$}{*} Collision\+Box\+::on\+\_\+collision\+\_\+enter) (struct \mbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}self, struct \mbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}collided\+Object)}
+{\footnotesize\ttfamily \label{structCollisionBox_abd93bd0b4a6b060b00374a418dea4691} 
+void(\texorpdfstring{$\ast$}{*} Collision\+Box::\+on\+\_\+collision\+\_\+enter) (struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}self, struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}collided\+Object)}
 
-\Hypertarget{structCollisionBox_a5c2eb43bf609522bdc2556c833efd5c9}\label{structCollisionBox_a5c2eb43bf609522bdc2556c833efd5c9} 
-\index{CollisionBox@{CollisionBox}!on\_collision\_exit@{on\_collision\_exit}}
+\Hypertarget{structCollisionBox_a5c2eb43bf609522bdc2556c833efd5c9}\index{CollisionBox@{CollisionBox}!on\_collision\_exit@{on\_collision\_exit}}
 \index{on\_collision\_exit@{on\_collision\_exit}!CollisionBox@{CollisionBox}}
 \doxysubsubsection{\texorpdfstring{on\_collision\_exit}{on\_collision\_exit}}
-{\footnotesize\ttfamily void(\texorpdfstring{$\ast$}{*} Collision\+Box\+::on\+\_\+collision\+\_\+exit) (struct \mbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}self, struct \mbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}collided\+Object)}
+{\footnotesize\ttfamily \label{structCollisionBox_a5c2eb43bf609522bdc2556c833efd5c9} 
+void(\texorpdfstring{$\ast$}{*} Collision\+Box::\+on\+\_\+collision\+\_\+exit) (struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}self, struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}collided\+Object)}
 
-\Hypertarget{structCollisionBox_ac0efb25764eded07b12fd75fc206501f}\label{structCollisionBox_ac0efb25764eded07b12fd75fc206501f} 
-\index{CollisionBox@{CollisionBox}!shape@{shape}}
+\Hypertarget{structCollisionBox_ac0efb25764eded07b12fd75fc206501f}\index{CollisionBox@{CollisionBox}!shape@{shape}}
 \index{shape@{shape}!CollisionBox@{CollisionBox}}
 \doxysubsubsection{\texorpdfstring{shape}{shape}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{structShape}{Shape}} Collision\+Box\+::shape}
+{\footnotesize\ttfamily \label{structCollisionBox_ac0efb25764eded07b12fd75fc206501f} 
+struct \doxymbox{\hyperlink{structShape}{Shape}} Collision\+Box::\+shape}
 
 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-include/\mbox{\hyperlink{collision__box_8h}{collision\+\_\+box.\+h}}\end{DoxyCompactItemize}
+include/\+\doxymbox{\hyperlink{collision__box_8h}{collision\+\_\+box.\+h}}\end{DoxyCompactItemize}

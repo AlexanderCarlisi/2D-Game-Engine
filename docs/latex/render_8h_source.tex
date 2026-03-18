@@ -1,37 +1,23 @@
 \doxysection{render.\+h}
 \hypertarget{render_8h_source}{}\label{render_8h_source}\index{include/render.h@{include/render.h}}
-\mbox{\hyperlink{render_8h}{Go to the documentation of this file.}}
+\doxymbox{\hyperlink{render_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{comment}{//\ uint32\_t\ represents\ Color:\ 4\ Bytes\ (alpha,\ red,\ green,\ blue)}}
-\DoxyCodeLine{00002\ }
-\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{game__object_8h}{game\_object.h}}"{}}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifndef\ RENDER\_H}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ RENDER\_H}}
-\DoxyCodeLine{00008\ }
-\DoxyCodeLine{00009\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structApplicationConfig}{ApplicationConfig}};\ \textcolor{comment}{//\ APP\_CONFIG\_H}}
-\DoxyCodeLine{00010\ }
-\DoxyCodeLine{00011\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structRenderer}{Renderer}}\ \{}
-\DoxyCodeLine{00012\ \ \ \ \ void\ (*\mbox{\hyperlink{structRenderer_a443cc783e688594138e2af4ad97a2003}{init}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structRenderer}{Renderer}}*\ self);}
-\DoxyCodeLine{00013\ \ \ \ \ void\ (*\mbox{\hyperlink{structRenderer_ae0020ce7ddbc2f12305cf5eda8925973}{clear}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structRenderer}{Renderer}}*\ self,\ uint32\_t\ color);}
-\DoxyCodeLine{00014\ \ \ \ \ void\ (*\mbox{\hyperlink{structRenderer_a57bf30f4b50df16b981df26ca8a5c5e9}{draw\_pixel}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structRenderer}{Renderer}}*\ self,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ uint32\_t\ color);}
-\DoxyCodeLine{00015\ \ \ \ \ void\ (*\mbox{\hyperlink{structRenderer_acf3832b368a59b8d366bf44e4d6414eb}{interpolate\_pixel}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structRenderer}{Renderer}}*\ self,\ \textcolor{keywordtype}{int}\ x0,\ \textcolor{keywordtype}{int}\ y0,\ \textcolor{keywordtype}{int}\ x1,\ \textcolor{keywordtype}{int}\ y1,\ uint32\_t\ color,\ \textcolor{keywordtype}{float}\ alpha);}
-\DoxyCodeLine{00016\ \ \ \ \ void\ (*\mbox{\hyperlink{structRenderer_ae14940cba4685efefd98678cde21925d}{draw\_shape}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structRenderer}{Renderer}}*\ self,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ uint32\_t\ color,\ \textcolor{keywordtype}{int}\ vertices);}
-\DoxyCodeLine{00017\ \ \ \ \ void\ (*\mbox{\hyperlink{structRenderer_a2607d24c8049689b97a9fb1c49e1bb32}{draw}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structRenderer}{Renderer}}*\ self,\ \textcolor{keywordtype}{float}\ alpha,\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGameObject}{GameObject}}**\ objects,\ \textcolor{keywordtype}{int}\ amountOfGameObjects);}
-\DoxyCodeLine{00018\ \ \ \ \ void\ (*\mbox{\hyperlink{structRenderer_aaa09d8f46dbf1705540038cb74fc4251}{display}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structRenderer}{Renderer}}*\ self);}
-\DoxyCodeLine{00019\ \ \ \ \ void\ (*\mbox{\hyperlink{structRenderer_aba82f56c4f95c684d8eac5c5d6143862}{release\_resources}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structRenderer}{Renderer}}*\ self);}
-\DoxyCodeLine{00020\ \ \ \ \ void\ (*\mbox{\hyperlink{structRenderer_a120d765054870116894e04ca46da87f6}{set\_aspects}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structRenderer}{Renderer}}*\ self);}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ RENDER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ RENDER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{platform_8h}{platform.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{pose_8h}{pose.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00008\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{render_8h_a07604ab1d5f0a6a3d6666d682f45d4db}{render\_clear}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWindowConfig}{WindowConfig}}*\ config,\ uint32\_t\ color);}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00011\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{render_8h_a020f2ef1754a4655e4a3ee55427a4e5e}{render\_draw\_pixel}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWindowConfig}{WindowConfig}}*\ config,\ \doxymbox{\hyperlink{structPose}{Pose}}*\ point,\ uint32\_t\ color);}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00014\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{render_8h_a39eb1e3211b623c17bf6967e79f9f721}{render\_interpolate\_pixel}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWindowConfig}{WindowConfig}}*\ config,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structPose}{Pose}}*\ point1,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structPose}{Pose}}*\ point2,\ uint32\_t\ color,\ \textcolor{keywordtype}{float}\ alpha);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00017\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{render_8h_abbf7c1e44f77deff7b2b128f52e17dee}{render\_draw\_shape}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWindowConfig}{WindowConfig}}*\ config,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structShape}{Shape}}*\ shape,\ uint32\_t\ color);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00020\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{render_8h_a26fd37d5f8a54b05a7d6023fd1ce22ce}{render\_draw}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWindowConfig}{WindowConfig}}*\ config,\ \textcolor{keywordtype}{float}\ alpha);}
 \DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \ \ \ \ uint32\_t*\ \mbox{\hyperlink{structRenderer_abb2e16fd086af7b187d4daed32f6c795}{framebuffer}};}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structRenderer_ae96692aeb912343f91ae164fc34ee22c}{win\_width}};}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structRenderer_afae6360f2eaff60fb79b0694b7031b81}{win\_height}};\ }
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structRenderer_a6c60d34bcb031f60c57c599de419dcf9}{res\_width}};}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{int}*\ \mbox{\hyperlink{structRenderer_ab377b5420e2999516dad0c5536aef072}{res\_height}};}
-\DoxyCodeLine{00027\ \}\ \mbox{\hyperlink{structRenderer}{Renderer}};}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

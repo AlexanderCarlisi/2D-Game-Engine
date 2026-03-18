@@ -1,0 +1,193 @@
+\doxysection{src/\+\+My\+Game.c File Reference}
+\hypertarget{MyGame_8c}{}\label{MyGame_8c}\index{src/MyGame.c@{src/MyGame.c}}
+{\ttfamily \+\#include "{}My\+Game.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include "{}platform.\+h"{}}\newline
+{\ttfamily \+\#include "{}input.\+h"{}}\newline
+{\ttfamily \+\#include "{}color.\+h"{}}\newline
+Include dependency graph for My\+Game.\+c:\+
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{MyGame_8c_a33c66b68a3d3720eeefdce0770e79271}{WORLD\+\_\+\+OVERWORLD}}~0
+\item 
+\+\#define \doxymbox{\hyperlink{MyGame_8c_a91f2289edd72cdc46aa21860ec513768}{PLAYER\+\_\+\+BUFFER\+\_\+\+INDEX}}~0
+\item 
+\+\#define \doxymbox{\hyperlink{MyGame_8c_ade10dfc471d106b1a6255a80d81b2e86}{WORLD\+\_\+\+NETHER}}~1
+\item 
+\+\#define \doxymbox{\hyperlink{MyGame_8c_a9e594c972dae1f358f4111aa4844c7c3}{WORLD\+\_\+\+END}}~2
+\item 
+\+\#define \doxymbox{\hyperlink{MyGame_8c_a322d53d23d7208a9e6a86b52db9732d1}{PPM}}~20
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{MyGame_8c_abbbb745af83eae33a5c2bf28a674a688}{overworld\+\_\+init}} ()
+\item 
+void \doxymbox{\hyperlink{MyGame_8c_a9f7ee281276372100d79e08a71def34d}{overworld\+\_\+start}} ()
+\item 
+void \doxymbox{\hyperlink{MyGame_8c_ab854822514ec50d16b80cc5b9827a2d5}{overworld\+\_\+loop}} ()
+\item 
+void \doxymbox{\hyperlink{MyGame_8c_a69ffe8d2b705fbd853203760271d30ad}{overworld\+\_\+close}} ()
+\item 
+void \doxymbox{\hyperlink{MyGame_8c_a20baff96af12ed447835f48fb4e23542}{overworld\+\_\+dealloc}} ()
+\item 
+void \doxymbox{\hyperlink{MyGame_8c_a160ba7976cec764267d7798ef6134395}{load\+\_\+player}} (\doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}obj)
+\item 
+void \doxymbox{\hyperlink{MyGame_8c_a5f5ccbe5abfdef24c8378dc3cf32ffb3}{game\+\_\+init}} ()
+\item 
+void \doxymbox{\hyperlink{MyGame_8c_a46fea93bf5d63e93090fbb95b742b881}{game\+\_\+loop}} ()
+\item 
+void \doxymbox{\hyperlink{MyGame_8c_afcf2a3ca10b9673501d5a727de507d50}{game\+\_\+free}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{structWorldConfig}{World\+Config}} \doxymbox{\hyperlink{MyGame_8c_aff916a34038c12ae9bdd612fc92d2efb}{overworld\+\_\+config}}
+\item 
+\doxymbox{\hyperlink{structWorldConfig}{World\+Config}} \doxymbox{\hyperlink{MyGame_8c_a3995012871263de9916e3e6c82680779}{neth\+\_\+end\+\_\+config}}
+\item 
+\doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{MyGame_8c_aa1fd88b64b7a88c8d1d37f632a850a20}{overworld\+\_\+ptr}} = NULL
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{MyGame_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{MyGame_8c_a91f2289edd72cdc46aa21860ec513768}\index{MyGame.c@{MyGame.c}!PLAYER\_BUFFER\_INDEX@{PLAYER\_BUFFER\_INDEX}}
+\index{PLAYER\_BUFFER\_INDEX@{PLAYER\_BUFFER\_INDEX}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{PLAYER\_BUFFER\_INDEX}{PLAYER\_BUFFER\_INDEX}}
+{\footnotesize\ttfamily \label{MyGame_8c_a91f2289edd72cdc46aa21860ec513768} 
+\+\#define PLAYER\+\_\+\+BUFFER\+\_\+\+INDEX~0}
+
+\Hypertarget{MyGame_8c_a322d53d23d7208a9e6a86b52db9732d1}\index{MyGame.c@{MyGame.c}!PPM@{PPM}}
+\index{PPM@{PPM}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{PPM}{PPM}}
+{\footnotesize\ttfamily \label{MyGame_8c_a322d53d23d7208a9e6a86b52db9732d1} 
+\+\#define PPM~20}
+
+\Hypertarget{MyGame_8c_a9e594c972dae1f358f4111aa4844c7c3}\index{MyGame.c@{MyGame.c}!WORLD\_END@{WORLD\_END}}
+\index{WORLD\_END@{WORLD\_END}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{WORLD\_END}{WORLD\_END}}
+{\footnotesize\ttfamily \label{MyGame_8c_a9e594c972dae1f358f4111aa4844c7c3} 
+\+\#define WORLD\+\_\+\+END~2}
+
+\Hypertarget{MyGame_8c_ade10dfc471d106b1a6255a80d81b2e86}\index{MyGame.c@{MyGame.c}!WORLD\_NETHER@{WORLD\_NETHER}}
+\index{WORLD\_NETHER@{WORLD\_NETHER}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{WORLD\_NETHER}{WORLD\_NETHER}}
+{\footnotesize\ttfamily \label{MyGame_8c_ade10dfc471d106b1a6255a80d81b2e86} 
+\+\#define WORLD\+\_\+\+NETHER~1}
+
+\Hypertarget{MyGame_8c_a33c66b68a3d3720eeefdce0770e79271}\index{MyGame.c@{MyGame.c}!WORLD\_OVERWORLD@{WORLD\_OVERWORLD}}
+\index{WORLD\_OVERWORLD@{WORLD\_OVERWORLD}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{WORLD\_OVERWORLD}{WORLD\_OVERWORLD}}
+{\footnotesize\ttfamily \label{MyGame_8c_a33c66b68a3d3720eeefdce0770e79271} 
+\+\#define WORLD\+\_\+\+OVERWORLD~0}
+
+You should know the index you want each world to represent Since it wont change :\+) 
+
+\label{doc-func-members}
+\Hypertarget{MyGame_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{MyGame_8c_afcf2a3ca10b9673501d5a727de507d50}\index{MyGame.c@{MyGame.c}!game\_free@{game\_free}}
+\index{game\_free@{game\_free}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{game\_free()}{game\_free()}}
+{\footnotesize\ttfamily \label{MyGame_8c_afcf2a3ca10b9673501d5a727de507d50} 
+void game\+\_\+free (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MyGame_8c_a5f5ccbe5abfdef24c8378dc3cf32ffb3}\index{MyGame.c@{MyGame.c}!game\_init@{game\_init}}
+\index{game\_init@{game\_init}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{game\_init()}{game\_init()}}
+{\footnotesize\ttfamily \label{MyGame_8c_a5f5ccbe5abfdef24c8378dc3cf32ffb3} 
+void game\+\_\+init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MyGame_8c_a46fea93bf5d63e93090fbb95b742b881}\index{MyGame.c@{MyGame.c}!game\_loop@{game\_loop}}
+\index{game\_loop@{game\_loop}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{game\_loop()}{game\_loop()}}
+{\footnotesize\ttfamily \label{MyGame_8c_a46fea93bf5d63e93090fbb95b742b881} 
+void game\+\_\+loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MyGame_8c_a160ba7976cec764267d7798ef6134395}\index{MyGame.c@{MyGame.c}!load\_player@{load\_player}}
+\index{load\_player@{load\_player}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{load\_player()}{load\_player()}}
+{\footnotesize\ttfamily \label{MyGame_8c_a160ba7976cec764267d7798ef6134395} 
+void load\+\_\+player (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}}]{obj}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MyGame_8c_a69ffe8d2b705fbd853203760271d30ad}\index{MyGame.c@{MyGame.c}!overworld\_close@{overworld\_close}}
+\index{overworld\_close@{overworld\_close}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{overworld\_close()}{overworld\_close()}}
+{\footnotesize\ttfamily \label{MyGame_8c_a69ffe8d2b705fbd853203760271d30ad} 
+void overworld\+\_\+close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MyGame_8c_a20baff96af12ed447835f48fb4e23542}\index{MyGame.c@{MyGame.c}!overworld\_dealloc@{overworld\_dealloc}}
+\index{overworld\_dealloc@{overworld\_dealloc}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{overworld\_dealloc()}{overworld\_dealloc()}}
+{\footnotesize\ttfamily \label{MyGame_8c_a20baff96af12ed447835f48fb4e23542} 
+void overworld\+\_\+dealloc (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MyGame_8c_abbbb745af83eae33a5c2bf28a674a688}\index{MyGame.c@{MyGame.c}!overworld\_init@{overworld\_init}}
+\index{overworld\_init@{overworld\_init}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{overworld\_init()}{overworld\_init()}}
+{\footnotesize\ttfamily \label{MyGame_8c_abbbb745af83eae33a5c2bf28a674a688} 
+void overworld\+\_\+init (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MyGame_8c_ab854822514ec50d16b80cc5b9827a2d5}\index{MyGame.c@{MyGame.c}!overworld\_loop@{overworld\_loop}}
+\index{overworld\_loop@{overworld\_loop}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{overworld\_loop()}{overworld\_loop()}}
+{\footnotesize\ttfamily \label{MyGame_8c_ab854822514ec50d16b80cc5b9827a2d5} 
+void overworld\+\_\+loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MyGame_8c_a9f7ee281276372100d79e08a71def34d}\index{MyGame.c@{MyGame.c}!overworld\_start@{overworld\_start}}
+\index{overworld\_start@{overworld\_start}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{overworld\_start()}{overworld\_start()}}
+{\footnotesize\ttfamily \label{MyGame_8c_a9f7ee281276372100d79e08a71def34d} 
+void overworld\+\_\+start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{MyGame_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{MyGame_8c_a3995012871263de9916e3e6c82680779}\index{MyGame.c@{MyGame.c}!neth\_end\_config@{neth\_end\_config}}
+\index{neth\_end\_config@{neth\_end\_config}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{neth\_end\_config}{neth\_end\_config}}
+{\footnotesize\ttfamily \label{MyGame_8c_a3995012871263de9916e3e6c82680779} 
+\doxymbox{\hyperlink{structWorldConfig}{World\+Config}} neth\+\_\+end\+\_\+config}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .buffer\_interval\ =\ (\doxymbox{\hyperlink{structInterval}{Interval}})\ \{.start\ =\ 0,\ .end\ =\ 0\},}
+\DoxyCodeLine{\ \ .pool\_interval\ =\ (\doxymbox{\hyperlink{structInterval}{Interval}})\ \{.start\ =\ 0,\ .end\ =\ 0\},}
+\DoxyCodeLine{\ \ .pool\_size\ =\ 50,}
+\DoxyCodeLine{\ \ .gravity\_field\ =\ 5.3,}
+\DoxyCodeLine{\ \ .pixels\_per\_meter\ =\ \doxymbox{\hyperlink{MyGame_8c_a322d53d23d7208a9e6a86b52db9732d1}{PPM}},}
+\DoxyCodeLine{\ \ .reallocation\_ratio\ =\ 1.5}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{MyGame_8c_aff916a34038c12ae9bdd612fc92d2efb}\index{MyGame.c@{MyGame.c}!overworld\_config@{overworld\_config}}
+\index{overworld\_config@{overworld\_config}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{overworld\_config}{overworld\_config}}
+{\footnotesize\ttfamily \label{MyGame_8c_aff916a34038c12ae9bdd612fc92d2efb} 
+\doxymbox{\hyperlink{structWorldConfig}{World\+Config}} overworld\+\_\+config}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \{}
+\DoxyCodeLine{\ \ .buffer\_interval\ =\ (\doxymbox{\hyperlink{structInterval}{Interval}})\ \{.start\ =\ 0,\ .end\ =\ 0\},}
+\DoxyCodeLine{\ \ .pool\_interval\ =\ (\doxymbox{\hyperlink{structInterval}{Interval}})\ \{.start\ =\ 0,\ .end\ =\ 0\},}
+\DoxyCodeLine{\ \ .pool\_size\ =\ 10,}
+\DoxyCodeLine{\ \ .gravity\_field\ =\ 9.8,}
+\DoxyCodeLine{\ \ .pixels\_per\_meter\ =\ \doxymbox{\hyperlink{MyGame_8c_a322d53d23d7208a9e6a86b52db9732d1}{PPM}},}
+\DoxyCodeLine{\ \ .reallocation\_ratio\ =\ 1.5}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{MyGame_8c_aa1fd88b64b7a88c8d1d37f632a850a20}\index{MyGame.c@{MyGame.c}!overworld\_ptr@{overworld\_ptr}}
+\index{overworld\_ptr@{overworld\_ptr}!MyGame.c@{MyGame.c}}
+\doxysubsubsection{\texorpdfstring{overworld\_ptr}{overworld\_ptr}}
+{\footnotesize\ttfamily \label{MyGame_8c_aa1fd88b64b7a88c8d1d37f632a850a20} 
+\doxymbox{\hyperlink{structWorld}{World}}\texorpdfstring{$\ast$}{*} overworld\+\_\+ptr = NULL}
+

@@ -1,11 +1,286 @@
-\doxysection{src/platform.c File Reference}
+\doxysection{src/\+platform.c File Reference}
 \hypertarget{platform_8c}{}\label{platform_8c}\index{src/platform.c@{src/platform.c}}
-{\ttfamily \#include "{}platform.\+h"{}}\newline
-Include dependency graph for platform.\+c\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=164pt]{platform_8c__incl}
-\end{center}
-\end{figure}
+{\ttfamily \+\#include "{}platform.\+h"{}}\newline
+{\ttfamily \+\#include "{}engine.\+h"{}}\newline
+{\ttfamily \+\#include "{}time.\+h"{}}\newline
+{\ttfamily \+\#include "{}render.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+{\ttfamily \+\#include "{}logger.\+h"{}}\newline
+{\ttfamily \+\#include "{}input.\+h"{}}\newline
+{\ttfamily \+\#include "{}color.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \+\#include $<$sched.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include $<$xcb/\+xcb.\+h$>$}\newline
+{\ttfamily \+\#include $<$xcb/\+xproto.\+h$>$}\newline
+{\ttfamily \+\#include $<$xcb/\+xcb\+\_\+image.\+h$>$}\newline
+{\ttfamily \+\#include $<$xcb/\+shm.\+h$>$}\newline
+{\ttfamily \+\#include $<$sys/\+shm.\+h$>$}\newline
+{\ttfamily \+\#include $<$sys/\+ipc.\+h$>$}\newline
+Include dependency graph for platform.\+c:\+
+% FIG 0
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{platform_8c_aff62d0b9dae5a4505ce27e5939962a37}{WINDOWS\+\_\+\+AMOUNT}}~1
+\item 
+\+\#define \doxymbox{\hyperlink{platform_8c_a3f38e2ce85dfc317ea6cf2e087ed007b}{XCB\+\_\+\+EVENT\+\_\+\+RESPONSE\+\_\+\+TYPE\+\_\+\+MASK}}~\texorpdfstring{$\sim$}{\string~}0x80
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{platform_8c_a0800e11b8cc92f5b74546f2ef94b6790}{\+\_\+check\+\_\+shm}} (struct xcb\+\_\+shm\+\_\+segment\+\_\+info\+\_\+t \texorpdfstring{$\ast$}{*}info)
+\item 
+bool \doxymbox{\hyperlink{platform_8c_a77fe1e5f81101b3191931fbc78a92490}{\+\_\+check\+\_\+window}} (struct X11\+Window \texorpdfstring{$\ast$}{*}window)
+\begin{DoxyCompactList}\small\item\em Helper function, dont segfault. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{platform_8c_a42483ba561c4c977f941bfa1de032843}{\+\_\+name\+\_\+window}} (struct X11\+Window \texorpdfstring{$\ast$}{*}window, const char \texorpdfstring{$\ast$}{*}name)
+\begin{DoxyCompactList}\small\item\em Helper function, names without flushing. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{platform_8c_aded73aa15ff722dca4204abfb927744f}{\+\_\+update\+\_\+resolution}} (struct X11\+Window \texorpdfstring{$\ast$}{*}window, struct \doxymbox{\hyperlink{structAspect}{Aspect}} res)
+\begin{DoxyCompactList}\small\item\em Helper function, changes resolution without flushing. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{platform_8c_a093252ca78a35428cd6743b614a5b159}{\+\_\+resize\+\_\+window}} (struct X11\+Window \texorpdfstring{$\ast$}{*}window, struct \doxymbox{\hyperlink{structAspect}{Aspect}} size)
+\begin{DoxyCompactList}\small\item\em Helper function, resizes window, handles res safely, no flush. \end{DoxyCompactList}\item 
+xcb\+\_\+atom\+\_\+t \doxymbox{\hyperlink{platform_8c_a3469c1d32f360daff256acfd5d60567a}{\+\_\+xcb\+\_\+request}} (struct X11\+Window \texorpdfstring{$\ast$}{*}window, const char \texorpdfstring{$\ast$}{*}name)
+\begin{DoxyCompactList}\small\item\em Helper function for obtaining atoms. Flushes. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{platform_8c_ae7bdf123f53beadcd6ba0236505abac9}{\+\_\+free\+\_\+window}} (struct X11\+Window \texorpdfstring{$\ast$}{*}window)
+\begin{DoxyCompactList}\small\item\em Helper function for freeing windows. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{platform_8c_ace511593784d2e12b7f0534b59d08432}{\+\_\+free\+\_\+window\+\_\+i}} (size\+\_\+t i)
+\item 
+void \doxymbox{\hyperlink{platform_8c_aa95f01e6f956c415fd1c110f7626e00b}{\+\_\+init\+\_\+loop}} ()
+\begin{DoxyCompactList}\small\item\em Helper function to declutter platform\+\_\+initialize. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{platform_8c_a059f118f7663d071e7294ed6afdd3626}{platform\+\_\+initialize}} ()
+\begin{DoxyCompactList}\small\item\em Startup the platform. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{platform_8c_a09af272af11c02534fa85121806f7bb8}{platform\+\_\+new\+\_\+window}} (const char \texorpdfstring{$\ast$}{*}window\+Name, struct \doxymbox{\hyperlink{structAspect}{Aspect}} window\+Size, struct \doxymbox{\hyperlink{structAspect}{Aspect}} resolution, float fps)
+\begin{DoxyCompactList}\small\item\em Handles the creation and initialization of a new Window for the respective platform. TODO:\+ doxy. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{platform_8c_a3ce6a032d11a0ec121ad2db35786865d}{platform\+\_\+set\+\_\+window\+\_\+name}} (struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}window, const char \texorpdfstring{$\ast$}{*}name)
+\begin{DoxyCompactList}\small\item\em Update the name of the Window, flushes change. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{platform_8c_a1dfd94763eba7fbb0be487be3b3997cd}{platform\+\_\+set\+\_\+window\+\_\+size}} (struct X11\+Window \texorpdfstring{$\ast$}{*}window, struct \doxymbox{\hyperlink{structAspect}{Aspect}} size)
+\item 
+bool \doxymbox{\hyperlink{platform_8c_aee0ff99a7e9ccfa8956ea58ef31fa35e}{platform\+\_\+set\+\_\+window\+\_\+resolution}} (struct X11\+Window \texorpdfstring{$\ast$}{*}window, struct \doxymbox{\hyperlink{structAspect}{Aspect}} res)
+\item 
+bool \doxymbox{\hyperlink{platform_8c_abd154e3d17890574d154c191f82debfe}{platform\+\_\+update\+\_\+window}} (struct X11\+Window \texorpdfstring{$\ast$}{*}window)
+\item 
+bool \doxymbox{\hyperlink{platform_8c_a8a9f2b9ac31adb2ebdd1dd4ba4313f38}{platform\+\_\+render}} (struct X11\+Window \texorpdfstring{$\ast$}{*}window, float alpha)
+\item 
+bool \doxymbox{\hyperlink{platform_8c_a6ac886706e24c779280a17b05be52ee3}{platform\+\_\+iterate}} (struct X11\+Window \texorpdfstring{$\ast$}{*}window)
+\item 
+void \doxymbox{\hyperlink{platform_8c_a1f31a5e79b6e14e51c07cc6497209bb3}{platform\+\_\+free}} ()
+\begin{DoxyCompactList}\small\item\em Deallocates all dynamic memory of the platform. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+xcb\+\_\+atom\+\_\+t \doxymbox{\hyperlink{platform_8c_adceab1b8a6dd447b18cc534ba47f80a9}{ATOM\+\_\+\+WM\+\_\+\+PROTOCOLS}} = XCB\+\_\+\+ATOM\+\_\+\+NONE
+\item 
+xcb\+\_\+atom\+\_\+t \doxymbox{\hyperlink{platform_8c_adfaf1d350e9ebb985ff0e213f8fbfa7b}{ATOM\+\_\+\+WM\+\_\+\+DELETE\+\_\+\+WINDOW}} = XCB\+\_\+\+ATOM\+\_\+\+NONE
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{platform_8c_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{platform_8c_aff62d0b9dae5a4505ce27e5939962a37}\index{platform.c@{platform.c}!WINDOWS\_AMOUNT@{WINDOWS\_AMOUNT}}
+\index{WINDOWS\_AMOUNT@{WINDOWS\_AMOUNT}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{WINDOWS\_AMOUNT}{WINDOWS\_AMOUNT}}
+{\footnotesize\ttfamily \label{platform_8c_aff62d0b9dae5a4505ce27e5939962a37} 
+\+\#define WINDOWS\+\_\+\+AMOUNT~1}
+
+\Hypertarget{platform_8c_a3f38e2ce85dfc317ea6cf2e087ed007b}\index{platform.c@{platform.c}!XCB\_EVENT\_RESPONSE\_TYPE\_MASK@{XCB\_EVENT\_RESPONSE\_TYPE\_MASK}}
+\index{XCB\_EVENT\_RESPONSE\_TYPE\_MASK@{XCB\_EVENT\_RESPONSE\_TYPE\_MASK}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{XCB\_EVENT\_RESPONSE\_TYPE\_MASK}{XCB\_EVENT\_RESPONSE\_TYPE\_MASK}}
+{\footnotesize\ttfamily \label{platform_8c_a3f38e2ce85dfc317ea6cf2e087ed007b} 
+\+\#define XCB\+\_\+\+EVENT\+\_\+\+RESPONSE\+\_\+\+TYPE\+\_\+\+MASK~\texorpdfstring{$\sim$}{\string~}0x80}
+
+
+
+\label{doc-func-members}
+\Hypertarget{platform_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{platform_8c_a0800e11b8cc92f5b74546f2ef94b6790}\index{platform.c@{platform.c}!\_check\_shm@{\_check\_shm}}
+\index{\_check\_shm@{\_check\_shm}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{\_check\_shm()}{\_check\_shm()}}
+{\footnotesize\ttfamily \label{platform_8c_a0800e11b8cc92f5b74546f2ef94b6790} 
+bool \+\_\+check\+\_\+shm (\begin{DoxyParamCaption}\item[{struct xcb\+\_\+shm\+\_\+segment\+\_\+info\+\_\+t \texorpdfstring{$\ast$}{*}}]{info}{}\end{DoxyParamCaption})}
+
+\Hypertarget{platform_8c_a77fe1e5f81101b3191931fbc78a92490}\index{platform.c@{platform.c}!\_check\_window@{\_check\_window}}
+\index{\_check\_window@{\_check\_window}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{\_check\_window()}{\_check\_window()}}
+{\footnotesize\ttfamily \label{platform_8c_a77fe1e5f81101b3191931fbc78a92490} 
+bool \+\_\+check\+\_\+window (\begin{DoxyParamCaption}\item[{struct X11\+Window \texorpdfstring{$\ast$}{*}}]{window}{}\end{DoxyParamCaption})}
+
+
+
+Helper function, dont segfault. 
+
+\Hypertarget{platform_8c_ae7bdf123f53beadcd6ba0236505abac9}\index{platform.c@{platform.c}!\_free\_window@{\_free\_window}}
+\index{\_free\_window@{\_free\_window}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{\_free\_window()}{\_free\_window()}}
+{\footnotesize\ttfamily \label{platform_8c_ae7bdf123f53beadcd6ba0236505abac9} 
+void \+\_\+free\+\_\+window (\begin{DoxyParamCaption}\item[{struct X11\+Window \texorpdfstring{$\ast$}{*}}]{window}{}\end{DoxyParamCaption})}
+
+
+
+Helper function for freeing windows. 
+
+\Hypertarget{platform_8c_ace511593784d2e12b7f0534b59d08432}\index{platform.c@{platform.c}!\_free\_window\_i@{\_free\_window\_i}}
+\index{\_free\_window\_i@{\_free\_window\_i}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{\_free\_window\_i()}{\_free\_window\_i()}}
+{\footnotesize\ttfamily \label{platform_8c_ace511593784d2e12b7f0534b59d08432} 
+void \+\_\+free\+\_\+window\+\_\+i (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{i}{}\end{DoxyParamCaption})}
+
+\Hypertarget{platform_8c_aa95f01e6f956c415fd1c110f7626e00b}\index{platform.c@{platform.c}!\_init\_loop@{\_init\_loop}}
+\index{\_init\_loop@{\_init\_loop}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{\_init\_loop()}{\_init\_loop()}}
+{\footnotesize\ttfamily \label{platform_8c_aa95f01e6f956c415fd1c110f7626e00b} 
+void \+\_\+init\+\_\+loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Helper function to declutter platform\+\_\+initialize. 
+
+\Hypertarget{platform_8c_a42483ba561c4c977f941bfa1de032843}\index{platform.c@{platform.c}!\_name\_window@{\_name\_window}}
+\index{\_name\_window@{\_name\_window}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{\_name\_window()}{\_name\_window()}}
+{\footnotesize\ttfamily \label{platform_8c_a42483ba561c4c977f941bfa1de032843} 
+bool \+\_\+name\+\_\+window (\begin{DoxyParamCaption}\item[{struct X11\+Window \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Helper function, names without flushing. 
+
+\Hypertarget{platform_8c_a093252ca78a35428cd6743b614a5b159}\index{platform.c@{platform.c}!\_resize\_window@{\_resize\_window}}
+\index{\_resize\_window@{\_resize\_window}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{\_resize\_window()}{\_resize\_window()}}
+{\footnotesize\ttfamily \label{platform_8c_a093252ca78a35428cd6743b614a5b159} 
+bool \+\_\+resize\+\_\+window (\begin{DoxyParamCaption}\item[{struct X11\+Window \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{struct \doxymbox{\hyperlink{structAspect}{Aspect}}}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Helper function, resizes window, handles res safely, no flush. 
+
+\Hypertarget{platform_8c_aded73aa15ff722dca4204abfb927744f}\index{platform.c@{platform.c}!\_update\_resolution@{\_update\_resolution}}
+\index{\_update\_resolution@{\_update\_resolution}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{\_update\_resolution()}{\_update\_resolution()}}
+{\footnotesize\ttfamily \label{platform_8c_aded73aa15ff722dca4204abfb927744f} 
+bool \+\_\+update\+\_\+resolution (\begin{DoxyParamCaption}\item[{struct X11\+Window \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{struct \doxymbox{\hyperlink{structAspect}{Aspect}}}]{res}{}\end{DoxyParamCaption})}
+
+
+
+Helper function, changes resolution without flushing. 
+
+\Hypertarget{platform_8c_a3469c1d32f360daff256acfd5d60567a}\index{platform.c@{platform.c}!\_xcb\_request@{\_xcb\_request}}
+\index{\_xcb\_request@{\_xcb\_request}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{\_xcb\_request()}{\_xcb\_request()}}
+{\footnotesize\ttfamily \label{platform_8c_a3469c1d32f360daff256acfd5d60567a} 
+xcb\+\_\+atom\+\_\+t \+\_\+xcb\+\_\+request (\begin{DoxyParamCaption}\item[{struct X11\+Window \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Helper function for obtaining atoms. Flushes. 
+
+\Hypertarget{platform_8c_a1f31a5e79b6e14e51c07cc6497209bb3}\index{platform.c@{platform.c}!platform\_free@{platform\_free}}
+\index{platform\_free@{platform\_free}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{platform\_free()}{platform\_free()}}
+{\footnotesize\ttfamily \label{platform_8c_a1f31a5e79b6e14e51c07cc6497209bb3} 
+void platform\+\_\+free (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Deallocates all dynamic memory of the platform. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{engine_8h_a9dc6a047707762d11d1464ccfda726ab}{engine\+\_\+close} 
+\end{DoxySeeAlso}
+\Hypertarget{platform_8c_a059f118f7663d071e7294ed6afdd3626}\index{platform.c@{platform.c}!platform\_initialize@{platform\_initialize}}
+\index{platform\_initialize@{platform\_initialize}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{platform\_initialize()}{platform\_initialize()}}
+{\footnotesize\ttfamily \label{platform_8c_a059f118f7663d071e7294ed6afdd3626} 
+void platform\+\_\+initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Startup the platform. 
+
+\begin{DoxyReturn}{Returns}
+Success. 
+\end{DoxyReturn}
+\Hypertarget{platform_8c_a6ac886706e24c779280a17b05be52ee3}\index{platform.c@{platform.c}!platform\_iterate@{platform\_iterate}}
+\index{platform\_iterate@{platform\_iterate}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{platform\_iterate()}{platform\_iterate()}}
+{\footnotesize\ttfamily \label{platform_8c_a6ac886706e24c779280a17b05be52ee3} 
+bool platform\+\_\+iterate (\begin{DoxyParamCaption}\item[{struct X11\+Window \texorpdfstring{$\ast$}{*}}]{window}{}\end{DoxyParamCaption})}
+
+\Hypertarget{platform_8c_a09af272af11c02534fa85121806f7bb8}\index{platform.c@{platform.c}!platform\_new\_window@{platform\_new\_window}}
+\index{platform\_new\_window@{platform\_new\_window}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{platform\_new\_window()}{platform\_new\_window()}}
+{\footnotesize\ttfamily \label{platform_8c_a09af272af11c02534fa85121806f7bb8} 
+struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*} platform\+\_\+new\+\_\+window (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{window\+Name}{, }\item[{struct \doxymbox{\hyperlink{structAspect}{Aspect}}}]{window\+Size}{, }\item[{struct \doxymbox{\hyperlink{structAspect}{Aspect}}}]{resolution}{, }\item[{float}]{fps}{}\end{DoxyParamCaption})}
+
+
+
+Handles the creation and initialization of a new Window for the respective platform. TODO:\+ doxy. 
+
+\begin{DoxySeeAlso}{See also}
+X11\+Window 
+
+TODO:\+ Window\textquotesingle{}s Window 
+\end{DoxySeeAlso}
+\begin{DoxyNote}{Note}
+config param is deep copied into return value. 
+\end{DoxyNote}
+\Hypertarget{platform_8c_a8a9f2b9ac31adb2ebdd1dd4ba4313f38}\index{platform.c@{platform.c}!platform\_render@{platform\_render}}
+\index{platform\_render@{platform\_render}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{platform\_render()}{platform\_render()}}
+{\footnotesize\ttfamily \label{platform_8c_a8a9f2b9ac31adb2ebdd1dd4ba4313f38} 
+bool platform\+\_\+render (\begin{DoxyParamCaption}\item[{struct X11\+Window \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{float}]{alpha}{}\end{DoxyParamCaption})}
+
+\Hypertarget{platform_8c_a3ce6a032d11a0ec121ad2db35786865d}\index{platform.c@{platform.c}!platform\_set\_window\_name@{platform\_set\_window\_name}}
+\index{platform\_set\_window\_name@{platform\_set\_window\_name}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{platform\_set\_window\_name()}{platform\_set\_window\_name()}}
+{\footnotesize\ttfamily \label{platform_8c_a3ce6a032d11a0ec121ad2db35786865d} 
+bool platform\+\_\+set\+\_\+window\+\_\+name (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Update the name of the Window, flushes change. 
+
+\begin{DoxyReturn}{Returns}
+Success. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{platform_8h_a09af272af11c02534fa85121806f7bb8}{platform\+\_\+new\+\_\+window} for changing multiple fields at once. 
+\end{DoxySeeAlso}
+\Hypertarget{platform_8c_aee0ff99a7e9ccfa8956ea58ef31fa35e}\index{platform.c@{platform.c}!platform\_set\_window\_resolution@{platform\_set\_window\_resolution}}
+\index{platform\_set\_window\_resolution@{platform\_set\_window\_resolution}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{platform\_set\_window\_resolution()}{platform\_set\_window\_resolution()}}
+{\footnotesize\ttfamily \label{platform_8c_aee0ff99a7e9ccfa8956ea58ef31fa35e} 
+bool platform\+\_\+set\+\_\+window\+\_\+resolution (\begin{DoxyParamCaption}\item[{struct X11\+Window \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{struct \doxymbox{\hyperlink{structAspect}{Aspect}}}]{res}{}\end{DoxyParamCaption})}
+
+\Hypertarget{platform_8c_a1dfd94763eba7fbb0be487be3b3997cd}\index{platform.c@{platform.c}!platform\_set\_window\_size@{platform\_set\_window\_size}}
+\index{platform\_set\_window\_size@{platform\_set\_window\_size}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{platform\_set\_window\_size()}{platform\_set\_window\_size()}}
+{\footnotesize\ttfamily \label{platform_8c_a1dfd94763eba7fbb0be487be3b3997cd} 
+bool platform\+\_\+set\+\_\+window\+\_\+size (\begin{DoxyParamCaption}\item[{struct X11\+Window \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{struct \doxymbox{\hyperlink{structAspect}{Aspect}}}]{size}{}\end{DoxyParamCaption})}
+
+\Hypertarget{platform_8c_abd154e3d17890574d154c191f82debfe}\index{platform.c@{platform.c}!platform\_update\_window@{platform\_update\_window}}
+\index{platform\_update\_window@{platform\_update\_window}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{platform\_update\_window()}{platform\_update\_window()}}
+{\footnotesize\ttfamily \label{platform_8c_abd154e3d17890574d154c191f82debfe} 
+bool platform\+\_\+update\+\_\+window (\begin{DoxyParamCaption}\item[{struct X11\+Window \texorpdfstring{$\ast$}{*}}]{window}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-var-members}
+\Hypertarget{platform_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{platform_8c_adfaf1d350e9ebb985ff0e213f8fbfa7b}\index{platform.c@{platform.c}!ATOM\_WM\_DELETE\_WINDOW@{ATOM\_WM\_DELETE\_WINDOW}}
+\index{ATOM\_WM\_DELETE\_WINDOW@{ATOM\_WM\_DELETE\_WINDOW}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{ATOM\_WM\_DELETE\_WINDOW}{ATOM\_WM\_DELETE\_WINDOW}}
+{\footnotesize\ttfamily \label{platform_8c_adfaf1d350e9ebb985ff0e213f8fbfa7b} 
+xcb\+\_\+atom\+\_\+t ATOM\+\_\+\+WM\+\_\+\+DELETE\+\_\+\+WINDOW = XCB\+\_\+\+ATOM\+\_\+\+NONE}
+
+\Hypertarget{platform_8c_adceab1b8a6dd447b18cc534ba47f80a9}\index{platform.c@{platform.c}!ATOM\_WM\_PROTOCOLS@{ATOM\_WM\_PROTOCOLS}}
+\index{ATOM\_WM\_PROTOCOLS@{ATOM\_WM\_PROTOCOLS}!platform.c@{platform.c}}
+\doxysubsubsection{\texorpdfstring{ATOM\_WM\_PROTOCOLS}{ATOM\_WM\_PROTOCOLS}}
+{\footnotesize\ttfamily \label{platform_8c_adceab1b8a6dd447b18cc534ba47f80a9} 
+xcb\+\_\+atom\+\_\+t ATOM\+\_\+\+WM\+\_\+\+PROTOCOLS = XCB\+\_\+\+ATOM\+\_\+\+NONE}
+

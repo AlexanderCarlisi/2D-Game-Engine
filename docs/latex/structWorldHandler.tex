@@ -1,0 +1,47 @@
+\doxysection{World\+Handler Struct Reference}
+\hypertarget{structWorldHandler}{}\label{structWorldHandler}\index{WorldHandler@{WorldHandler}}
+
+
+{\ttfamily \+\#include $<$world\+\_\+handler.\+h$>$}
+
+
+
+Collaboration diagram for World\+Handler:\+
+% FIG 0
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+struct World\+Vector \doxymbox{\hyperlink{structWorldHandler_ac33b7bf1761d252a9d6251debb67fb41}{worlds}}
+\item 
+struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structWorldHandler_af72f13585998a46d0e378b0fb8ba8446}{active}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The handler for all instantiated Worlds. stores all the worlds into a World\+Vector. 
+
+Only 1 \doxylink{structWorld}{World} can be declared as active at a time. Worlds can be pre-\/loaded, which will simply call the init function. \begin{DoxySeeAlso}{See also}
+\doxylink{world_8h}{world.\+h} for info on structuring your world. 
+\end{DoxySeeAlso}
+Worlds exist within the 
+
+\label{doc-variable-members}
+\Hypertarget{structWorldHandler_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{structWorldHandler_af72f13585998a46d0e378b0fb8ba8446}\index{WorldHandler@{WorldHandler}!active@{active}}
+\index{active@{active}!WorldHandler@{WorldHandler}}
+\doxysubsubsection{\texorpdfstring{active}{active}}
+{\footnotesize\ttfamily \label{structWorldHandler_af72f13585998a46d0e378b0fb8ba8446} 
+struct \doxymbox{\hyperlink{structWorld}{World}}\texorpdfstring{$\ast$}{*} World\+Handler::\+active}
+
+\Hypertarget{structWorldHandler_ac33b7bf1761d252a9d6251debb67fb41}\index{WorldHandler@{WorldHandler}!worlds@{worlds}}
+\index{worlds@{worlds}!WorldHandler@{WorldHandler}}
+\doxysubsubsection{\texorpdfstring{worlds}{worlds}}
+{\footnotesize\ttfamily \label{structWorldHandler_ac33b7bf1761d252a9d6251debb67fb41} 
+struct World\+Vector World\+Handler::\+worlds}
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+include/\+\doxymbox{\hyperlink{world__handler_8h}{world\+\_\+handler.\+h}}\end{DoxyCompactItemize}

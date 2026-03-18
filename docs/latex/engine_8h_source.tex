@@ -1,43 +1,22 @@
 \doxysection{engine.\+h}
 \hypertarget{engine_8h_source}{}\label{engine_8h_source}\index{include/engine.h@{include/engine.h}}
-\mbox{\hyperlink{engine_8h}{Go to the documentation of this file.}}
+\doxymbox{\hyperlink{engine_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{comment}{//}}
-\DoxyCodeLine{00002\ \textcolor{comment}{//\ 2D\ Game\ Engine\ main\ class.}}
-\DoxyCodeLine{00003\ \textcolor{comment}{//\ Engine.tick()\ is\ the\ main\ loop\ of\ the\ program,\ it's\ encapsulated\ by\ OS\ code.}}
-\DoxyCodeLine{00004\ \textcolor{comment}{//\ When\ creating\ your\ own\ game\ using\ this\ Engine,\ you\ should\ be\ interfacing\ with\ this\ class\ to\ make\ changes.}}
-\DoxyCodeLine{00005\ \textcolor{comment}{//}}
-\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{render_8h}{render.h}}"{}}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{world_8h}{world.h}}"{}}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}stdbool.h"{}}}
-\DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ ENGINE\_H}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ ENGINE\_H}}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ENGINE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ENGINE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{platform_8h}{platform.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00007\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{engine_8h_a7a9f877affd8494ed58d4e218bc69737}{engine\_start}}();}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00011\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{engine_8h_a2238829386032404539c4b46c1e12152}{engine\_tick}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}}*\ window);}
 \DoxyCodeLine{00012\ }
-\DoxyCodeLine{00013\ \textcolor{comment}{//\ Initialize\ the\ engine}}
-\DoxyCodeLine{00014\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{engine_8h_a92f7ca3cfebd2124ea8cc7476a91804b}{engine\_start}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structRenderer}{Renderer}}*);}
-\DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ \textcolor{comment}{//\ Update\ GameLogic,\ Physics,\ and\ Renderer}}
-\DoxyCodeLine{00017\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{engine_8h_a9ab771cc364d9f18c80a770e231cac11}{engine\_tick}}();}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \textcolor{comment}{//\ Set\ the\ state\ of\ the\ engine\ |\ RUNNING\ or\ ENDED}}
-\DoxyCodeLine{00020\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{engine_8h_af7f99e5137cc14c78cb3780c687ab1c4}{set\_engine\_state}}(\textcolor{keywordtype}{bool}\ isRunning);}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{comment}{//\ Closes\ the\ Engine,\ cleaning\ up\ resources\ |\ Call\ on\ Exit}}
-\DoxyCodeLine{00023\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{engine_8h_a9dc6a047707762d11d1464ccfda726ab}{engine\_close}}();}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{comment}{//\ Returns\ current\ state\ of\ the\ engine}}
-\DoxyCodeLine{00026\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{engine_8h_a98ad3711619a0e20042ca57d8d65c94d}{engine\_is\_running}}();}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{comment}{//\ Returns\ a\ pointer\ to\ the\ world\ structure}}
-\DoxyCodeLine{00029\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structWorld}{World}}*\ \mbox{\hyperlink{engine_8h_a02f89457778b79dccb9c08f623f3517e}{engine\_get\_world\_ptr}}();}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \textcolor{comment}{//\ Updates\ the\ WindowSize\ and\ Resolution\ in\ the\ Renderer}}
-\DoxyCodeLine{00032\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{engine_8h_ac561ee8b69ab03f88338fa046bd00f77}{engine\_update\_renderer\_aspects}}();}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \textcolor{comment}{//\ Returns\ a\ pointer\ to\ the\ Renderer}}
-\DoxyCodeLine{00035\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structRenderer}{Renderer}}*\ \mbox{\hyperlink{engine_8h_a07b159f3759b1b4dc4783be694cbf694}{engine\_get\_renderer\_ptr}}();}
-\DoxyCodeLine{00036\ }
-\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00016\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{engine_8h_aa79d1cf3159f120d013f499a899cb9f1}{engine\_set\_running}}(\textcolor{keywordtype}{bool}\ state);}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00019\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{engine_8h_a98ad3711619a0e20042ca57d8d65c94d}{engine\_is\_running}}();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00022\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{engine_8h_a9dc6a047707762d11d1464ccfda726ab}{engine\_close}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

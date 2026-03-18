@@ -1,36 +1,36 @@
 \doxysection{pose.\+h}
 \hypertarget{pose_8h_source}{}\label{pose_8h_source}\index{include/pose.h@{include/pose.h}}
-\mbox{\hyperlink{pose_8h}{Go to the documentation of this file.}}
+\doxymbox{\hyperlink{pose_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ POSE\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ POSE\_H}}
 \DoxyCodeLine{00003\ }
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}stdbool.h"{}}}
-\DoxyCodeLine{00005\ }
-\DoxyCodeLine{00006\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structWorld}{World}};\ \textcolor{comment}{//\ WORLD\_H}}
-\DoxyCodeLine{00007\ }
-\DoxyCodeLine{00008\ }
-\DoxyCodeLine{00009\ \textcolor{comment}{//\ When\ updating\ a\ Pose\ structs\ values,\ it's\ recommended\ to\ use\ the\ provided\ functions,\ as\ it\ will\ update\ the\ other\ values.\ }}
-\DoxyCodeLine{00010\ \textcolor{comment}{//\ (eg.\ if\ you\ update\ the\ Meters\ position\ using\ the\ function,\ it\ will\ update\ the\ Pixel\ positions\ using\ the\ proper\ conversion)}}
-\DoxyCodeLine{00011\ \textcolor{comment}{//\ Layout:\ [float,\ float,\ int,\ int]}}
-\DoxyCodeLine{00012\ \textcolor{comment}{//\ Size:\ 16\ bytes}}
-\DoxyCodeLine{00013\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structPose}{Pose}}\ \{}
-\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structPose_affe8f3c1da6e7743f555368f29a4e1e8}{xMeters}};}
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structPose_a9d69f8d07e8b2f4484ea038e87c67867}{yMeters}};}
-\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPose_abaea3fbec7a7613f18da4f21a7dff7e8}{xPixels}};}
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structPose_adbf6eff50394a6413e7c7111abac0701}{yPixels}};}
-\DoxyCodeLine{00018\ \}\ \mbox{\hyperlink{structPose}{Pose}};}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \textcolor{comment}{//\ Updates\ the\ provided\ Pose\ to\ the\ provided\ Meters,\ handles\ the\ conversion\ for\ Pixel\ values\ using\ the\ World\ settings.}}
-\DoxyCodeLine{00022\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pose_8h_a2d967a205bef95cdada2eb07c8341fc3}{update\_pose\_meters}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structPose}{Pose}}*\ pose,\ \textcolor{keywordtype}{float}\ xMeters,\ \textcolor{keywordtype}{float}\ yMeters);}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \textcolor{comment}{//\ Updates\ the\ provided\ Pose\ tot\ he\ provided\ Pixels,\ handles\ the\ conversion\ of\ Meter\ values\ using\ the\ World\ settings.}}
-\DoxyCodeLine{00025\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{pose_8h_aa7487dcbd5e018b8139531b6919ed8ac}{update\_pose\_pixels}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structPose}{Pose}}*\ pose,\ \textcolor{keywordtype}{int}\ xPixels,\ \textcolor{keywordtype}{int}\ yPixels);}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \textcolor{comment}{//\ Checks\ if\ two\ poses\ are\ equal\ in\ Meter\ Positions.\ Returns\ 1\ if\ they\ are,\ 0\ if\ they\ are\ not.}}
-\DoxyCodeLine{00028\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{pose_8h_ab40e17349a992e17879aa4d35a11c0e8}{pose\_equals}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structPose}{Pose}}*\ pose1,\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structPose}{Pose}}*\ pose2);}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ POSE\_H}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}stdint.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structWorld}{World}};\ \textcolor{comment}{//\ WORLD\_H}}
+\DoxyCodeLine{00008\ \textcolor{keyword}{typedef}\ int16\_t\ \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}};}
+\DoxyCodeLine{00009\ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\_t}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structPose}{Pose}}\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\_t}}\ \doxymbox{\hyperlink{structPose_a54907536e516786437ef85f1dc802681}{x\_meters}};}
+\DoxyCodeLine{00043\ \ \ \ \ \doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\_t}}\ \doxymbox{\hyperlink{structPose_a43668c499a4cd767092d052ab6f53098}{y\_meters}};}
+\DoxyCodeLine{00044\ \ \ \ \ \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}}\ \doxymbox{\hyperlink{structPose_ad78e58bf2af687ae6b2cdea54bb6ee73}{x\_pixels}};}
+\DoxyCodeLine{00045\ \ \ \ \ \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}}\ \doxymbox{\hyperlink{structPose_a62c70f8161824d984821bcf048dfaa24}{y\_pixels}};}
+\DoxyCodeLine{00046\ \}\ \doxymbox{\hyperlink{structPose}{Pose}};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \doxymbox{\hyperlink{structPose}{Pose}}\ \doxymbox{\hyperlink{pose_8h_a2615d54c9ad2f2a3022e6c85bee9557c}{pose\_from\_pixels}}(\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}}\ ppm,\ \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}}\ x,\ \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}}\ y);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00052\ \doxymbox{\hyperlink{structPose}{Pose}}\ \doxymbox{\hyperlink{pose_8h_aadb6e1208c338af92782c0a847963b58}{pose\_from\_meters}}(\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}}\ ppm,\ \doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\_t}}\ x,\ \doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\_t}}\ y);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{pose_8h_a9cd46ab19dfe0d3753efb44ab61ebef3}{pose\_update\_meters}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structPose}{Pose}}*\ pose,\ \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}}\ ppm,\ \doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\_t}}\ x,\ \doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\_t}}\ y);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00068\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{pose_8h_a8b396a2145434a7715eee8c7ef7345ab}{pose\_update\_pixels}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structPose}{Pose}}*\ pose,\ \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}}\ ppm,\ \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}}\ xPixels,\ \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}}\ yPixels);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{pose_8h_ab40e17349a992e17879aa4d35a11c0e8}{pose\_equals}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structPose}{Pose}}*\ pose1,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structPose}{Pose}}*\ pose2);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00082\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{pose_8h_adf5cba6e0721de3e3a1b49a393c22f3d}{pose\_pixels\_in\_bounds}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structPose}{Pose}}*\ pose,\ \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}}\ xUpper,\ \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\_t}}\ yUpper);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ POSE\_H}}
 
 \end{DoxyCode}

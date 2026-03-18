@@ -1,19 +1,135 @@
-\doxysection{src/world.c File Reference}
+\doxysection{src/\+world.c File Reference}
 \hypertarget{world_8c}{}\label{world_8c}\index{src/world.c@{src/world.c}}
-{\ttfamily \#include "{}world.\+h"{}}\newline
-{\ttfamily \#include "{}game\+\_\+object.\+h"{}}\newline
-{\ttfamily \#include "{}stdio.\+h"{}}\newline
-{\ttfamily \#include "{}stdlib.\+h"{}}\newline
-{\ttfamily \#include "{}color.\+h"{}}\newline
-{\ttfamily \#include "{}pose.\+h"{}}\newline
-{\ttfamily \#include "{}shape.\+h"{}}\newline
-{\ttfamily \#include "{}app\+\_\+config.\+h"{}}\newline
-{\ttfamily \#include "{}world\+\_\+config.\+h"{}}\newline
-Include dependency graph for world.\+c\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{world_8c__incl}
-\end{center}
-\end{figure}
+{\ttfamily \+\#include "{}world.\+h"{}}\newline
+{\ttfamily \+\#include $<$string.\+h$>$}\newline
+Include dependency graph for world.\+c:\+
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{world_8c_acb07e24337846579c5f21047c0af057e}{DEFINE\+\_\+\+VECTOR}} (Game\+Object\+Vector, vector\+\_\+game\+\_\+object, struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}})
+\item 
+bool \doxymbox{\hyperlink{world_8c_a3771accf8d5d3db698bca0e6a97cf598}{world\+\_\+realloc\+\_\+pool}} (struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}world, size\+\_\+t new\+Size)
+\begin{DoxyCompactList}\small\item\em Reallocate the Object Pool. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{world_8c_a8c0c701c7b1804c85d393c8bd263398e}{world\+\_\+remove\+\_\+from\+\_\+buffer}} (struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}world, struct \doxymbox{\hyperlink{structInterval}{Interval}} \texorpdfstring{$\ast$}{*}interval)
+\begin{DoxyCompactList}\small\item\em Nullifies Objects within the \doxylink{structInterval}{Interval} of the Object Buffer. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{world_8c_a8012ea4d64f0a51f45b7612c2b00eed2}{world\+\_\+remove\+\_\+from\+\_\+pool}} (struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}world, struct \doxymbox{\hyperlink{structInterval}{Interval}} \texorpdfstring{$\ast$}{*}interval)
+\begin{DoxyCompactList}\small\item\em Nullifies Objects within the \doxylink{structInterval}{Interval} of the Object Pool. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{world_8c_ab61d9b2740d742d32ad18f5259c43acd}{world\+\_\+buffer\+\_\+get\+\_\+object}} (struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}world, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Returns the Pointer to the \doxylink{structGameObject}{Game\+Object} on the Buffer at that Index. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{world_8c_a6ea67b52e6571e090533d71b9365ff9c}{world\+\_\+pool\+\_\+get\+\_\+object}} (struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}world, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Returns the Pointer to the \doxylink{structGameObject}{Game\+Object} on the Pool at that Index. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{world_8c_a942d5b3d67a1fef20d1b97c469ff42ce}{world\+\_\+new}} (struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}world, struct \doxymbox{\hyperlink{structWorldConfig}{World\+Config}} config)
+\begin{DoxyCompactList}\small\item\em Initializes a new \doxylink{structWorld}{World} with default parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{world_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{world_8c_acb07e24337846579c5f21047c0af057e}\index{world.c@{world.c}!DEFINE\_VECTOR@{DEFINE\_VECTOR}}
+\index{DEFINE\_VECTOR@{DEFINE\_VECTOR}!world.c@{world.c}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_VECTOR()}{DEFINE\_VECTOR()}}
+{\footnotesize\ttfamily \label{world_8c_acb07e24337846579c5f21047c0af057e} 
+DEFINE\+\_\+\+VECTOR (\begin{DoxyParamCaption}\item[{Game\+Object\+Vector}]{}{, }\item[{vector\+\_\+game\+\_\+object}]{}{, }\item[{struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{world_8c_ab61d9b2740d742d32ad18f5259c43acd}\index{world.c@{world.c}!world\_buffer\_get\_object@{world\_buffer\_get\_object}}
+\index{world\_buffer\_get\_object@{world\_buffer\_get\_object}!world.c@{world.c}}
+\doxysubsubsection{\texorpdfstring{world\_buffer\_get\_object()}{world\_buffer\_get\_object()}}
+{\footnotesize\ttfamily \label{world_8c_ab61d9b2740d742d32ad18f5259c43acd} 
+struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*} world\+\_\+buffer\+\_\+get\+\_\+object (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}}]{world}{, }\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Returns the Pointer to the \doxylink{structGameObject}{Game\+Object} on the Buffer at that Index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & on buffer. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{world_8c_a942d5b3d67a1fef20d1b97c469ff42ce}\index{world.c@{world.c}!world\_new@{world\_new}}
+\index{world\_new@{world\_new}!world.c@{world.c}}
+\doxysubsubsection{\texorpdfstring{world\_new()}{world\_new()}}
+{\footnotesize\ttfamily \label{world_8c_a942d5b3d67a1fef20d1b97c469ff42ce} 
+bool world\+\_\+new (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}}]{world}{, }\item[{struct \doxymbox{\hyperlink{structWorldConfig}{World\+Config}}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new \doxylink{structWorld}{World} with default parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world} & To be initialized. \\
+\hline
+{\em config} & \doxylink{structWorldConfig}{World\+Config} to initialize with. Deepcopied. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{world_8c_a6ea67b52e6571e090533d71b9365ff9c}\index{world.c@{world.c}!world\_pool\_get\_object@{world\_pool\_get\_object}}
+\index{world\_pool\_get\_object@{world\_pool\_get\_object}!world.c@{world.c}}
+\doxysubsubsection{\texorpdfstring{world\_pool\_get\_object()}{world\_pool\_get\_object()}}
+{\footnotesize\ttfamily \label{world_8c_a6ea67b52e6571e090533d71b9365ff9c} 
+struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*} world\+\_\+pool\+\_\+get\+\_\+object (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}}]{world}{, }\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Returns the Pointer to the \doxylink{structGameObject}{Game\+Object} on the Pool at that Index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & in pool. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{world_8c_a3771accf8d5d3db698bca0e6a97cf598}\index{world.c@{world.c}!world\_realloc\_pool@{world\_realloc\_pool}}
+\index{world\_realloc\_pool@{world\_realloc\_pool}!world.c@{world.c}}
+\doxysubsubsection{\texorpdfstring{world\_realloc\_pool()}{world\_realloc\_pool()}}
+{\footnotesize\ttfamily \label{world_8c_a3771accf8d5d3db698bca0e6a97cf598} 
+bool world\+\_\+realloc\+\_\+pool (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}}]{world}{, }\item[{size\+\_\+t}]{new\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Reallocate the Object Pool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Size} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Success of Reallocation. 
+\end{DoxyReturn}
+\Hypertarget{world_8c_a8c0c701c7b1804c85d393c8bd263398e}\index{world.c@{world.c}!world\_remove\_from\_buffer@{world\_remove\_from\_buffer}}
+\index{world\_remove\_from\_buffer@{world\_remove\_from\_buffer}!world.c@{world.c}}
+\doxysubsubsection{\texorpdfstring{world\_remove\_from\_buffer()}{world\_remove\_from\_buffer()}}
+{\footnotesize\ttfamily \label{world_8c_a8c0c701c7b1804c85d393c8bd263398e} 
+bool world\+\_\+remove\+\_\+from\+\_\+buffer (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}}]{world}{, }\item[{struct \doxymbox{\hyperlink{structInterval}{Interval}} \texorpdfstring{$\ast$}{*}}]{interval}{}\end{DoxyParamCaption})}
+
+
+
+Nullifies Objects within the \doxylink{structInterval}{Interval} of the Object Buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em interval} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Success of the operation. 
+\end{DoxyReturn}
+\Hypertarget{world_8c_a8012ea4d64f0a51f45b7612c2b00eed2}\index{world.c@{world.c}!world\_remove\_from\_pool@{world\_remove\_from\_pool}}
+\index{world\_remove\_from\_pool@{world\_remove\_from\_pool}!world.c@{world.c}}
+\doxysubsubsection{\texorpdfstring{world\_remove\_from\_pool()}{world\_remove\_from\_pool()}}
+{\footnotesize\ttfamily \label{world_8c_a8012ea4d64f0a51f45b7612c2b00eed2} 
+bool world\+\_\+remove\+\_\+from\+\_\+pool (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}}]{world}{, }\item[{struct \doxymbox{\hyperlink{structInterval}{Interval}} \texorpdfstring{$\ast$}{*}}]{interval}{}\end{DoxyParamCaption})}
+
+
+
+Nullifies Objects within the \doxylink{structInterval}{Interval} of the Object Pool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em interval} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Success of the operation. 
+\end{DoxyReturn}

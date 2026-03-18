@@ -1,42 +1,136 @@
-\doxysection{src/pose.c File Reference}
+\doxysection{src/\+pose.c File Reference}
 \hypertarget{pose_8c}{}\label{pose_8c}\index{src/pose.c@{src/pose.c}}
-{\ttfamily \#include "{}pose.\+h"{}}\newline
-{\ttfamily \#include "{}world.\+h"{}}\newline
-Include dependency graph for pose.\+c\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{pose_8c__incl}
-\end{center}
-\end{figure}
+{\ttfamily \+\#include "{}pose.\+h"{}}\newline
+{\ttfamily \+\#include $<$stddef.\+h$>$}\newline
+Include dependency graph for pose.\+c:\+
+% FIG 0
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{pose_8c_a2d967a205bef95cdada2eb07c8341fc3}{update\+\_\+pose\+\_\+meters}} (struct \mbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}pose, float x\+Meters, float y\+Meters)
-\item 
-void \mbox{\hyperlink{pose_8c_aa7487dcbd5e018b8139531b6919ed8ac}{update\+\_\+pose\+\_\+pixels}} (struct \mbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}pose, int x\+Pixels, int y\+Pixels)
-\item 
-bool \mbox{\hyperlink{pose_8c_ab40e17349a992e17879aa4d35a11c0e8}{pose\+\_\+equals}} (struct \mbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}pose1, struct \mbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}pose2)
-\end{DoxyCompactItemize}
+void \doxymbox{\hyperlink{pose_8c_a9cd46ab19dfe0d3753efb44ab61ebef3}{pose\+\_\+update\+\_\+meters}} (struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}pose, \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}} ppm, \doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\+\_\+t}} x, \doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\+\_\+t}} y)
+\begin{DoxyCompactList}\small\item\em Updates the \doxylink{structPose}{Pose} on new Meter coordinates. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{pose_8c_a1d982b5d2e0decb7efa0d2cd8ec24a87}{pose\+\_\+update\+\_\+pixels}} (struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}pose, \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}} ppm, \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}} x, \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}} y)
+\begin{DoxyCompactList}\small\item\em Updates the \doxylink{structPose}{Pose} on new Pixel coordinates. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{pose_8c_ab40e17349a992e17879aa4d35a11c0e8}{pose\+\_\+equals}} (struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}pose1, struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}pose2)
+\begin{DoxyCompactList}\small\item\em Checks if two poses are equal in Meter Positions. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{pose_8c_adf5cba6e0721de3e3a1b49a393c22f3d}{pose\+\_\+pixels\+\_\+in\+\_\+bounds}} (struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}pose, \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}} x\+Upper, \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}} y\+Upper)
+\begin{DoxyCompactList}\small\item\em Checks if the pixels of pose and within the bounds of x\+Upper and y\+Upper. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structPose}{Pose}} \doxymbox{\hyperlink{pose_8c_a094cb3e5eca583a044ef053c3c7c5b8e}{pose\+\_\+from\+\_\+pixels}} (\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}} ppm, \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}} x, \doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}} y)
+\begin{DoxyCompactList}\small\item\em Generate a new \doxylink{structPose}{Pose} struct from given Pixels. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structPose}{Pose}} \doxymbox{\hyperlink{pose_8c_a316a66c9a1dea5f072e69aa1106ecf9e}{pose\+\_\+from\+\_\+meters}} (\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}} ppm, \doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\+\_\+t}} x, \doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\+\_\+t}} y)
+\begin{DoxyCompactList}\small\item\em Generate a new \doxylink{structPose}{Pose} struct from given Meters. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\label{doc-func-members}
+\Hypertarget{pose_8c_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{pose_8c_ab40e17349a992e17879aa4d35a11c0e8}\label{pose_8c_ab40e17349a992e17879aa4d35a11c0e8} 
-\index{pose.c@{pose.c}!pose\_equals@{pose\_equals}}
+\Hypertarget{pose_8c_ab40e17349a992e17879aa4d35a11c0e8}\index{pose.c@{pose.c}!pose\_equals@{pose\_equals}}
 \index{pose\_equals@{pose\_equals}!pose.c@{pose.c}}
 \doxysubsubsection{\texorpdfstring{pose\_equals()}{pose\_equals()}}
-{\footnotesize\ttfamily bool pose\+\_\+equals (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{pose1,  }\item[{struct \mbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{pose2 }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{pose_8c_ab40e17349a992e17879aa4d35a11c0e8} 
+bool pose\+\_\+equals (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{pose1}{, }\item[{struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{pose2}{}\end{DoxyParamCaption})}
 
-\Hypertarget{pose_8c_a2d967a205bef95cdada2eb07c8341fc3}\label{pose_8c_a2d967a205bef95cdada2eb07c8341fc3} 
-\index{pose.c@{pose.c}!update\_pose\_meters@{update\_pose\_meters}}
-\index{update\_pose\_meters@{update\_pose\_meters}!pose.c@{pose.c}}
-\doxysubsubsection{\texorpdfstring{update\_pose\_meters()}{update\_pose\_meters()}}
-{\footnotesize\ttfamily void update\+\_\+pose\+\_\+meters (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{pose,  }\item[{float}]{x\+Meters,  }\item[{float}]{y\+Meters }\end{DoxyParamCaption})}
 
-\Hypertarget{pose_8c_aa7487dcbd5e018b8139531b6919ed8ac}\label{pose_8c_aa7487dcbd5e018b8139531b6919ed8ac} 
-\index{pose.c@{pose.c}!update\_pose\_pixels@{update\_pose\_pixels}}
-\index{update\_pose\_pixels@{update\_pose\_pixels}!pose.c@{pose.c}}
-\doxysubsubsection{\texorpdfstring{update\_pose\_pixels()}{update\_pose\_pixels()}}
-{\footnotesize\ttfamily void update\+\_\+pose\+\_\+pixels (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{pose,  }\item[{int}]{x\+Pixels,  }\item[{int}]{y\+Pixels }\end{DoxyParamCaption})}
 
+Checks if two poses are equal in Meter Positions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose1} & \\
+\hline
+{\em pose2} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True \texorpdfstring{$\vert$}{|} False 
+\end{DoxyReturn}
+\Hypertarget{pose_8c_a316a66c9a1dea5f072e69aa1106ecf9e}\index{pose.c@{pose.c}!pose\_from\_meters@{pose\_from\_meters}}
+\index{pose\_from\_meters@{pose\_from\_meters}!pose.c@{pose.c}}
+\doxysubsubsection{\texorpdfstring{pose\_from\_meters()}{pose\_from\_meters()}}
+{\footnotesize\ttfamily \label{pose_8c_a316a66c9a1dea5f072e69aa1106ecf9e} 
+struct \doxymbox{\hyperlink{structPose}{Pose}} pose\+\_\+from\+\_\+meters (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}}}]{ppm}{, }\item[{\doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\+\_\+t}}}]{x}{, }\item[{\doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\+\_\+t}}}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Generate a new \doxylink{structPose}{Pose} struct from given Meters. 
+
+\Hypertarget{pose_8c_a094cb3e5eca583a044ef053c3c7c5b8e}\index{pose.c@{pose.c}!pose\_from\_pixels@{pose\_from\_pixels}}
+\index{pose\_from\_pixels@{pose\_from\_pixels}!pose.c@{pose.c}}
+\doxysubsubsection{\texorpdfstring{pose\_from\_pixels()}{pose\_from\_pixels()}}
+{\footnotesize\ttfamily \label{pose_8c_a094cb3e5eca583a044ef053c3c7c5b8e} 
+struct \doxymbox{\hyperlink{structPose}{Pose}} pose\+\_\+from\+\_\+pixels (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}}}]{ppm}{, }\item[{\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}}}]{x}{, }\item[{\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}}}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Generate a new \doxylink{structPose}{Pose} struct from given Pixels. 
+
+\Hypertarget{pose_8c_adf5cba6e0721de3e3a1b49a393c22f3d}\index{pose.c@{pose.c}!pose\_pixels\_in\_bounds@{pose\_pixels\_in\_bounds}}
+\index{pose\_pixels\_in\_bounds@{pose\_pixels\_in\_bounds}!pose.c@{pose.c}}
+\doxysubsubsection{\texorpdfstring{pose\_pixels\_in\_bounds()}{pose\_pixels\_in\_bounds()}}
+{\footnotesize\ttfamily \label{pose_8c_adf5cba6e0721de3e3a1b49a393c22f3d} 
+bool pose\+\_\+pixels\+\_\+in\+\_\+bounds (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{pose}{, }\item[{\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}}}]{x\+Upper}{, }\item[{\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}}}]{y\+Upper}{}\end{DoxyParamCaption})}
+
+
+
+Checks if the pixels of pose and within the bounds of x\+Upper and y\+Upper. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & \doxylink{structPose}{Pose} to check with \\
+\hline
+{\em x\+Upper} & upper boundary in pixels (exclusive) \\
+\hline
+{\em y\+Upper} & upper boundary in pixels (exclusive) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the pose is valid, false otherwise 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+lower bound:\+ \+[(0,0),(x\+Upper,y\+Upper)) 
+\end{DoxyNote}
+\Hypertarget{pose_8c_a9cd46ab19dfe0d3753efb44ab61ebef3}\index{pose.c@{pose.c}!pose\_update\_meters@{pose\_update\_meters}}
+\index{pose\_update\_meters@{pose\_update\_meters}!pose.c@{pose.c}}
+\doxysubsubsection{\texorpdfstring{pose\_update\_meters()}{pose\_update\_meters()}}
+{\footnotesize\ttfamily \label{pose_8c_a9cd46ab19dfe0d3753efb44ab61ebef3} 
+void pose\+\_\+update\+\_\+meters (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{pose}{, }\item[{\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}}}]{ppm}{, }\item[{\doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\+\_\+t}}}]{x}{, }\item[{\doxymbox{\hyperlink{pose_8h_acc65acdf3716084034da9f90590c20ca}{meter\+\_\+t}}}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Updates the \doxylink{structPose}{Pose} on new Meter coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & \doxylink{structPose}{Pose} Pointer to update. \\
+\hline
+{\em ppm} & Pixels Per Meters \\
+\hline
+{\em x} & in meters \\
+\hline
+{\em y} & in meters \\
+\hline
+\end{DoxyParams}
+\Hypertarget{pose_8c_a1d982b5d2e0decb7efa0d2cd8ec24a87}\index{pose.c@{pose.c}!pose\_update\_pixels@{pose\_update\_pixels}}
+\index{pose\_update\_pixels@{pose\_update\_pixels}!pose.c@{pose.c}}
+\doxysubsubsection{\texorpdfstring{pose\_update\_pixels()}{pose\_update\_pixels()}}
+{\footnotesize\ttfamily \label{pose_8c_a1d982b5d2e0decb7efa0d2cd8ec24a87} 
+void pose\+\_\+update\+\_\+pixels (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{pose}{, }\item[{\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}}}]{ppm}{, }\item[{\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}}}]{x\+Pixels}{, }\item[{\doxymbox{\hyperlink{pose_8h_a91857c2068d5c2a8a834e25a4db7f48e}{pixel\+\_\+t}}}]{y\+Pixels}{}\end{DoxyParamCaption})}
+
+
+
+Updates the \doxylink{structPose}{Pose} on new Pixel coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & \doxylink{structPose}{Pose} Pointer to update. \\
+\hline
+{\em ppm} & Pixels Per Meters \\
+\hline
+{\em x} & in pixels \\
+\hline
+{\em y} & in pixels \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+It\textquotesingle{}s suggested to stick with the Meters system, instead of manipulating pixels directly. 
+\end{DoxyWarning}

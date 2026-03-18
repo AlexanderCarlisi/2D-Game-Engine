@@ -1,28 +1,28 @@
 \doxysection{collision\+\_\+box.\+h}
 \hypertarget{collision__box_8h_source}{}\label{collision__box_8h_source}\index{include/collision\_box.h@{include/collision\_box.h}}
-\mbox{\hyperlink{collision__box_8h}{Go to the documentation of this file.}}
+\doxymbox{\hyperlink{collision__box_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ COLLISION\_BOX\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ COLLISION\_BOX\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{shape_8h}{shape.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{shape_8h}{shape.h}}"{}}}
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}stdint.h"{}}}
 \DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}stdbool.h"{}}}
 \DoxyCodeLine{00007\ }
-\DoxyCodeLine{00008\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGameObject}{GameObject}};\ \textcolor{comment}{//\ GAME\_OBJECT\_H}}
+\DoxyCodeLine{00008\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structGameObject}{GameObject}};\ \textcolor{comment}{//\ GAME\_OBJECT\_H}}
 \DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{comment}{//\ Layout:\ [Shape,\ funcptr,\ funcptr,\ uint32]}}
-\DoxyCodeLine{00011\ \textcolor{comment}{//\ Size:\ 124(128),\ 76}}
-\DoxyCodeLine{00012\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCollisionBox}{CollisionBox}}\ \{}
-\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structShape}{Shape}}\ \mbox{\hyperlink{structCollisionBox_ac0efb25764eded07b12fd75fc206501f}{shape}};}
-\DoxyCodeLine{00014\ \ \ \ \ void\ (*\mbox{\hyperlink{structCollisionBox_abd93bd0b4a6b060b00374a418dea4691}{on\_collision\_enter}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structGameObject}{GameObject}}*\ self,\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGameObject}{GameObject}}*\ collidedObject);}
-\DoxyCodeLine{00015\ \ \ \ \ void\ (*\mbox{\hyperlink{structCollisionBox_a5c2eb43bf609522bdc2556c833efd5c9}{on\_collision\_exit}})(\textcolor{keyword}{struct\ }\mbox{\hyperlink{structGameObject}{GameObject}}*\ self,\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGameObject}{GameObject}}*\ collidedObject);}
-\DoxyCodeLine{00016\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structCollisionBox_a5b52666dd1a3ec41becf5bc2a2f64665}{debug\_color}};}
-\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ bool\ collision\_enabled;}}
-\DoxyCodeLine{00018\ \}\ \mbox{\hyperlink{structCollisionBox}{CollisionBox}};}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ \mbox{\hyperlink{structCollisionBox}{CollisionBox}}\ \mbox{\hyperlink{collision__box_8h_a92e9df6fbad82605d70d3bb7a1e2bd95}{collision\_box\_create\_debug}}(uint32\_t\ debugColor,\ uint32\_t\ shapeColor,\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structPose}{Pose}}\ shapeSize);}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ COLLISION\_BOX\_H}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structCollisionBox}{CollisionBox}}\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structShape}{Shape}}\ \doxymbox{\hyperlink{structCollisionBox_ac0efb25764eded07b12fd75fc206501f}{shape}};}
+\DoxyCodeLine{00017\ \ \ \ \ void\ (*\doxymbox{\hyperlink{structCollisionBox_abd93bd0b4a6b060b00374a418dea4691}{on\_collision\_enter}})(\textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structGameObject}{GameObject}}*\ self,\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structGameObject}{GameObject}}*\ collidedObject);}
+\DoxyCodeLine{00018\ \ \ \ \ void\ (*\doxymbox{\hyperlink{structCollisionBox_a5c2eb43bf609522bdc2556c833efd5c9}{on\_collision\_exit}})(\textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structGameObject}{GameObject}}*\ self,\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structGameObject}{GameObject}}*\ collidedObject);}
+\DoxyCodeLine{00019\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{structCollisionBox_a5b52666dd1a3ec41becf5bc2a2f64665}{debug\_color}};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{//\ bool\ collision\_enabled;}}
+\DoxyCodeLine{00021\ \}\ \doxymbox{\hyperlink{structCollisionBox}{CollisionBox}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00024\ \doxymbox{\hyperlink{structCollisionBox}{CollisionBox}}\ \doxymbox{\hyperlink{collision__box_8h_a92e9df6fbad82605d70d3bb7a1e2bd95}{collision\_box\_create\_debug}}(uint32\_t\ debugColor,\ uint32\_t\ shapeColor,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structPose}{Pose}}\ shapeSize);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00027\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{collision__box_8h_a98c32ad175718a0ac2fddbab4de5db6d}{collision\_box\_health\_check}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structCollisionBox}{CollisionBox}}*\ cb);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ COLLISION\_BOX\_H}}
 
 \end{DoxyCode}

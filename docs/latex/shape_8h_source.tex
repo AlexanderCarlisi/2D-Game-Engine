@@ -1,6 +1,6 @@
 \doxysection{shape.\+h}
 \hypertarget{shape_8h_source}{}\label{shape_8h_source}\index{include/shape.h@{include/shape.h}}
-\mbox{\hyperlink{shape_8h}{Go to the documentation of this file.}}
+\doxymbox{\hyperlink{shape_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
@@ -8,51 +8,51 @@
 \DoxyCodeLine{00004\ \textcolor{preprocessor}{\#ifndef\ SHAPE\_H}}
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ SHAPE\_H}}
 \DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pose_8h}{pose.h}}"{}}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vector_8h}{vector.h}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{pose_8h}{pose.h}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{vector_8h}{vector.h}}"{}}}
 \DoxyCodeLine{00009\ }
 \DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ SHAPE\_PI}}
 \DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ SHAPE\_PI\ 3.14159265358979323846}}
 \DoxyCodeLine{00012\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SHAPE\_PI}}
 \DoxyCodeLine{00013\ }
-\DoxyCodeLine{00014\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structWorld}{World}};\ \textcolor{comment}{//\ WORLD\_H}}
-\DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \textcolor{comment}{//\ A\ normalized\ magnitude,\ representing\ the\ Vertex\ of\ a\ Shape.\ }}
-\DoxyCodeLine{00018\ \textcolor{comment}{//\ (x,\ y)\ :\ [0,\ 1]}}
-\DoxyCodeLine{00019\ \textcolor{comment}{//\ Bottom\ Left\ =\ (0,\ 0)}}
-\DoxyCodeLine{00020\ \textcolor{comment}{//\ Top\ Right\ =\ (1,\ 1)}}
-\DoxyCodeLine{00021\ \textcolor{comment}{//\ Layout:\ [int,\ int]}}
-\DoxyCodeLine{00022\ \textcolor{comment}{//\ Size:\ 8}}
-\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structVertex}{Vertex}}\ \{}
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structVertex_ae8e06f567763ea3569726c4505036486}{x}};}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structVertex_a2d66125d75c50f6671ac5c96c57ebfaf}{y}};}
-\DoxyCodeLine{00026\ \}\ \mbox{\hyperlink{structVertex}{Vertex}};}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ A\ normalized\ magnitude,\ representing\ the\ Vertex\ of\ a\ Shape.\ }}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ (x,\ y)\ :\ [0,\ 1]}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ Bottom\ Left\ =\ (0,\ 0)}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ Top\ Right\ =\ (1,\ 1)}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ Layout:\ [float,\ float]}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ Size:\ 8}}
+\DoxyCodeLine{00020\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structVertex}{Vertex}}\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{structVertex_aa592e1564aa3b226ff629b824b240310}{x}};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{structVertex_a448817068556fe43e81dc0a3e7d1fa43}{y}};}
+\DoxyCodeLine{00023\ \}\ \doxymbox{\hyperlink{structVertex}{Vertex}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \doxymbox{\hyperlink{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}{DECLARE\_VECTOR}}(VertexVector,\ vector\_vertex,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structVertex}{Vertex}})}
+\DoxyCodeLine{00026\ \doxymbox{\hyperlink{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}{DECLARE\_VECTOR}}(PoseVector,\ vector\_pose,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structPose}{Pose}})}
 \DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \mbox{\hyperlink{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}{DECLARE\_VECTOR}}(VertexVector,\ vector\_vertex,\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structVertex}{Vertex}})}
-\DoxyCodeLine{00029\ \mbox{\hyperlink{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}{DECLARE\_VECTOR}}(PoseVector,\ vector\_pose,\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structPose}{Pose}})}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00031\ \textcolor{comment}{//\ Shape\ object,\ responsible\ for\ generating\ and\ storing\ 2D\ Shapes.}}
-\DoxyCodeLine{00032\ \textcolor{comment}{//\ The\ data\ here\ is\ used\ for\ both\ Rendering\ and\ Physics.}}
-\DoxyCodeLine{00033\ \textcolor{comment}{//\ This\ Shape\ structure\ is\ made\ to\ be\ malliable,\ and\ allow\ for\ a\ lot\ of\ freedom.}}
-\DoxyCodeLine{00034\ \textcolor{comment}{//\ Do\ note\ that\ having\ a\ lot\ of\ verticies\ is\ performance\ intensive,\ and\ its\ not\ suggested\ to\ run\ isConvex\ too\ much}}
-\DoxyCodeLine{00035\ \textcolor{comment}{//\ if\ possible\ know\ if\ the\ shape\ is\ convex\ or\ not,\ or\ just\ simplify\ the\ collisions\ to\ always\ be\ or\ not\ be\ convex}}
-\DoxyCodeLine{00036\ \textcolor{comment}{//\ }}
-\DoxyCodeLine{00037\ \textcolor{comment}{//\ A\ dynamic\ array\ of\ Verticies.\ Normalized\ between\ [0,\ 1],\ (0,\ 0)\ being\ bottom\ left.}}
-\DoxyCodeLine{00038\ \textcolor{comment}{//\ This\ way\ the\ size\ of\ your\ Object\ doesn't\ matter,\ and\ can\ be\ transposed\ to\ whatever\ Size\ freely.}}
-\DoxyCodeLine{00039\ \textcolor{comment}{//\ Each\ vertici\ needs\ to\ be\ processed\ anyways\ to\ place\ onto\ the\ screen,\ and\ for\ collision\ checks.\ So\ it\ really\ shouldn't\ add\ any\ overhead.}}
-\DoxyCodeLine{00040\ \textcolor{comment}{//\ \string^\ Requires\ one\ loop\ through\ the\ Array\ to\ be\ true,\ so\ gotta\ handle\ rendering\ and\ collisions\ in\ that\ one\ for\ loop.}}
-\DoxyCodeLine{00041\ \textcolor{comment}{//\ \string^\string^\ Simply\ find\ the\ proper\ pixel\ positions\ in\ Fixed\ Update,\ but\ only\ render\ them\ in\ the\ variable\ update.}}
-\DoxyCodeLine{00042\ \textcolor{comment}{//\ Layout:\ [Vector,\ Pose,\ uint32,\ bool]}}
-\DoxyCodeLine{00043\ \textcolor{comment}{//\ Size:\ 85(88),\ 53(56)}}
-\DoxyCodeLine{00044\ typedef\ struct\ \mbox{\hyperlink{structShape}{Shape}}\ \{}
-\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{struct\ }VertexVector\ normalized\_vertices;\ \ \ \ \textcolor{comment}{//\ Dynamic\ Array\ of\ Normalized\ Verticies.}}
-\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{struct\ }PoseVector\ vertex\_poses;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Dynamic\ Array\ of\ Vertex\ Positions.}}
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structPose}{Pose}}\ size;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Size\ of\ Shape,\ used\ to\ Transpose\ the\ Normalized\ Verticies.}}
-\DoxyCodeLine{00048\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structShape_aea1151cb3fa07951bb5df63b829d2339}{color}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ *Until\ Textures\ become\ a\ thing.}}
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structShape_af02ff13496bc45baa618735897d06a3f}{convex}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Whether\ a\ Shape\ is\ Convex\ or\ Concave.}}
-\DoxyCodeLine{00050\ \}\ \mbox{\hyperlink{structShape}{Shape}};}
-\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ Shape\ object,\ responsible\ for\ generating\ and\ storing\ 2D\ Shapes.}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//\ The\ data\ here\ is\ used\ for\ both\ Rendering\ and\ Physics.}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ This\ Shape\ structure\ is\ made\ to\ be\ malliable,\ and\ allow\ for\ a\ lot\ of\ freedom.}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ Do\ note\ that\ having\ a\ lot\ of\ verticies\ is\ performance\ intensive,\ and\ its\ not\ suggested\ to\ run\ isConvex\ too\ much}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ if\ possible\ know\ if\ the\ shape\ is\ convex\ or\ not,\ or\ just\ simplify\ the\ collisions\ to\ always\ be\ or\ not\ be\ convex}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ }}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ A\ dynamic\ array\ of\ Verticies.\ Normalized\ between\ [0,\ 1],\ (0,\ 0)\ being\ top\ left.}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ This\ way\ the\ size\ of\ your\ Object\ doesn't\ matter,\ and\ can\ be\ transposed\ to\ whatever\ Size\ freely.}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ @var\ normalized\_vertices\ defines\ the\ shape.\ With\ a\ literal\ line\ being\ drawn\ from\ each\ point\ to\ the\ next.}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ \ The\ vertices\ don't\ need\ to\ be\ sorted\ in\ any\ specific\ order,\ since\ its\ however\ you\ want\ your\ shape\ to\ be\ defined\ as.}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//\ \ The\ last\ vertex\ in\ the\ vector\ of\ vertices\ will\ automatically\ be\ drawn\ to\ the\ [0]th\ index\ vertex.}}
+\DoxyCodeLine{00040\ \textcolor{comment}{//}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ Shapes\ need\ to\ be\ deallocated.}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ Layout:\ [Vector,\ Pose,\ uint32,\ bool]}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ Size:\ 85(88),\ 53(56)}}
+\DoxyCodeLine{00045\ typedef\ struct\ \doxymbox{\hyperlink{structShape}{Shape}}\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{struct\ }VertexVector\ \doxymbox{\hyperlink{structShape_ab03927c75ccfc88ae0b5915f977b6fd2}{normalized\_vertices}};\ \ \ \ \textcolor{comment}{//\ Dynamic\ Array\ of\ Normalized\ Verticies.\ This\ defines\ the\ shape.}}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{struct\ }PoseVector\ \doxymbox{\hyperlink{structShape_a0c73d1517097a1b90545a21d3e4bcae7}{vertex\_poses}};\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Dynamic\ Array\ of\ Vertex\ Positions.\ This\ is\ the\ vertices\ position\ in\ world.\ Don't\ manipulate}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structPose}{Pose}}\ \doxymbox{\hyperlink{structShape_ac1150aebbbbde7d1d1ffa6b8c2acb697}{size}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Size\ of\ Shape,\ used\ to\ Transpose\ the\ Normalized\ Verticies.}}
+\DoxyCodeLine{00049\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{structShape_aea1151cb3fa07951bb5df63b829d2339}{color}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ *Until\ Textures\ become\ a\ thing.}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{structShape_af02ff13496bc45baa618735897d06a3f}{convex}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Whether\ a\ Shape\ is\ Convex\ or\ Concave.}}
+\DoxyCodeLine{00051\ \}\ \doxymbox{\hyperlink{structShape}{Shape}};}
 \DoxyCodeLine{00052\ }
 \DoxyCodeLine{00053\ \textcolor{comment}{//\ Uses\ the\ Graham\ Scan\ algorithm\ to\ determine\ if\ the\ provided\ set\ of\ Vertices\ forms\ a\ convex\ shape.}}
 \DoxyCodeLine{00054\ \textcolor{comment}{//\ This\ engine\ allows\ users\ to\ have\ a\ lot\ of\ freedom\ with\ what}}
@@ -60,15 +60,20 @@
 \DoxyCodeLine{00056\ \textcolor{comment}{//\ efficient\ algorithms,\ instead\ of\ running\ an\ algorithm\ to\ find\ if\ a\ shape}}
 \DoxyCodeLine{00057\ \textcolor{comment}{//\ is\ convex\ or\ concave,\ users\ will\ either\ need\ to\ run\ this\ to\ figure\ it\ out,\ or\ specify\ so\ when\ creating\ the\ shape.}}
 \DoxyCodeLine{00058\ \textcolor{comment}{//\ TODO:\ This.}}
-\DoxyCodeLine{00059\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{shape_8h_a496bae0a86c93dcdd26c59620855a067}{shape\_is\_convex}}(\textcolor{keyword}{struct}\ VertexVector\ vertices);}
+\DoxyCodeLine{00059\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{shape_8h_a496bae0a86c93dcdd26c59620855a067}{shape\_is\_convex}}(\textcolor{keyword}{struct}\ VertexVector\ vertices);}
 \DoxyCodeLine{00060\ }
-\DoxyCodeLine{00067\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{shape_8h_a99a51d799c4888bd83f1a63502c2ca77}{shape\_init}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structShape}{Shape}}*\ shape,\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structPose}{Pose}}\ size,\ uint32\_t\ color,\ \textcolor{keywordtype}{bool}\ convex,\ \textcolor{keyword}{struct}\ VertexVector\ vertices);}
+\DoxyCodeLine{00067\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{shape_8h_ac804880d3b2787e1436a9a2a5e407861}{shape\_init}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structShape}{Shape}}*\ shape,\ \textcolor{keywordtype}{size\_t}\ vertices);}
 \DoxyCodeLine{00068\ }
-\DoxyCodeLine{00071\ VertexVector\ \mbox{\hyperlink{shape_8h_ad0253b80f7355c7384fe153d24817c64}{shape\_create\_vertices}}(\textcolor{keywordtype}{int}\ vertices);}
-\DoxyCodeLine{00072\ }
-\DoxyCodeLine{00076\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structShape}{Shape}}\ \mbox{\hyperlink{shape_8h_ad165244121fb819485a7bfafdf4ab913}{shape\_create\_box}}(struct\ \mbox{\hyperlink{structPose}{Pose}}\ \mbox{\hyperlink{structShape_ac1150aebbbbde7d1d1ffa6b8c2acb697}{size}},\ uint32\_t\ \mbox{\hyperlink{structShape_aea1151cb3fa07951bb5df63b829d2339}{color}});}
-\DoxyCodeLine{00077\ }
-\DoxyCodeLine{00078\ }
-\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SHAPE\_H}}
+\DoxyCodeLine{00072\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structShape}{Shape}}\ \doxymbox{\hyperlink{shape_8h_ad165244121fb819485a7bfafdf4ab913}{shape\_create\_box}}(struct\ \doxymbox{\hyperlink{structPose}{Pose}}\ \doxymbox{\hyperlink{structShape_ac1150aebbbbde7d1d1ffa6b8c2acb697}{size}},\ uint32\_t\ \doxymbox{\hyperlink{structShape_aea1151cb3fa07951bb5df63b829d2339}{color}});}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{shape_8h_a7e5ab23c4730494bc6b6f9af812f3ba5}{shape\_add\_vertex}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structShape}{Shape}}*\ shape,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structVertex}{Vertex}}\ vertex);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00081\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{shape_8h_a5612963ad690a2d41843af572cdf69bc}{shape\_add\_convex\_vertices}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structShape}{Shape}}*\ shape,\ \textcolor{keywordtype}{size\_t}\ vertices);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00084\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{shape_8h_af8f71d01af5cf608eae78cd5500af260}{shape\_free}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structShape}{Shape}}*\ shape);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00087\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{shape_8h_a7fedc86479c01b1648ca00900ae7e4a8}{shape\_health\_check}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structShape}{Shape}}*\ shape);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SHAPE\_H}}
 
 \end{DoxyCode}

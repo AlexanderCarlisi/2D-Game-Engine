@@ -1,0 +1,53 @@
+\doxysection{src/\+render\+\_\+algorithms.c File Reference}
+\hypertarget{render__algorithms_8c}{}\label{render__algorithms_8c}\index{src/render\_algorithms.c@{src/render\_algorithms.c}}
+{\ttfamily \+\#include "{}render\+\_\+algorithms.\+h"{}}\newline
+Include dependency graph for render\+\_\+algorithms.\+c:\+
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{render__algorithms_8c_a56e7395f462130c54232dbb66237e406}{\+\_\+is\+\_\+left}} (int x, int y, struct \doxymbox{\hyperlink{structPose}{Pose}} a, struct \doxymbox{\hyperlink{structPose}{Pose}} b)
+\begin{DoxyCompactList}\small\item\em helper function, is point XY to the left of edge AB \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{render__algorithms_8c_af7573001d4666cc43c4a01f947d28b5f}{\+\_\+nonzero\+\_\+rule}} (int x, int y, struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}v, int n)
+\item 
+void \doxymbox{\hyperlink{render__algorithms_8c_a8c5fba2165e1440042cb3558b498ffbf}{render\+\_\+algo\+\_\+scanline}} (struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}} \texorpdfstring{$\ast$}{*}config, struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}shape, uint32\+\_\+t color)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{render__algorithms_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{render__algorithms_8c_a56e7395f462130c54232dbb66237e406}\index{render\_algorithms.c@{render\_algorithms.c}!\_is\_left@{\_is\_left}}
+\index{\_is\_left@{\_is\_left}!render\_algorithms.c@{render\_algorithms.c}}
+\doxysubsubsection{\texorpdfstring{\_is\_left()}{\_is\_left()}}
+{\footnotesize\ttfamily \label{render__algorithms_8c_a56e7395f462130c54232dbb66237e406} 
+bool \+\_\+is\+\_\+left (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{struct \doxymbox{\hyperlink{structPose}{Pose}}}]{a}{, }\item[{struct \doxymbox{\hyperlink{structPose}{Pose}}}]{b}{}\end{DoxyParamCaption})}
+
+
+
+helper function, is point XY to the left of edge AB 
+
+\Hypertarget{render__algorithms_8c_af7573001d4666cc43c4a01f947d28b5f}\index{render\_algorithms.c@{render\_algorithms.c}!\_nonzero\_rule@{\_nonzero\_rule}}
+\index{\_nonzero\_rule@{\_nonzero\_rule}!render\_algorithms.c@{render\_algorithms.c}}
+\doxysubsubsection{\texorpdfstring{\_nonzero\_rule()}{\_nonzero\_rule()}}
+{\footnotesize\ttfamily \label{render__algorithms_8c_af7573001d4666cc43c4a01f947d28b5f} 
+bool \+\_\+nonzero\+\_\+rule (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{v}{, }\item[{int}]{n}{}\end{DoxyParamCaption})}
+
+helper function None\+Zero Algorithm:\+ \href{https://en.wikipedia.org/wiki/Nonzero-rule}{\texttt{https:\+/\+/\+en.\+wikipedia.\+org/\+wiki/\+\+Nonzero-\/rule}} \begin{DoxyReturn}{Returns}
+true if inside polygon; false otherwise 
+\end{DoxyReturn}
+\Hypertarget{render__algorithms_8c_a8c5fba2165e1440042cb3558b498ffbf}\index{render\_algorithms.c@{render\_algorithms.c}!render\_algo\_scanline@{render\_algo\_scanline}}
+\index{render\_algo\_scanline@{render\_algo\_scanline}!render\_algorithms.c@{render\_algorithms.c}}
+\doxysubsubsection{\texorpdfstring{render\_algo\_scanline()}{render\_algo\_scanline()}}
+{\footnotesize\ttfamily \label{render__algorithms_8c_a8c5fba2165e1440042cb3558b498ffbf} 
+void render\+\_\+algo\+\_\+scanline (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{, }\item[{struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}}]{shape}{, }\item[{uint32\+\_\+t}]{color}{}\end{DoxyParamCaption})}
+
+Scanline algorithm for drawing shapes Calls render\+\_\+draw\+\_\+pixel 
+\begin{DoxyParams}{Parameters}
+{\em config} & \\
+\hline
+{\em shape} & \\
+\hline
+{\em color} & \\
+\hline
+\end{DoxyParams}

@@ -1,87 +1,114 @@
-\doxysection{include/shape.h File Reference}
+\doxysection{include/\+shape.h File Reference}
 \hypertarget{shape_8h}{}\label{shape_8h}\index{include/shape.h@{include/shape.h}}
-{\ttfamily \#include $<$stdint.\+h$>$}\newline
-{\ttfamily \#include $<$stdbool.\+h$>$}\newline
-{\ttfamily \#include "{}pose.\+h"{}}\newline
-{\ttfamily \#include "{}vector.\+h"{}}\newline
-Include dependency graph for shape.\+h\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{shape_8h__incl}
-\end{center}
-\end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{shape_8h__dep__incl}
-\end{center}
-\end{figure}
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include "{}pose.\+h"{}}\newline
+{\ttfamily \+\#include "{}vector.\+h"{}}\newline
+Include dependency graph for shape.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
 \doxysubsubsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structVertex}{Vertex}}
+struct \doxymbox{\hyperlink{structVertex}{Vertex}}
 \item 
-struct \mbox{\hyperlink{structShape}{Shape}}
+struct \doxymbox{\hyperlink{structShape}{Shape}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{shape_8h_a69c972d708b677cdbe589078a752835c}{SHAPE\+\_\+\+PI}}~3.\+14159265358979323846
+\+\#define \doxymbox{\hyperlink{shape_8h_a69c972d708b677cdbe589078a752835c}{SHAPE\+\_\+\+PI}}~3.\+14159265358979323846
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-typedef struct \mbox{\hyperlink{structVertex}{Vertex}} \mbox{\hyperlink{shape_8h_a2e1662af5233d0fe6a6f061445d2ff25}{Vertex}}
+typedef struct Vertex \doxymbox{\hyperlink{shape_8h_a2e1662af5233d0fe6a6f061445d2ff25}{Vertex}}
 \item 
-typedef struct \mbox{\hyperlink{structShape}{Shape}} \mbox{\hyperlink{shape_8h_af9a178f4454c17dee9f11ea39cd27dbf}{Shape}}
+typedef struct Shape \doxymbox{\hyperlink{shape_8h_af9a178f4454c17dee9f11ea39cd27dbf}{Shape}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{shape_8h_a496bae0a86c93dcdd26c59620855a067}{shape\+\_\+is\+\_\+convex}} (struct Vertex\+Vector vertices)
-\item 
-void \mbox{\hyperlink{shape_8h_a99a51d799c4888bd83f1a63502c2ca77}{shape\+\_\+init}} (struct \mbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}shape, struct \mbox{\hyperlink{structPose}{Pose}} size, uint32\+\_\+t color, bool convex, struct Vertex\+Vector vertices)
+bool \doxymbox{\hyperlink{shape_8h_a496bae0a86c93dcdd26c59620855a067}{shape\+\_\+is\+\_\+convex}} (struct Vertex\+Vector vertices)
+\begin{DoxyCompactList}\small\item\em TODO:\+ \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{shape_8h_ac804880d3b2787e1436a9a2a5e407861}{shape\+\_\+init}} (struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}shape, size\+\_\+t vertices)
 \begin{DoxyCompactList}\small\item\em Initializes the provided \doxylink{structShape}{Shape}. \end{DoxyCompactList}\item 
-Vertex\+Vector \mbox{\hyperlink{shape_8h_ad0253b80f7355c7384fe153d24817c64}{shape\+\_\+create\+\_\+vertices}} (int vertices)
-\begin{DoxyCompactList}\small\item\em Creates a Dynamic Array of Convex Vertices, for regular shape. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structShape}{Shape}} \mbox{\hyperlink{shape_8h_ad165244121fb819485a7bfafdf4ab913}{shape\+\_\+create\+\_\+box}} (struct \mbox{\hyperlink{structPose}{Pose}} size, uint32\+\_\+t color)
-\begin{DoxyCompactList}\small\item\em Initializes a new \doxylink{structShape}{Shape}, that\textquotesingle{}s vertices are of a Square. \end{DoxyCompactList}\end{DoxyCompactItemize}
+struct \doxymbox{\hyperlink{structShape}{Shape}} \doxymbox{\hyperlink{shape_8h_ad165244121fb819485a7bfafdf4ab913}{shape\+\_\+create\+\_\+box}} (struct \doxymbox{\hyperlink{structPose}{Pose}} size, uint32\+\_\+t color)
+\begin{DoxyCompactList}\small\item\em Initializes a new \doxylink{structShape}{Shape}, that\textquotesingle{}s vertices are of a Square. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{shape_8h_a7e5ab23c4730494bc6b6f9af812f3ba5}{shape\+\_\+add\+\_\+vertex}} (struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}shape, struct \doxymbox{\hyperlink{structVertex}{Vertex}} vertex)
+\begin{DoxyCompactList}\small\item\em Add a new \doxylink{structVertex}{Vertex} to the normalized\+\_\+vertices dyn arr. Updates the vertex\+\_\+poses count properly, which is why this func is preferred. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{shape_8h_a5612963ad690a2d41843af572cdf69bc}{shape\+\_\+add\+\_\+convex\+\_\+vertices}} (struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}shape, size\+\_\+t vertices)
+\begin{DoxyCompactList}\small\item\em Create the vertices for a convex shape, adding them to the current shape. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{shape_8h_af8f71d01af5cf608eae78cd5500af260}{shape\+\_\+free}} (struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}shape)
+\begin{DoxyCompactList}\small\item\em Deallocate provided shape, and its members. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{shape_8h_a7fedc86479c01b1648ca00900ae7e4a8}{shape\+\_\+health\+\_\+check}} (struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}shape)
+\begin{DoxyCompactList}\small\item\em Prints to term debug info on \doxylink{structShape}{Shape}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\label{doc-define-members}
+\Hypertarget{shape_8h_doc-define-members}
 \doxysubsection{Macro Definition Documentation}
-\Hypertarget{shape_8h_a69c972d708b677cdbe589078a752835c}\label{shape_8h_a69c972d708b677cdbe589078a752835c} 
-\index{shape.h@{shape.h}!SHAPE\_PI@{SHAPE\_PI}}
+\Hypertarget{shape_8h_a69c972d708b677cdbe589078a752835c}\index{shape.h@{shape.h}!SHAPE\_PI@{SHAPE\_PI}}
 \index{SHAPE\_PI@{SHAPE\_PI}!shape.h@{shape.h}}
 \doxysubsubsection{\texorpdfstring{SHAPE\_PI}{SHAPE\_PI}}
-{\footnotesize\ttfamily \#define SHAPE\+\_\+\+PI~3.\+14159265358979323846}
+{\footnotesize\ttfamily \label{shape_8h_a69c972d708b677cdbe589078a752835c} 
+\+\#define SHAPE\+\_\+\+PI~3.\+14159265358979323846}
 
 
 
+\label{doc-typedef-members}
+\Hypertarget{shape_8h_doc-typedef-members}
 \doxysubsection{Typedef Documentation}
-\Hypertarget{shape_8h_af9a178f4454c17dee9f11ea39cd27dbf}\label{shape_8h_af9a178f4454c17dee9f11ea39cd27dbf} 
-\index{shape.h@{shape.h}!Shape@{Shape}}
+\Hypertarget{shape_8h_af9a178f4454c17dee9f11ea39cd27dbf}\index{shape.h@{shape.h}!Shape@{Shape}}
 \index{Shape@{Shape}!shape.h@{shape.h}}
 \doxysubsubsection{\texorpdfstring{Shape}{Shape}}
-{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structShape}{Shape}} \mbox{\hyperlink{structShape}{Shape}}}
+{\footnotesize\ttfamily \label{shape_8h_af9a178f4454c17dee9f11ea39cd27dbf} 
+typedef struct Shape Shape}
 
-\Hypertarget{shape_8h_a2e1662af5233d0fe6a6f061445d2ff25}\label{shape_8h_a2e1662af5233d0fe6a6f061445d2ff25} 
-\index{shape.h@{shape.h}!Vertex@{Vertex}}
+\Hypertarget{shape_8h_a2e1662af5233d0fe6a6f061445d2ff25}\index{shape.h@{shape.h}!Vertex@{Vertex}}
 \index{Vertex@{Vertex}!shape.h@{shape.h}}
 \doxysubsubsection{\texorpdfstring{Vertex}{Vertex}}
-{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structVertex}{Vertex}} \mbox{\hyperlink{structVertex}{Vertex}}}
+{\footnotesize\ttfamily \label{shape_8h_a2e1662af5233d0fe6a6f061445d2ff25} 
+typedef struct Vertex Vertex}
 
 
 
+\label{doc-func-members}
+\Hypertarget{shape_8h_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{shape_8h_ad165244121fb819485a7bfafdf4ab913}\label{shape_8h_ad165244121fb819485a7bfafdf4ab913} 
-\index{shape.h@{shape.h}!shape\_create\_box@{shape\_create\_box}}
+\Hypertarget{shape_8h_a5612963ad690a2d41843af572cdf69bc}\index{shape.h@{shape.h}!shape\_add\_convex\_vertices@{shape\_add\_convex\_vertices}}
+\index{shape\_add\_convex\_vertices@{shape\_add\_convex\_vertices}!shape.h@{shape.h}}
+\doxysubsubsection{\texorpdfstring{shape\_add\_convex\_vertices()}{shape\_add\_convex\_vertices()}}
+{\footnotesize\ttfamily \label{shape_8h_a5612963ad690a2d41843af572cdf69bc} 
+void shape\+\_\+add\+\_\+convex\+\_\+vertices (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}}]{shape}{, }\item[{size\+\_\+t}]{vertices}{}\end{DoxyParamCaption})}
+
+
+
+Create the vertices for a convex shape, adding them to the current shape. 
+
+\Hypertarget{shape_8h_a7e5ab23c4730494bc6b6f9af812f3ba5}\index{shape.h@{shape.h}!shape\_add\_vertex@{shape\_add\_vertex}}
+\index{shape\_add\_vertex@{shape\_add\_vertex}!shape.h@{shape.h}}
+\doxysubsubsection{\texorpdfstring{shape\_add\_vertex()}{shape\_add\_vertex()}}
+{\footnotesize\ttfamily \label{shape_8h_a7e5ab23c4730494bc6b6f9af812f3ba5} 
+bool shape\+\_\+add\+\_\+vertex (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}}]{shape}{, }\item[{struct \doxymbox{\hyperlink{structVertex}{Vertex}}}]{vertex}{}\end{DoxyParamCaption})}
+
+
+
+Add a new \doxylink{structVertex}{Vertex} to the normalized\+\_\+vertices dyn arr. Updates the vertex\+\_\+poses count properly, which is why this func is preferred. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em shape} & \doxylink{structShape}{Shape} to add to. \\
+\hline
+{\em vertex} & \doxylink{structVertex}{Vertex} to deepcopy into vertex\+\_\+poses. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{shape_8h_ad165244121fb819485a7bfafdf4ab913}\index{shape.h@{shape.h}!shape\_create\_box@{shape\_create\_box}}
 \index{shape\_create\_box@{shape\_create\_box}!shape.h@{shape.h}}
 \doxysubsubsection{\texorpdfstring{shape\_create\_box()}{shape\_create\_box()}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{structShape}{Shape}} shape\+\_\+create\+\_\+box (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structPose}{Pose}}}]{size,  }\item[{uint32\+\_\+t}]{color }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{shape_8h_ad165244121fb819485a7bfafdf4ab913} 
+struct \doxymbox{\hyperlink{structShape}{Shape}} shape\+\_\+create\+\_\+box (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structPose}{Pose}}}]{size}{, }\item[{uint32\+\_\+t}]{color}{}\end{DoxyParamCaption})}
 
 
 
@@ -91,30 +118,34 @@ Initializes a new \doxylink{structShape}{Shape}, that\textquotesingle{}s vertice
 \begin{DoxyParams}{Parameters}
 {\em size} & To manipulate the width and height of the Box. \\
 \hline
-{\em color} & To display the shape as in the \doxylink{structRenderer}{Renderer}. \\
+{\em color} & To display the shape as in the Renderer. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{shape_8h_ad0253b80f7355c7384fe153d24817c64}\label{shape_8h_ad0253b80f7355c7384fe153d24817c64} 
-\index{shape.h@{shape.h}!shape\_create\_vertices@{shape\_create\_vertices}}
-\index{shape\_create\_vertices@{shape\_create\_vertices}!shape.h@{shape.h}}
-\doxysubsubsection{\texorpdfstring{shape\_create\_vertices()}{shape\_create\_vertices()}}
-{\footnotesize\ttfamily Vertex\+Vector shape\+\_\+create\+\_\+vertices (\begin{DoxyParamCaption}\item[{int}]{vertices }\end{DoxyParamCaption})}
+\Hypertarget{shape_8h_af8f71d01af5cf608eae78cd5500af260}\index{shape.h@{shape.h}!shape\_free@{shape\_free}}
+\index{shape\_free@{shape\_free}!shape.h@{shape.h}}
+\doxysubsubsection{\texorpdfstring{shape\_free()}{shape\_free()}}
+{\footnotesize\ttfamily \label{shape_8h_af8f71d01af5cf608eae78cd5500af260} 
+void shape\+\_\+free (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}}]{shape}{}\end{DoxyParamCaption})}
 
 
 
-Creates a Dynamic Array of Convex Vertices, for regular shape. 
+Deallocate provided shape, and its members. 
+
+\Hypertarget{shape_8h_a7fedc86479c01b1648ca00900ae7e4a8}\index{shape.h@{shape.h}!shape\_health\_check@{shape\_health\_check}}
+\index{shape\_health\_check@{shape\_health\_check}!shape.h@{shape.h}}
+\doxysubsubsection{\texorpdfstring{shape\_health\_check()}{shape\_health\_check()}}
+{\footnotesize\ttfamily \label{shape_8h_a7fedc86479c01b1648ca00900ae7e4a8} 
+void shape\+\_\+health\+\_\+check (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}}]{shape}{}\end{DoxyParamCaption})}
 
 
-\begin{DoxyParams}{Parameters}
-{\em vertices} & ~\newline
- \\
-\hline
-\end{DoxyParams}
-\Hypertarget{shape_8h_a99a51d799c4888bd83f1a63502c2ca77}\label{shape_8h_a99a51d799c4888bd83f1a63502c2ca77} 
-\index{shape.h@{shape.h}!shape\_init@{shape\_init}}
+
+Prints to term debug info on \doxylink{structShape}{Shape}. 
+
+\Hypertarget{shape_8h_ac804880d3b2787e1436a9a2a5e407861}\index{shape.h@{shape.h}!shape\_init@{shape\_init}}
 \index{shape\_init@{shape\_init}!shape.h@{shape.h}}
 \doxysubsubsection{\texorpdfstring{shape\_init()}{shape\_init()}}
-{\footnotesize\ttfamily void shape\+\_\+init (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}}]{shape,  }\item[{struct \mbox{\hyperlink{structPose}{Pose}}}]{size,  }\item[{uint32\+\_\+t}]{color,  }\item[{bool}]{convex,  }\item[{struct Vertex\+Vector}]{vertices }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{shape_8h_ac804880d3b2787e1436a9a2a5e407861} 
+void shape\+\_\+init (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}}]{shape}{, }\item[{size\+\_\+t}]{vertices}{}\end{DoxyParamCaption})}
 
 
 
@@ -126,16 +157,20 @@ Initializes the provided \doxylink{structShape}{Shape}.
 \hline
 {\em size} & Desired dimensions of \doxylink{structShape}{Shape}. \\
 \hline
-{\em color} & To display the shape as in the \doxylink{structRenderer}{Renderer}. \\
+{\em color} & To display the shape as in the Renderer. \\
 \hline
 {\em convex} & Wether the shape is Convex or Concave. \\
 \hline
 {\em vertices} & Dynamic Array of Normalized Vertices to define the outline of the \doxylink{structShape}{Shape}. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{shape_8h_a496bae0a86c93dcdd26c59620855a067}\label{shape_8h_a496bae0a86c93dcdd26c59620855a067} 
-\index{shape.h@{shape.h}!shape\_is\_convex@{shape\_is\_convex}}
+\Hypertarget{shape_8h_a496bae0a86c93dcdd26c59620855a067}\index{shape.h@{shape.h}!shape\_is\_convex@{shape\_is\_convex}}
 \index{shape\_is\_convex@{shape\_is\_convex}!shape.h@{shape.h}}
 \doxysubsubsection{\texorpdfstring{shape\_is\_convex()}{shape\_is\_convex()}}
-{\footnotesize\ttfamily bool shape\+\_\+is\+\_\+convex (\begin{DoxyParamCaption}\item[{struct Vertex\+Vector}]{vertices }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{shape_8h_a496bae0a86c93dcdd26c59620855a067} 
+bool shape\+\_\+is\+\_\+convex (\begin{DoxyParamCaption}\item[{struct Vertex\+Vector}]{vertices}{}\end{DoxyParamCaption})}
+
+
+
+TODO:\+ 
 

@@ -1,40 +1,245 @@
-\doxysection{include/platform.h File Reference}
+\doxysection{include/\+platform.h File Reference}
 \hypertarget{platform_8h}{}\label{platform_8h}\index{include/platform.h@{include/platform.h}}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{platform_8h__dep__incl}
-\end{center}
-\end{figure}
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include $<$xcb/\+xproto.\+h$>$}\newline
+{\ttfamily \+\#include "{}world\+\_\+handler.\+h"{}}\newline
+Include dependency graph for platform.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structAspect}{Aspect}}
+\item 
+struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{platform_8h_aa34df5d60aa1dd013515210c9558c35c}{PLATFORM\+\_\+\+MAX\+\_\+\+WINDOW\+\_\+\+NAME}}~256
+\item 
+\+\#define \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}}~X11\+Window
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct Aspect \doxymbox{\hyperlink{platform_8h_ac5dd0e56809b21a4edcabb0003955c3b}{Aspect}}
+\item 
+typedef struct Window\+Config \doxymbox{\hyperlink{platform_8h_aa55a4e0dac412d6cc8373e53e495a24f}{Window\+Config}}
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{platform_8h_a2412cf308a84d40ab8cb2f5dc39a492b}{platform\+\_\+start}} ()
+\doxymbox{\hyperlink{platform_8h_adac60cd07d64dec5743dab23f4279fe9}{DECLARE\+\_\+\+VECTOR}} (Window\+Config\+Vector, vector\+\_\+window\+\_\+config, struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}})
 \item 
-void \mbox{\hyperlink{platform_8h_ab1c8a93db7ac7cc38f8da19527fddaa9}{platform\+\_\+resize\+\_\+window}} (struct \mbox{\hyperlink{structAspect}{Aspect}} \texorpdfstring{$\ast$}{*}window\+Size)
-\item 
-void \mbox{\hyperlink{platform_8h_a2dd0ac1b68daa781ebf06b60113d3a38}{platform\+\_\+name\+\_\+window}} (const char \texorpdfstring{$\ast$}{*}name)
-\end{DoxyCompactItemize}
+void \doxymbox{\hyperlink{platform_8h_a059f118f7663d071e7294ed6afdd3626}{platform\+\_\+initialize}} ()
+\begin{DoxyCompactList}\small\item\em Startup the platform. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{platform_8h_a09af272af11c02534fa85121806f7bb8}{platform\+\_\+new\+\_\+window}} (const char \texorpdfstring{$\ast$}{*}window\+Name, struct \doxymbox{\hyperlink{structAspect}{Aspect}} window\+Size, struct \doxymbox{\hyperlink{structAspect}{Aspect}} resolution, float fps)
+\begin{DoxyCompactList}\small\item\em Handles the creation and initialization of a new Window for the respective platform. TODO:\+ doxy. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{platform_8h_a6b2f7ee595b3d1f9380464fe75681e70}{platform\+\_\+update\+\_\+window}} (struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}window)
+\begin{DoxyCompactList}\small\item\em Flushes all changes of the Window Config to the platform. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{platform_8h_a3ce6a032d11a0ec121ad2db35786865d}{platform\+\_\+set\+\_\+window\+\_\+name}} (struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}window, const char \texorpdfstring{$\ast$}{*}name)
+\begin{DoxyCompactList}\small\item\em Update the name of the Window, flushes change. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{platform_8h_a837afdd4109dc355af4e0ebcfce7b712}{platform\+\_\+set\+\_\+window\+\_\+size}} (struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}window, struct \doxymbox{\hyperlink{structAspect}{Aspect}} size)
+\begin{DoxyCompactList}\small\item\em Update the window size, flushes change. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{platform_8h_a42230200f2bdd1d46f63b484293bd48a}{platform\+\_\+set\+\_\+window\+\_\+resolution}} (struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}window, struct \doxymbox{\hyperlink{structAspect}{Aspect}} res)
+\begin{DoxyCompactList}\small\item\em Update the window resolution, flushes change. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{platform_8h_a6d4c7002175a56588610334b048f2ce6}{platform\+\_\+render}} (struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}window, float alpha)
+\begin{DoxyCompactList}\small\item\em Renders the \doxylink{structWorld}{World} assigned to the \doxylink{structWindowConfig}{Window\+Config}. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{platform_8h_aab4b3f97a83b6062a96b79af32585b2f}{platform\+\_\+iterate}} (struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}window)
+\begin{DoxyCompactList}\small\item\em Performs an iteration platform side. Checks for client side inputs and requests. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{platform_8h_a1f31a5e79b6e14e51c07cc6497209bb3}{platform\+\_\+free}} ()
+\begin{DoxyCompactList}\small\item\em Deallocates all dynamic memory of the platform. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\label{doc-define-members}
+\Hypertarget{platform_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{platform_8h_aa34df5d60aa1dd013515210c9558c35c}\index{platform.h@{platform.h}!PLATFORM\_MAX\_WINDOW\_NAME@{PLATFORM\_MAX\_WINDOW\_NAME}}
+\index{PLATFORM\_MAX\_WINDOW\_NAME@{PLATFORM\_MAX\_WINDOW\_NAME}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{PLATFORM\_MAX\_WINDOW\_NAME}{PLATFORM\_MAX\_WINDOW\_NAME}}
+{\footnotesize\ttfamily \label{platform_8h_aa34df5d60aa1dd013515210c9558c35c} 
+\+\#define PLATFORM\+\_\+\+MAX\+\_\+\+WINDOW\+\_\+\+NAME~256}
+
+\Hypertarget{platform_8h_a19890063d92678a1018e0b939ad54652}\index{platform.h@{platform.h}!WINDOWINFO@{WINDOWINFO}}
+\index{WINDOWINFO@{WINDOWINFO}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{WINDOWINFO}{WINDOWINFO}}
+{\footnotesize\ttfamily \label{platform_8h_a19890063d92678a1018e0b939ad54652} 
+\+\#define WINDOWINFO~X11\+Window}
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{platform_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{platform_8h_ac5dd0e56809b21a4edcabb0003955c3b}\index{platform.h@{platform.h}!Aspect@{Aspect}}
+\index{Aspect@{Aspect}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{Aspect}{Aspect}}
+{\footnotesize\ttfamily \label{platform_8h_ac5dd0e56809b21a4edcabb0003955c3b} 
+typedef struct Aspect Aspect}
+
+\Hypertarget{platform_8h_aa55a4e0dac412d6cc8373e53e495a24f}\index{platform.h@{platform.h}!WindowConfig@{WindowConfig}}
+\index{WindowConfig@{WindowConfig}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{WindowConfig}{WindowConfig}}
+{\footnotesize\ttfamily \label{platform_8h_aa55a4e0dac412d6cc8373e53e495a24f} 
+typedef struct Window\+Config Window\+Config}
+
+
+
+\label{doc-func-members}
+\Hypertarget{platform_8h_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{platform_8h_a2dd0ac1b68daa781ebf06b60113d3a38}\label{platform_8h_a2dd0ac1b68daa781ebf06b60113d3a38} 
-\index{platform.h@{platform.h}!platform\_name\_window@{platform\_name\_window}}
-\index{platform\_name\_window@{platform\_name\_window}!platform.h@{platform.h}}
-\doxysubsubsection{\texorpdfstring{platform\_name\_window()}{platform\_name\_window()}}
-{\footnotesize\ttfamily void platform\+\_\+name\+\_\+window (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name }\end{DoxyParamCaption})}
+\Hypertarget{platform_8h_adac60cd07d64dec5743dab23f4279fe9}\index{platform.h@{platform.h}!DECLARE\_VECTOR@{DECLARE\_VECTOR}}
+\index{DECLARE\_VECTOR@{DECLARE\_VECTOR}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_VECTOR()}{DECLARE\_VECTOR()}}
+{\footnotesize\ttfamily \label{platform_8h_adac60cd07d64dec5743dab23f4279fe9} 
+DECLARE\+\_\+\+VECTOR (\begin{DoxyParamCaption}\item[{Window\+Config\+Vector}]{}{, }\item[{vector\+\_\+window\+\_\+config}]{}{, }\item[{struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}}}]{}{}\end{DoxyParamCaption})}
 
-\Hypertarget{platform_8h_ab1c8a93db7ac7cc38f8da19527fddaa9}\label{platform_8h_ab1c8a93db7ac7cc38f8da19527fddaa9} 
-\index{platform.h@{platform.h}!platform\_resize\_window@{platform\_resize\_window}}
-\index{platform\_resize\_window@{platform\_resize\_window}!platform.h@{platform.h}}
-\doxysubsubsection{\texorpdfstring{platform\_resize\_window()}{platform\_resize\_window()}}
-{\footnotesize\ttfamily void platform\+\_\+resize\+\_\+window (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structAspect}{Aspect}} \texorpdfstring{$\ast$}{*}}]{window\+Size }\end{DoxyParamCaption})}
+\Hypertarget{platform_8h_a1f31a5e79b6e14e51c07cc6497209bb3}\index{platform.h@{platform.h}!platform\_free@{platform\_free}}
+\index{platform\_free@{platform\_free}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{platform\_free()}{platform\_free()}}
+{\footnotesize\ttfamily \label{platform_8h_a1f31a5e79b6e14e51c07cc6497209bb3} 
+void platform\+\_\+free (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-\Hypertarget{platform_8h_a2412cf308a84d40ab8cb2f5dc39a492b}\label{platform_8h_a2412cf308a84d40ab8cb2f5dc39a492b} 
-\index{platform.h@{platform.h}!platform\_start@{platform\_start}}
-\index{platform\_start@{platform\_start}!platform.h@{platform.h}}
-\doxysubsubsection{\texorpdfstring{platform\_start()}{platform\_start()}}
-{\footnotesize\ttfamily void platform\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+Deallocates all dynamic memory of the platform. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{engine_8h_a9dc6a047707762d11d1464ccfda726ab}{engine\+\_\+close} 
+\end{DoxySeeAlso}
+\Hypertarget{platform_8h_a059f118f7663d071e7294ed6afdd3626}\index{platform.h@{platform.h}!platform\_initialize@{platform\_initialize}}
+\index{platform\_initialize@{platform\_initialize}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{platform\_initialize()}{platform\_initialize()}}
+{\footnotesize\ttfamily \label{platform_8h_a059f118f7663d071e7294ed6afdd3626} 
+void platform\+\_\+initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Startup the platform. 
+
+\begin{DoxyReturn}{Returns}
+Success. 
+\end{DoxyReturn}
+\Hypertarget{platform_8h_aab4b3f97a83b6062a96b79af32585b2f}\index{platform.h@{platform.h}!platform\_iterate@{platform\_iterate}}
+\index{platform\_iterate@{platform\_iterate}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{platform\_iterate()}{platform\_iterate()}}
+{\footnotesize\ttfamily \label{platform_8h_aab4b3f97a83b6062a96b79af32585b2f} 
+bool platform\+\_\+iterate (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}}]{window}{}\end{DoxyParamCaption})}
+
+
+
+Performs an iteration platform side. Checks for client side inputs and requests. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & The window to perform checks on. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False if an error occurs. 
+\end{DoxyReturn}
+\Hypertarget{platform_8h_a09af272af11c02534fa85121806f7bb8}\index{platform.h@{platform.h}!platform\_new\_window@{platform\_new\_window}}
+\index{platform\_new\_window@{platform\_new\_window}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{platform\_new\_window()}{platform\_new\_window()}}
+{\footnotesize\ttfamily \label{platform_8h_a09af272af11c02534fa85121806f7bb8} 
+struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*} platform\+\_\+new\+\_\+window (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{window\+Name}{, }\item[{struct \doxymbox{\hyperlink{structAspect}{Aspect}}}]{window\+Size}{, }\item[{struct \doxymbox{\hyperlink{structAspect}{Aspect}}}]{resolution}{, }\item[{float}]{fps}{}\end{DoxyParamCaption})}
+
+
+
+Handles the creation and initialization of a new Window for the respective platform. TODO:\+ doxy. 
+
+\begin{DoxySeeAlso}{See also}
+X11\+Window 
+
+TODO:\+ Window\textquotesingle{}s Window 
+\end{DoxySeeAlso}
+\begin{DoxyNote}{Note}
+config param is deep copied into return value. 
+\end{DoxyNote}
+\Hypertarget{platform_8h_a6d4c7002175a56588610334b048f2ce6}\index{platform.h@{platform.h}!platform\_render@{platform\_render}}
+\index{platform\_render@{platform\_render}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{platform\_render()}{platform\_render()}}
+{\footnotesize\ttfamily \label{platform_8h_a6d4c7002175a56588610334b048f2ce6} 
+bool platform\+\_\+render (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{float}]{alpha}{}\end{DoxyParamCaption})}
+
+
+
+Renders the \doxylink{structWorld}{World} assigned to the \doxylink{structWindowConfig}{Window\+Config}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & The \doxylink{structWindowConfig}{Window\+Config} to render. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False if an error occurs. 
+\end{DoxyReturn}
+\Hypertarget{platform_8h_a3ce6a032d11a0ec121ad2db35786865d}\index{platform.h@{platform.h}!platform\_set\_window\_name@{platform\_set\_window\_name}}
+\index{platform\_set\_window\_name@{platform\_set\_window\_name}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{platform\_set\_window\_name()}{platform\_set\_window\_name()}}
+{\footnotesize\ttfamily \label{platform_8h_a3ce6a032d11a0ec121ad2db35786865d} 
+bool platform\+\_\+set\+\_\+window\+\_\+name (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Update the name of the Window, flushes change. 
+
+\begin{DoxyReturn}{Returns}
+Success. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{platform_8h_a09af272af11c02534fa85121806f7bb8}{platform\+\_\+new\+\_\+window} for changing multiple fields at once. 
+\end{DoxySeeAlso}
+\Hypertarget{platform_8h_a42230200f2bdd1d46f63b484293bd48a}\index{platform.h@{platform.h}!platform\_set\_window\_resolution@{platform\_set\_window\_resolution}}
+\index{platform\_set\_window\_resolution@{platform\_set\_window\_resolution}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{platform\_set\_window\_resolution()}{platform\_set\_window\_resolution()}}
+{\footnotesize\ttfamily \label{platform_8h_a42230200f2bdd1d46f63b484293bd48a} 
+bool platform\+\_\+set\+\_\+window\+\_\+resolution (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{struct \doxymbox{\hyperlink{structAspect}{Aspect}}}]{res}{}\end{DoxyParamCaption})}
+
+
+
+Update the window resolution, flushes change. 
+
+\begin{DoxyReturn}{Returns}
+Success. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{platform_8h_a09af272af11c02534fa85121806f7bb8}{platform\+\_\+new\+\_\+window} for changing multiple fields at once. 
+\end{DoxySeeAlso}
+\Hypertarget{platform_8h_a837afdd4109dc355af4e0ebcfce7b712}\index{platform.h@{platform.h}!platform\_set\_window\_size@{platform\_set\_window\_size}}
+\index{platform\_set\_window\_size@{platform\_set\_window\_size}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{platform\_set\_window\_size()}{platform\_set\_window\_size()}}
+{\footnotesize\ttfamily \label{platform_8h_a837afdd4109dc355af4e0ebcfce7b712} 
+bool platform\+\_\+set\+\_\+window\+\_\+size (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}}]{window}{, }\item[{struct \doxymbox{\hyperlink{structAspect}{Aspect}}}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Update the window size, flushes change. 
+
+\begin{DoxyReturn}{Returns}
+Success. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxylink{platform_8h_a09af272af11c02534fa85121806f7bb8}{platform\+\_\+new\+\_\+window} for changing multiple fields at once. 
+\end{DoxySeeAlso}
+\Hypertarget{platform_8h_a6b2f7ee595b3d1f9380464fe75681e70}\index{platform.h@{platform.h}!platform\_update\_window@{platform\_update\_window}}
+\index{platform\_update\_window@{platform\_update\_window}!platform.h@{platform.h}}
+\doxysubsubsection{\texorpdfstring{platform\_update\_window()}{platform\_update\_window()}}
+{\footnotesize\ttfamily \label{platform_8h_a6b2f7ee595b3d1f9380464fe75681e70} 
+bool platform\+\_\+update\+\_\+window (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}}]{window}{}\end{DoxyParamCaption})}
+
+
+
+Flushes all changes of the Window Config to the platform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & \doxylink{structWindowConfig}{Window\+Config} with changes you wish to see implemented. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Success. 
+\end{DoxyReturn}

@@ -2,66 +2,132 @@
 \hypertarget{structWorld}{}\label{structWorld}\index{World@{World}}
 
 
-{\ttfamily \#include $<$world.\+h$>$}
+{\ttfamily \+\#include $<$world.\+h$>$}
 
 
 
-Collaboration diagram for World\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=193pt]{structWorld__coll__graph}
-\end{center}
-\end{figure}
+Collaboration diagram for World:\+
+% FIG 0
 \doxysubsubsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structWorldConfig}{World\+Config}} \mbox{\hyperlink{structWorld_a66ca57b1328af18d931f52cad66a5d3f}{config}}
+struct \doxymbox{\hyperlink{structWorldConfig}{World\+Config}} \doxymbox{\hyperlink{structWorld_a66ca57b1328af18d931f52cad66a5d3f}{config}}
 \item 
-void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structWorld_ad8006b94b08ecd30068e17559c22ef59}{init}} )()
+struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \doxymbox{\hyperlink{structWorld_a0474713bb025d33bd2353e50be4a0414}{object\+\_\+buffer}} \+[\doxymbox{\hyperlink{world_8h_af196f4dd741ed06cb6c3ac371abb1322}{WORLD\+\_\+\+OBJECT\+\_\+\+BUFFER\+\_\+\+SIZE}}]\+
 \item 
-void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structWorld_aa44d80fc35d20c856bd0d3cbaac6ae7e}{start}} )()
+struct Game\+Object\+Vector \doxymbox{\hyperlink{structWorld_a9ae4d496788799c84b0438aeb304fd5f}{object\+\_\+pool}}
 \item 
-void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structWorld_afffb83c69d32962df1eea69bb2ca3aac}{loop}} )()
+struct \doxymbox{\hyperlink{structInterval}{Interval}} \doxymbox{\hyperlink{structWorld_a52f7c5d7b2493171f2ecfadd824f5e1e}{interval\+\_\+buffer}}
 \item 
-void(\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{structWorld_a16643d99ec2bd3c5c1e03829f1993511}{close}} )()
+struct \doxymbox{\hyperlink{structInterval}{Interval}} \doxymbox{\hyperlink{structWorld_a79b43f49c6e0e21c6ecc32a0ff9489bc}{interval\+\_\+pool}}
+\item 
+void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structWorld_ad8006b94b08ecd30068e17559c22ef59}{init}} )()
+\item 
+void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structWorld_aa44d80fc35d20c856bd0d3cbaac6ae7e}{start}} )()
+\item 
+void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structWorld_afffb83c69d32962df1eea69bb2ca3aac}{loop}} )()
+\item 
+void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structWorld_a16643d99ec2bd3c5c1e03829f1993511}{close}} )()
+\item 
+void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structWorld_a5ef9180cc65cfdf646cccd833cf45224}{dealloc}} )()
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+TODO:\+ Remove \doxylink{structWorldConfig}{World\+Config} from \doxylink{structWorld}{World}. It\textquotesingle{}s unnecessary
+
+A \doxylink{structWorld}{World} is a collection of Game Object. Split into a Statically allocated buffer, and dynamically allocated pool.
+
+There are intervals for the respective Game Object collections denoting what indices are active. Active game object will have physics updates and be rendered.
+
+There are 5 functions pointers for you to implement. 
+
+init :\+ Preload any dynamic memory or light/\+heavy data, the intention behind this function is just a suggestion for loading things as the game is played, its not a strict requirement. You are responsible for calling this function, if ever.
+
+start :\+ This function is called whenever the \doxylink{structWorld}{World} is set as active in the \doxylink{structWorldHandler}{World\+Handler}, \begin{DoxySeeAlso}{See also}
+\doxylink{world__handler_8h}{world\+\_\+handler.\+h}
+\end{DoxySeeAlso}
+
+
+loop :\+ This function is called automatically every loop when the world is active.
+
+close :\+ This function is caleld automatically when you set anther world as active.
+
+Dealloc :\+ This function is called automatically on clean exit. You can call this function yourself, just make sure to remove the world from the world handler after.
+
+\begin{DoxyWarning}{Warning}
+object\+\_\+pool is deallocated automatically for you on clean exit. This is not the case if you call dealloc yourself. Make sure to NULL check the object\+\_\+pool.\+data member, and use the appropriate 
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\doxylink{vector_8h}{vector.\+h} function for dellocating its resources. 
+\end{DoxySeeAlso}
+
+
+\label{doc-variable-members}
+\Hypertarget{structWorld_doc-variable-members}
 \doxysubsection{Field Documentation}
-\Hypertarget{structWorld_a16643d99ec2bd3c5c1e03829f1993511}\label{structWorld_a16643d99ec2bd3c5c1e03829f1993511} 
-\index{World@{World}!close@{close}}
+\Hypertarget{structWorld_a16643d99ec2bd3c5c1e03829f1993511}\index{World@{World}!close@{close}}
 \index{close@{close}!World@{World}}
 \doxysubsubsection{\texorpdfstring{close}{close}}
-{\footnotesize\ttfamily void(\texorpdfstring{$\ast$}{*} World\+::close) ()}
+{\footnotesize\ttfamily \label{structWorld_a16643d99ec2bd3c5c1e03829f1993511} 
+void(\texorpdfstring{$\ast$}{*} World::\+close) ()}
 
-\Hypertarget{structWorld_a66ca57b1328af18d931f52cad66a5d3f}\label{structWorld_a66ca57b1328af18d931f52cad66a5d3f} 
-\index{World@{World}!config@{config}}
+\Hypertarget{structWorld_a66ca57b1328af18d931f52cad66a5d3f}\index{World@{World}!config@{config}}
 \index{config@{config}!World@{World}}
 \doxysubsubsection{\texorpdfstring{config}{config}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{structWorldConfig}{World\+Config}} World\+::config}
+{\footnotesize\ttfamily \label{structWorld_a66ca57b1328af18d931f52cad66a5d3f} 
+struct \doxymbox{\hyperlink{structWorldConfig}{World\+Config}} World::\+config}
 
-\Hypertarget{structWorld_ad8006b94b08ecd30068e17559c22ef59}\label{structWorld_ad8006b94b08ecd30068e17559c22ef59} 
-\index{World@{World}!init@{init}}
+\Hypertarget{structWorld_a5ef9180cc65cfdf646cccd833cf45224}\index{World@{World}!dealloc@{dealloc}}
+\index{dealloc@{dealloc}!World@{World}}
+\doxysubsubsection{\texorpdfstring{dealloc}{dealloc}}
+{\footnotesize\ttfamily \label{structWorld_a5ef9180cc65cfdf646cccd833cf45224} 
+void(\texorpdfstring{$\ast$}{*} World::\+dealloc) ()}
+
+\Hypertarget{structWorld_ad8006b94b08ecd30068e17559c22ef59}\index{World@{World}!init@{init}}
 \index{init@{init}!World@{World}}
 \doxysubsubsection{\texorpdfstring{init}{init}}
-{\footnotesize\ttfamily void(\texorpdfstring{$\ast$}{*} World\+::init) ()}
+{\footnotesize\ttfamily \label{structWorld_ad8006b94b08ecd30068e17559c22ef59} 
+void(\texorpdfstring{$\ast$}{*} World::\+init) ()}
 
-\Hypertarget{structWorld_afffb83c69d32962df1eea69bb2ca3aac}\label{structWorld_afffb83c69d32962df1eea69bb2ca3aac} 
-\index{World@{World}!loop@{loop}}
+\Hypertarget{structWorld_a52f7c5d7b2493171f2ecfadd824f5e1e}\index{World@{World}!interval\_buffer@{interval\_buffer}}
+\index{interval\_buffer@{interval\_buffer}!World@{World}}
+\doxysubsubsection{\texorpdfstring{interval\_buffer}{interval\_buffer}}
+{\footnotesize\ttfamily \label{structWorld_a52f7c5d7b2493171f2ecfadd824f5e1e} 
+struct \doxymbox{\hyperlink{structInterval}{Interval}} World::\+interval\+\_\+buffer}
+
+\Hypertarget{structWorld_a79b43f49c6e0e21c6ecc32a0ff9489bc}\index{World@{World}!interval\_pool@{interval\_pool}}
+\index{interval\_pool@{interval\_pool}!World@{World}}
+\doxysubsubsection{\texorpdfstring{interval\_pool}{interval\_pool}}
+{\footnotesize\ttfamily \label{structWorld_a79b43f49c6e0e21c6ecc32a0ff9489bc} 
+struct \doxymbox{\hyperlink{structInterval}{Interval}} World::\+interval\+\_\+pool}
+
+\Hypertarget{structWorld_afffb83c69d32962df1eea69bb2ca3aac}\index{World@{World}!loop@{loop}}
 \index{loop@{loop}!World@{World}}
 \doxysubsubsection{\texorpdfstring{loop}{loop}}
-{\footnotesize\ttfamily void(\texorpdfstring{$\ast$}{*} World\+::loop) ()}
+{\footnotesize\ttfamily \label{structWorld_afffb83c69d32962df1eea69bb2ca3aac} 
+void(\texorpdfstring{$\ast$}{*} World::\+loop) ()}
 
-\Hypertarget{structWorld_aa44d80fc35d20c856bd0d3cbaac6ae7e}\label{structWorld_aa44d80fc35d20c856bd0d3cbaac6ae7e} 
-\index{World@{World}!start@{start}}
+\Hypertarget{structWorld_a0474713bb025d33bd2353e50be4a0414}\index{World@{World}!object\_buffer@{object\_buffer}}
+\index{object\_buffer@{object\_buffer}!World@{World}}
+\doxysubsubsection{\texorpdfstring{object\_buffer}{object\_buffer}}
+{\footnotesize\ttfamily \label{structWorld_a0474713bb025d33bd2353e50be4a0414} 
+struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} World::\+object\+\_\+buffer\+[\doxymbox{\hyperlink{world_8h_af196f4dd741ed06cb6c3ac371abb1322}{WORLD\+\_\+\+OBJECT\+\_\+\+BUFFER\+\_\+\+SIZE}}]\+}
+
+\Hypertarget{structWorld_a9ae4d496788799c84b0438aeb304fd5f}\index{World@{World}!object\_pool@{object\_pool}}
+\index{object\_pool@{object\_pool}!World@{World}}
+\doxysubsubsection{\texorpdfstring{object\_pool}{object\_pool}}
+{\footnotesize\ttfamily \label{structWorld_a9ae4d496788799c84b0438aeb304fd5f} 
+struct Game\+Object\+Vector World::\+object\+\_\+pool}
+
+\Hypertarget{structWorld_aa44d80fc35d20c856bd0d3cbaac6ae7e}\index{World@{World}!start@{start}}
 \index{start@{start}!World@{World}}
 \doxysubsubsection{\texorpdfstring{start}{start}}
-{\footnotesize\ttfamily void(\texorpdfstring{$\ast$}{*} World\+::start) ()}
+{\footnotesize\ttfamily \label{structWorld_aa44d80fc35d20c856bd0d3cbaac6ae7e} 
+void(\texorpdfstring{$\ast$}{*} World::\+start) ()}
 
 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-include/\mbox{\hyperlink{world_8h}{world.\+h}}\end{DoxyCompactItemize}
+include/\+\doxymbox{\hyperlink{world_8h}{world.\+h}}\end{DoxyCompactItemize}

@@ -1,18 +1,16 @@
 var searchData=
 [
-  ['set_5faspects_0',['set_aspects',['../structRenderer.html#a120d765054870116894e04ca46da87f6',1,'Renderer']]],
-  ['set_5fengine_5fstate_1',['set_engine_state',['../engine_8c.html#af7f99e5137cc14c78cb3780c687ab1c4',1,'set_engine_state(bool isRunning):&#160;engine.c'],['../engine_8h.html#af7f99e5137cc14c78cb3780c687ab1c4',1,'set_engine_state(bool isRunning):&#160;engine.c']]],
-  ['shape_2',['shape',['../structShape.html',1,'Shape'],['../structCollisionBox.html#ac0efb25764eded07b12fd75fc206501f',1,'CollisionBox::shape'],['../shape_8h.html#af9a178f4454c17dee9f11ea39cd27dbf',1,'Shape:&#160;shape.h']]],
-  ['shape_2ec_3',['shape.c',['../shape_8c.html',1,'']]],
-  ['shape_2eh_4',['shape.h',['../shape_8h.html',1,'']]],
-  ['shape_5fcreate_5fbox_5',['shape_create_box',['../shape_8h.html#ad165244121fb819485a7bfafdf4ab913',1,'shape_create_box(struct Pose size, uint32_t color):&#160;shape.c'],['../shape_8c.html#ad165244121fb819485a7bfafdf4ab913',1,'shape_create_box(struct Pose size, uint32_t color):&#160;shape.c']]],
-  ['shape_5fcreate_5fvertices_6',['shape_create_vertices',['../shape_8h.html#ad0253b80f7355c7384fe153d24817c64',1,'shape_create_vertices(int vertices):&#160;shape.c'],['../shape_8c.html#a553375c193e3fe21be2b4ecd36c2c725',1,'shape_create_vertices(int vertices):&#160;shape.c']]],
-  ['shape_5finit_7',['shape_init',['../shape_8h.html#a99a51d799c4888bd83f1a63502c2ca77',1,'shape_init(struct Shape *shape, struct Pose size, uint32_t color, bool convex, struct VertexVector vertices):&#160;shape.c'],['../shape_8c.html#a99a51d799c4888bd83f1a63502c2ca77',1,'shape_init(struct Shape *shape, struct Pose size, uint32_t color, bool convex, struct VertexVector vertices):&#160;shape.c']]],
-  ['shape_5fis_5fconvex_8',['shape_is_convex',['../shape_8h.html#a496bae0a86c93dcdd26c59620855a067',1,'shape_is_convex(struct VertexVector vertices):&#160;shape.c'],['../shape_8c.html#a496bae0a86c93dcdd26c59620855a067',1,'shape_is_convex(struct VertexVector vertices):&#160;shape.c']]],
-  ['shape_5fpi_9',['SHAPE_PI',['../shape_8h.html#a69c972d708b677cdbe589078a752835c',1,'shape.h']]],
-  ['size_10',['size',['../structShape.html#ac1150aebbbbde7d1d1ffa6b8c2acb697',1,'Shape']]],
-  ['start_11',['start',['../structInterval.html#a165fc98b82c980d8ae885c07e30fbba1',1,'Interval::start'],['../structWorld.html#aa44d80fc35d20c856bd0d3cbaac6ae7e',1,'World::start']]],
-  ['starting_5fpose_12',['starting_pose',['../structGameObjectConfig.html#a46d7f50931178e6ebb35afb0a30231e3',1,'GameObjectConfig']]],
-  ['starting_5frotation_13',['starting_rotation',['../structGameObjectConfig.html#a5b102bf5efd9f426805a36cee2c782e8',1,'GameObjectConfig']]],
-  ['static_14',['STATIC',['../game__object_8h.html#a842c5e2e69277690b064bf363c017980ae55a36a850c67d46b3b3325de7fce0b8',1,'game_object.h']]]
+  ['object_5fbuffer_0',['object_buffer',['../structWorld.html#a0474713bb025d33bd2353e50be4a0414',1,'World']]],
+  ['object_5fpool_1',['object_pool',['../structWorld.html#a9ae4d496788799c84b0438aeb304fd5f',1,'World']]],
+  ['object_5ftype_2',['object_type',['../structGameObject.html#a97c7d01db045d4af4ce1b7c32997bba6',1,'GameObject::object_type'],['../structGameObjectConfig.html#a4df6d8864b61494556f4c952e4273053',1,'GameObjectConfig::object_type']]],
+  ['objecttype_3',['ObjectType',['../game__object_8h.html#a842c5e2e69277690b064bf363c017980',1,'ObjectType:&#160;game_object.h'],['../game__object_8h.html#a06ae4e2ed34533f72218e1207aa28f18',1,'ObjectType:&#160;game_object.h']]],
+  ['on_5fcollision_5fenter_4',['on_collision_enter',['../structCollisionBox.html#abd93bd0b4a6b060b00374a418dea4691',1,'CollisionBox']]],
+  ['on_5fcollision_5fexit_5',['on_collision_exit',['../structCollisionBox.html#a5c2eb43bf609522bdc2556c833efd5c9',1,'CollisionBox']]],
+  ['overworld_5fclose_6',['overworld_close',['../MyGame_8c.html#a69ffe8d2b705fbd853203760271d30ad',1,'MyGame.c']]],
+  ['overworld_5fconfig_7',['overworld_config',['../MyGame_8c.html#aff916a34038c12ae9bdd612fc92d2efb',1,'MyGame.c']]],
+  ['overworld_5fdealloc_8',['overworld_dealloc',['../MyGame_8c.html#a20baff96af12ed447835f48fb4e23542',1,'MyGame.c']]],
+  ['overworld_5finit_9',['overworld_init',['../MyGame_8c.html#abbbb745af83eae33a5c2bf28a674a688',1,'MyGame.c']]],
+  ['overworld_5floop_10',['overworld_loop',['../MyGame_8c.html#ab854822514ec50d16b80cc5b9827a2d5',1,'MyGame.c']]],
+  ['overworld_5fptr_11',['overworld_ptr',['../MyGame_8c.html#aa1fd88b64b7a88c8d1d37f632a850a20',1,'MyGame.c']]],
+  ['overworld_5fstart_12',['overworld_start',['../MyGame_8c.html#a9f7ee281276372100d79e08a71def34d',1,'MyGame.c']]]
 ];

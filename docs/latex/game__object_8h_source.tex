@@ -1,74 +1,47 @@
 \doxysection{game\+\_\+object.\+h}
 \hypertarget{game__object_8h_source}{}\label{game__object_8h_source}\index{include/game\_object.h@{include/game\_object.h}}
-\mbox{\hyperlink{game__object_8h}{Go to the documentation of this file.}}
+\doxymbox{\hyperlink{game__object_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{comment}{//}}
-\DoxyCodeLine{00002\ \textcolor{comment}{//\ GameObjects\ are\ the\ parts\ of\ the\ game.}}
-\DoxyCodeLine{00003\ \textcolor{comment}{//\ They\ have\ a\ Position,\ Size,\ Color,\ CollisionBox}}
-\DoxyCodeLine{00004\ \textcolor{comment}{//\ <p>}}
-\DoxyCodeLine{00005\ \textcolor{comment}{//\ I\ might\ want\ to\ seperate\ a\ Physical\ Position/Size\ and\ a\ Rendering\ Position/Size}}
-\DoxyCodeLine{00006\ \textcolor{comment}{//\ This\ would\ allow\ for\ Collisions\ that\ don't\ represent\ the\ look\ of\ an\ Object,\ it\ would\ be\ more\ versatile.}}
-\DoxyCodeLine{00007\ \textcolor{comment}{//\ <p>}}
-\DoxyCodeLine{00008\ \textcolor{comment}{//\ These\ Objects\ will\ also\ need\ some\ actual\ Physics:\ Acceleration,\ Velocity,\ Mass,\ Fiction(to\ calc\ coefficient)}}
-\DoxyCodeLine{00009\ \textcolor{comment}{//}}
-\DoxyCodeLine{00010\ }
-\DoxyCodeLine{00011\ \textcolor{comment}{//}}
-\DoxyCodeLine{00012\ \textcolor{comment}{//\ Two\ types\ of\ objects}}
-\DoxyCodeLine{00013\ \textcolor{comment}{//\ STATIC\ :\ Not\ affected\ by\ Physics,\ is\ still\ drawn\ every\ frame.\ Using\ functions\ to\ update\ Position\ will\ still\ work.}}
-\DoxyCodeLine{00014\ \textcolor{comment}{//\ \ ***\ While\ static\ objects\ arent\ AFFECTED\ by\ physics,\ they\ will\ still\ affect\ other\ objects,\ unless\ stated\ otherwise.}}
-\DoxyCodeLine{00015\ \textcolor{comment}{//\ DYNAMIC\ :\ Affected\ by\ Physics,\ gravity\ and\ collisions.\ Ofcourse\ you\ can\ change\ these\ behaviors.}}
-\DoxyCodeLine{00016\ \textcolor{comment}{//}}
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00018\ \textcolor{comment}{//\ TODO:\ Fix\ name\ formatting\ in\ Structs}}
-\DoxyCodeLine{00019\ \textcolor{comment}{//\ TODO:\ Proper\ Rotation.}}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ GAME\_OBJECT\_H}}
-\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#define\ GAME\_OBJECT\_H}}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \textcolor{comment}{//\ Includes}}
-\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{collision__box_8h}{collision\_box.h}}"{}}}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00027\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structWorld}{World}};\ \textcolor{comment}{//\ WORLD\_H}}
-\DoxyCodeLine{00028\ }
-\DoxyCodeLine{00029\ \textcolor{comment}{//\ Dynamic\ Array\ for\ Collision\ Boxes}}
-\DoxyCodeLine{00030\ \mbox{\hyperlink{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}{DECLARE\_VECTOR}}(CollisionBoxVector,\ vector\_collision\_box,\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structCollisionBox}{CollisionBox}})}
-\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GAME\_OBJECT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GAME\_OBJECT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{collision__box_8h}{collision\_box.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ Dynamic\ Array\ for\ Collision\ Boxes}}
+\DoxyCodeLine{00007\ \doxymbox{\hyperlink{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}{DECLARE\_VECTOR}}(CollisionBoxVector,\ vector\_collision\_box,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structCollisionBox}{CollisionBox}})}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Layout:\ [0,\ 1]}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ Size:\ 1\ byte}}
+\DoxyCodeLine{00011\ typedef\ enum\ \doxymbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980}{ObjectType}}\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \doxymbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980ae55a36a850c67d46b3b3325de7fce0b8}{STATIC}},\ \textcolor{comment}{//\ Not\ affected\ by\ Forces.}}
+\DoxyCodeLine{00013\ \ \ \ \ \doxymbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980aaac65e0072e6ff1f4c3209d2fdd8730a}{DYNAMIC}}\ \textcolor{comment}{//\ Affected\ by\ Forces.}}
+\DoxyCodeLine{00014\ \}\ \doxymbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980}{ObjectType}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structGameObject}{GameObject}}\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{struct\ }CollisionBoxVector\ \doxymbox{\hyperlink{structGameObject_a3169e0b15ff183fd37cb5d800231db7d}{collider\_vector}};}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structPose}{Pose}}\ \doxymbox{\hyperlink{structGameObject_ad94b000ad8e5607982f87efa9d283ddf}{pose}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Top\ left,\ relative\ to\ collision\ box\ shape\ normalized\ vertices}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structPose}{Pose}}\ \doxymbox{\hyperlink{structGameObject_a6257fbf7f5192c9986a49edf66cfbed2}{previous\_pose}};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{structGameObject_a298cfcfee8d765549f510be908968e0b}{rotation\_degrees}};}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980}{ObjectType}}\ \doxymbox{\hyperlink{structGameObject_a97c7d01db045d4af4ce1b7c32997bba6}{object\_type}};}
+\DoxyCodeLine{00031\ \}\ \doxymbox{\hyperlink{structGameObject}{GameObject}};}
 \DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \textcolor{comment}{//\ Layout:\ [0,\ 1]}}
-\DoxyCodeLine{00034\ \textcolor{comment}{//\ Size:\ 1\ byte}}
-\DoxyCodeLine{00035\ typedef\ enum\ \mbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980}{ObjectType}}\ \{}
-\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980ae55a36a850c67d46b3b3325de7fce0b8}{STATIC}},\ \textcolor{comment}{//\ Not\ affected\ by\ Forces.}}
-\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980aaac65e0072e6ff1f4c3209d2fdd8730a}{DYNAMIC}}\ \textcolor{comment}{//\ Affected\ by\ Forces.}}
-\DoxyCodeLine{00038\ \}\ \mbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980}{ObjectType}};}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \textcolor{comment}{//\ Layout:\ [Vector,\ Pose,\ Pose,\ int,\ float,\ 1bEnum]}}
-\DoxyCodeLine{00042\ \textcolor{comment}{//\ Size:\ 73(80),\ 57(60)}}
-\DoxyCodeLine{00043\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGameObject}{GameObject}}\ \{}
-\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{struct\ }CollisionBoxVector\ \mbox{\hyperlink{structGameObject_a3169e0b15ff183fd37cb5d800231db7d}{collider\_vector}};}
-\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structPose}{Pose}}\ \mbox{\hyperlink{structGameObject_ad94b000ad8e5607982f87efa9d283ddf}{pose}};\ \textcolor{comment}{//\ Bottom\ Left\ relative\ to\ CollionBox}}
-\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structPose}{Pose}}\ \mbox{\hyperlink{structGameObject_a6257fbf7f5192c9986a49edf66cfbed2}{previous\_pose}};}
-\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structGameObject_af40a8c8091ced5f69633a6acb56942cd}{world\_index}};}
-\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structGameObject_ac55f6ebdf4cfbab508680ad7290fb26c}{rotation}};}
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980}{ObjectType}}\ \mbox{\hyperlink{structGameObject_a97c7d01db045d4af4ce1b7c32997bba6}{object\_type}};}
-\DoxyCodeLine{00050\ \}\ \mbox{\hyperlink{structGameObject}{GameObject}};}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00053\ \textcolor{comment}{//\ Layout:\ [Vector,\ Pose,\ float,\ 1bEnum]}}
-\DoxyCodeLine{00054\ \textcolor{comment}{//\ Size:\ 53(56),\ 37(40)}}
-\DoxyCodeLine{00055\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGameObjectConfig}{GameObjectConfig}}\ \{}
-\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{struct\ }CollisionBoxVector\ \mbox{\hyperlink{structGameObjectConfig_a15a1dc4f7a4eeee8524a43c1255ced01}{collider\_vector}};}
-\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structPose}{Pose}}\ \mbox{\hyperlink{structGameObjectConfig_a46d7f50931178e6ebb35afb0a30231e3}{starting\_pose}};}
-\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structGameObjectConfig_a5b102bf5efd9f426805a36cee2c782e8}{starting\_rotation}};}
-\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980}{ObjectType}}\ \mbox{\hyperlink{structGameObjectConfig_a4df6d8864b61494556f4c952e4273053}{object\_type}};}
-\DoxyCodeLine{00060\ \}\ \mbox{\hyperlink{structGameObjectConfig}{GameObjectConfig}};}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00062\ }
-\DoxyCodeLine{00063\ \textcolor{comment}{//\ ///\ @brief\ Creates\ and\ Initializes\ an\ empty\ collision\ box\ vector.}}
-\DoxyCodeLine{00064\ \textcolor{comment}{//\ CollisionBoxVector\ create\_empty\_collision\_box\_vector(size\_t\ size);}}
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00067\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{game__object_8h_a5326a6199deb5693e9b5b096759c4736}{gameobject\_init}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structGameObject}{GameObject}}*\ obj,\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structGameObjectConfig}{GameObjectConfig}}*\ config);}
-\DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GAME\_OBJECT\_H}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//\ Layout:\ [Vector,\ Pose,\ float,\ 1bEnum]}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ Size:\ 53(56),\ 37(40)}}
+\DoxyCodeLine{00035\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structGameObjectConfig}{GameObjectConfig}}\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structPose}{Pose}}\ \doxymbox{\hyperlink{structGameObjectConfig_a46d7f50931178e6ebb35afb0a30231e3}{starting\_pose}};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{structGameObjectConfig_ae9e4cccb1a713edd65e50ce905de03f4}{num\_colliders}};\ \ \ \ \ \ \ \textcolor{comment}{//\ Amount\ of\ colliders\ to\ pre-\/alloc\ for}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{structGameObjectConfig_a5b102bf5efd9f426805a36cee2c782e8}{starting\_rotation}};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980}{ObjectType}}\ \doxymbox{\hyperlink{structGameObjectConfig_a4df6d8864b61494556f4c952e4273053}{object\_type}};}
+\DoxyCodeLine{00040\ \}\ \doxymbox{\hyperlink{structGameObjectConfig}{GameObjectConfig}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{game__object_8h_a5326a6199deb5693e9b5b096759c4736}{gameobject\_init}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structGameObject}{GameObject}}*\ obj,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structGameObjectConfig}{GameObjectConfig}}*\ config);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{game__object_8h_a45def62f4ee4e1044dc12da0a467448f}{gameobject\_add\_collider}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structGameObject}{GameObject}}*\ obj,\ \doxymbox{\hyperlink{structCollisionBox}{CollisionBox}}\ cb);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{game__object_8h_adad93d999cc7475de26534f41c68e253}{gameobject\_free}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structGameObject}{GameObject}}*\ obj);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{game__object_8h_a6a18c9d20bec1cec481f4505bf50d76d}{gameobject\_health\_check}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structGameObject}{GameObject}}*\ obj);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GAME\_OBJECT\_H}}
 
 \end{DoxyCode}

@@ -2,74 +2,73 @@
 \hypertarget{structGameObject}{}\label{structGameObject}\index{GameObject@{GameObject}}
 
 
-{\ttfamily \#include $<$game\+\_\+object.\+h$>$}
+{\ttfamily \+\#include $<$game\+\_\+object.\+h$>$}
 
 
 
-Collaboration diagram for Game\+Object\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=190pt]{structGameObject__coll__graph}
-\end{center}
-\end{figure}
+Collaboration diagram for Game\+Object:\+
+% FIG 0
 \doxysubsubsection*{Data Fields}
 \begin{DoxyCompactItemize}
 \item 
-struct Collision\+Box\+Vector \mbox{\hyperlink{structGameObject_a3169e0b15ff183fd37cb5d800231db7d}{collider\+\_\+vector}}
+struct Collision\+Box\+Vector \doxymbox{\hyperlink{structGameObject_a3169e0b15ff183fd37cb5d800231db7d}{collider\+\_\+vector}}
 \item 
-struct \mbox{\hyperlink{structPose}{Pose}} \mbox{\hyperlink{structGameObject_ad94b000ad8e5607982f87efa9d283ddf}{pose}}
+struct \doxymbox{\hyperlink{structPose}{Pose}} \doxymbox{\hyperlink{structGameObject_ad94b000ad8e5607982f87efa9d283ddf}{pose}}
 \item 
-struct \mbox{\hyperlink{structPose}{Pose}} \mbox{\hyperlink{structGameObject_a6257fbf7f5192c9986a49edf66cfbed2}{previous\+\_\+pose}}
+struct \doxymbox{\hyperlink{structPose}{Pose}} \doxymbox{\hyperlink{structGameObject_a6257fbf7f5192c9986a49edf66cfbed2}{previous\+\_\+pose}}
 \item 
-int \mbox{\hyperlink{structGameObject_af40a8c8091ced5f69633a6acb56942cd}{world\+\_\+index}}
+float \doxymbox{\hyperlink{structGameObject_a298cfcfee8d765549f510be908968e0b}{rotation\+\_\+degrees}}
 \item 
-float \mbox{\hyperlink{structGameObject_ac55f6ebdf4cfbab508680ad7290fb26c}{rotation}}
-\item 
-enum \mbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980}{Object\+Type}} \mbox{\hyperlink{structGameObject_a97c7d01db045d4af4ce1b7c32997bba6}{object\+\_\+type}}
+enum \doxymbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980}{Object\+Type}} \doxymbox{\hyperlink{structGameObject_a97c7d01db045d4af4ce1b7c32997bba6}{object\+\_\+type}}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+A collection of Collision Boxes with a position and rotation. Can be defined as either STATIC or DYNAMIC \begin{DoxySeeAlso}{See also}
+\doxylink{game__object_8h_a842c5e2e69277690b064bf363c017980}{Object\+Type}
+\end{DoxySeeAlso}
+
+
+Initialized with \begin{DoxySeeAlso}{See also}
+\doxylink{structGameObjectConfig}{Game\+Object\+Config}
+\end{DoxySeeAlso}
+Layout:\+ \+[Vector, \doxylink{structPose}{Pose}, \doxylink{structPose}{Pose}, float, 1b\+Enum]\+ Size:\+ 73(80), 57(60) 
+
+\label{doc-variable-members}
+\Hypertarget{structGameObject_doc-variable-members}
 \doxysubsection{Field Documentation}
-\Hypertarget{structGameObject_a3169e0b15ff183fd37cb5d800231db7d}\label{structGameObject_a3169e0b15ff183fd37cb5d800231db7d} 
-\index{GameObject@{GameObject}!collider\_vector@{collider\_vector}}
+\Hypertarget{structGameObject_a3169e0b15ff183fd37cb5d800231db7d}\index{GameObject@{GameObject}!collider\_vector@{collider\_vector}}
 \index{collider\_vector@{collider\_vector}!GameObject@{GameObject}}
 \doxysubsubsection{\texorpdfstring{collider\_vector}{collider\_vector}}
-{\footnotesize\ttfamily struct Collision\+Box\+Vector Game\+Object\+::collider\+\_\+vector}
+{\footnotesize\ttfamily \label{structGameObject_a3169e0b15ff183fd37cb5d800231db7d} 
+struct Collision\+Box\+Vector Game\+Object::\+collider\+\_\+vector}
 
-\Hypertarget{structGameObject_a97c7d01db045d4af4ce1b7c32997bba6}\label{structGameObject_a97c7d01db045d4af4ce1b7c32997bba6} 
-\index{GameObject@{GameObject}!object\_type@{object\_type}}
+\Hypertarget{structGameObject_a97c7d01db045d4af4ce1b7c32997bba6}\index{GameObject@{GameObject}!object\_type@{object\_type}}
 \index{object\_type@{object\_type}!GameObject@{GameObject}}
 \doxysubsubsection{\texorpdfstring{object\_type}{object\_type}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980}{Object\+Type}} Game\+Object\+::object\+\_\+type}
+{\footnotesize\ttfamily \label{structGameObject_a97c7d01db045d4af4ce1b7c32997bba6} 
+enum \doxymbox{\hyperlink{game__object_8h_a842c5e2e69277690b064bf363c017980}{Object\+Type}} Game\+Object::\+object\+\_\+type}
 
-\Hypertarget{structGameObject_ad94b000ad8e5607982f87efa9d283ddf}\label{structGameObject_ad94b000ad8e5607982f87efa9d283ddf} 
-\index{GameObject@{GameObject}!pose@{pose}}
+\Hypertarget{structGameObject_ad94b000ad8e5607982f87efa9d283ddf}\index{GameObject@{GameObject}!pose@{pose}}
 \index{pose@{pose}!GameObject@{GameObject}}
 \doxysubsubsection{\texorpdfstring{pose}{pose}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{structPose}{Pose}} Game\+Object\+::pose}
+{\footnotesize\ttfamily \label{structGameObject_ad94b000ad8e5607982f87efa9d283ddf} 
+struct \doxymbox{\hyperlink{structPose}{Pose}} Game\+Object::\+pose}
 
-\Hypertarget{structGameObject_a6257fbf7f5192c9986a49edf66cfbed2}\label{structGameObject_a6257fbf7f5192c9986a49edf66cfbed2} 
-\index{GameObject@{GameObject}!previous\_pose@{previous\_pose}}
+\Hypertarget{structGameObject_a6257fbf7f5192c9986a49edf66cfbed2}\index{GameObject@{GameObject}!previous\_pose@{previous\_pose}}
 \index{previous\_pose@{previous\_pose}!GameObject@{GameObject}}
 \doxysubsubsection{\texorpdfstring{previous\_pose}{previous\_pose}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{structPose}{Pose}} Game\+Object\+::previous\+\_\+pose}
+{\footnotesize\ttfamily \label{structGameObject_a6257fbf7f5192c9986a49edf66cfbed2} 
+struct \doxymbox{\hyperlink{structPose}{Pose}} Game\+Object::\+previous\+\_\+pose}
 
-\Hypertarget{structGameObject_ac55f6ebdf4cfbab508680ad7290fb26c}\label{structGameObject_ac55f6ebdf4cfbab508680ad7290fb26c} 
-\index{GameObject@{GameObject}!rotation@{rotation}}
-\index{rotation@{rotation}!GameObject@{GameObject}}
-\doxysubsubsection{\texorpdfstring{rotation}{rotation}}
-{\footnotesize\ttfamily float Game\+Object\+::rotation}
-
-\Hypertarget{structGameObject_af40a8c8091ced5f69633a6acb56942cd}\label{structGameObject_af40a8c8091ced5f69633a6acb56942cd} 
-\index{GameObject@{GameObject}!world\_index@{world\_index}}
-\index{world\_index@{world\_index}!GameObject@{GameObject}}
-\doxysubsubsection{\texorpdfstring{world\_index}{world\_index}}
-{\footnotesize\ttfamily int Game\+Object\+::world\+\_\+index}
+\Hypertarget{structGameObject_a298cfcfee8d765549f510be908968e0b}\index{GameObject@{GameObject}!rotation\_degrees@{rotation\_degrees}}
+\index{rotation\_degrees@{rotation\_degrees}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{rotation\_degrees}{rotation\_degrees}}
+{\footnotesize\ttfamily \label{structGameObject_a298cfcfee8d765549f510be908968e0b} 
+float Game\+Object::\+rotation\+\_\+degrees}
 
 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 
-include/\mbox{\hyperlink{game__object_8h}{game\+\_\+object.\+h}}\end{DoxyCompactItemize}
+include/\+\doxymbox{\hyperlink{game__object_8h}{game\+\_\+object.\+h}}\end{DoxyCompactItemize}

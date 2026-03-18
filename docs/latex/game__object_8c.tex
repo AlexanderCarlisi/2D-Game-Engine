@@ -1,28 +1,62 @@
-\doxysection{src/game\+\_\+object.c File Reference}
+\doxysection{src/\+game\+\_\+object.c File Reference}
 \hypertarget{game__object_8c}{}\label{game__object_8c}\index{src/game\_object.c@{src/game\_object.c}}
-{\ttfamily \#include "{}game\+\_\+object.\+h"{}}\newline
-{\ttfamily \#include "{}shape.\+h"{}}\newline
-Include dependency graph for game\+\_\+object.\+c\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{game__object_8c__incl}
-\end{center}
-\end{figure}
+{\ttfamily \+\#include "{}game\+\_\+object.\+h"{}}\newline
+{\ttfamily \+\#include "{}shape.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include "{}logger.\+h"{}}\newline
+Include dependency graph for game\+\_\+object.\+c:\+
+% FIG 0
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{game__object_8c_a5326a6199deb5693e9b5b096759c4736}{gameobject\+\_\+init}} (struct \mbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}obj, struct \mbox{\hyperlink{structGameObjectConfig}{Game\+Object\+Config}} \texorpdfstring{$\ast$}{*}config)
-\begin{DoxyCompactList}\small\item\em Initializes the \doxylink{structGameObject}{Game\+Object} with the provided Config. \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \doxymbox{\hyperlink{game__object_8c_a5326a6199deb5693e9b5b096759c4736}{gameobject\+\_\+init}} (struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}obj, struct \doxymbox{\hyperlink{structGameObjectConfig}{Game\+Object\+Config}} \texorpdfstring{$\ast$}{*}config)
+\begin{DoxyCompactList}\small\item\em Initializes the \doxylink{structGameObject}{Game\+Object} with the provided Config. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{game__object_8c_a45def62f4ee4e1044dc12da0a467448f}{gameobject\+\_\+add\+\_\+collider}} (struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}obj, \doxymbox{\hyperlink{structCollisionBox}{Collision\+Box}} cb)
+\begin{DoxyCompactList}\small\item\em Add a collision box to the collider\+\_\+vector. Deepcopy. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{game__object_8c_a6a18c9d20bec1cec481f4505bf50d76d}{gameobject\+\_\+health\+\_\+check}} (struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}obj)
+\begin{DoxyCompactList}\small\item\em Prints debug information about a \doxylink{structGameObject}{Game\+Object}. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{game__object_8c_adad93d999cc7475de26534f41c68e253}{gameobject\+\_\+free}} (struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}obj)
+\begin{DoxyCompactList}\small\item\em Deallocate Dyn memory in \doxylink{structGameObject}{Game\+Object}. I.\+e collider vector + shapes. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\label{doc-func-members}
+\Hypertarget{game__object_8c_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{game__object_8c_a5326a6199deb5693e9b5b096759c4736}\label{game__object_8c_a5326a6199deb5693e9b5b096759c4736} 
-\index{game\_object.c@{game\_object.c}!gameobject\_init@{gameobject\_init}}
+\Hypertarget{game__object_8c_a45def62f4ee4e1044dc12da0a467448f}\index{game\_object.c@{game\_object.c}!gameobject\_add\_collider@{gameobject\_add\_collider}}
+\index{gameobject\_add\_collider@{gameobject\_add\_collider}!game\_object.c@{game\_object.c}}
+\doxysubsubsection{\texorpdfstring{gameobject\_add\_collider()}{gameobject\_add\_collider()}}
+{\footnotesize\ttfamily \label{game__object_8c_a45def62f4ee4e1044dc12da0a467448f} 
+void gameobject\+\_\+add\+\_\+collider (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}}]{obj}{, }\item[{\doxymbox{\hyperlink{structCollisionBox}{Collision\+Box}}}]{cb}{}\end{DoxyParamCaption})}
+
+
+
+Add a collision box to the collider\+\_\+vector. Deepcopy. 
+
+\Hypertarget{game__object_8c_adad93d999cc7475de26534f41c68e253}\index{game\_object.c@{game\_object.c}!gameobject\_free@{gameobject\_free}}
+\index{gameobject\_free@{gameobject\_free}!game\_object.c@{game\_object.c}}
+\doxysubsubsection{\texorpdfstring{gameobject\_free()}{gameobject\_free()}}
+{\footnotesize\ttfamily \label{game__object_8c_adad93d999cc7475de26534f41c68e253} 
+void gameobject\+\_\+free (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}}]{obj}{}\end{DoxyParamCaption})}
+
+
+
+Deallocate Dyn memory in \doxylink{structGameObject}{Game\+Object}. I.\+e collider vector + shapes. 
+
+\Hypertarget{game__object_8c_a6a18c9d20bec1cec481f4505bf50d76d}\index{game\_object.c@{game\_object.c}!gameobject\_health\_check@{gameobject\_health\_check}}
+\index{gameobject\_health\_check@{gameobject\_health\_check}!game\_object.c@{game\_object.c}}
+\doxysubsubsection{\texorpdfstring{gameobject\_health\_check()}{gameobject\_health\_check()}}
+{\footnotesize\ttfamily \label{game__object_8c_a6a18c9d20bec1cec481f4505bf50d76d} 
+void gameobject\+\_\+health\+\_\+check (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}}]{obj}{}\end{DoxyParamCaption})}
+
+
+
+Prints debug information about a \doxylink{structGameObject}{Game\+Object}. 
+
+\Hypertarget{game__object_8c_a5326a6199deb5693e9b5b096759c4736}\index{game\_object.c@{game\_object.c}!gameobject\_init@{gameobject\_init}}
 \index{gameobject\_init@{gameobject\_init}!game\_object.c@{game\_object.c}}
 \doxysubsubsection{\texorpdfstring{gameobject\_init()}{gameobject\_init()}}
-{\footnotesize\ttfamily void gameobject\+\_\+init (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}}]{obj,  }\item[{struct \mbox{\hyperlink{structGameObjectConfig}{Game\+Object\+Config}} \texorpdfstring{$\ast$}{*}}]{config }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{game__object_8c_a5326a6199deb5693e9b5b096759c4736} 
+void gameobject\+\_\+init (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}}]{obj}{, }\item[{struct \doxymbox{\hyperlink{structGameObjectConfig}{Game\+Object\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{}\end{DoxyParamCaption})}
 
 
 

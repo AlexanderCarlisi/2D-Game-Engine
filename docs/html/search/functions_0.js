@@ -1,17 +1,16 @@
 var searchData=
 [
-  ['appconfig_5fget_0',['appconfig_get',['../app__config_8c.html#aac4d8359ba042ef8043c2a0a1dfd2613',1,'appconfig_get():&#160;app_config.c'],['../app__config_8h.html#aac4d8359ba042ef8043c2a0a1dfd2613',1,'appconfig_get():&#160;app_config.c']]],
-  ['appconfig_5fget_5ffps_1',['appconfig_get_fps',['../app__config_8h.html#ac9b7558807c1b01764f2034c64ecf746',1,'appconfig_get_fps():&#160;app_config.c'],['../app__config_8c.html#ac9b7558807c1b01764f2034c64ecf746',1,'appconfig_get_fps():&#160;app_config.c']]],
-  ['appconfig_5fget_5fname_2',['appconfig_get_name',['../app__config_8h.html#acc990bf2b60648541028f5cc6f26bd9a',1,'appconfig_get_name():&#160;app_config.c'],['../app__config_8c.html#acc990bf2b60648541028f5cc6f26bd9a',1,'appconfig_get_name():&#160;app_config.c']]],
-  ['appconfig_5fget_5fresolution_3',['appconfig_get_resolution',['../app__config_8h.html#ab30a39292702ee3f24963ed25f1d35a5',1,'appconfig_get_resolution():&#160;app_config.c'],['../app__config_8c.html#ab30a39292702ee3f24963ed25f1d35a5',1,'appconfig_get_resolution():&#160;app_config.c']]],
-  ['appconfig_5fget_5fwindow_5fsize_4',['appconfig_get_window_size',['../app__config_8h.html#a8b5f1de0608258b3d466a20368acff78',1,'appconfig_get_window_size():&#160;app_config.c'],['../app__config_8c.html#a8b5f1de0608258b3d466a20368acff78',1,'appconfig_get_window_size():&#160;app_config.c']]],
-  ['appconfig_5finit_5',['appconfig_init',['../app__config_8h.html#a6a6540922c8c73b462050c80aeaf6d8e',1,'appconfig_init(struct ApplicationConfig *config):&#160;app_config.c'],['../app__config_8c.html#a6a6540922c8c73b462050c80aeaf6d8e',1,'appconfig_init(struct ApplicationConfig *config):&#160;app_config.c']]],
-  ['appconfig_5fplatform_5fresized_5fwindow_6',['appconfig_platform_resized_window',['../app__config_8h.html#a94b177bd28a473bf4c75d00489187ed7',1,'appconfig_platform_resized_window(struct Aspect aspect):&#160;app_config.c'],['../app__config_8c.html#a94b177bd28a473bf4c75d00489187ed7',1,'appconfig_platform_resized_window(struct Aspect aspect):&#160;app_config.c']]],
-  ['appconfig_5fplatform_5fresized_5fwindow_5fpx_7',['appconfig_platform_resized_window_px',['../app__config_8h.html#ac72993399d825c8af1e49e673c461329',1,'appconfig_platform_resized_window_px(int pxWidth, int pxHeight):&#160;app_config.c'],['../app__config_8c.html#ac72993399d825c8af1e49e673c461329',1,'appconfig_platform_resized_window_px(int pxWidth, int pxHeight):&#160;app_config.c']]],
-  ['appconfig_5fset_8',['appconfig_set',['../app__config_8h.html#ae1cfeffd2fed0d3dd14ccf1662f756d2',1,'appconfig_set(struct ApplicationConfig *config):&#160;app_config.c'],['../app__config_8c.html#ae1cfeffd2fed0d3dd14ccf1662f756d2',1,'appconfig_set(struct ApplicationConfig *config):&#160;app_config.c']]],
-  ['appconfig_5fset_5fname_9',['appconfig_set_name',['../app__config_8h.html#a7e4729b8012c52e167c3f9c6e448091c',1,'appconfig_set_name(const char *name):&#160;app_config.c'],['../app__config_8c.html#a7e4729b8012c52e167c3f9c6e448091c',1,'appconfig_set_name(const char *name):&#160;app_config.c']]],
-  ['appconfig_5fset_5fresolution_10',['appconfig_set_resolution',['../app__config_8h.html#aa32966ef5e34c432ff055bddb0c6fb5f',1,'appconfig_set_resolution(struct Aspect aspect):&#160;app_config.c'],['../app__config_8c.html#aa32966ef5e34c432ff055bddb0c6fb5f',1,'appconfig_set_resolution(struct Aspect aspect):&#160;app_config.c']]],
-  ['appconfig_5fset_5fresolution_5fpx_11',['appconfig_set_resolution_px',['../app__config_8h.html#a87280061e998a36395d542c1bbc12354',1,'appconfig_set_resolution_px(int pxWidth, int pxHeight):&#160;app_config.c'],['../app__config_8c.html#a87280061e998a36395d542c1bbc12354',1,'appconfig_set_resolution_px(int pxWidth, int pxHeight):&#160;app_config.c']]],
-  ['appconfig_5fset_5fwindow_5fsize_12',['appconfig_set_window_size',['../app__config_8h.html#ad24b84f76148a62ce0acca8b80fc58d6',1,'appconfig_set_window_size(struct Aspect aspect):&#160;app_config.c'],['../app__config_8c.html#ad24b84f76148a62ce0acca8b80fc58d6',1,'appconfig_set_window_size(struct Aspect aspect):&#160;app_config.c']]],
-  ['appconfig_5fset_5fwindow_5fsize_5fpx_13',['appconfig_set_window_size_px',['../app__config_8h.html#a25908f2612e13fde45d94b74425d6c78',1,'appconfig_set_window_size_px(int pxWidth, int pxHeight):&#160;app_config.c'],['../app__config_8c.html#a25908f2612e13fde45d94b74425d6c78',1,'appconfig_set_window_size_px(int pxWidth, int pxHeight):&#160;app_config.c']]]
+  ['_5fcheck_5fshm_0',['_check_shm',['../platform_8c.html#a0800e11b8cc92f5b74546f2ef94b6790',1,'platform.c']]],
+  ['_5fcheck_5fwindow_1',['_check_window',['../platform_8c.html#a77fe1e5f81101b3191931fbc78a92490',1,'platform.c']]],
+  ['_5fdraw_5fobject_2',['_draw_object',['../render_8c.html#aec0e31ecd9c1f4a76a4e0fe903afa046',1,'render.c']]],
+  ['_5ffree_5fwindow_3',['_free_window',['../platform_8c.html#ae7bdf123f53beadcd6ba0236505abac9',1,'platform.c']]],
+  ['_5ffree_5fwindow_5fi_4',['_free_window_i',['../platform_8c.html#ace511593784d2e12b7f0534b59d08432',1,'platform.c']]],
+  ['_5finit_5floop_5',['_init_loop',['../platform_8c.html#aa95f01e6f956c415fd1c110f7626e00b',1,'platform.c']]],
+  ['_5fis_5fleft_6',['_is_left',['../render__algorithms_8c.html#a56e7395f462130c54232dbb66237e406',1,'render_algorithms.c']]],
+  ['_5fname_5fwindow_7',['_name_window',['../platform_8c.html#a42483ba561c4c977f941bfa1de032843',1,'platform.c']]],
+  ['_5fnonzero_5frule_8',['_nonzero_rule',['../render__algorithms_8c.html#af7573001d4666cc43c4a01f947d28b5f',1,'render_algorithms.c']]],
+  ['_5fresize_5fwindow_9',['_resize_window',['../platform_8c.html#a093252ca78a35428cd6743b614a5b159',1,'platform.c']]],
+  ['_5fupdate_5fresolution_10',['_update_resolution',['../platform_8c.html#aded73aa15ff722dca4204abfb927744f',1,'platform.c']]],
+  ['_5fupdate_5fvertex_5fposes_11',['_update_vertex_poses',['../world__handler_8c.html#ad4a220e47d3dcf1b60c449ddc58cfd78',1,'world_handler.c']]],
+  ['_5fxcb_5frequest_12',['_xcb_request',['../platform_8c.html#a3469c1d32f360daff256acfd5d60567a',1,'platform.c']]]
 ];

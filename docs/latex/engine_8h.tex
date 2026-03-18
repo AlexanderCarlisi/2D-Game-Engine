@@ -1,105 +1,88 @@
-\doxysection{include/engine.h File Reference}
+\doxysection{include/\+engine.h File Reference}
 \hypertarget{engine_8h}{}\label{engine_8h}\index{include/engine.h@{include/engine.h}}
-{\ttfamily \#include "{}render.\+h"{}}\newline
-{\ttfamily \#include "{}world.\+h"{}}\newline
-{\ttfamily \#include "{}stdbool.\+h"{}}\newline
-Include dependency graph for engine.\+h\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{engine_8h__incl}
-\end{center}
-\end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=268pt]{engine_8h__dep__incl}
-\end{center}
-\end{figure}
-\doxysubsubsection*{Macros}
-\begin{DoxyCompactItemize}
-\item 
-\#define \mbox{\hyperlink{engine_8h_a189e7cd8d6fb4ba4877b143116356c70}{ENGINE\+\_\+H}}
-\end{DoxyCompactItemize}
+{\ttfamily \+\#include "{}platform.\+h"{}}\newline
+Include dependency graph for engine.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{engine_8h_a92f7ca3cfebd2124ea8cc7476a91804b}{engine\+\_\+start}} (struct \mbox{\hyperlink{structRenderer}{Renderer}} \texorpdfstring{$\ast$}{*})
-\item 
-void \mbox{\hyperlink{engine_8h_a9ab771cc364d9f18c80a770e231cac11}{engine\+\_\+tick}} ()
-\item 
-void \mbox{\hyperlink{engine_8h_af7f99e5137cc14c78cb3780c687ab1c4}{set\+\_\+engine\+\_\+state}} (bool is\+Running)
-\item 
-void \mbox{\hyperlink{engine_8h_a9dc6a047707762d11d1464ccfda726ab}{engine\+\_\+close}} ()
-\item 
-bool \mbox{\hyperlink{engine_8h_a98ad3711619a0e20042ca57d8d65c94d}{engine\+\_\+is\+\_\+running}} ()
-\item 
-struct \mbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{engine_8h_a02f89457778b79dccb9c08f623f3517e}{engine\+\_\+get\+\_\+world\+\_\+ptr}} ()
-\item 
-void \mbox{\hyperlink{engine_8h_ac561ee8b69ab03f88338fa046bd00f77}{engine\+\_\+update\+\_\+renderer\+\_\+aspects}} ()
-\item 
-struct \mbox{\hyperlink{structRenderer}{Renderer}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{engine_8h_a07b159f3759b1b4dc4783be694cbf694}{engine\+\_\+get\+\_\+renderer\+\_\+ptr}} ()
-\end{DoxyCompactItemize}
+void \doxymbox{\hyperlink{engine_8h_a7a9f877affd8494ed58d4e218bc69737}{engine\+\_\+start}} ()
+\begin{DoxyCompactList}\small\item\em Initialize the engine. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{engine_8h_a2238829386032404539c4b46c1e12152}{engine\+\_\+tick}} (struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}window)
+\begin{DoxyCompactList}\small\item\em Update Game\+Logic, Physics, and Renderer. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{engine_8h_aa79d1cf3159f120d013f499a899cb9f1}{engine\+\_\+set\+\_\+running}} (bool state)
+\begin{DoxyCompactList}\small\item\em Set the running state of the engine. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{engine_8h_a98ad3711619a0e20042ca57d8d65c94d}{engine\+\_\+is\+\_\+running}} ()
+\begin{DoxyCompactList}\small\item\em Returns current state of the engine. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{engine_8h_a9dc6a047707762d11d1464ccfda726ab}{engine\+\_\+close}} ()
+\begin{DoxyCompactList}\small\item\em Closes the Engine, cleaning up resources \texorpdfstring{$\vert$}{|} Call on Exit. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Macro Definition Documentation}
-\Hypertarget{engine_8h_a189e7cd8d6fb4ba4877b143116356c70}\label{engine_8h_a189e7cd8d6fb4ba4877b143116356c70} 
-\index{engine.h@{engine.h}!ENGINE\_H@{ENGINE\_H}}
-\index{ENGINE\_H@{ENGINE\_H}!engine.h@{engine.h}}
-\doxysubsubsection{\texorpdfstring{ENGINE\_H}{ENGINE\_H}}
-{\footnotesize\ttfamily \#define ENGINE\+\_\+H}
-
-
-
+\label{doc-func-members}
+\Hypertarget{engine_8h_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{engine_8h_a9dc6a047707762d11d1464ccfda726ab}\label{engine_8h_a9dc6a047707762d11d1464ccfda726ab} 
-\index{engine.h@{engine.h}!engine\_close@{engine\_close}}
+\Hypertarget{engine_8h_a9dc6a047707762d11d1464ccfda726ab}\index{engine.h@{engine.h}!engine\_close@{engine\_close}}
 \index{engine\_close@{engine\_close}!engine.h@{engine.h}}
 \doxysubsubsection{\texorpdfstring{engine\_close()}{engine\_close()}}
-{\footnotesize\ttfamily void engine\+\_\+close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{engine_8h_a9dc6a047707762d11d1464ccfda726ab} 
+void engine\+\_\+close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-\Hypertarget{engine_8h_a07b159f3759b1b4dc4783be694cbf694}\label{engine_8h_a07b159f3759b1b4dc4783be694cbf694} 
-\index{engine.h@{engine.h}!engine\_get\_renderer\_ptr@{engine\_get\_renderer\_ptr}}
-\index{engine\_get\_renderer\_ptr@{engine\_get\_renderer\_ptr}!engine.h@{engine.h}}
-\doxysubsubsection{\texorpdfstring{engine\_get\_renderer\_ptr()}{engine\_get\_renderer\_ptr()}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{structRenderer}{Renderer}} \texorpdfstring{$\ast$}{*} engine\+\_\+get\+\_\+renderer\+\_\+ptr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\Hypertarget{engine_8h_a02f89457778b79dccb9c08f623f3517e}\label{engine_8h_a02f89457778b79dccb9c08f623f3517e} 
-\index{engine.h@{engine.h}!engine\_get\_world\_ptr@{engine\_get\_world\_ptr}}
-\index{engine\_get\_world\_ptr@{engine\_get\_world\_ptr}!engine.h@{engine.h}}
-\doxysubsubsection{\texorpdfstring{engine\_get\_world\_ptr()}{engine\_get\_world\_ptr()}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*} engine\+\_\+get\+\_\+world\+\_\+ptr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\Hypertarget{engine_8h_a98ad3711619a0e20042ca57d8d65c94d}\label{engine_8h_a98ad3711619a0e20042ca57d8d65c94d} 
-\index{engine.h@{engine.h}!engine\_is\_running@{engine\_is\_running}}
+Closes the Engine, cleaning up resources \texorpdfstring{$\vert$}{|} Call on Exit. 
+
+\Hypertarget{engine_8h_a98ad3711619a0e20042ca57d8d65c94d}\index{engine.h@{engine.h}!engine\_is\_running@{engine\_is\_running}}
 \index{engine\_is\_running@{engine\_is\_running}!engine.h@{engine.h}}
 \doxysubsubsection{\texorpdfstring{engine\_is\_running()}{engine\_is\_running()}}
-{\footnotesize\ttfamily bool engine\+\_\+is\+\_\+running (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{engine_8h_a98ad3711619a0e20042ca57d8d65c94d} 
+bool engine\+\_\+is\+\_\+running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-\Hypertarget{engine_8h_a92f7ca3cfebd2124ea8cc7476a91804b}\label{engine_8h_a92f7ca3cfebd2124ea8cc7476a91804b} 
-\index{engine.h@{engine.h}!engine\_start@{engine\_start}}
+
+
+Returns current state of the engine. 
+
+\Hypertarget{engine_8h_aa79d1cf3159f120d013f499a899cb9f1}\index{engine.h@{engine.h}!engine\_set\_running@{engine\_set\_running}}
+\index{engine\_set\_running@{engine\_set\_running}!engine.h@{engine.h}}
+\doxysubsubsection{\texorpdfstring{engine\_set\_running()}{engine\_set\_running()}}
+{\footnotesize\ttfamily \label{engine_8h_aa79d1cf3159f120d013f499a899cb9f1} 
+void engine\+\_\+set\+\_\+running (\begin{DoxyParamCaption}\item[{bool}]{state}{}\end{DoxyParamCaption})}
+
+
+
+Set the running state of the engine. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & Running or Not Running \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+setting to false will shut the game down, and clear all resources. 
+\end{DoxyNote}
+\Hypertarget{engine_8h_a7a9f877affd8494ed58d4e218bc69737}\index{engine.h@{engine.h}!engine\_start@{engine\_start}}
 \index{engine\_start@{engine\_start}!engine.h@{engine.h}}
 \doxysubsubsection{\texorpdfstring{engine\_start()}{engine\_start()}}
-{\footnotesize\ttfamily void engine\+\_\+start (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structRenderer}{Renderer}} \texorpdfstring{$\ast$}{*}}]{render }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{engine_8h_a7a9f877affd8494ed58d4e218bc69737} 
+void engine\+\_\+start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-\Hypertarget{engine_8h_a9ab771cc364d9f18c80a770e231cac11}\label{engine_8h_a9ab771cc364d9f18c80a770e231cac11} 
-\index{engine.h@{engine.h}!engine\_tick@{engine\_tick}}
+
+
+Initialize the engine. 
+
+\Hypertarget{engine_8h_a2238829386032404539c4b46c1e12152}\index{engine.h@{engine.h}!engine\_tick@{engine\_tick}}
 \index{engine\_tick@{engine\_tick}!engine.h@{engine.h}}
 \doxysubsubsection{\texorpdfstring{engine\_tick()}{engine\_tick()}}
-{\footnotesize\ttfamily void engine\+\_\+tick (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{engine_8h_a2238829386032404539c4b46c1e12152} 
+bool engine\+\_\+tick (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{platform_8h_a19890063d92678a1018e0b939ad54652}{WINDOWINFO}} \texorpdfstring{$\ast$}{*}}]{window}{}\end{DoxyParamCaption})}
 
-\Hypertarget{engine_8h_ac561ee8b69ab03f88338fa046bd00f77}\label{engine_8h_ac561ee8b69ab03f88338fa046bd00f77} 
-\index{engine.h@{engine.h}!engine\_update\_renderer\_aspects@{engine\_update\_renderer\_aspects}}
-\index{engine\_update\_renderer\_aspects@{engine\_update\_renderer\_aspects}!engine.h@{engine.h}}
-\doxysubsubsection{\texorpdfstring{engine\_update\_renderer\_aspects()}{engine\_update\_renderer\_aspects()}}
-{\footnotesize\ttfamily void engine\+\_\+update\+\_\+renderer\+\_\+aspects (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\Hypertarget{engine_8h_af7f99e5137cc14c78cb3780c687ab1c4}\label{engine_8h_af7f99e5137cc14c78cb3780c687ab1c4} 
-\index{engine.h@{engine.h}!set\_engine\_state@{set\_engine\_state}}
-\index{set\_engine\_state@{set\_engine\_state}!engine.h@{engine.h}}
-\doxysubsubsection{\texorpdfstring{set\_engine\_state()}{set\_engine\_state()}}
-{\footnotesize\ttfamily void set\+\_\+engine\+\_\+state (\begin{DoxyParamCaption}\item[{bool}]{is\+Running }\end{DoxyParamCaption})}
 
+Update Game\+Logic, Physics, and Renderer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & Collection of Renderer and \doxylink{structWorld}{World} to perform with. \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,63 @@
+\doxysection{src/\+input.c File Reference}
+\hypertarget{input_8c}{}\label{input_8c}\index{src/input.c@{src/input.c}}
+{\ttfamily \+\#include "{}input.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}e\+\_\+time.\+h"{}}\newline
+Include dependency graph for input.\+c:\+
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{input_8c_a98d52065a06d8401430e73187f628d66}{input\+\_\+kb\+\_\+pressed}} (\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}} key)
+\begin{DoxyCompactList}\small\item\em return true if the keycode\textquotesingle{}s held value is greater than zero. KEYBOARD \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{input_8c_a684635525fa43acbfee05e5f7ff25774}{input\+\_\+kb\+\_\+held}} (\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}} key, uint64\+\_\+t threshold\+Ms)
+\begin{DoxyCompactList}\small\item\em return true if the keycode\textquotesingle{}s held value is greather than provided threshold. KEYBOARD \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{input_8c_a36f3f57905d1ef7074bc724aa4ae7b1b}{input\+\_\+kb\+\_\+set\+\_\+press}} (\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}} key)
+\begin{DoxyCompactList}\small\item\em set to current time, if not already currently held. KEYBOARD \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{input_8c_a56dde12ca314c3c461b571c0ca7a0499}{input\+\_\+kb\+\_\+set\+\_\+release}} (\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}} key)
+\begin{DoxyCompactList}\small\item\em set pressed to false. KEYBOARD \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{input_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{input_8c_a684635525fa43acbfee05e5f7ff25774}\index{input.c@{input.c}!input\_kb\_held@{input\_kb\_held}}
+\index{input\_kb\_held@{input\_kb\_held}!input.c@{input.c}}
+\doxysubsubsection{\texorpdfstring{input\_kb\_held()}{input\_kb\_held()}}
+{\footnotesize\ttfamily \label{input_8c_a684635525fa43acbfee05e5f7ff25774} 
+bool input\+\_\+kb\+\_\+held (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}}}]{key}{, }\item[{uint64\+\_\+t}]{threshold\+Ms}{}\end{DoxyParamCaption})}
+
+
+
+return true if the keycode\textquotesingle{}s held value is greather than provided threshold. KEYBOARD 
+
+\Hypertarget{input_8c_a98d52065a06d8401430e73187f628d66}\index{input.c@{input.c}!input\_kb\_pressed@{input\_kb\_pressed}}
+\index{input\_kb\_pressed@{input\_kb\_pressed}!input.c@{input.c}}
+\doxysubsubsection{\texorpdfstring{input\_kb\_pressed()}{input\_kb\_pressed()}}
+{\footnotesize\ttfamily \label{input_8c_a98d52065a06d8401430e73187f628d66} 
+bool input\+\_\+kb\+\_\+pressed (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}}}]{key}{}\end{DoxyParamCaption})}
+
+
+
+return true if the keycode\textquotesingle{}s held value is greater than zero. KEYBOARD 
+
+\Hypertarget{input_8c_a36f3f57905d1ef7074bc724aa4ae7b1b}\index{input.c@{input.c}!input\_kb\_set\_press@{input\_kb\_set\_press}}
+\index{input\_kb\_set\_press@{input\_kb\_set\_press}!input.c@{input.c}}
+\doxysubsubsection{\texorpdfstring{input\_kb\_set\_press()}{input\_kb\_set\_press()}}
+{\footnotesize\ttfamily \label{input_8c_a36f3f57905d1ef7074bc724aa4ae7b1b} 
+void input\+\_\+kb\+\_\+set\+\_\+press (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}}}]{key}{}\end{DoxyParamCaption})}
+
+
+
+set to current time, if not already currently held. KEYBOARD 
+
+\Hypertarget{input_8c_a56dde12ca314c3c461b571c0ca7a0499}\index{input.c@{input.c}!input\_kb\_set\_release@{input\_kb\_set\_release}}
+\index{input\_kb\_set\_release@{input\_kb\_set\_release}!input.c@{input.c}}
+\doxysubsubsection{\texorpdfstring{input\_kb\_set\_release()}{input\_kb\_set\_release()}}
+{\footnotesize\ttfamily \label{input_8c_a56dde12ca314c3c461b571c0ca7a0499} 
+void input\+\_\+kb\+\_\+set\+\_\+release (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}}}]{key}{}\end{DoxyParamCaption})}
+
+
+
+set pressed to false. KEYBOARD 
+

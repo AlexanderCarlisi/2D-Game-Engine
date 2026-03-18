@@ -1,0 +1,90 @@
+\doxysection{Window\+Config Struct Reference}
+\hypertarget{structWindowConfig}{}\label{structWindowConfig}\index{WindowConfig@{WindowConfig}}
+
+
+{\ttfamily \+\#include $<$platform.\+h$>$}
+
+
+
+Collaboration diagram for Window\+Config:\+
+% FIG 0
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \doxymbox{\hyperlink{structWindowConfig_abd756e31f0d363fedef2a717a8ca0f9d}{previous\+\_\+time}}
+\item 
+uint64\+\_\+t \doxymbox{\hyperlink{structWindowConfig_af2d53f3dafdc13e5840b1970f7d899a3}{accumulator}}
+\item 
+const char \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structWindowConfig_a713b397992a0cdea5591442e0bb3f411}{window\+\_\+name}}
+\item 
+uint32\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structWindowConfig_afa2c5bfabad58ac64e9a7ff831847f58}{framebuffer}}
+\item 
+struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structWindowConfig_a755d26d9139c10d74a35a8dbe5553d5b}{world\+\_\+handler}}
+\item 
+struct \doxymbox{\hyperlink{structAspect}{Aspect}} \doxymbox{\hyperlink{structWindowConfig_a92ab6b0ff819b5ec59b78790cff4ae35}{window\+\_\+aspect}}
+\item 
+struct \doxymbox{\hyperlink{structAspect}{Aspect}} \doxymbox{\hyperlink{structWindowConfig_a679ba799d758151098dd652d36316d0d}{render\+\_\+aspect}}
+\item 
+float \doxymbox{\hyperlink{structWindowConfig_aa16d9ad88c1446dc166721ca59d213de}{frames\+\_\+per\+\_\+second}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains information consering that of a Window. This information is used the same across platforms. 
+
+\label{doc-variable-members}
+\Hypertarget{structWindowConfig_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{structWindowConfig_af2d53f3dafdc13e5840b1970f7d899a3}\index{WindowConfig@{WindowConfig}!accumulator@{accumulator}}
+\index{accumulator@{accumulator}!WindowConfig@{WindowConfig}}
+\doxysubsubsection{\texorpdfstring{accumulator}{accumulator}}
+{\footnotesize\ttfamily \label{structWindowConfig_af2d53f3dafdc13e5840b1970f7d899a3} 
+uint64\+\_\+t Window\+Config::\+accumulator}
+
+\Hypertarget{structWindowConfig_afa2c5bfabad58ac64e9a7ff831847f58}\index{WindowConfig@{WindowConfig}!framebuffer@{framebuffer}}
+\index{framebuffer@{framebuffer}!WindowConfig@{WindowConfig}}
+\doxysubsubsection{\texorpdfstring{framebuffer}{framebuffer}}
+{\footnotesize\ttfamily \label{structWindowConfig_afa2c5bfabad58ac64e9a7ff831847f58} 
+uint32\+\_\+t\texorpdfstring{$\ast$}{*} Window\+Config::\+framebuffer}
+
+\Hypertarget{structWindowConfig_aa16d9ad88c1446dc166721ca59d213de}\index{WindowConfig@{WindowConfig}!frames\_per\_second@{frames\_per\_second}}
+\index{frames\_per\_second@{frames\_per\_second}!WindowConfig@{WindowConfig}}
+\doxysubsubsection{\texorpdfstring{frames\_per\_second}{frames\_per\_second}}
+{\footnotesize\ttfamily \label{structWindowConfig_aa16d9ad88c1446dc166721ca59d213de} 
+float Window\+Config::\+frames\+\_\+per\+\_\+second}
+
+\Hypertarget{structWindowConfig_abd756e31f0d363fedef2a717a8ca0f9d}\index{WindowConfig@{WindowConfig}!previous\_time@{previous\_time}}
+\index{previous\_time@{previous\_time}!WindowConfig@{WindowConfig}}
+\doxysubsubsection{\texorpdfstring{previous\_time}{previous\_time}}
+{\footnotesize\ttfamily \label{structWindowConfig_abd756e31f0d363fedef2a717a8ca0f9d} 
+uint64\+\_\+t Window\+Config::\+previous\+\_\+time}
+
+\Hypertarget{structWindowConfig_a679ba799d758151098dd652d36316d0d}\index{WindowConfig@{WindowConfig}!render\_aspect@{render\_aspect}}
+\index{render\_aspect@{render\_aspect}!WindowConfig@{WindowConfig}}
+\doxysubsubsection{\texorpdfstring{render\_aspect}{render\_aspect}}
+{\footnotesize\ttfamily \label{structWindowConfig_a679ba799d758151098dd652d36316d0d} 
+struct \doxymbox{\hyperlink{structAspect}{Aspect}} Window\+Config::\+render\+\_\+aspect}
+
+\Hypertarget{structWindowConfig_a92ab6b0ff819b5ec59b78790cff4ae35}\index{WindowConfig@{WindowConfig}!window\_aspect@{window\_aspect}}
+\index{window\_aspect@{window\_aspect}!WindowConfig@{WindowConfig}}
+\doxysubsubsection{\texorpdfstring{window\_aspect}{window\_aspect}}
+{\footnotesize\ttfamily \label{structWindowConfig_a92ab6b0ff819b5ec59b78790cff4ae35} 
+struct \doxymbox{\hyperlink{structAspect}{Aspect}} Window\+Config::\+window\+\_\+aspect}
+
+\Hypertarget{structWindowConfig_a713b397992a0cdea5591442e0bb3f411}\index{WindowConfig@{WindowConfig}!window\_name@{window\_name}}
+\index{window\_name@{window\_name}!WindowConfig@{WindowConfig}}
+\doxysubsubsection{\texorpdfstring{window\_name}{window\_name}}
+{\footnotesize\ttfamily \label{structWindowConfig_a713b397992a0cdea5591442e0bb3f411} 
+const char\texorpdfstring{$\ast$}{*} Window\+Config::\+window\+\_\+name}
+
+\Hypertarget{structWindowConfig_a755d26d9139c10d74a35a8dbe5553d5b}\index{WindowConfig@{WindowConfig}!world\_handler@{world\_handler}}
+\index{world\_handler@{world\_handler}!WindowConfig@{WindowConfig}}
+\doxysubsubsection{\texorpdfstring{world\_handler}{world\_handler}}
+{\footnotesize\ttfamily \label{structWindowConfig_a755d26d9139c10d74a35a8dbe5553d5b} 
+struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}}\texorpdfstring{$\ast$}{*} Window\+Config::\+world\+\_\+handler}
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+include/\+\doxymbox{\hyperlink{platform_8h}{platform.\+h}}\end{DoxyCompactItemize}

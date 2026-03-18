@@ -1,0 +1,101 @@
+\doxysection{include/\+input.h File Reference}
+\hypertarget{input_8h}{}\label{input_8h}\index{include/input.h@{include/input.h}}
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+Include dependency graph for input.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structTrigger}{Trigger}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}}~uint32\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct Trigger \doxymbox{\hyperlink{input_8h_a3b499f090dfa23ba296f331500b58975}{Trigger}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{input_8h_a98d52065a06d8401430e73187f628d66}{input\+\_\+kb\+\_\+pressed}} (\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}} key)
+\begin{DoxyCompactList}\small\item\em return true if the keycode\textquotesingle{}s held value is greater than zero. KEYBOARD \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{input_8h_a684635525fa43acbfee05e5f7ff25774}{input\+\_\+kb\+\_\+held}} (\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}} key, uint64\+\_\+t threshold\+Ms)
+\begin{DoxyCompactList}\small\item\em return true if the keycode\textquotesingle{}s held value is greather than provided threshold. KEYBOARD \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{input_8h_a36f3f57905d1ef7074bc724aa4ae7b1b}{input\+\_\+kb\+\_\+set\+\_\+press}} (\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}} key)
+\begin{DoxyCompactList}\small\item\em set to current time, if not already currently held. KEYBOARD \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{input_8h_a56dde12ca314c3c461b571c0ca7a0499}{input\+\_\+kb\+\_\+set\+\_\+release}} (\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}} key)
+\begin{DoxyCompactList}\small\item\em set pressed to false. KEYBOARD \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{input_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{input_8h_a667863aaebb23c74a9b35742cb75c587}\index{input.h@{input.h}!keycode\_t@{keycode\_t}}
+\index{keycode\_t@{keycode\_t}!input.h@{input.h}}
+\doxysubsubsection{\texorpdfstring{keycode\_t}{keycode\_t}}
+{\footnotesize\ttfamily \label{input_8h_a667863aaebb23c74a9b35742cb75c587} 
+\+\#define keycode\+\_\+t~uint32\+\_\+t}
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{input_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{input_8h_a3b499f090dfa23ba296f331500b58975}\index{input.h@{input.h}!Trigger@{Trigger}}
+\index{Trigger@{Trigger}!input.h@{input.h}}
+\doxysubsubsection{\texorpdfstring{Trigger}{Trigger}}
+{\footnotesize\ttfamily \label{input_8h_a3b499f090dfa23ba296f331500b58975} 
+typedef struct Trigger Trigger}
+
+
+
+\label{doc-func-members}
+\Hypertarget{input_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{input_8h_a684635525fa43acbfee05e5f7ff25774}\index{input.h@{input.h}!input\_kb\_held@{input\_kb\_held}}
+\index{input\_kb\_held@{input\_kb\_held}!input.h@{input.h}}
+\doxysubsubsection{\texorpdfstring{input\_kb\_held()}{input\_kb\_held()}}
+{\footnotesize\ttfamily \label{input_8h_a684635525fa43acbfee05e5f7ff25774} 
+bool input\+\_\+kb\+\_\+held (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}}}]{key}{, }\item[{uint64\+\_\+t}]{threshold\+Ms}{}\end{DoxyParamCaption})}
+
+
+
+return true if the keycode\textquotesingle{}s held value is greather than provided threshold. KEYBOARD 
+
+\Hypertarget{input_8h_a98d52065a06d8401430e73187f628d66}\index{input.h@{input.h}!input\_kb\_pressed@{input\_kb\_pressed}}
+\index{input\_kb\_pressed@{input\_kb\_pressed}!input.h@{input.h}}
+\doxysubsubsection{\texorpdfstring{input\_kb\_pressed()}{input\_kb\_pressed()}}
+{\footnotesize\ttfamily \label{input_8h_a98d52065a06d8401430e73187f628d66} 
+bool input\+\_\+kb\+\_\+pressed (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}}}]{key}{}\end{DoxyParamCaption})}
+
+
+
+return true if the keycode\textquotesingle{}s held value is greater than zero. KEYBOARD 
+
+\Hypertarget{input_8h_a36f3f57905d1ef7074bc724aa4ae7b1b}\index{input.h@{input.h}!input\_kb\_set\_press@{input\_kb\_set\_press}}
+\index{input\_kb\_set\_press@{input\_kb\_set\_press}!input.h@{input.h}}
+\doxysubsubsection{\texorpdfstring{input\_kb\_set\_press()}{input\_kb\_set\_press()}}
+{\footnotesize\ttfamily \label{input_8h_a36f3f57905d1ef7074bc724aa4ae7b1b} 
+void input\+\_\+kb\+\_\+set\+\_\+press (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}}}]{key}{}\end{DoxyParamCaption})}
+
+
+
+set to current time, if not already currently held. KEYBOARD 
+
+\Hypertarget{input_8h_a56dde12ca314c3c461b571c0ca7a0499}\index{input.h@{input.h}!input\_kb\_set\_release@{input\_kb\_set\_release}}
+\index{input\_kb\_set\_release@{input\_kb\_set\_release}!input.h@{input.h}}
+\doxysubsubsection{\texorpdfstring{input\_kb\_set\_release()}{input\_kb\_set\_release()}}
+{\footnotesize\ttfamily \label{input_8h_a56dde12ca314c3c461b571c0ca7a0499} 
+void input\+\_\+kb\+\_\+set\+\_\+release (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\+\_\+t}}}]{key}{}\end{DoxyParamCaption})}
+
+
+
+set pressed to false. KEYBOARD 
+

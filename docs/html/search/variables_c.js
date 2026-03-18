@@ -1,9 +1,11 @@
 var searchData=
 [
-  ['reallocation_5fratio_0',['reallocation_ratio',['../structWorldConfig.html#a4e90a83f4277d8f5c88eec069bce92ba',1,'WorldConfig']]],
-  ['release_5fresources_1',['release_resources',['../structRenderer.html#aba82f56c4f95c684d8eac5c5d6143862',1,'Renderer']]],
-  ['render_5faspect_2',['render_aspect',['../structApplicationConfig.html#ade1f2baf0447cc163c16a42f00346d31',1,'ApplicationConfig']]],
-  ['res_5fheight_3',['res_height',['../structRenderer.html#ab377b5420e2999516dad0c5536aef072',1,'Renderer']]],
-  ['res_5fwidth_4',['res_width',['../structRenderer.html#a6c60d34bcb031f60c57c599de419dcf9',1,'Renderer']]],
-  ['rotation_5',['rotation',['../structGameObject.html#ac55f6ebdf4cfbab508680ad7290fb26c',1,'GameObject']]]
+  ['pixels_5fper_5fmeter_0',['pixels_per_meter',['../structWorldConfig.html#a05233d5f5cc8e9492abd8a292afce000',1,'WorldConfig']]],
+  ['pool_5finterval_1',['pool_interval',['../structWorldConfig.html#a4697d0b5a07ce94ac4d91a50ed79fa71',1,'WorldConfig']]],
+  ['pool_5fsize_2',['pool_size',['../structWorldConfig.html#a03ece8fcf8f07dd2264f605af6f56b9b',1,'WorldConfig']]],
+  ['pose_3',['pose',['../structGameObject.html#ad94b000ad8e5607982f87efa9d283ddf',1,'GameObject']]],
+  ['pressed_4',['pressed',['../structTrigger.html#ad834032c877956d01a5e6cf84ebd3673',1,'Trigger']]],
+  ['pressed_5fsince_5',['pressed_since',['../structTrigger.html#a9a93b70ee76520f3ed253694dc0fe367',1,'Trigger']]],
+  ['previous_5fpose_6',['previous_pose',['../structGameObject.html#a6257fbf7f5192c9986a49edf66cfbed2',1,'GameObject']]],
+  ['previous_5ftime_7',['previous_time',['../structWindowConfig.html#abd756e31f0d363fedef2a717a8ca0f9d',1,'WindowConfig']]]
 ];

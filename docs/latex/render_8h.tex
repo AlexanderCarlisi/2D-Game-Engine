@@ -1,39 +1,79 @@
-\doxysection{include/render.h File Reference}
+\doxysection{include/\+render.h File Reference}
 \hypertarget{render_8h}{}\label{render_8h}\index{include/render.h@{include/render.h}}
-{\ttfamily \#include $<$stdint.\+h$>$}\newline
-{\ttfamily \#include "{}game\+\_\+object.\+h"{}}\newline
-Include dependency graph for render.\+h\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=325pt]{render_8h__incl}
-\end{center}
-\end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=281pt]{render_8h__dep__incl}
-\end{center}
-\end{figure}
-\doxysubsubsection*{Data Structures}
+{\ttfamily \+\#include "{}platform.\+h"{}}\newline
+{\ttfamily \+\#include "{}pose.\+h"{}}\newline
+Include dependency graph for render.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
+\doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structRenderer}{Renderer}}
-\end{DoxyCompactItemize}
-\doxysubsubsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-typedef struct \mbox{\hyperlink{structRenderer}{Renderer}} \mbox{\hyperlink{render_8h_af686c50c81f04a4a2a1b42e2ced91c97}{Renderer}}
-\end{DoxyCompactItemize}
+void \doxymbox{\hyperlink{render_8h_a07604ab1d5f0a6a3d6666d682f45d4db}{render\+\_\+clear}} (struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}} \texorpdfstring{$\ast$}{*}config, uint32\+\_\+t color)
+\begin{DoxyCompactList}\small\item\em Clear the framebuffer with the color. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{render_8h_a020f2ef1754a4655e4a3ee55427a4e5e}{render\+\_\+draw\+\_\+pixel}} (struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}} \texorpdfstring{$\ast$}{*}config, \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}point, uint32\+\_\+t color)
+\begin{DoxyCompactList}\small\item\em Writes color to the framebuffer at the point. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{render_8h_a39eb1e3211b623c17bf6967e79f9f721}{render\+\_\+interpolate\+\_\+pixel}} (struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}} \texorpdfstring{$\ast$}{*}config, struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}point1, struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}point2, uint32\+\_\+t color, float alpha)
+\begin{DoxyCompactList}\small\item\em calls render\+\_\+draw\+\_\+pixel whilst interpolating between point 1 and point 2 \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{render_8h_abbf7c1e44f77deff7b2b128f52e17dee}{render\+\_\+draw\+\_\+shape}} (struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}} \texorpdfstring{$\ast$}{*}config, struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}shape, uint32\+\_\+t color)
+\begin{DoxyCompactList}\small\item\em Runs a. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{render_8h_a26fd37d5f8a54b05a7d6023fd1ce22ce}{render\+\_\+draw}} (struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}} \texorpdfstring{$\ast$}{*}config, float alpha)
+\begin{DoxyCompactList}\small\item\em Draw all active game objects attached to active \doxylink{structWorld}{World} from \doxylink{structWorld}{World} handler. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Typedef Documentation}
-\Hypertarget{render_8h_af686c50c81f04a4a2a1b42e2ced91c97}\label{render_8h_af686c50c81f04a4a2a1b42e2ced91c97} 
-\index{render.h@{render.h}!Renderer@{Renderer}}
-\index{Renderer@{Renderer}!render.h@{render.h}}
-\doxysubsubsection{\texorpdfstring{Renderer}{Renderer}}
-{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structRenderer}{Renderer}} \mbox{\hyperlink{structRenderer}{Renderer}}}
+\label{doc-func-members}
+\Hypertarget{render_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{render_8h_a07604ab1d5f0a6a3d6666d682f45d4db}\index{render.h@{render.h}!render\_clear@{render\_clear}}
+\index{render\_clear@{render\_clear}!render.h@{render.h}}
+\doxysubsubsection{\texorpdfstring{render\_clear()}{render\_clear()}}
+{\footnotesize\ttfamily \label{render_8h_a07604ab1d5f0a6a3d6666d682f45d4db} 
+void render\+\_\+clear (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{, }\item[{uint32\+\_\+t}]{color}{}\end{DoxyParamCaption})}
+
+
+
+Clear the framebuffer with the color. 
+
+\Hypertarget{render_8h_a26fd37d5f8a54b05a7d6023fd1ce22ce}\index{render.h@{render.h}!render\_draw@{render\_draw}}
+\index{render\_draw@{render\_draw}!render.h@{render.h}}
+\doxysubsubsection{\texorpdfstring{render\_draw()}{render\_draw()}}
+{\footnotesize\ttfamily \label{render_8h_a26fd37d5f8a54b05a7d6023fd1ce22ce} 
+void render\+\_\+draw (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{, }\item[{float}]{alpha}{}\end{DoxyParamCaption})}
+
+
+
+Draw all active game objects attached to active \doxylink{structWorld}{World} from \doxylink{structWorld}{World} handler. 
+
+\Hypertarget{render_8h_a020f2ef1754a4655e4a3ee55427a4e5e}\index{render.h@{render.h}!render\_draw\_pixel@{render\_draw\_pixel}}
+\index{render\_draw\_pixel@{render\_draw\_pixel}!render.h@{render.h}}
+\doxysubsubsection{\texorpdfstring{render\_draw\_pixel()}{render\_draw\_pixel()}}
+{\footnotesize\ttfamily \label{render_8h_a020f2ef1754a4655e4a3ee55427a4e5e} 
+void render\+\_\+draw\+\_\+pixel (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{, }\item[{\doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{point}{, }\item[{uint32\+\_\+t}]{color}{}\end{DoxyParamCaption})}
+
+
+
+Writes color to the framebuffer at the point. 
+
+\Hypertarget{render_8h_abbf7c1e44f77deff7b2b128f52e17dee}\index{render.h@{render.h}!render\_draw\_shape@{render\_draw\_shape}}
+\index{render\_draw\_shape@{render\_draw\_shape}!render.h@{render.h}}
+\doxysubsubsection{\texorpdfstring{render\_draw\_shape()}{render\_draw\_shape()}}
+{\footnotesize\ttfamily \label{render_8h_abbf7c1e44f77deff7b2b128f52e17dee} 
+void render\+\_\+draw\+\_\+shape (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{, }\item[{struct \doxymbox{\hyperlink{structShape}{Shape}} \texorpdfstring{$\ast$}{*}}]{shape}{, }\item[{uint32\+\_\+t}]{color}{}\end{DoxyParamCaption})}
+
+
+
+Runs a. 
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{render__algorithms_8h}{render\+\_\+algorithms.\+h} 
+\end{DoxySeeAlso}
+\Hypertarget{render_8h_a39eb1e3211b623c17bf6967e79f9f721}\index{render.h@{render.h}!render\_interpolate\_pixel@{render\_interpolate\_pixel}}
+\index{render\_interpolate\_pixel@{render\_interpolate\_pixel}!render.h@{render.h}}
+\doxysubsubsection{\texorpdfstring{render\_interpolate\_pixel()}{render\_interpolate\_pixel()}}
+{\footnotesize\ttfamily \label{render_8h_a39eb1e3211b623c17bf6967e79f9f721} 
+void render\+\_\+interpolate\+\_\+pixel (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWindowConfig}{Window\+Config}} \texorpdfstring{$\ast$}{*}}]{config}{, }\item[{struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{point1}{, }\item[{struct \doxymbox{\hyperlink{structPose}{Pose}} \texorpdfstring{$\ast$}{*}}]{point2}{, }\item[{uint32\+\_\+t}]{color}{, }\item[{float}]{alpha}{}\end{DoxyParamCaption})}
+
+
+
+calls render\+\_\+draw\+\_\+pixel whilst interpolating between point 1 and point 2 
 

@@ -1,14 +1,16 @@
 var searchData=
 [
-  ['end_0',['end',['../structInterval.html#ad364452d2207c9102f838c44d12abaa7',1,'Interval']]],
-  ['engine_2ec_1',['engine.c',['../engine_8c.html',1,'']]],
-  ['engine_2eh_2',['engine.h',['../engine_8h.html',1,'']]],
-  ['engine_5fclose_3',['engine_close',['../engine_8h.html#a9dc6a047707762d11d1464ccfda726ab',1,'engine_close():&#160;engine.c'],['../engine_8c.html#a9dc6a047707762d11d1464ccfda726ab',1,'engine_close():&#160;engine.c']]],
-  ['engine_5fget_5frenderer_5fptr_4',['engine_get_renderer_ptr',['../engine_8h.html#a07b159f3759b1b4dc4783be694cbf694',1,'engine_get_renderer_ptr():&#160;engine.c'],['../engine_8c.html#a07b159f3759b1b4dc4783be694cbf694',1,'engine_get_renderer_ptr():&#160;engine.c']]],
-  ['engine_5fget_5fworld_5fptr_5',['engine_get_world_ptr',['../engine_8h.html#a02f89457778b79dccb9c08f623f3517e',1,'engine_get_world_ptr():&#160;engine.c'],['../engine_8c.html#a02f89457778b79dccb9c08f623f3517e',1,'engine_get_world_ptr():&#160;engine.c']]],
-  ['engine_5fh_6',['ENGINE_H',['../engine_8h.html#a189e7cd8d6fb4ba4877b143116356c70',1,'engine.h']]],
-  ['engine_5fis_5frunning_7',['engine_is_running',['../engine_8h.html#a98ad3711619a0e20042ca57d8d65c94d',1,'engine_is_running():&#160;engine.c'],['../engine_8c.html#a98ad3711619a0e20042ca57d8d65c94d',1,'engine_is_running():&#160;engine.c']]],
-  ['engine_5fstart_8',['engine_start',['../engine_8h.html#a92f7ca3cfebd2124ea8cc7476a91804b',1,'engine_start(struct Renderer *):&#160;engine.c'],['../engine_8c.html#a1d76f7c8ca3c96659f81a2a367a62d85',1,'engine_start(struct Renderer *render):&#160;engine.c']]],
-  ['engine_5ftick_9',['engine_tick',['../engine_8h.html#a9ab771cc364d9f18c80a770e231cac11',1,'engine_tick():&#160;engine.c'],['../engine_8c.html#a9ab771cc364d9f18c80a770e231cac11',1,'engine_tick():&#160;engine.c']]],
-  ['engine_5fupdate_5frenderer_5faspects_10',['engine_update_renderer_aspects',['../engine_8h.html#ac561ee8b69ab03f88338fa046bd00f77',1,'engine_update_renderer_aspects():&#160;engine.c'],['../engine_8c.html#ac561ee8b69ab03f88338fa046bd00f77',1,'engine_update_renderer_aspects():&#160;engine.c']]]
+  ['close_0',['close',['../structWorld.html#a16643d99ec2bd3c5c1e03829f1993511',1,'World']]],
+  ['collider_5fvector_1',['collider_vector',['../structGameObject.html#a3169e0b15ff183fd37cb5d800231db7d',1,'GameObject']]],
+  ['collision_5fbox_2ec_2',['collision_box.c',['../collision__box_8c.html',1,'']]],
+  ['collision_5fbox_2eh_3',['collision_box.h',['../collision__box_8h.html',1,'']]],
+  ['collision_5fbox_5fcreate_5fdebug_4',['collision_box_create_debug',['../collision__box_8h.html#a92e9df6fbad82605d70d3bb7a1e2bd95',1,'collision_box_create_debug(uint32_t debugColor, uint32_t shapeColor, struct Pose shapeSize):&#160;collision_box.c'],['../collision__box_8c.html#a92e9df6fbad82605d70d3bb7a1e2bd95',1,'collision_box_create_debug(uint32_t debugColor, uint32_t shapeColor, struct Pose shapeSize):&#160;collision_box.c']]],
+  ['collision_5fbox_5fhealth_5fcheck_5',['collision_box_health_check',['../collision__box_8h.html#a98c32ad175718a0ac2fddbab4de5db6d',1,'collision_box_health_check(struct CollisionBox *cb):&#160;collision_box.c'],['../collision__box_8c.html#a98c32ad175718a0ac2fddbab4de5db6d',1,'collision_box_health_check(struct CollisionBox *cb):&#160;collision_box.c']]],
+  ['collisionbox_6',['CollisionBox',['../structCollisionBox.html',1,'CollisionBox'],['../collision__box_8h.html#afca8eb5da995cc07e3c41532c053ab33',1,'CollisionBox:&#160;collision_box.h']]],
+  ['color_7',['color',['../structShape.html#aea1151cb3fa07951bb5df63b829d2339',1,'Shape']]],
+  ['color_2ec_8',['color.c',['../color_8c.html',1,'']]],
+  ['color_2eh_9',['color.h',['../color_8h.html',1,'']]],
+  ['config_10',['config',['../structWorld.html#a66ca57b1328af18d931f52cad66a5d3f',1,'World']]],
+  ['convex_11',['convex',['../structShape.html#af02ff13496bc45baa618735897d06a3f',1,'Shape']]],
+  ['current_20progress_12',['Current Progress',['../md_README.html#autotoc_md2',1,'']]]
 ];

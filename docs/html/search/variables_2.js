@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['debug_5fcolor_0',['debug_color',['../structCollisionBox.html#a5b52666dd1a3ec41becf5bc2a2f64665',1,'CollisionBox']]],
-  ['display_1',['display',['../structRenderer.html#aaa09d8f46dbf1705540038cb74fc4251',1,'Renderer']]],
-  ['draw_2',['draw',['../structRenderer.html#a2607d24c8049689b97a9fb1c49e1bb32',1,'Renderer']]],
-  ['draw_5fpixel_3',['draw_pixel',['../structRenderer.html#a57bf30f4b50df16b981df26ca8a5c5e9',1,'Renderer']]],
-  ['draw_5fshape_4',['draw_shape',['../structRenderer.html#ae14940cba4685efefd98678cde21925d',1,'Renderer']]]
+  ['close_0',['close',['../structWorld.html#a16643d99ec2bd3c5c1e03829f1993511',1,'World']]],
+  ['collider_5fvector_1',['collider_vector',['../structGameObject.html#a3169e0b15ff183fd37cb5d800231db7d',1,'GameObject']]],
+  ['color_2',['color',['../structShape.html#aea1151cb3fa07951bb5df63b829d2339',1,'Shape']]],
+  ['config_3',['config',['../structWorld.html#a66ca57b1328af18d931f52cad66a5d3f',1,'World']]],
+  ['convex_4',['convex',['../structShape.html#af02ff13496bc45baa618735897d06a3f',1,'Shape']]]
 ];

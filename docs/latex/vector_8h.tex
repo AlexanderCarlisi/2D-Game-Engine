@@ -1,59 +1,50 @@
-\doxysection{include/vector.h File Reference}
+\doxysection{include/\+vector.h File Reference}
 \hypertarget{vector_8h}{}\label{vector_8h}\index{include/vector.h@{include/vector.h}}
-{\ttfamily \#include "{}stdlib.\+h"{}}\newline
-{\ttfamily \#include $<$stdio.\+h$>$}\newline
-Include dependency graph for vector.\+h\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=202pt]{vector_8h__incl}
-\end{center}
-\end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{vector_8h__dep__incl}
-\end{center}
-\end{figure}
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+Include dependency graph for vector.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}{DECLARE\+\_\+\+VECTOR}}(vector\+\_\+name,  func\+\_\+prefix,  type)
+\+\#define \doxymbox{\hyperlink{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}{DECLARE\+\_\+\+VECTOR}}(vector\+\_\+name,  func\+\_\+prefix,  type)
 \item 
-\#define \mbox{\hyperlink{vector_8h_a8de777c307fe27198a82849b9da6b227}{DEFINE\+\_\+\+VECTOR}}(vector\+\_\+name,  func\+\_\+prefix,  type)
+\+\#define \doxymbox{\hyperlink{vector_8h_a8de777c307fe27198a82849b9da6b227}{DEFINE\+\_\+\+VECTOR}}(vector\+\_\+name,  func\+\_\+prefix,  type)
 \end{DoxyCompactItemize}
 
 
+\label{doc-define-members}
+\Hypertarget{vector_8h_doc-define-members}
 \doxysubsection{Macro Definition Documentation}
-\Hypertarget{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}\label{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1} 
-\index{vector.h@{vector.h}!DECLARE\_VECTOR@{DECLARE\_VECTOR}}
+\Hypertarget{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}\index{vector.h@{vector.h}!DECLARE\_VECTOR@{DECLARE\_VECTOR}}
 \index{DECLARE\_VECTOR@{DECLARE\_VECTOR}!vector.h@{vector.h}}
 \doxysubsubsection{\texorpdfstring{DECLARE\_VECTOR}{DECLARE\_VECTOR}}
-{\footnotesize\ttfamily \#define DECLARE\+\_\+\+VECTOR(\begin{DoxyParamCaption}\item[{}]{vector\+\_\+name,  }\item[{}]{func\+\_\+prefix,  }\item[{}]{type }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1} 
+\+\#define DECLARE\+\_\+\+VECTOR(\begin{DoxyParamCaption}\item[{}]{vector\+\_\+name}{, }\item[{}]{func\+\_\+prefix}{, }\item[{}]{type}{}\end{DoxyParamCaption})}
 
-{\bfseries Value\+:}
+{\bfseries Value:\+}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }vector\_name\ \{\(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ count;\(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ size;\(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ type*\ data;\(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ realloc\_ratio;\(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \}\ vector\_name;\(\backslash\)}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }vector\_name\ \{\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{size\_t}\ count;\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{size\_t}\ size;\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ type*\ data;\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{float}\ realloc\_ratio;\(\backslash\)}
+\DoxyCodeLine{\}\ vector\_name;\(\backslash\)}
 \DoxyCodeLine{\(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ func\_prefix\#\#\_init(vector\_name*\ arr,\ \textcolor{keywordtype}{size\_t}\ size);\(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ func\_prefix\#\#\_free(vector\_name*\ arr);\(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ func\_prefix\#\#\_add(vector\_name*\ arr,\ type\ item);\(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ func\_prefix\#\#\_realloc(vector\_name*\ arr);\(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ func\_prefix\#\#\_realloc\_set(vector\_name*\ arr,\ \textcolor{keywordtype}{size\_t}\ newSize);\(\backslash\)}
-\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{void}\ func\_prefix\#\#\_pop\_swap(vector\_name*\ arr,\ \textcolor{keywordtype}{int}\ index);\(\backslash\)}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ func\_prefix\#\#\_init(vector\_name*\ arr,\ \textcolor{keywordtype}{size\_t}\ size);\(\backslash\)}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ func\_prefix\#\#\_free(vector\_name*\ arr);\(\backslash\)}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ func\_prefix\#\#\_add(vector\_name*\ arr,\ type\ item);\(\backslash\)}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ func\_prefix\#\#\_realloc(vector\_name*\ arr);\(\backslash\)}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ func\_prefix\#\#\_realloc\_set(vector\_name*\ arr,\ \textcolor{keywordtype}{size\_t}\ newSize);\(\backslash\)}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ func\_prefix\#\#\_pop\_swap(vector\_name*\ arr,\ \textcolor{keywordtype}{size\_t}\ index);\(\backslash\)}
 
 \end{DoxyCode}
-\Hypertarget{vector_8h_a8de777c307fe27198a82849b9da6b227}\label{vector_8h_a8de777c307fe27198a82849b9da6b227} 
-\index{vector.h@{vector.h}!DEFINE\_VECTOR@{DEFINE\_VECTOR}}
+\Hypertarget{vector_8h_a8de777c307fe27198a82849b9da6b227}\index{vector.h@{vector.h}!DEFINE\_VECTOR@{DEFINE\_VECTOR}}
 \index{DEFINE\_VECTOR@{DEFINE\_VECTOR}!vector.h@{vector.h}}
 \doxysubsubsection{\texorpdfstring{DEFINE\_VECTOR}{DEFINE\_VECTOR}}
-{\footnotesize\ttfamily \#define DEFINE\+\_\+\+VECTOR(\begin{DoxyParamCaption}\item[{}]{vector\+\_\+name,  }\item[{}]{func\+\_\+prefix,  }\item[{}]{type }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{vector_8h_a8de777c307fe27198a82849b9da6b227} 
+\+\#define DEFINE\+\_\+\+VECTOR(\begin{DoxyParamCaption}\item[{}]{vector\+\_\+name}{, }\item[{}]{func\+\_\+prefix}{, }\item[{}]{type}{}\end{DoxyParamCaption})}
 

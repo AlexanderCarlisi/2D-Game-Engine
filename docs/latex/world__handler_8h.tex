@@ -1,275 +1,152 @@
-\doxysection{include/world\+\_\+handler.h File Reference}
+\doxysection{include/\+world\+\_\+handler.h File Reference}
 \hypertarget{world__handler_8h}{}\label{world__handler_8h}\index{include/world\_handler.h@{include/world\_handler.h}}
-{\ttfamily \#include "{}world.\+h"{}}\newline
-{\ttfamily \#include "{}game\+\_\+object.\+h"{}}\newline
-{\ttfamily \#include $<$stdbool.\+h$>$}\newline
-Include dependency graph for world\+\_\+handler.\+h\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{world__handler_8h__incl}
-\end{center}
-\end{figure}
+{\ttfamily \+\#include "{}vector.\+h"{}}\newline
+{\ttfamily \+\#include "{}world.\+h"{}}\newline
+Include dependency graph for world\+\_\+handler.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
 \doxysubsubsection*{Data Structures}
 \begin{DoxyCompactItemize}
 \item 
-struct \mbox{\hyperlink{structGameObjectBuffer}{Game\+Object\+Buffer}}
+struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct World\+Handler \doxymbox{\hyperlink{world__handler_8h_a095d867c8636509b7afcec0d4f69aa0b}{World\+Handler}}
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{world__handler_8h_a98ba81955337d325b802d5b2babf530a}{worldhandler\+\_\+realloc\+\_\+pool}} (size\+\_\+t new\+Size)
-\begin{DoxyCompactList}\small\item\em Reallocate the World\+Handler Object Pool. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{world__handler_8h_a1add68a94ba41e0575997af1eb34cad2}{worldhandler\+\_\+add\+\_\+to\+\_\+buffer}} (struct Game\+Object\+Vector \texorpdfstring{$\ast$}{*}objects, size\+\_\+t start, size\+\_\+t end)
-\begin{DoxyCompactList}\small\item\em Add objects to World\+Handler Buffer. The Buffer is for Common or Persistant Game Objects. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{world__handler_8h_a7e76050dd3dcdfaf3364855fb1a9a17f}{worldhandler\+\_\+add\+\_\+to\+\_\+pool}} (struct Game\+Object\+Vector \texorpdfstring{$\ast$}{*}objects, size\+\_\+t start, size\+\_\+t end)
-\begin{DoxyCompactList}\small\item\em Add objects to World\+Handler Pool. The Pool is for short lived Game Objects. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{world__handler_8h_ae195eef01019a30f5b09e6e4a871d272}{worldhandler\+\_\+remove\+\_\+from\+\_\+buffer}} (size\+\_\+t start, size\+\_\+t end)
-\begin{DoxyCompactList}\small\item\em Nullifies Objects within the \doxylink{structInterval}{Interval} of the World\+Handler\textquotesingle{}s Object Buffer. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{world__handler_8h_a221cbcea8ef8b8b01770ff78e192b550}{worldhandler\+\_\+remove\+\_\+from\+\_\+pool}} (size\+\_\+t start, size\+\_\+t end)
-\begin{DoxyCompactList}\small\item\em Nullifies Objects within the \doxylink{structInterval}{Interval} of the World\+Handler\textquotesingle{}s Object Pool. \end{DoxyCompactList}\item 
-size\+\_\+t \mbox{\hyperlink{world__handler_8h_a635cb9628b6b83bbdd1078a9f38f1c6f}{worldhandler\+\_\+get\+\_\+buffer\+\_\+interval\+\_\+start}} ()
-\begin{DoxyCompactList}\small\item\em Get the Starting \doxylink{structInterval}{Interval} of Active Game Objects on the Buffer. \end{DoxyCompactList}\item 
-size\+\_\+t \mbox{\hyperlink{world__handler_8h_afd748b8b1dda6ac872e6b87cd8fcf72f}{worldhandler\+\_\+get\+\_\+buffer\+\_\+interval\+\_\+end}} ()
-\begin{DoxyCompactList}\small\item\em Get the Ending \doxylink{structInterval}{Interval} of Active Game Objects on the Buffer. \end{DoxyCompactList}\item 
-size\+\_\+t \mbox{\hyperlink{world__handler_8h_a605ad5be32d11a5c23e13cbb718e97e7}{worldhandler\+\_\+get\+\_\+pool\+\_\+interval\+\_\+start}} ()
-\begin{DoxyCompactList}\small\item\em Get the Starting \doxylink{structInterval}{Interval} of Active Game Objects on the Pool. \end{DoxyCompactList}\item 
-size\+\_\+t \mbox{\hyperlink{world__handler_8h_a9bca611fe4fed1ad0dae65e6cd62c027}{worldhandler\+\_\+get\+\_\+pool\+\_\+interval\+\_\+end}} ()
-\begin{DoxyCompactList}\small\item\em Get the Ending Inverval of Active Game Objects on the Pool. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{world__handler_8h_aadb3ffc662df0a01734a856c1c331703}{worldhandler\+\_\+set\+\_\+buffer\+\_\+interval}} (size\+\_\+t start, size\+\_\+t end)
-\begin{DoxyCompactList}\small\item\em Set the \doxylink{structInterval}{Interval} of Active Game Objects on the Buffer. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{world__handler_8h_ac3915e13c15289ce0c2921e2c493b430}{worldhandler\+\_\+set\+\_\+pool\+\_\+interval}} (size\+\_\+t start, size\+\_\+t end)
-\begin{DoxyCompactList}\small\item\em Set the \doxylink{structInterval}{Interval} of Active Game Objects on the Pool. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{world__handler_8h_aa831aec5f4d9e77745d6d17ef4431c11}{worldhandler\+\_\+load\+\_\+world}} (struct \mbox{\hyperlink{structWorld}{World}} world)
-\end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
-\begin{DoxyCompactItemize}
+\doxymbox{\hyperlink{world__handler_8h_aed8a3f979e2f2bea1b42de8ecfbc69fc}{DECLARE\+\_\+\+VECTOR}} (World\+Vector, vector\+\_\+world, struct \doxymbox{\hyperlink{structWorld}{World}})
 \item 
-struct \mbox{\hyperlink{structGameObjectBuffer}{Game\+Object\+Buffer}} \mbox{\hyperlink{world__handler_8h_affd5977b4b5cfc908f92fb6f7e1b6039}{object\+\_\+buffer}}
-\item 
-struct Game\+Object\+Vector \mbox{\hyperlink{world__handler_8h_a2e7d8b09fe98fa6a93ee3f372c14fe72}{object\+\_\+pool}}
-\end{DoxyCompactItemize}
+struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{world__handler_8h_a7c0c1a1fa5af09d0542c5791d728c86b}{world\+\_\+handler\+\_\+new}} ()
+\begin{DoxyCompactList}\small\item\em Allocate a new \doxylink{structWorldHandler}{World\+Handler}. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{world__handler_8h_acbcd3f1157afc60762f4e8ee311f3c85}{world\+\_\+handler\+\_\+set\+\_\+active}} (struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}handler, struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}world)
+\begin{DoxyCompactList}\small\item\em Sets a new world as active Calls active-\/\texorpdfstring{$>$}{>}close() replaces the active pointer in \doxylink{structWorldHandler}{World\+Handler}. Then calls active-\/\texorpdfstring{$>$}{>}start(). \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{world__handler_8h_aa738b5d7d3931cf75b1011bb14ce3ea9}{world\+\_\+handler\+\_\+new\+\_\+world}} (struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}handler, struct \doxymbox{\hyperlink{structWorldConfig}{World\+Config}} config)
+\begin{DoxyCompactList}\small\item\em Allocates and adds a new world to the worlds vector. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{world__handler_8h_ab4f78bc733dbceb57071d1a405258d66}{world\+\_\+handler\+\_\+free}} (struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}handler)
+\begin{DoxyCompactList}\small\item\em Deallocates all worlds stored in the handler\textquotesingle{}s worlds vector. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{world__handler_8h_aefbe3dea91c989ed83c0116c09dc1678}{world\+\_\+handler\+\_\+update\+\_\+active}} (struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}handler)
+\begin{DoxyCompactList}\small\item\em Update the current active world. Runs world-\/\texorpdfstring{$>$}{>}loop. Handles physics updates, updates shape poses. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\label{doc-typedef-members}
+\Hypertarget{world__handler_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{world__handler_8h_a095d867c8636509b7afcec0d4f69aa0b}\index{world\_handler.h@{world\_handler.h}!WorldHandler@{WorldHandler}}
+\index{WorldHandler@{WorldHandler}!world\_handler.h@{world\_handler.h}}
+\doxysubsubsection{\texorpdfstring{WorldHandler}{WorldHandler}}
+{\footnotesize\ttfamily \label{world__handler_8h_a095d867c8636509b7afcec0d4f69aa0b} 
+typedef struct World\+Handler World\+Handler}
+
+
+
+\label{doc-func-members}
+\Hypertarget{world__handler_8h_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{world__handler_8h_a1add68a94ba41e0575997af1eb34cad2}\label{world__handler_8h_a1add68a94ba41e0575997af1eb34cad2} 
-\index{world\_handler.h@{world\_handler.h}!worldhandler\_add\_to\_buffer@{worldhandler\_add\_to\_buffer}}
-\index{worldhandler\_add\_to\_buffer@{worldhandler\_add\_to\_buffer}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{worldhandler\_add\_to\_buffer()}{worldhandler\_add\_to\_buffer()}}
-{\footnotesize\ttfamily bool worldhandler\+\_\+add\+\_\+to\+\_\+buffer (\begin{DoxyParamCaption}\item[{struct Game\+Object\+Vector \texorpdfstring{$\ast$}{*}}]{objects,  }\item[{size\+\_\+t}]{start,  }\item[{size\+\_\+t}]{end }\end{DoxyParamCaption})}
+\Hypertarget{world__handler_8h_aed8a3f979e2f2bea1b42de8ecfbc69fc}\index{world\_handler.h@{world\_handler.h}!DECLARE\_VECTOR@{DECLARE\_VECTOR}}
+\index{DECLARE\_VECTOR@{DECLARE\_VECTOR}!world\_handler.h@{world\_handler.h}}
+\doxysubsubsection{\texorpdfstring{DECLARE\_VECTOR()}{DECLARE\_VECTOR()}}
+{\footnotesize\ttfamily \label{world__handler_8h_aed8a3f979e2f2bea1b42de8ecfbc69fc} 
+DECLARE\+\_\+\+VECTOR (\begin{DoxyParamCaption}\item[{World\+Vector}]{}{, }\item[{vector\+\_\+world}]{}{, }\item[{struct \doxymbox{\hyperlink{structWorld}{World}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{world__handler_8h_ab4f78bc733dbceb57071d1a405258d66}\index{world\_handler.h@{world\_handler.h}!world\_handler\_free@{world\_handler\_free}}
+\index{world\_handler\_free@{world\_handler\_free}!world\_handler.h@{world\_handler.h}}
+\doxysubsubsection{\texorpdfstring{world\_handler\_free()}{world\_handler\_free()}}
+{\footnotesize\ttfamily \label{world__handler_8h_ab4f78bc733dbceb57071d1a405258d66} 
+bool world\+\_\+handler\+\_\+free (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}}]{handler}{}\end{DoxyParamCaption})}
 
 
 
-Add objects to World\+Handler Buffer. The Buffer is for Common or Persistant Game Objects. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em objects} & Vector of Game\+Objects to add to the Buffer. \\
-\hline
-{\em start} & Index of Buffer to start adding Game\+Objects to. Inclusive \\
-\hline
-{\em end} & Index of Buffer to stop at, can end before reaching the end of objects. Inclusive \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Success of adding to Buffer. 
-\end{DoxyReturn}
-\begin{DoxyWarning}{Warning}
-Will overwrite existing Objects. 
-\end{DoxyWarning}
-\Hypertarget{world__handler_8h_a7e76050dd3dcdfaf3364855fb1a9a17f}\label{world__handler_8h_a7e76050dd3dcdfaf3364855fb1a9a17f} 
-\index{world\_handler.h@{world\_handler.h}!worldhandler\_add\_to\_pool@{worldhandler\_add\_to\_pool}}
-\index{worldhandler\_add\_to\_pool@{worldhandler\_add\_to\_pool}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{worldhandler\_add\_to\_pool()}{worldhandler\_add\_to\_pool()}}
-{\footnotesize\ttfamily bool worldhandler\+\_\+add\+\_\+to\+\_\+pool (\begin{DoxyParamCaption}\item[{struct Game\+Object\+Vector \texorpdfstring{$\ast$}{*}}]{objects,  }\item[{size\+\_\+t}]{start,  }\item[{size\+\_\+t}]{end }\end{DoxyParamCaption})}
-
-
-
-Add objects to World\+Handler Pool. The Pool is for short lived Game Objects. 
+Deallocates all worlds stored in the handler\textquotesingle{}s worlds vector. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em objects} & Vector of Game\+Objects to add to the Pool. \\
-\hline
-{\em start} & Index of Buffer to start adding Game\+Objects to. Inclusive \\
-\hline
-{\em end} & Index of Buffer to stop at, can end before reaching the end of objects. Inclusive \\
+{\em handler} & \\
 \hline
 \end{DoxyParams}
+\begin{DoxyNote}{Note}
+This is called on clean close by 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\doxylink{platform_8c}{platform.\+c}. 
+\end{DoxySeeAlso}
 \begin{DoxyReturn}{Returns}
-Success of adding to Pool. 
+false on deallocation failure 
 \end{DoxyReturn}
-\begin{DoxyWarning}{Warning}
-Will realloc the Pool using the \doxylink{structWorldConfig}{World\+Config}\textquotesingle{}s Reallocation Ratio if needed. 
-
-Will overwrite existing Objects. 
-\end{DoxyWarning}
-\Hypertarget{world__handler_8h_afd748b8b1dda6ac872e6b87cd8fcf72f}\label{world__handler_8h_afd748b8b1dda6ac872e6b87cd8fcf72f} 
-\index{world\_handler.h@{world\_handler.h}!worldhandler\_get\_buffer\_interval\_end@{worldhandler\_get\_buffer\_interval\_end}}
-\index{worldhandler\_get\_buffer\_interval\_end@{worldhandler\_get\_buffer\_interval\_end}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{worldhandler\_get\_buffer\_interval\_end()}{worldhandler\_get\_buffer\_interval\_end()}}
-{\footnotesize\ttfamily size\+\_\+t worldhandler\+\_\+get\+\_\+buffer\+\_\+interval\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\Hypertarget{world__handler_8h_a7c0c1a1fa5af09d0542c5791d728c86b}\index{world\_handler.h@{world\_handler.h}!world\_handler\_new@{world\_handler\_new}}
+\index{world\_handler\_new@{world\_handler\_new}!world\_handler.h@{world\_handler.h}}
+\doxysubsubsection{\texorpdfstring{world\_handler\_new()}{world\_handler\_new()}}
+{\footnotesize\ttfamily \label{world__handler_8h_a7c0c1a1fa5af09d0542c5791d728c86b} 
+struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*} world\+\_\+handler\+\_\+new (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
-Get the Ending \doxylink{structInterval}{Interval} of Active Game Objects on the Buffer. 
+Allocate a new \doxylink{structWorldHandler}{World\+Handler}. 
 
-\Hypertarget{world__handler_8h_a635cb9628b6b83bbdd1078a9f38f1c6f}\label{world__handler_8h_a635cb9628b6b83bbdd1078a9f38f1c6f} 
-\index{world\_handler.h@{world\_handler.h}!worldhandler\_get\_buffer\_interval\_start@{worldhandler\_get\_buffer\_interval\_start}}
-\index{worldhandler\_get\_buffer\_interval\_start@{worldhandler\_get\_buffer\_interval\_start}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{worldhandler\_get\_buffer\_interval\_start()}{worldhandler\_get\_buffer\_interval\_start()}}
-{\footnotesize\ttfamily size\+\_\+t worldhandler\+\_\+get\+\_\+buffer\+\_\+interval\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Get the Starting \doxylink{structInterval}{Interval} of Active Game Objects on the Buffer. 
-
-\Hypertarget{world__handler_8h_a9bca611fe4fed1ad0dae65e6cd62c027}\label{world__handler_8h_a9bca611fe4fed1ad0dae65e6cd62c027} 
-\index{world\_handler.h@{world\_handler.h}!worldhandler\_get\_pool\_interval\_end@{worldhandler\_get\_pool\_interval\_end}}
-\index{worldhandler\_get\_pool\_interval\_end@{worldhandler\_get\_pool\_interval\_end}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{worldhandler\_get\_pool\_interval\_end()}{worldhandler\_get\_pool\_interval\_end()}}
-{\footnotesize\ttfamily size\+\_\+t worldhandler\+\_\+get\+\_\+pool\+\_\+interval\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\Hypertarget{world__handler_8h_aa738b5d7d3931cf75b1011bb14ce3ea9}\index{world\_handler.h@{world\_handler.h}!world\_handler\_new\_world@{world\_handler\_new\_world}}
+\index{world\_handler\_new\_world@{world\_handler\_new\_world}!world\_handler.h@{world\_handler.h}}
+\doxysubsubsection{\texorpdfstring{world\_handler\_new\_world()}{world\_handler\_new\_world()}}
+{\footnotesize\ttfamily \label{world__handler_8h_aa738b5d7d3931cf75b1011bb14ce3ea9} 
+bool world\+\_\+handler\+\_\+new\+\_\+world (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}}]{handler}{, }\item[{struct \doxymbox{\hyperlink{structWorldConfig}{World\+Config}}}]{config}{}\end{DoxyParamCaption})}
 
 
 
-Get the Ending Inverval of Active Game Objects on the Pool. 
-
-\Hypertarget{world__handler_8h_a605ad5be32d11a5c23e13cbb718e97e7}\label{world__handler_8h_a605ad5be32d11a5c23e13cbb718e97e7} 
-\index{world\_handler.h@{world\_handler.h}!worldhandler\_get\_pool\_interval\_start@{worldhandler\_get\_pool\_interval\_start}}
-\index{worldhandler\_get\_pool\_interval\_start@{worldhandler\_get\_pool\_interval\_start}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{worldhandler\_get\_pool\_interval\_start()}{worldhandler\_get\_pool\_interval\_start()}}
-{\footnotesize\ttfamily size\+\_\+t worldhandler\+\_\+get\+\_\+pool\+\_\+interval\+\_\+start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Get the Starting \doxylink{structInterval}{Interval} of Active Game Objects on the Pool. 
-
-\Hypertarget{world__handler_8h_aa831aec5f4d9e77745d6d17ef4431c11}\label{world__handler_8h_aa831aec5f4d9e77745d6d17ef4431c11} 
-\index{world\_handler.h@{world\_handler.h}!worldhandler\_load\_world@{worldhandler\_load\_world}}
-\index{worldhandler\_load\_world@{worldhandler\_load\_world}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{worldhandler\_load\_world()}{worldhandler\_load\_world()}}
-{\footnotesize\ttfamily void worldhandler\+\_\+load\+\_\+world (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structWorld}{World}}}]{world }\end{DoxyParamCaption})}
-
-\Hypertarget{world__handler_8h_a98ba81955337d325b802d5b2babf530a}\label{world__handler_8h_a98ba81955337d325b802d5b2babf530a} 
-\index{world\_handler.h@{world\_handler.h}!worldhandler\_realloc\_pool@{worldhandler\_realloc\_pool}}
-\index{worldhandler\_realloc\_pool@{worldhandler\_realloc\_pool}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{worldhandler\_realloc\_pool()}{worldhandler\_realloc\_pool()}}
-{\footnotesize\ttfamily bool worldhandler\+\_\+realloc\+\_\+pool (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{new\+Size }\end{DoxyParamCaption})}
-
-
-
-Reallocate the World\+Handler Object Pool. 
+Allocates and adds a new world to the worlds vector. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em new\+Size} & \\
+{\em handler} & \\
+\hline
+{\em config} & Deepcopied \doxylink{structWorldConfig}{World\+Config} to new world \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Success of Reallocation. 
+false on allocation failure 
 \end{DoxyReturn}
-\begin{DoxyWarning}{Warning}
-
-\end{DoxyWarning}
-\Hypertarget{world__handler_8h_ae195eef01019a30f5b09e6e4a871d272}\label{world__handler_8h_ae195eef01019a30f5b09e6e4a871d272} 
-\index{world\_handler.h@{world\_handler.h}!worldhandler\_remove\_from\_buffer@{worldhandler\_remove\_from\_buffer}}
-\index{worldhandler\_remove\_from\_buffer@{worldhandler\_remove\_from\_buffer}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{worldhandler\_remove\_from\_buffer()}{worldhandler\_remove\_from\_buffer()}}
-{\footnotesize\ttfamily bool worldhandler\+\_\+remove\+\_\+from\+\_\+buffer (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{start,  }\item[{size\+\_\+t}]{end }\end{DoxyParamCaption})}
+\Hypertarget{world__handler_8h_acbcd3f1157afc60762f4e8ee311f3c85}\index{world\_handler.h@{world\_handler.h}!world\_handler\_set\_active@{world\_handler\_set\_active}}
+\index{world\_handler\_set\_active@{world\_handler\_set\_active}!world\_handler.h@{world\_handler.h}}
+\doxysubsubsection{\texorpdfstring{world\_handler\_set\_active()}{world\_handler\_set\_active()}}
+{\footnotesize\ttfamily \label{world__handler_8h_acbcd3f1157afc60762f4e8ee311f3c85} 
+bool world\+\_\+handler\+\_\+set\+\_\+active (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}}]{handler}{, }\item[{struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}}]{world}{}\end{DoxyParamCaption})}
 
 
 
-Nullifies Objects within the \doxylink{structInterval}{Interval} of the World\+Handler\textquotesingle{}s Object Buffer. 
+Sets a new world as active Calls active-\/\texorpdfstring{$>$}{>}close() replaces the active pointer in \doxylink{structWorldHandler}{World\+Handler}. Then calls active-\/\texorpdfstring{$>$}{>}start(). 
 
 
 \begin{DoxyParams}{Parameters}
-{\em start} & Index to start removing from. Inclusive \\
+{\em handler} & \\
 \hline
-{\em end} & Index to stop removing at. Inclusive \\
+{\em world} & \\
 \hline
 \end{DoxyParams}
+\begin{DoxyNote}{Note}
+you are responsible for calling world-\/\texorpdfstring{$>$}{>}init for any pre-\/loading 
+
+This will not deallocate the currently active world. 
+\end{DoxyNote}
 \begin{DoxyReturn}{Returns}
-Success of the operation. 
+false on invalid argument 
 \end{DoxyReturn}
-\Hypertarget{world__handler_8h_a221cbcea8ef8b8b01770ff78e192b550}\label{world__handler_8h_a221cbcea8ef8b8b01770ff78e192b550} 
-\index{world\_handler.h@{world\_handler.h}!worldhandler\_remove\_from\_pool@{worldhandler\_remove\_from\_pool}}
-\index{worldhandler\_remove\_from\_pool@{worldhandler\_remove\_from\_pool}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{worldhandler\_remove\_from\_pool()}{worldhandler\_remove\_from\_pool()}}
-{\footnotesize\ttfamily bool worldhandler\+\_\+remove\+\_\+from\+\_\+pool (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{start,  }\item[{size\+\_\+t}]{end }\end{DoxyParamCaption})}
+\Hypertarget{world__handler_8h_aefbe3dea91c989ed83c0116c09dc1678}\index{world\_handler.h@{world\_handler.h}!world\_handler\_update\_active@{world\_handler\_update\_active}}
+\index{world\_handler\_update\_active@{world\_handler\_update\_active}!world\_handler.h@{world\_handler.h}}
+\doxysubsubsection{\texorpdfstring{world\_handler\_update\_active()}{world\_handler\_update\_active()}}
+{\footnotesize\ttfamily \label{world__handler_8h_aefbe3dea91c989ed83c0116c09dc1678} 
+bool world\+\_\+handler\+\_\+update\+\_\+active (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}}]{handler}{}\end{DoxyParamCaption})}
 
 
 
-Nullifies Objects within the \doxylink{structInterval}{Interval} of the World\+Handler\textquotesingle{}s Object Pool. 
+Update the current active world. Runs world-\/\texorpdfstring{$>$}{>}loop. Handles physics updates, updates shape poses. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em start} & Index to start removing from. Inclusive \\
-\hline
-{\em end} & Index to stop removing at. Inclusive \\
+{\em handler} & \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Success of the operation. 
+false when some struct member is NULL 
 \end{DoxyReturn}
-\Hypertarget{world__handler_8h_aadb3ffc662df0a01734a856c1c331703}\label{world__handler_8h_aadb3ffc662df0a01734a856c1c331703} 
-\index{world\_handler.h@{world\_handler.h}!worldhandler\_set\_buffer\_interval@{worldhandler\_set\_buffer\_interval}}
-\index{worldhandler\_set\_buffer\_interval@{worldhandler\_set\_buffer\_interval}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{worldhandler\_set\_buffer\_interval()}{worldhandler\_set\_buffer\_interval()}}
-{\footnotesize\ttfamily bool worldhandler\+\_\+set\+\_\+buffer\+\_\+interval (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{start,  }\item[{size\+\_\+t}]{end }\end{DoxyParamCaption})}
-
-
-
-Set the \doxylink{structInterval}{Interval} of Active Game Objects on the Buffer. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em start} & Index inclusive \\
-\hline
-{\em end} & Index inclusive \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Validity of operation. 
-\end{DoxyReturn}
-\begin{DoxyWarning}{Warning}
-Will not stop you from making NULL Game\+Objects active. 
-\end{DoxyWarning}
-\Hypertarget{world__handler_8h_ac3915e13c15289ce0c2921e2c493b430}\label{world__handler_8h_ac3915e13c15289ce0c2921e2c493b430} 
-\index{world\_handler.h@{world\_handler.h}!worldhandler\_set\_pool\_interval@{worldhandler\_set\_pool\_interval}}
-\index{worldhandler\_set\_pool\_interval@{worldhandler\_set\_pool\_interval}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{worldhandler\_set\_pool\_interval()}{worldhandler\_set\_pool\_interval()}}
-{\footnotesize\ttfamily bool worldhandler\+\_\+set\+\_\+pool\+\_\+interval (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{start,  }\item[{size\+\_\+t}]{end }\end{DoxyParamCaption})}
-
-
-
-Set the \doxylink{structInterval}{Interval} of Active Game Objects on the Pool. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em start} & Index inclusive \\
-\hline
-{\em end} & Index inclusive \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Validity of operation. 
-\end{DoxyReturn}
-\begin{DoxyWarning}{Warning}
-Will not stop you from making NULL Game\+Objects active. 
-\end{DoxyWarning}
-
-
-\doxysubsection{Variable Documentation}
-\Hypertarget{world__handler_8h_affd5977b4b5cfc908f92fb6f7e1b6039}\label{world__handler_8h_affd5977b4b5cfc908f92fb6f7e1b6039} 
-\index{world\_handler.h@{world\_handler.h}!object\_buffer@{object\_buffer}}
-\index{object\_buffer@{object\_buffer}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{object\_buffer}{object\_buffer}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{structGameObjectBuffer}{Game\+Object\+Buffer}} object\+\_\+buffer}
-
-\Hypertarget{world__handler_8h_a2e7d8b09fe98fa6a93ee3f372c14fe72}\label{world__handler_8h_a2e7d8b09fe98fa6a93ee3f372c14fe72} 
-\index{world\_handler.h@{world\_handler.h}!object\_pool@{object\_pool}}
-\index{object\_pool@{object\_pool}!world\_handler.h@{world\_handler.h}}
-\doxysubsubsection{\texorpdfstring{object\_pool}{object\_pool}}
-{\footnotesize\ttfamily struct Game\+Object\+Vector object\+\_\+pool}
-

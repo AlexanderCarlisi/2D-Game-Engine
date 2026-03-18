@@ -1,2 +1,139 @@
-\doxysection{src/world\+\_\+handler.c File Reference}
+\doxysection{src/\+world\+\_\+handler.c File Reference}
 \hypertarget{world__handler_8c}{}\label{world__handler_8c}\index{src/world\_handler.c@{src/world\_handler.c}}
+{\ttfamily \+\#include "{}world\+\_\+handler.\+h"{}}\newline
+{\ttfamily \+\#include $<$math.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdio.\+h$>$}\newline
+{\ttfamily \+\#include "{}logger.\+h"{}}\newline
+Include dependency graph for world\+\_\+handler.\+c:\+
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{world__handler_8c_a5aa3e0ede79a5b3d2206a9556831c13d}{DEFINE\+\_\+\+VECTOR}} (World\+Vector, vector\+\_\+world, struct \doxymbox{\hyperlink{structWorld}{World}})
+\item 
+struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{world__handler_8c_a7c0c1a1fa5af09d0542c5791d728c86b}{world\+\_\+handler\+\_\+new}} ()
+\begin{DoxyCompactList}\small\item\em Allocate a new \doxylink{structWorldHandler}{World\+Handler}. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{world__handler_8c_acbcd3f1157afc60762f4e8ee311f3c85}{world\+\_\+handler\+\_\+set\+\_\+active}} (struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}handler, struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}world)
+\begin{DoxyCompactList}\small\item\em Sets a new world as active Calls active-\/\texorpdfstring{$>$}{>}close() replaces the active pointer in \doxylink{structWorldHandler}{World\+Handler}. Then calls active-\/\texorpdfstring{$>$}{>}start(). \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{world__handler_8c_aa738b5d7d3931cf75b1011bb14ce3ea9}{world\+\_\+handler\+\_\+new\+\_\+world}} (struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}handler, struct \doxymbox{\hyperlink{structWorldConfig}{World\+Config}} config)
+\begin{DoxyCompactList}\small\item\em Allocates and adds a new world to the worlds vector. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{world__handler_8c_ab4f78bc733dbceb57071d1a405258d66}{world\+\_\+handler\+\_\+free}} (struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}handler)
+\begin{DoxyCompactList}\small\item\em Deallocates all worlds stored in the handler\textquotesingle{}s worlds vector. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{world__handler_8c_ad4a220e47d3dcf1b60c449ddc58cfd78}{\+\_\+update\+\_\+vertex\+\_\+poses}} (struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}world, struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}object)
+\item 
+bool \doxymbox{\hyperlink{world__handler_8c_aefbe3dea91c989ed83c0116c09dc1678}{world\+\_\+handler\+\_\+update\+\_\+active}} (struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}handler)
+\begin{DoxyCompactList}\small\item\em Update the current active world. Runs world-\/\texorpdfstring{$>$}{>}loop. Handles physics updates, updates shape poses. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{world__handler_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{world__handler_8c_ad4a220e47d3dcf1b60c449ddc58cfd78}\index{world\_handler.c@{world\_handler.c}!\_update\_vertex\_poses@{\_update\_vertex\_poses}}
+\index{\_update\_vertex\_poses@{\_update\_vertex\_poses}!world\_handler.c@{world\_handler.c}}
+\doxysubsubsection{\texorpdfstring{\_update\_vertex\_poses()}{\_update\_vertex\_poses()}}
+{\footnotesize\ttfamily \label{world__handler_8c_ad4a220e47d3dcf1b60c449ddc58cfd78} 
+void \+\_\+update\+\_\+vertex\+\_\+poses (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}}]{world}{, }\item[{struct \doxymbox{\hyperlink{structGameObject}{Game\+Object}} \texorpdfstring{$\ast$}{*}}]{object}{}\end{DoxyParamCaption})}
+
+\Hypertarget{world__handler_8c_a5aa3e0ede79a5b3d2206a9556831c13d}\index{world\_handler.c@{world\_handler.c}!DEFINE\_VECTOR@{DEFINE\_VECTOR}}
+\index{DEFINE\_VECTOR@{DEFINE\_VECTOR}!world\_handler.c@{world\_handler.c}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_VECTOR()}{DEFINE\_VECTOR()}}
+{\footnotesize\ttfamily \label{world__handler_8c_a5aa3e0ede79a5b3d2206a9556831c13d} 
+DEFINE\+\_\+\+VECTOR (\begin{DoxyParamCaption}\item[{World\+Vector}]{}{, }\item[{vector\+\_\+world}]{}{, }\item[{struct \doxymbox{\hyperlink{structWorld}{World}}}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{world__handler_8c_ab4f78bc733dbceb57071d1a405258d66}\index{world\_handler.c@{world\_handler.c}!world\_handler\_free@{world\_handler\_free}}
+\index{world\_handler\_free@{world\_handler\_free}!world\_handler.c@{world\_handler.c}}
+\doxysubsubsection{\texorpdfstring{world\_handler\_free()}{world\_handler\_free()}}
+{\footnotesize\ttfamily \label{world__handler_8c_ab4f78bc733dbceb57071d1a405258d66} 
+bool world\+\_\+handler\+\_\+free (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}}]{handler}{}\end{DoxyParamCaption})}
+
+
+
+Deallocates all worlds stored in the handler\textquotesingle{}s worlds vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This is called on clean close by 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+\doxylink{platform_8c}{platform.\+c}. 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+false on deallocation failure 
+\end{DoxyReturn}
+\Hypertarget{world__handler_8c_a7c0c1a1fa5af09d0542c5791d728c86b}\index{world\_handler.c@{world\_handler.c}!world\_handler\_new@{world\_handler\_new}}
+\index{world\_handler\_new@{world\_handler\_new}!world\_handler.c@{world\_handler.c}}
+\doxysubsubsection{\texorpdfstring{world\_handler\_new()}{world\_handler\_new()}}
+{\footnotesize\ttfamily \label{world__handler_8c_a7c0c1a1fa5af09d0542c5791d728c86b} 
+struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*} world\+\_\+handler\+\_\+new (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Allocate a new \doxylink{structWorldHandler}{World\+Handler}. 
+
+\Hypertarget{world__handler_8c_aa738b5d7d3931cf75b1011bb14ce3ea9}\index{world\_handler.c@{world\_handler.c}!world\_handler\_new\_world@{world\_handler\_new\_world}}
+\index{world\_handler\_new\_world@{world\_handler\_new\_world}!world\_handler.c@{world\_handler.c}}
+\doxysubsubsection{\texorpdfstring{world\_handler\_new\_world()}{world\_handler\_new\_world()}}
+{\footnotesize\ttfamily \label{world__handler_8c_aa738b5d7d3931cf75b1011bb14ce3ea9} 
+bool world\+\_\+handler\+\_\+new\+\_\+world (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}}]{handler}{, }\item[{struct \doxymbox{\hyperlink{structWorldConfig}{World\+Config}}}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Allocates and adds a new world to the worlds vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & \\
+\hline
+{\em config} & Deepcopied \doxylink{structWorldConfig}{World\+Config} to new world \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false on allocation failure 
+\end{DoxyReturn}
+\Hypertarget{world__handler_8c_acbcd3f1157afc60762f4e8ee311f3c85}\index{world\_handler.c@{world\_handler.c}!world\_handler\_set\_active@{world\_handler\_set\_active}}
+\index{world\_handler\_set\_active@{world\_handler\_set\_active}!world\_handler.c@{world\_handler.c}}
+\doxysubsubsection{\texorpdfstring{world\_handler\_set\_active()}{world\_handler\_set\_active()}}
+{\footnotesize\ttfamily \label{world__handler_8c_acbcd3f1157afc60762f4e8ee311f3c85} 
+bool world\+\_\+handler\+\_\+set\+\_\+active (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}}]{handler}{, }\item[{struct \doxymbox{\hyperlink{structWorld}{World}} \texorpdfstring{$\ast$}{*}}]{world}{}\end{DoxyParamCaption})}
+
+
+
+Sets a new world as active Calls active-\/\texorpdfstring{$>$}{>}close() replaces the active pointer in \doxylink{structWorldHandler}{World\+Handler}. Then calls active-\/\texorpdfstring{$>$}{>}start(). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & \\
+\hline
+{\em world} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+you are responsible for calling world-\/\texorpdfstring{$>$}{>}init for any pre-\/loading 
+
+This will not deallocate the currently active world. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+false on invalid argument 
+\end{DoxyReturn}
+\Hypertarget{world__handler_8c_aefbe3dea91c989ed83c0116c09dc1678}\index{world\_handler.c@{world\_handler.c}!world\_handler\_update\_active@{world\_handler\_update\_active}}
+\index{world\_handler\_update\_active@{world\_handler\_update\_active}!world\_handler.c@{world\_handler.c}}
+\doxysubsubsection{\texorpdfstring{world\_handler\_update\_active()}{world\_handler\_update\_active()}}
+{\footnotesize\ttfamily \label{world__handler_8c_aefbe3dea91c989ed83c0116c09dc1678} 
+bool world\+\_\+handler\+\_\+update\+\_\+active (\begin{DoxyParamCaption}\item[{struct \doxymbox{\hyperlink{structWorldHandler}{World\+Handler}} \texorpdfstring{$\ast$}{*}}]{handler}{}\end{DoxyParamCaption})}
+
+
+
+Update the current active world. Runs world-\/\texorpdfstring{$>$}{>}loop. Handles physics updates, updates shape poses. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false when some struct member is NULL 
+\end{DoxyReturn}

@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['framebuffer_0',['framebuffer',['../structRenderer.html#abb2e16fd086af7b187d4daed32f6c795',1,'Renderer']]],
-  ['frames_5fper_5fsecond_1',['frames_per_second',['../structApplicationConfig.html#a8896553be1205afdcf37c9de66be3448',1,'ApplicationConfig']]]
+  ['dealloc_0',['dealloc',['../structWorld.html#a5ef9180cc65cfdf646cccd833cf45224',1,'World']]],
+  ['debug_5fcollision_5fenter_5ffunction_1',['debug_collision_enter_function',['../collision__box_8c.html#a5ecadc88d4c4e45cd7f057b9866c2be8',1,'collision_box.c']]],
+  ['debug_5fcollision_5fexit_5ffunction_2',['debug_collision_exit_function',['../collision__box_8c.html#a7cbb9cab14ec44f8af0769058f5d0260',1,'collision_box.c']]],
+  ['debug_5fcolor_3',['debug_color',['../structCollisionBox.html#a5b52666dd1a3ec41becf5bc2a2f64665',1,'CollisionBox']]],
+  ['declare_5fvector_4',['DECLARE_VECTOR',['../vector_8h.html#a5bcb7e8eef1611a13d677e477fcddde1',1,'DECLARE_VECTOR:&#160;vector.h'],['../platform_8h.html#adac60cd07d64dec5743dab23f4279fe9',1,'DECLARE_VECTOR(WindowConfigVector, vector_window_config, struct WindowConfig):&#160;platform.h'],['../world_8h.html#afe09ccd1a17a66642a934c88a9b0b58c',1,'DECLARE_VECTOR(GameObjectVector, vector_game_object, struct GameObject):&#160;world.h'],['../world__handler_8h.html#aed8a3f979e2f2bea1b42de8ecfbc69fc',1,'DECLARE_VECTOR(WorldVector, vector_world, struct World):&#160;world_handler.h']]],
+  ['define_5fvector_5',['DEFINE_VECTOR',['../vector_8h.html#a8de777c307fe27198a82849b9da6b227',1,'DEFINE_VECTOR:&#160;vector.h'],['../shape_8c.html#ad2bb96e3c3e5bc30005ed91bbb34bff9',1,'DEFINE_VECTOR(VertexVector, vector_vertex, struct Vertex):&#160;shape.c'],['../shape_8c.html#a544b36ecd3e5790b103cbf2e3da28c2c',1,'DEFINE_VECTOR(PoseVector, vector_pose, struct Pose):&#160;shape.c'],['../world_8c.html#acb07e24337846579c5f21047c0af057e',1,'DEFINE_VECTOR(GameObjectVector, vector_game_object, struct GameObject):&#160;world.c'],['../world__handler_8c.html#a5aa3e0ede79a5b3d2206a9556831c13d',1,'DEFINE_VECTOR(WorldVector, vector_world, struct World):&#160;world_handler.c']]],
+  ['dynamic_6',['DYNAMIC',['../game__object_8h.html#a842c5e2e69277690b064bf363c017980aaac65e0072e6ff1f4c3209d2fdd8730a',1,'game_object.h']]]
 ];

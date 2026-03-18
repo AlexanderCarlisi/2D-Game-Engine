@@ -1,26 +1,23 @@
-\doxysection{src/main.c File Reference}
+\doxysection{src/\+main.c File Reference}
 \hypertarget{main_8c}{}\label{main_8c}\index{src/main.c@{src/main.c}}
-{\ttfamily \#include "{}platform.\+h"{}}\newline
-{\ttfamily \#include "{}app\+\_\+config.\+h"{}}\newline
-Include dependency graph for main.\+c\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=244pt]{main_8c__incl}
-\end{center}
-\end{figure}
+{\ttfamily \+\#include "{}engine\+\_\+options.\+h"{}}\newline
+{\ttfamily \+\#include "{}logger.\+h"{}}\newline
+Include dependency graph for main.\+c:\+
+% FIG 0
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+int \doxymbox{\hyperlink{main_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\+[$\,$]\+)
 \end{DoxyCompactItemize}
 
 
+\label{doc-func-members}
+\Hypertarget{main_8c_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
-\index{main.c@{main.c}!main@{main}}
+\Hypertarget{main_8c_a0ddf1224851353fc92bfbff6f499fa97}\index{main.c@{main.c}!main@{main}}
 \index{main@{main}!main.c@{main.c}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{main_8c_a0ddf1224851353fc92bfbff6f499fa97} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\+[$\,$]\+}\end{DoxyParamCaption})}
 
+args\+[0]\+ = Filename, implicit args\+[1]\+ = Log to file property \textquotesingle{}0\textquotesingle{}:\+ Append to file \textquotesingle{}1\textquotesingle{}:\+ Clear file, Write 

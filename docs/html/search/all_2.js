@@ -1,16 +1,10 @@
 var searchData=
 [
-  ['clear_0',['clear',['../structRenderer.html#ae0020ce7ddbc2f12305cf5eda8925973',1,'Renderer']]],
-  ['close_1',['close',['../structWorld.html#a16643d99ec2bd3c5c1e03829f1993511',1,'World']]],
-  ['collider_5fvector_2',['collider_vector',['../structGameObject.html#a3169e0b15ff183fd37cb5d800231db7d',1,'GameObject::collider_vector'],['../structGameObjectConfig.html#a15a1dc4f7a4eeee8524a43c1255ced01',1,'GameObjectConfig::collider_vector']]],
-  ['collision_5fbox_2ec_3',['collision_box.c',['../collision__box_8c.html',1,'']]],
-  ['collision_5fbox_2eh_4',['collision_box.h',['../collision__box_8h.html',1,'']]],
-  ['collision_5fbox_5fcreate_5fdebug_5',['collision_box_create_debug',['../collision__box_8h.html#a92e9df6fbad82605d70d3bb7a1e2bd95',1,'collision_box_create_debug(uint32_t debugColor, uint32_t shapeColor, struct Pose shapeSize):&#160;collision_box.c'],['../collision__box_8c.html#a92e9df6fbad82605d70d3bb7a1e2bd95',1,'collision_box_create_debug(uint32_t debugColor, uint32_t shapeColor, struct Pose shapeSize):&#160;collision_box.c']]],
-  ['collisionbox_6',['collisionbox',['../structCollisionBox.html',1,'CollisionBox'],['../collision__box_8h.html#afca8eb5da995cc07e3c41532c053ab33',1,'CollisionBox:&#160;collision_box.h']]],
-  ['color_7',['color',['../structShape.html#aea1151cb3fa07951bb5df63b829d2339',1,'Shape']]],
-  ['color_2ec_8',['color.c',['../color_8c.html',1,'']]],
-  ['color_2eh_9',['color.h',['../color_8h.html',1,'']]],
-  ['config_10',['config',['../structWorld.html#a66ca57b1328af18d931f52cad66a5d3f',1,'World']]],
-  ['convex_11',['convex',['../structShape.html#af02ff13496bc45baa618735897d06a3f',1,'Shape']]],
-  ['count_12',['count',['../structGameObjectBuffer.html#adda46d74f5cf10a0ef7fb23cafd6e177',1,'GameObjectBuffer']]]
+  ['abstract_0',['Abstract',['../md_README.html#autotoc_md1',1,'']]],
+  ['accumulator_1',['accumulator',['../structWindowConfig.html#af2d53f3dafdc13e5840b1970f7d899a3',1,'WindowConfig']]],
+  ['active_2',['active',['../structWorldHandler.html#af72f13585998a46d0e378b0fb8ba8446',1,'WorldHandler']]],
+  ['and_20run_3',['How to Build and Run',['../md_README.html#autotoc_md4',1,'']]],
+  ['aspect_4',['Aspect',['../structAspect.html',1,'Aspect'],['../platform_8h.html#ac5dd0e56809b21a4edcabb0003955c3b',1,'Aspect:&#160;platform.h']]],
+  ['atom_5fwm_5fdelete_5fwindow_5',['ATOM_WM_DELETE_WINDOW',['../platform_8c.html#adfaf1d350e9ebb985ff0e213f8fbfa7b',1,'platform.c']]],
+  ['atom_5fwm_5fprotocols_6',['ATOM_WM_PROTOCOLS',['../platform_8c.html#adceab1b8a6dd447b18cc534ba47f80a9',1,'platform.c']]]
 ];

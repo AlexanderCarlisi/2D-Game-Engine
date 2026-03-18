@@ -1,53 +1,56 @@
 \doxysection{world.\+h}
 \hypertarget{world_8h_source}{}\label{world_8h_source}\index{include/world.h@{include/world.h}}
-\mbox{\hyperlink{world_8h}{Go to the documentation of this file.}}
+\doxymbox{\hyperlink{world_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ WORLD\_H}}
 \DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ WORLD\_H}}
 \DoxyCodeLine{00003\ }
-\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{world__config_8h}{world\_config.h}}"{}}}
-\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{game__object_8h}{game\_object.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{engine__options_8h}{engine\_options.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{game__object_8h}{game\_object.h}}"{}}}
 \DoxyCodeLine{00006\ }
-\DoxyCodeLine{00007\ }
-\DoxyCodeLine{00008\ \mbox{\hyperlink{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}{DECLARE\_VECTOR}}(GameObjectVector,\ vector\_game\_object,\ \textcolor{keyword}{struct}\ \mbox{\hyperlink{structGameObject}{GameObject}})}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ WORLD\_OBJECT\_BUFFER\_SIZE\ EO\_GAME\_OBJECT\_BUFFER}}
+\DoxyCodeLine{00008\ \doxymbox{\hyperlink{vector_8h_a5bcb7e8eef1611a13d677e477fcddde1}{DECLARE\_VECTOR}}(GameObjectVector,\ vector\_game\_object,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structGameObject}{GameObject}});}
 \DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ typedef\ struct\ \mbox{\hyperlink{structWorld}{World}}\ \{}
-\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structWorldConfig}{WorldConfig}}\ config;}
-\DoxyCodeLine{00012\ \ \ \ \ void\ (*init)();\ \ \ \ \ \textcolor{comment}{//\ Gets\ called\ when\ WorldHandler\ load\ World}}
-\DoxyCodeLine{00013\ \ \ \ \ void\ (*start)();\ \ \ \ \textcolor{comment}{//\ Gets\ called\ when\ set\ to\ Active\ World}}
-\DoxyCodeLine{00014\ \ \ \ \ void\ (*loop)();\ \ \ \ \ \textcolor{comment}{//\ Called\ every\ Fixed\ Update.\ logic\ loop}}
-\DoxyCodeLine{00015\ \ \ \ \ void\ (*close)();\ \ \ \ \textcolor{comment}{//\ Called\ when\ another\ World\ gets\ set\ as\ Active.}}
-\DoxyCodeLine{00016\ \}\ \mbox{\hyperlink{structWorld}{World}};}
-\DoxyCodeLine{00017\ }
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \textcolor{comment}{//\ //\ Initializes\ the\ World}}
-\DoxyCodeLine{00020\ \textcolor{comment}{//\ int\ world\_init(struct\ World*);}}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{comment}{//\ //\ Add\ a\ GameObject\ to\ the\ world-\/>\ objects\ dynamic\ array,\ handles\ errors.}}
-\DoxyCodeLine{00023\ \textcolor{comment}{//\ int\ world\_insert\_object(struct\ World*\ self,\ struct\ GameObject*\ objectptr);}}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{comment}{//\ //\ Update\ all\ GameObject\ Bodies,\ should\ be\ run\ every\ Tick\ at\ a\ fixed\ update\ rate.}}
-\DoxyCodeLine{00026\ \textcolor{comment}{//\ void\ world\_update\_physics(struct\ World*\ self);}}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{comment}{//\ //\ Allocates\ a\ GameObject,\ calls\ world\_insert\_object\ automatically.}}
-\DoxyCodeLine{00029\ \textcolor{comment}{//\ //\ Sets\ passed\ in\ Pointer\ value.}}
-\DoxyCodeLine{00030\ \textcolor{comment}{//\ //\ Returns\ 0:\ Allocation\ Failure,\ 1:\ Allocation\ Successful}}
-\DoxyCodeLine{00031\ \textcolor{comment}{//\ int\ world\_create\_object(struct\ World*\ self,\ struct\ GameObject**\ objectptr);}}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \textcolor{comment}{//\ //\ Deallocates\ a\ GameObject,\ and\ removes\ it\ from\ the\ Dynamic\ Array.}}
-\DoxyCodeLine{00034\ \textcolor{comment}{//\ //\ Doesn't\ automatically\ reallocate\ the\ Array,\ if\ you\ want\ to\ deallocate\ memory\ use\ @reallocate\_objects\ function.}}
-\DoxyCodeLine{00035\ \textcolor{comment}{//\ //\ param\ worldIndex\ should\ be\ provided\ from\ the\ GameObject\ you\ want\ to\ destroy.}}
-\DoxyCodeLine{00036\ \textcolor{comment}{//\ //\ GameObjects\ store\ their\ index\ in\ the\ array\ so\ we\ can\ get\ efficient\ O(1)\ removals,\ with\ minimal\ memory\ overhead.}}
-\DoxyCodeLine{00037\ \textcolor{comment}{//\ int\ world\_destroy\_object(struct\ World*\ self,\ int\ worldIndex);}}
-\DoxyCodeLine{00038\ }
-\DoxyCodeLine{00039\ \textcolor{comment}{//\ //\ Reallocates\ Objects\ array,\ this\ allows\ for\ users\ of\ the\ Engine\ to\ optimize\ themselves\ selves\ without\ relying\ on\ automatic\ reallocations.}}
-\DoxyCodeLine{00040\ \textcolor{comment}{//\ //\ It\ is\ recommended\ to\ do\ this\ whenever\ adding\ or\ removing\ inconsistant\ or\ large\ amounts\ of\ data\ at\ a\ time.}}
-\DoxyCodeLine{00041\ \textcolor{comment}{//\ //\ You\ should\ change\ objectsSize\ and\ reallocationRatio\ based\ on\ your\ game's\ needs.}}
-\DoxyCodeLine{00042\ \textcolor{comment}{//\ int\ world\_reallocate\_objects(struct\ World*\ self);}}
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \textcolor{comment}{//\ //\ Free\ all\ World\ resources.}}
-\DoxyCodeLine{00045\ \textcolor{comment}{//\ void\ world\_deallocate(struct\ World*\ self);}}
-\DoxyCodeLine{00046\ }
-\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ WORLD\_H}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structInterval}{Interval}}\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{structInterval_a165fc98b82c980d8ae885c07e30fbba1}{start}};}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{structInterval_ad364452d2207c9102f838c44d12abaa7}{end}};}
+\DoxyCodeLine{00021\ \}\ \doxymbox{\hyperlink{structInterval}{Interval}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structWorldConfig}{WorldConfig}}\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structInterval}{Interval}}\ \doxymbox{\hyperlink{structWorldConfig_a6ae0fa7b5fa38da0340d7a8e30cd16ae}{buffer\_interval}};}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structInterval}{Interval}}\ \doxymbox{\hyperlink{structWorldConfig_a4697d0b5a07ce94ac4d91a50ed79fa71}{pool\_interval}};}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \doxymbox{\hyperlink{structWorldConfig_a03ece8fcf8f07dd2264f605af6f56b9b}{pool\_size}};}
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{structWorldConfig_a6c4a5be90ceb5f830142f93e8c2248ec}{reallocation\_ratio}};}
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{structWorldConfig_aaee2c8e1796b1cc662d65cdaf8528774}{gravity\_field}};}
+\DoxyCodeLine{00052\ \ \ \ \ uint\ \doxymbox{\hyperlink{structWorldConfig_a05233d5f5cc8e9492abd8a292afce000}{pixels\_per\_meter}};}
+\DoxyCodeLine{00053\ \}\ \doxymbox{\hyperlink{structWorldConfig}{WorldConfig}};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00094\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structWorld}{World}}\ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structWorldConfig}{WorldConfig}}\ \doxymbox{\hyperlink{structWorld_a66ca57b1328af18d931f52cad66a5d3f}{config}};}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structGameObject}{GameObject}}\ \doxymbox{\hyperlink{structWorld_a0474713bb025d33bd2353e50be4a0414}{object\_buffer}}[\doxymbox{\hyperlink{world_8h_af196f4dd741ed06cb6c3ac371abb1322}{WORLD\_OBJECT\_BUFFER\_SIZE}}];}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{struct\ }GameObjectVector\ \doxymbox{\hyperlink{structWorld_a9ae4d496788799c84b0438aeb304fd5f}{object\_pool}};}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structInterval}{Interval}}\ \doxymbox{\hyperlink{structWorld_a52f7c5d7b2493171f2ecfadd824f5e1e}{interval\_buffer}};}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structInterval}{Interval}}\ \doxymbox{\hyperlink{structWorld_a79b43f49c6e0e21c6ecc32a0ff9489bc}{interval\_pool}};}
+\DoxyCodeLine{00100\ \ \ \ \ void\ (*\doxymbox{\hyperlink{structWorld_ad8006b94b08ecd30068e17559c22ef59}{init}})();}
+\DoxyCodeLine{00101\ \ \ \ \ void\ (*\doxymbox{\hyperlink{structWorld_aa44d80fc35d20c856bd0d3cbaac6ae7e}{start}})();}
+\DoxyCodeLine{00102\ \ \ \ \ void\ (*\doxymbox{\hyperlink{structWorld_afffb83c69d32962df1eea69bb2ca3aac}{loop}})();}
+\DoxyCodeLine{00103\ \ \ \ \ void\ (*\doxymbox{\hyperlink{structWorld_a16643d99ec2bd3c5c1e03829f1993511}{close}})();}
+\DoxyCodeLine{00104\ \ \ \ \ void\ (*\doxymbox{\hyperlink{structWorld_a5ef9180cc65cfdf646cccd833cf45224}{dealloc}})();}
+\DoxyCodeLine{00105\ \}\ \doxymbox{\hyperlink{structWorld}{World}};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00110\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{world_8h_a942d5b3d67a1fef20d1b97c469ff42ce}{world\_new}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWorld}{World}}*\ world,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWorldConfig}{WorldConfig}}\ config);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00115\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{world_8h_a3771accf8d5d3db698bca0e6a97cf598}{world\_realloc\_pool}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWorld}{World}}*\ world,\ \textcolor{keywordtype}{size\_t}\ newSize);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00120\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{world_8h_a8c0c701c7b1804c85d393c8bd263398e}{world\_remove\_from\_buffer}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWorld}{World}}*\ world,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structInterval}{Interval}}*\ interval);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00125\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{world_8h_a8012ea4d64f0a51f45b7612c2b00eed2}{world\_remove\_from\_pool}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWorld}{World}}*\ world,\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structInterval}{Interval}}*\ interval);}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00129\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structGameObject}{GameObject}}*\ \doxymbox{\hyperlink{world_8h_ab61d9b2740d742d32ad18f5259c43acd}{world\_buffer\_get\_object}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWorld}{World}}*\ world,\ \textcolor{keywordtype}{size\_t}\ index);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00133\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structGameObject}{GameObject}}*\ \doxymbox{\hyperlink{world_8h_a6ea67b52e6571e090533d71b9365ff9c}{world\_pool\_get\_object}}(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structWorld}{World}}*\ world,\ \textcolor{keywordtype}{size\_t}\ index);}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ WORLD\_H}}
 
 \end{DoxyCode}

@@ -1,0 +1,53 @@
+\chapter{2D Game Engine }
+\hypertarget{md_README}{}\label{md_README}\index{2D Game Engine@{2D Game Engine}}
+\label{md_README_autotoc_md0}%
+\Hypertarget{md_README_autotoc_md0}%
+\hypertarget{md_README_autotoc_md1}{}\doxysection{\texorpdfstring{Abstract}{Abstract}}\label{md_README_autotoc_md1}
+This project is a hobby 2D Game Engine written in C. The purpose of this project is to use as little libraries as reasonable, to learn as much as possible.\hypertarget{md_README_autotoc_md2}{}\doxysection{\texorpdfstring{Current Progress}{Current Progress}}\label{md_README_autotoc_md2}
+Currently there is a simple Engine Framework implemented that includes:\+ Game\+Objects, Worlds, Shapes, Renderers, Windows, Inputs, and more.
+
+There is an example game in \textquotesingle{}\doxylink{MyGame_8c}{My\+Game.\+c}\textquotesingle{}, that is used to refine the framework, and as a basic test for the Engine and how it\textquotesingle{}s intended to be implemented for a game.
+
+Windows was implemented originally using \textquotesingle{}Windows.\+h\textquotesingle{}, until I refactored the code for Linux and scope crept a little bit too much, and Windows was just never updated from the refactor. So the core functionality for Windows exists, it just needs to be rewritten a bit.
+
+Linux (X11) should be working (?), it works on my laptop at least. I genuently could not tell you why I am using XCB, but do know that it wasn\textquotesingle{}t my first choice, and am totally willing to reimplement everything in something else, I knew the reason 4 months ago, I don\textquotesingle{}t remember anymore.
+
+Linux currently has working Windows, Inputs, and Rendering.
+
+Rendering is currently only implemented using a Scanline algorithm utilizing the Nonzero Rule for Convex and Concave shapes. Currently supports different Framerates, resolutions, window sizes, and more.
+
+Input handling is very rudimentry and only implemented for Linux.
+
+Logging also had a crude implementation, but it honestly looks really shweet right now, so it\textquotesingle{}ll be a bit before it gets refactored.
+
+Multiple Window support is a thing (this is why Windows doesn\textquotesingle{}t work), but it\textquotesingle{}s not tested, because I forgot I did it (literally half of my headache on this project and I still am too scared to see if it works).
+
+Windows have references to Worlds, so you can point to the same \doxylink{structWorld}{World} object on Multiple Windows or have different ones, so it\textquotesingle{}s actually gonna be pretty cool if it works.\hypertarget{md_README_autotoc_md3}{}\doxysection{\texorpdfstring{Plans}{Plans}}\label{md_README_autotoc_md3}
+
+\begin{DoxyItemize}
+\item Audio
+\item Refactor the Windows Code
+\item Physics, Collisions
+\item Textures
+\item Actual Example Project that isn\textquotesingle{}t one ugly file and is like an actual game
+\item Rendering with the GPU (Open\+GL, Vulkan, etc), I really want to get as deep into this as I can, and was a big reason I started this project in the first place, so expect a lot of code that never actually gets used, but was just fun to learn and implement.
+\item And probably more
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md4}{}\doxysection{\texorpdfstring{How to Build and Run}{How to Build and Run}}\label{md_README_autotoc_md4}
+(Windows is broken right now)
+
+(If you\textquotesingle{}re on Wayland I have literally no clue what will happen)
+
+I compile using gcc, if you can figure something else out you\textquotesingle{}re more than welcome to do whatever you want.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{gcc\ src/*.c\ -\/Iinclude\ -\/o\ 2DGameEngine\ -\/lxcb\ -\/lxcb-\/shm\ -\/lm}
+
+\end{DoxyCode}
+
+
+I didn\textquotesingle{}t document how I downloaded the dependancies, so just google it because thats what I did :\+)
+
+Run using {\ttfamily ./\+2\+DGame\+Engine 1}
+
+the extra parameter can be either 1 or 0, it dictates how logging is handled, don\textquotesingle{}t worry about it. 

@@ -1,0 +1,122 @@
+\doxysection{input.\+h}
+\hypertarget{input_8h_source}{}\label{input_8h_source}\index{include/input.h@{include/input.h}}
+\doxymbox{\hyperlink{input_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ INPUT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ INPUT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ keycode\_t\ uint32\_t}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structTrigger}{Trigger}}\ \{}
+\DoxyCodeLine{00012\ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{structTrigger_ad834032c877956d01a5e6cf84ebd3673}{pressed}};}
+\DoxyCodeLine{00013\ \ \ int64\_t\ \doxymbox{\hyperlink{structTrigger_a9a93b70ee76520f3ed253694dc0fe367}{pressed\_since}};\ \textcolor{comment}{//\ miliseconds:\ Set\ when\ pressed\ and\ released}}
+\DoxyCodeLine{00014\ \}\ \doxymbox{\hyperlink{structTrigger}{Trigger}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00018\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{input_8h_a98d52065a06d8401430e73187f628d66}{input\_kb\_pressed}}(\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\_t}}\ key);}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00021\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{input_8h_a684635525fa43acbfee05e5f7ff25774}{input\_kb\_held}}(\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\_t}}\ key,\ uint64\_t\ thresholdMs);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00024\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{input_8h_a36f3f57905d1ef7074bc724aa4ae7b1b}{input\_kb\_set\_press}}(\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\_t}}\ key);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00027\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{input_8h_a56dde12ca314c3c461b571c0ca7a0499}{input\_kb\_set\_release}}(\doxymbox{\hyperlink{input_8h_a667863aaebb23c74a9b35742cb75c587}{keycode\_t}}\ key);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#ifdef\ \_\_linux\_\_}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ INPUT\_KEYBOARD\_MAX\ \ \ \ 133}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_Q\ \ \ \ \ \ 24}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_W\ \ \ \ \ \ 25}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_E\ \ \ \ \ \ 26}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_R\ \ \ \ \ \ 27}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_T\ \ \ \ \ \ 28}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_Y\ \ \ \ \ \ 29}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_U\ \ \ \ \ \ 30}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_I\ \ \ \ \ \ 31}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_O\ \ \ \ \ \ 32}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_P\ \ \ \ \ \ 33}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_A\ \ \ \ \ \ 38}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_S\ \ \ \ \ \ 39}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_D\ \ \ \ \ \ 40}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_F\ \ \ \ \ \ 41}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_G\ \ \ \ \ \ 42}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_H\ \ \ \ \ \ 43}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_J\ \ \ \ \ \ 44}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_K\ \ \ \ \ \ 45}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_L\ \ \ \ \ \ 46}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_Z\ \ \ \ \ \ 52}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_X\ \ \ \ \ \ 53}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_C\ \ \ \ \ \ 54}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_V\ \ \ \ \ \ 55}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_B\ \ \ \ \ \ 56}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_N\ \ \ \ \ \ 57}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_M\ \ \ \ \ \ 58}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_1\ \ \ \ \ \ 10}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_2\ \ \ \ \ \ 11}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_3\ \ \ \ \ \ 12}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_4\ \ \ \ \ \ 13}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_5\ \ \ \ \ \ 14}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_6\ \ \ \ \ \ 15}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_7\ \ \ \ \ \ 16}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_8\ \ \ \ \ \ 17}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_9\ \ \ \ \ \ 18}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_0\ \ \ \ \ \ 19}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_ESC\ \ \ \ 9}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_TILDE\ \ 49}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_TAB\ \ \ \ 23}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_CAPSL\ \ 66}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_LSHFT\ \ 50}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_LCTRL\ \ 37}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_LALT\ \ \ 64}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_MOD\ \ \ \ 133}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_SPACE\ \ 65}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_RSHFT\ \ 62}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_RCTRL\ \ 105}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_RALT\ \ \ 108}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_BACKS\ \ 22}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_DELET\ \ 119}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_INSER\ \ 118}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_PRTSC\ \ 107}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_COMMA\ \ 59}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_PEROD\ \ 60}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_FSLSH\ \ 61}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_BSLSH\ \ 22}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_COLON\ \ 47}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_QUOTE\ \ 48}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_OBRAK\ \ 34}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_CBRAK\ \ 35}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_MINUS\ \ 20}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_EQUAL\ \ 21}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUM0\ \ \ 90}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUM1\ \ \ 87}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUM2\ \ \ 88}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUM3\ \ \ 89}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUM4\ \ \ 83}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUM5\ \ \ 84}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUM6\ \ \ 85}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUM7\ \ \ 79}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUM8\ \ \ 80}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUM9\ \ \ 81}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUMLK\ \ 77}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUMSL\ \ 106}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUMAS\ \ 63}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUMMI\ \ 82}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUMPL\ \ 86}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUMEN\ \ 104}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#define\ INPUT\_KEYB\_NUMDL\ \ 91}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_\_linux\_\_}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ INPUT\_H}}
+
+\end{DoxyCode}
