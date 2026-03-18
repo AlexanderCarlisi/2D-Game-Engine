@@ -7,7 +7,6 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include <xcb/xproto.h>
 #include "world_handler.h"
 
 #define PLATFORM_MAX_WINDOW_NAME 256    // Should be max Window Name length for Windows and Unix, needs to be tested.
@@ -117,6 +116,7 @@ typedef struct W32Window {
 #include <xcb/xcb.h>
 #include <xcb/shm.h>
 #include <xcb/xcb_image.h>
+#include <xcb/xproto.h>
 
 /**
  * @struct X11Window
