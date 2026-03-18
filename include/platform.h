@@ -29,7 +29,7 @@ typedef struct Aspect {
 /// @struct WindowConfig
 /// Contains information consering that of a Window.
 /// This information is used the same across platforms.
-///
+/// 
 /// @var world A pointer to the desired World to render. The purpose behind it
 ///     being a pointer is so that you can have multiple windows render the same
 ///     world. This does add additional complexity, TODO: Look into maybe making

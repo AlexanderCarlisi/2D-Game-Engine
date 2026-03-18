@@ -8,8 +8,7 @@
 #include "input.h"
 #include "color.h"
 
-#define WINDOWS_AMOUNT 1
-static WINDOWINFO* window_configs[WINDOWS_AMOUNT];
+static WINDOWINFO* window_configs[EO_WINDOWS_AMOUNT];
 static size_t window_configs_count = 0;
 
 
