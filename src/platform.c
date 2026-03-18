@@ -25,10 +25,25 @@ bool _check_window(struct W32Window* window) {
 }
 
 /// Helper function for freeing windows.
-void _free_window(struct X11Window* window) {
+/// TODO: double check make sure this isn't leaking memory
+void _free_window(struct W32Window* window) {
     if (window == NULL) return; // nothing to dealloc
-    
-    // hawtuah dealloc on that thang 
+
+    if (window->bitmap) {
+        DeleteObject(window->bitmap);
+    }
+
+    if (window->hdc) {
+        ReleaseDC(window->hwnd, window->hdc);
+    }
+
+    if (window->hwnd) {
+        DestroyWindow(window->hwnd);
+    }
+
+    if (window->config.framebuffer) {
+        free(window->config.framebuffer);
+    }
     
     free(window);
     logger_write(1, 0, "_free_window: dealloc finish", false);
@@ -194,7 +209,7 @@ void platform_free() {
 }
 
 void platform_initialize() {
-    
+
 }
 
 #else
