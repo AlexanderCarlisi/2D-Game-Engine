@@ -118,7 +118,7 @@ void load_player(GameObject* obj) {
   );
   
   // Unexpected Behavior? Debug it
-  gameobject_health_check(obj);
+  gameobject_health_check(obj); // Logs current state of gameobject (probably shouldn't put this in a loop)
 }
 
 
