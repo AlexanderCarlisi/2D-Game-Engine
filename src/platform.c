@@ -59,18 +59,18 @@ void _free_window_i(size_t i) {
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
-        // TODO: handle close and destory gracefully, yes all this
-        case WM_CLOSE: DestroyWindow(hwnd); return 0;
-        case WM_DESTROY: PostQuitMessage(0); return 0;
+        case WM_CLOSE: DestroyWindow(hwnd); {
+            engine_close();
+            return 0;
+        }
+        case WM_DESTROY: PostQuitMessage(0); {
+            engine_close();
+            return 0;
+        }
         case WM_SIZE: {
-            // TODO: i think this is wrong?
-            // int width = LOWORD(lParam);
-            // int height = HIWORD(lParam);
-
-            // if (engine_is_running()) {
-            //     appconfig_platform_resized_window_px(width, height);
-            // }
-
+            int width = LOWORD(lParam);
+            int height = HIWORD(lParam);
+            _set_window_size(hwnd, (struct Aspect){.width=width, .height=height});
             return 0;
         }
         default: return DefWindowProc(hwnd, uMsg, wParam, lParam);
@@ -83,6 +83,21 @@ bool platform_set_window_name(struct WINDOWINFO* window, const char* name) {
         return false;
     }
     return SetWindowText(window->hwnd, name);
+}
+
+/// @brief 
+/// @param hwnd 
+/// @param size 
+/// @return 
+bool _set_window_size(HWND hwnd, struct Aspect size) {
+    return SetWindowPos(
+        hwnd,
+        NULL,
+        0,
+        0,
+        size.height, size.width,
+        SWP_NOMOVE | SWP_NOZORDER
+    );
 }
 
 bool platform_set_window_size(struct WINDOWINFO* window, struct Aspect size) {
