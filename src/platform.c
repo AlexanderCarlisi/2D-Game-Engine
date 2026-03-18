@@ -24,6 +24,24 @@ bool _check_window(struct W32Window* window) {
 
 }
 
+/// Helper function for freeing windows.
+void _free_window(struct X11Window* window) {
+    if (window == NULL) return; // nothing to dealloc
+    
+    // hawtuah dealloc on that thang 
+    
+    free(window);
+    logger_write(1, 0, "_free_window: dealloc finish", false);
+}
+
+void _free_window_i(size_t i) {
+    if (i < window_configs_count && window_configs[i] != NULL) {
+        logger_write(2, 1, "_free_window_i: Dealloc %zu", false);
+        _free_window(window_configs[i]);
+        window_configs[i] = NULL;
+    }
+}
+
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         // TODO: handle close and destory gracefully?
@@ -147,156 +165,37 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
     logger_write(1, 0, "HWD Setup", false);
 
     window->hdc = GetDC(window->hwnd);
-    // platform_set_window_resolution()
-    // ShowWindow(window->hwnd, SW_SHOW);
+    platform_set_window_resolution(window, resolution);
+    ShowWindow(window->hwnd, SW_SHOW);
+
+    logger_write(1, 0, "platform_new_window: Successfully initialized", false);
 }
 
-// struct W32Window* _cast_window(struct WindowConfig* config) {
-//     if (config == NULL) {
-//         printf("\n>>> _cast_window: NULL argument <<<\n");
-//         return NULL;
-//     }
-//     return (W32Window*) config;
-// }
+bool platform_render(struct WINDOWINFO* window, float alpha) {
+    render_clear(&window->config, EO_RENDER_CLEAR);
+    render_draw(&window->config, alpha);
 
-// LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-//     switch (uMsg) {
-//         // TODO: handle close and destory gracefully?
-//         case WM_CLOSE: DestroyWindow(hwnd); return 0;
-//         case WM_DESTROY: PostQuitMessage(0); return 0;
-//         case WM_SIZE: {
-//             // TODO: i think this is wrong?
-//             // int width = LOWORD(lParam);
-//             // int height = HIWORD(lParam);
+    // bitmap shinanigans
+    // some kind of flush operation
 
-//             // if (engine_is_running()) {
-//             //     appconfig_platform_resized_window_px(width, height);
-//             // }
+    return true;
+}
 
-//             return 0;
-//         }
-//         default: return DefWindowProc(hwnd, uMsg, wParam, lParam);
-//     }
-// }
+bool platform_iterate(struct WINDOWINFO* window) {
+    world_handler_update_active(window->config.world_handler);
+    return true;
+}
 
-// void platform_initialize() {
-//     return false;
-// }
+void platform_free() {
+    for (size_t i = 0; i < window_configs_count; i++) {
+        _free_window_i(i);
+    }
+    window_configs_count = 0;
+}
 
-// struct WindowConfig* platform_new_window(struct WindowConfig config) {
-//     W32Window* window = (W32Window*) malloc(sizeof(W32Window));
-//     if (window == NULL) {
-//         printf("\n>>> W32 failed W32Window Allocation <<<\n");
-//         return NULL;
-//     }
-
-//     window->config = config;
-
-//     WNDCLASS wc = {0};
-//     wc.lpfnWndProc = WindowProc;
-//     wc.hInstance = GetModuleHandle(NULL);
-//     wc.lpszClassName = "WindowClass";
-
-//     RegisterClass(&wc);
-
-//     window->hwnd = CreateWindowEx(
-//         0, "WindowClass", window->config.window_name,
-//         WS_OVERLAPPEDWINDOW,
-//         CW_USEDEFAULT, CW_USEDEFAULT,
-//         window->config.window_aspect.width, window->config.window_aspect.height,
-//         NULL, NULL, wc.hInstance, NULL
-//     );
-
-//     if (!window->hwnd) {
-//         printf(">>> W32: HWND is null <<<\n");
-//         return NULL;
-//     }
-
-//     window->hdc = GetDC(window->hwnd);
-//     platform_set_window_resolution(&window->config, window->config.render_aspect);
-
-//     ShowWindow(window->hwnd, SW_SHOW);
-//     initialize_time_frequency();
+void platform_initialize() {
     
-//     // engine start
-//     // engine loop
-
-//     return &window->config;
-// }
-
-// bool platform_set_window_name(struct WindowConfig* config, const char* name) {
-//     W32Window* window = _cast_window(config);
-//     if (window == NULL) return false;
-//     // window->config.window_name = name;
-//     return SetWindowText(window->hwnd, name);
-// }
-
-// bool platform_set_window_size(struct WindowConfig* config, struct Aspect size) {
-//     W32Window* window = _cast_window(config);
-//     if (window == NULL) return false;
-//     return SetWindowPos(
-//         window->hwnd,
-//         NULL,
-//         0,
-//         0,
-//         size.height, size.width,
-//         SWP_NOMOVE | SWP_NOZORDER
-//     );
-// }
-
-// bool platform_set_window_resolution(struct WindowConfig* config, struct Aspect res) {
-//     W32Window* window = _cast_window(config);
-//     if (window == NULL) return false;
-
-//     if (window->bitmap) {
-//         DeleteObject(window->bitmap);
-//         window->bitmap = NULL;
-//     }
-    
-//     // Not a memory leak, framebuffer is owned by DIB
-//     window->config.framebuffer = NULL;
-
-//     memset(&window->bitmapInfo, 0, sizeof(BITMAPINFO));
-//     window->bitmapInfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-//     window->bitmapInfo.bmiHeader.biWidth = res.width;
-//     window->bitmapInfo.bmiHeader.biHeight = -res.height; // top-down DIB
-//     window->bitmapInfo.bmiHeader.biPlanes = 1;
-//     window->bitmapInfo.bmiHeader.biBitCount = 32;
-//     window->bitmapInfo.bmiHeader.biCompression = BI_RGB;
-
-//     window->bitmap = CreateDIBSection(
-//         window->hdc,
-//         &window->bitmapInfo,
-//         DIB_RGB_COLORS,
-//         (void**) &window->config.framebuffer,
-//         NULL,
-//         0
-//     );
-    
-//     // There is a Bitmap that gets assigned automatically cannot be deallocated, 
-//     // as its within context, so we store its address and free it once the program quits
-//     if (window->oldBitMap == NULL) {
-//         window->oldBitMap = SelectObject(window->hdc, window->bitmap);
-//         return true;
-//     } else {
-//         return SelectObject(window->hdc, window->bitmap);
-//     }
-// }
-
-// bool platform_update_window(struct WindowConfig* config) {
-//     // TODO: Some kind of windows flush
-//     return false;
-// }
-
-// bool platform_iterate(struct WindowConfig* config) {
-//     // TODO: 
-//     return false;
-// }
-
-// bool platform_render(struct WindowConfig* config, float alpha) {
-//     // TODO: 
-//     return false;
-// }
+}
 
 #else
 #include <stdlib.h>
