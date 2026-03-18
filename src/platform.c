@@ -209,6 +209,10 @@ struct AWINDOW* platform_new_window(const char* windowName, struct Aspect window
     ShowWindow(window->hwnd, SW_SHOW);
 
     logger_write(1, 0, "platform_new_window: Successfully initialized", false);
+    
+    window_configs[window_configs_count] = window;
+    window_configs_count++;
+    return window;
 }
 
 /// helper function to declutter platform_initialize
