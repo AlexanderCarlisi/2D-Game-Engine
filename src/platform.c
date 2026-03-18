@@ -59,7 +59,7 @@ void _free_window_i(size_t i) {
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
-        // TODO: handle close and destory gracefully?
+        // TODO: handle close and destory gracefully, yes all this
         case WM_CLOSE: DestroyWindow(hwnd); return 0;
         case WM_DESTROY: PostQuitMessage(0); return 0;
         case WM_SIZE: {
@@ -186,6 +186,35 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
     logger_write(1, 0, "platform_new_window: Successfully initialized", false);
 }
 
+/// helper function to declutter platform_initialize
+void _init_loop() {
+    MSG msg = {0};
+    for (size_t i = 0; i < window_configs_count; i++) {
+        W32Window* window = window_configs[i];
+        if (window == NULL) continue;
+
+        while(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+            // TODO: add input handling
+            if (msg.message == WM_QUIT) {
+                logger_write(1, 0, "Closing Program", false);
+                engine_close();
+                return;
+            }
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+        engine_tick(window);
+    }
+}
+
+void platform_initialize() {
+    engine_start();
+    while(engine_is_running()) {
+        _init_loop();
+    }
+    engine_close();
+}
+
 bool platform_render(struct WINDOWINFO* window, float alpha) {
     render_clear(&window->config, EO_RENDER_CLEAR);
     render_draw(&window->config, alpha);
@@ -206,10 +235,6 @@ void platform_free() {
         _free_window_i(i);
     }
     window_configs_count = 0;
-}
-
-void platform_initialize() {
-
 }
 
 #else
