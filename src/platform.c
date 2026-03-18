@@ -33,6 +33,10 @@ void _free_window(struct W32Window* window) {
         DeleteObject(window->bitmap);
     }
 
+    if (window->oldBitMap) {
+        SelectObject(window->hdc, window->oldBitMap);
+    }
+
     if (window->hdc) {
         ReleaseDC(window->hwnd, window->hdc);
     }
@@ -84,6 +88,12 @@ bool platform_set_window_name(struct WINDOWINFO* window, const char* name) {
     }
     return SetWindowText(window->hwnd, name);
 }
+
+
+
+// TODO: AdjustWindowRecEX
+// Right now Window Size includes the title bar, so its not a true window size with respect to the resolution
+
 
 /// @brief 
 /// @param hwnd 
@@ -153,6 +163,7 @@ bool platform_set_window_resolution(struct WINDOWINFO* window, struct Aspect res
     }
 }
 
+// TODO: Multiple windows is def not gonna work on Windows rn, as a Window Class is only good for 1 Window
 struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps) {
     if (window_configs_count >= EO_WINDOWS_AMOUNT) {
         logger_write(1, 0, "platform_new_window: attempted to exceed max windows allocated", true);
@@ -234,8 +245,15 @@ bool platform_render(struct WINDOWINFO* window, float alpha) {
     render_clear(&window->config, EO_RENDER_CLEAR);
     render_draw(&window->config, alpha);
 
-    // bitmap shinanigans
-    // some kind of flush operation
+    // Copy DIB to Device Context (Flush)
+    // Stretch because Window Size != Resolution in all cases
+    StretchBlt(
+        window->hdc,
+        0, 0, window->config.window_aspect.width, window->config.window_aspect.height,
+        window->hdc, // Source is the same HDC because the bitmap is selected into it
+        0, 0, window->config.render_aspect.width, window->config.render_aspect.height,
+        SRCCOPY
+    );
 
     return true;
 }
