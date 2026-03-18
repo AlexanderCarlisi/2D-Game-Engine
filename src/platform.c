@@ -14,6 +14,16 @@ static size_t window_configs_count = 0;
 
 #ifdef _WIN32
 
+
+// TODO: more strick checking
+bool _check_window(struct W32Window* window) {
+    return window != NULL
+        && window->bitmap != NULL
+        && window->hdc != NULL
+        && window->hwnd != NULL;
+
+}
+
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         // TODO: handle close and destory gracefully?
@@ -32,6 +42,14 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
         }
         default: return DefWindowProc(hwnd, uMsg, wParam, lParam);
     }
+}
+
+bool platform_set_window_name(struct WINDOWINFO* window, const char* name) {
+    if (!_check_window(window)) {
+        logger_write(1, 0, "platform_set_window_name: failed", true);
+        return false;
+    }
+    return SetWindowText(window->hwnd, name);
 }
 
 struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps) {
@@ -72,6 +90,8 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
         logger_write(1, 0, "platform_new_window: HWND alloc failed", true);
         return NULL;
     }
+
+    logger_write(1, 0, "HWD Setup", false);
 
     window->hdc = GetDC(window->hwnd);
     // platform_set_window_resolution()
