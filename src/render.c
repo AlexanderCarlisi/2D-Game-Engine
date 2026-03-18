@@ -15,12 +15,21 @@ void render_clear(struct WindowConfig* config, uint32_t color) {
 void render_draw_pixel(struct WindowConfig* config, Pose* point, uint32_t color) {
   struct Aspect res = config->render_aspect;
   if (!pose_pixels_in_bounds(point, res.width, res.height)) return;
+
+  int framebufferIndex = point->y_pixels * res.width + point->x_pixels;
+
+  // Don't wrap shapes horizontally, and don't overflow vertically
+  if (point->x_pixels > res.width || point->y_pixels > res.height) return;
+
+  // Stay within Framebuffer Size
+  if (framebufferIndex < 0 || framebufferIndex > res.width * res.height) return;
+
   config->framebuffer[point->y_pixels * res.width + point->x_pixels] = color;
 }
 
 void render_interpolate_pixel(struct WindowConfig* config, struct Pose* point1, struct Pose* point2, uint32_t color, float alpha) {
-  int x = (int) ((point2->x_pixels - point1->x_pixels) * alpha);
-  int y = (int) ((point2->y_pixels - point1->x_pixels) * alpha);
+  pixel_t x = (int) ((point2->x_pixels - point1->x_pixels) * alpha);
+  pixel_t y = (int) ((point2->y_pixels - point1->x_pixels) * alpha);
   Pose p = pose_from_pixels(config->world_handler->active->config.pixels_per_meter, x, y); // defeated the entire purpose lmao
   render_draw_pixel(config, &p, color);
 }

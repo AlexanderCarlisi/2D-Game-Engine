@@ -62,6 +62,13 @@ void render_algo_scanline(struct WindowConfig* config, struct Shape* shape, uint
     }
   }
 
+  // Vertex poses Max and Min can extend pass the Resolution, this causes a Horizontal Wrapping effect.
+  // We don't want that wrapping effect.
+  if (max.x_pixels > config->render_aspect.width) max.x_pixels = config->render_aspect.width;
+  // if (max.x_pixels < 0) max.x_pixels = 0;
+  if (max.y_pixels > config->render_aspect.height) max.y_pixels = config->render_aspect.height;
+  // if (max.y_)
+
   // Render
   struct Pose cursor = {
     .x_pixels = min.x_pixels,
@@ -77,6 +84,8 @@ void render_algo_scanline(struct WindowConfig* config, struct Shape* shape, uint
     if (cursor.x_pixels > max.x_pixels) {
       cursor.x_pixels = min.x_pixels;
       cursor.y_pixels++;
+
+      // printf("MIN: %d,  MAX: %d\n", min.x_pixels, max.x_pixels);
     }
   }
 }

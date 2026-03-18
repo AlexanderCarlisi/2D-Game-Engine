@@ -23,8 +23,8 @@
 /// Layout [uint16, uint16]
 /// Size 4(8), 4
 typedef struct Aspect {
-    uint16_t width;
-    uint16_t height;
+    int16_t width;
+    int16_t height;
 } Aspect;
 
 /// @struct WindowConfig
