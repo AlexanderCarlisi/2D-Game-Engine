@@ -12,9 +12,9 @@
 #define PLATFORM_MAX_WINDOW_NAME 256    // Should be max Window Name length for Windows and Unix, needs to be tested.
 
 #ifdef _WIN32
-#define WINDOWINFO W32Window
+#define AWINDOW W32Window
 #else
-#define WINDOWINFO X11Window
+#define AWINDOW X11Window
 #endif
 
 /// @struct Aspect
@@ -56,38 +56,38 @@ void platform_initialize();
 /// @see X11Window
 /// @see TODO: Window's Window
 /// @note config param is deep copied into return value.
-struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps);
+struct AWINDOW* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps);
 
 /// @brief Flushes all changes of the Window Config to the platform.
 /// @param config WindowConfig with changes you wish to see implemented.
 /// @return Success.
-bool platform_update_window(struct WINDOWINFO* window);
+bool platform_update_window(struct AWINDOW* window);
 
 /// @brief Update the name of the Window, flushes change.
 /// @return Success.
 /// @see platform_new_window for changing multiple fields at once.
-bool platform_set_window_name(struct WINDOWINFO* window, const char* name);
+bool platform_set_window_name(struct AWINDOW* window, const char* name);
 
 /// @brief Update the window size, flushes change.
 /// @return Success.
 /// @see platform_new_window for changing multiple fields at once.
-bool platform_set_window_size(struct WINDOWINFO* window, struct Aspect size);
+bool platform_set_window_size(struct AWINDOW* window, struct Aspect size);
 
 /// @brief Update the window resolution, flushes change.
 /// @return Success.
 /// @see platform_new_window for changing multiple fields at once.
-bool platform_set_window_resolution(struct WINDOWINFO* window, struct Aspect res);
+bool platform_set_window_resolution(struct AWINDOW* window, struct Aspect res);
 
 /// @brief Renders the World assigned to the WindowConfig.
 /// @param config The WindowConfig to render.
 /// @return False if an error occurs.
-bool platform_render(struct WINDOWINFO* window, float alpha);
+bool platform_render(struct AWINDOW* window, float alpha);
 
 /// @brief Performs an iteration platform side.
 /// Checks for client side inputs and requests.
 /// @param config The window to perform checks on.
 /// @return False if an error occurs.
-bool platform_iterate(struct WINDOWINFO* window);
+bool platform_iterate(struct AWINDOW* window);
 
 /// @brief Deallocates all dynamic memory of the platform
 /// @see engine_close

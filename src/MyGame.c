@@ -125,7 +125,7 @@ void load_player(GameObject* obj) {
 void game_init() {
   printf("Hello World!");
 
-  WINDOWINFO* window = platform_new_window(
+  AWINDOW* window = platform_new_window(
     "MyGame",
     (Aspect) {.width=1280, .height=720},
     (Aspect) {.width=1280, .height=720},

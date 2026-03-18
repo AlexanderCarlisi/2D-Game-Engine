@@ -11,7 +11,7 @@ void engine_start() {
     logger_write(1, 0, "Engine Started", false);
 }
 
-bool engine_tick(struct WINDOWINFO* window) {
+bool engine_tick(struct AWINDOW* window) {
     if (window->config.previous_time == 0)
         window->config.previous_time = etime_ms();
     uint64_t currentTime = etime_ms();

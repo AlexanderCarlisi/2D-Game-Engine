@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include <winuser.h>
+// #include <winuser.h>
 
 #define keycode_t uint32_t
 
@@ -162,51 +162,51 @@ void input_kb_set_release(keycode_t key);
 #define INPUT_KEYB_9      '9'   // 0x39
 #define INPUT_KEYB_0      '0'   // 0x30
 
-#define INPUT_KEYB_ESC    VK_ESCAPE  // 0x1B
-#define INPUT_KEYB_TILDE  VK_OEM_3   // 0xC0 (~ / `)
-#define INPUT_KEYB_TAB    VK_TAB     // 0x09
-#define INPUT_KEYB_CAPSL  VK_CAPITAL // 0x14
-#define INPUT_KEYB_LSHFT  VK_LSHIFT  // 0xA0
-#define INPUT_KEYB_LCTRL  VK_LCONTROL// 0xA2
-#define INPUT_KEYB_LALT   VK_LMENU   // 0xA4
-#define INPUT_KEYB_MOD    VK_LWIN    // 0x5B (Windows Key)
-#define INPUT_KEYB_SPACE  VK_SPACE   // 0x20
-#define INPUT_KEYB_RSHFT  VK_RSHIFT  // 0xA1
-#define INPUT_KEYB_RCTRL  VK_RCONTROL// 0xA3
-#define INPUT_KEYB_RALT   VK_RMENU   // 0xA5
-#define INPUT_KEYB_BACKS  VK_BACK    // 0x08
-#define INPUT_KEYB_DELET  VK_DELETE  // 0x2E
-#define INPUT_KEYB_INSER  VK_INSERT  // 0x2D
-#define INPUT_KEYB_PRTSC  VK_SNAPSHOT// 0x2C
+// #define INPUT_KEYB_ESC    VK_ESCAPE  // 0x1B
+// #define INPUT_KEYB_TILDE  VK_OEM_3   // 0xC0 (~ / `)
+// #define INPUT_KEYB_TAB    VK_TAB     // 0x09
+// #define INPUT_KEYB_CAPSL  VK_CAPITAL // 0x14
+// #define INPUT_KEYB_LSHFT  VK_LSHIFT  // 0xA0
+// #define INPUT_KEYB_LCTRL  VK_LCONTROL// 0xA2
+// #define INPUT_KEYB_LALT   VK_LMENU   // 0xA4
+// #define INPUT_KEYB_MOD    VK_LWIN    // 0x5B (Windows Key)
+// #define INPUT_KEYB_SPACE  VK_SPACE   // 0x20
+// #define INPUT_KEYB_RSHFT  VK_RSHIFT  // 0xA1
+// #define INPUT_KEYB_RCTRL  VK_RCONTROL// 0xA3
+// #define INPUT_KEYB_RALT   VK_RMENU   // 0xA5
+// #define INPUT_KEYB_BACKS  VK_BACK    // 0x08
+// #define INPUT_KEYB_DELET  VK_DELETE  // 0x2E
+// #define INPUT_KEYB_INSER  VK_INSERT  // 0x2D
+// #define INPUT_KEYB_PRTSC  VK_SNAPSHOT// 0x2C
 
-#define INPUT_KEYB_COMMA  VK_OEM_COMMA  // 0xBC
-#define INPUT_KEYB_PEROD  VK_OEM_PERIOD // 0xBE
-#define INPUT_KEYB_FSLSH  VK_OEM_2      // 0xBF (/ ?)
-#define INPUT_KEYB_BSLSH  VK_OEM_5      // 0xDC (\ |)
-#define INPUT_KEYB_COLON  VK_OEM_1      // 0xBA (; :)
-#define INPUT_KEYB_QUOTE  VK_OEM_7      // 0xDE (' ")
-#define INPUT_KEYB_OBRAK  VK_OEM_4      // 0xDB ([ {)
-#define INPUT_KEYB_CBRAK  VK_OEM_6      // 0xDD (] })
-#define INPUT_KEYB_MINUS  VK_OEM_MINUS  // 0xBD (- _)
-#define INPUT_KEYB_EQUAL  VK_OEM_PLUS   // 0xBB (= +)
+// #define INPUT_KEYB_COMMA  VK_OEM_COMMA  // 0xBC
+// #define INPUT_KEYB_PEROD  VK_OEM_PERIOD // 0xBE
+// #define INPUT_KEYB_FSLSH  VK_OEM_2      // 0xBF (/ ?)
+// #define INPUT_KEYB_BSLSH  VK_OEM_5      // 0xDC (\ |)
+// #define INPUT_KEYB_COLON  VK_OEM_1      // 0xBA (; :)
+// #define INPUT_KEYB_QUOTE  VK_OEM_7      // 0xDE (' ")
+// #define INPUT_KEYB_OBRAK  VK_OEM_4      // 0xDB ([ {)
+// #define INPUT_KEYB_CBRAK  VK_OEM_6      // 0xDD (] })
+// #define INPUT_KEYB_MINUS  VK_OEM_MINUS  // 0xBD (- _)
+// #define INPUT_KEYB_EQUAL  VK_OEM_PLUS   // 0xBB (= +)
 
-#define INPUT_KEYB_NUM0   VK_NUMPAD0 // 0x60
-#define INPUT_KEYB_NUM1   VK_NUMPAD1 // 0x61
-#define INPUT_KEYB_NUM2   VK_NUMPAD2 // 0x62
-#define INPUT_KEYB_NUM3   VK_NUMPAD3 // 0x63
-#define INPUT_KEYB_NUM4   VK_NUMPAD4 // 0x64
-#define INPUT_KEYB_NUM5   VK_NUMPAD5 // 0x65
-#define INPUT_KEYB_NUM6   VK_NUMPAD6 // 0x66
-#define INPUT_KEYB_NUM7   VK_NUMPAD7 // 0x67
-#define INPUT_KEYB_NUM8   VK_NUMPAD8 // 0x68
-#define INPUT_KEYB_NUM9   VK_NUMPAD9 // 0x69
-#define INPUT_KEYB_NUMLK  VK_NUMLOCK // 0x90
-#define INPUT_KEYB_NUMSL  VK_DIVIDE  // 0x6F (/)
-#define INPUT_KEYB_NUMAS  VK_MULTIPLY// 0x6A (*)
-#define INPUT_KEYB_NUMMI  VK_SUBTRACT// 0x6D (-)
-#define INPUT_KEYB_NUMPL  VK_ADD     // 0x6B (+)
-#define INPUT_KEYB_NUMEN  VK_RETURN  // 0x0D (Numpad Enter is also VK_RETURN)
-#define INPUT_KEYB_NUMDL  VK_DECIMAL // 0x6E (.)
+// #define INPUT_KEYB_NUM0   VK_NUMPAD0 // 0x60
+// #define INPUT_KEYB_NUM1   VK_NUMPAD1 // 0x61
+// #define INPUT_KEYB_NUM2   VK_NUMPAD2 // 0x62
+// #define INPUT_KEYB_NUM3   VK_NUMPAD3 // 0x63
+// #define INPUT_KEYB_NUM4   VK_NUMPAD4 // 0x64
+// #define INPUT_KEYB_NUM5   VK_NUMPAD5 // 0x65
+// #define INPUT_KEYB_NUM6   VK_NUMPAD6 // 0x66
+// #define INPUT_KEYB_NUM7   VK_NUMPAD7 // 0x67
+// #define INPUT_KEYB_NUM8   VK_NUMPAD8 // 0x68
+// #define INPUT_KEYB_NUM9   VK_NUMPAD9 // 0x69
+// #define INPUT_KEYB_NUMLK  VK_NUMLOCK // 0x90
+// #define INPUT_KEYB_NUMSL  VK_DIVIDE  // 0x6F (/)
+// #define INPUT_KEYB_NUMAS  VK_MULTIPLY// 0x6A (*)
+// #define INPUT_KEYB_NUMMI  VK_SUBTRACT// 0x6D (-)
+// #define INPUT_KEYB_NUMPL  VK_ADD     // 0x6B (+)
+// #define INPUT_KEYB_NUMEN  VK_RETURN  // 0x0D (Numpad Enter is also VK_RETURN)
+// #define INPUT_KEYB_NUMDL  VK_DECIMAL // 0x6E (.)
 
 #endif // __linux__
 

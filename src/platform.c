@@ -8,7 +8,7 @@
 #include "input.h"
 #include "color.h"
 
-static WINDOWINFO* window_configs[EO_WINDOWS_AMOUNT];
+static AWINDOW* window_configs[EO_WINDOWS_AMOUNT];
 static size_t window_configs_count = 0;
 
 
@@ -53,6 +53,21 @@ void _free_window(struct W32Window* window) {
     logger_write(1, 0, "_free_window: dealloc finish", false);
 }
 
+/// @brief 
+/// @param hwnd 
+/// @param size 
+/// @return 
+bool _set_window_size(HWND hwnd, struct Aspect size) {
+    return SetWindowPos(
+        hwnd,
+        NULL,
+        0,
+        0,
+        size.height, size.width,
+        SWP_NOMOVE | SWP_NOZORDER
+    );
+}
+
 void _free_window_i(size_t i) {
     if (i < window_configs_count && window_configs[i] != NULL) {
         logger_write(2, 1, "_free_window_i: Dealloc %zu", false);
@@ -81,7 +96,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
     }
 }
 
-bool platform_set_window_name(struct WINDOWINFO* window, const char* name) {
+bool platform_set_window_name(struct AWINDOW* window, const char* name) {
     if (!_check_window(window)) {
         logger_write(1, 0, "platform_set_window_name: failed", true);
         return false;
@@ -94,23 +109,7 @@ bool platform_set_window_name(struct WINDOWINFO* window, const char* name) {
 // TODO: AdjustWindowRecEX
 // Right now Window Size includes the title bar, so its not a true window size with respect to the resolution
 
-
-/// @brief 
-/// @param hwnd 
-/// @param size 
-/// @return 
-bool _set_window_size(HWND hwnd, struct Aspect size) {
-    return SetWindowPos(
-        hwnd,
-        NULL,
-        0,
-        0,
-        size.height, size.width,
-        SWP_NOMOVE | SWP_NOZORDER
-    );
-}
-
-bool platform_set_window_size(struct WINDOWINFO* window, struct Aspect size) {
+bool platform_set_window_size(struct AWINDOW* window, struct Aspect size) {
     if (!_check_window(window)) {
         logger_write(1, 0, "platform_set_window_size: failed", true);
         return false;
@@ -125,7 +124,7 @@ bool platform_set_window_size(struct WINDOWINFO* window, struct Aspect size) {
     );
 }
 
-bool platform_set_window_resolution(struct WINDOWINFO* window, struct Aspect res) {
+bool platform_set_window_resolution(struct AWINDOW* window, struct Aspect res) {
     if (window->bitmap) {
         DeleteObject(window->bitmap);
         window->bitmap = NULL;
@@ -164,7 +163,7 @@ bool platform_set_window_resolution(struct WINDOWINFO* window, struct Aspect res
 }
 
 // TODO: Multiple windows is def not gonna work on Windows rn, as a Window Class is only good for 1 Window
-struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps) {
+struct AWINDOW* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps) {
     if (window_configs_count >= EO_WINDOWS_AMOUNT) {
         logger_write(1, 0, "platform_new_window: attempted to exceed max windows allocated", true);
         return NULL;
@@ -241,7 +240,7 @@ void platform_initialize() {
     engine_close();
 }
 
-bool platform_render(struct WINDOWINFO* window, float alpha) {
+bool platform_render(struct AWINDOW* window, float alpha) {
     render_clear(&window->config, EO_RENDER_CLEAR);
     render_draw(&window->config, alpha);
 
@@ -258,7 +257,7 @@ bool platform_render(struct WINDOWINFO* window, float alpha) {
     return true;
 }
 
-bool platform_iterate(struct WINDOWINFO* window) {
+bool platform_iterate(struct AWINDOW* window) {
     world_handler_update_active(window->config.world_handler);
     return true;
 }
@@ -529,7 +528,7 @@ void platform_initialize() {
     engine_close();
 }
 
-struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps) {
+struct AWINDOW* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps) {
     // XCB-SHM https://stackoverflow.com/questions/27745131/how-to-use-shm-pixmap-with-xcb
     // WM_PROTO and DELETE WINDOW https://marc.info/?l=freedesktop-xcb&m=129381953404497
     if (window_configs_count >= EO_WINDOWS_AMOUNT) {
@@ -651,7 +650,7 @@ struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect win
     return window;
 }
 
-bool platform_set_window_name(struct WINDOWINFO* window, const char* name) {
+bool platform_set_window_name(struct AWINDOW* window, const char* name) {
     if (!_check_window(window)) {
         printf("\n>>> platform_set_window_name : Failed <<<\n");
         logger_write(1, 0, "platform_set_window_name: failed", true);

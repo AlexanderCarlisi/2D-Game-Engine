@@ -49,7 +49,7 @@ typedef struct WorldConfig {
 	size_t pool_size;
   float reallocation_ratio;
   float gravity_field;
-	uint pixels_per_meter;
+	uint32_t pixels_per_meter;
 } WorldConfig;
 
 
