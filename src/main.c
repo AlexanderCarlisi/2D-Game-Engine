@@ -13,9 +13,6 @@
 //
 // Currently Implementing:
 //  Fix FB Issues
-//  Fix Shape out of bounds issues (thought this was fixed already?)
-//    - Issue with Datatypes? uint pixels?
-//  Fix program not closing properly?
 
 #include "engine_options.h"
 #include "logger.h"
