@@ -23,7 +23,7 @@ bool pose_equals(struct Pose* pose1, struct Pose* pose2) {
 
 bool pose_pixels_in_bounds(struct Pose* pose, pixel_t xUpper, pixel_t yUpper) {
 	if (pose == NULL) return false;
-	return pose->x_pixels <= xUpper && pose->y_pixels <= yUpper;
+	return pose->x_pixels >= 0 && pose->y_pixels >= 0 && pose->x_pixels < xUpper && pose->y_pixels < yUpper;
 }
 
 struct Pose pose_from_pixels(pixel_t ppm, pixel_t x, pixel_t y) {
