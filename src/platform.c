@@ -52,6 +52,59 @@ bool platform_set_window_name(struct WINDOWINFO* window, const char* name) {
     return SetWindowText(window->hwnd, name);
 }
 
+bool platform_set_window_size(struct WINDOWINFO* window, struct Aspect size) {
+    if (!_check_window(window)) {
+        logger_write(1, 0, "platform_set_window_size: failed", true);
+        return false;
+    }
+    return SetWindowPos(
+        window->hwnd,
+        NULL,
+        0,
+        0,
+        size.height, size.width,
+        SWP_NOMOVE | SWP_NOZORDER
+    );
+}
+
+bool platform_set_window_resolution(struct WINDOWINFO* window, struct Aspect res) {
+    if (window->bitmap) {
+        DeleteObject(window->bitmap);
+        window->bitmap = NULL;
+    }
+
+    // NOT a memory leak, framebuffer is owned by DIB
+    window->config.framebuffer = NULL;
+
+    memset(&window->bitmapInfo, 0, sizeof(BITMAPINFO));
+    window->bitmapInfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    window->bitmapInfo.bmiHeader.biWidth = res.width;
+    window->bitmapInfo.bmiHeader.biHeight = -res.height; // top-down DIB
+    window->bitmapInfo.bmiHeader.biPlanes = 1;
+    window->bitmapInfo.bmiHeader.biBitCount = 32;
+    window->bitmapInfo.bmiHeader.biCompression = BI_RGB;
+
+    window->bitmap = CreateDIBSection(
+        window->hdc,
+        &window->bitmapInfo,
+        DIB_RGB_COLORS,
+        (void**) &window->config.framebuffer, // look into this, its sus lowk
+        NULL,
+        0
+    );
+    
+    // There is a Bitmap that gets assigned automatically cannot be deallocated, 
+    // as its within context, so we store its address and free it once the program quits
+    if (window->oldBitMap == NULL) {
+        window->oldBitMap = SelectObject(window->hdc, window->bitmap);
+        logger_write(1, 0, "Store oldBitMap", false);
+        return true;
+    } else {
+        logger_write(1, 0, "Updated Window Resolution", false);
+        return SelectObject(window->hdc, window->bitmap);
+    }
+}
+
 struct WINDOWINFO* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps) {
     if (window_configs_count >= EO_WINDOWS_AMOUNT) {
         logger_write(1, 0, "platform_new_window: attempted to exceed max windows allocated", true);
