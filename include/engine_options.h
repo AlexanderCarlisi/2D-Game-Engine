@@ -1,7 +1,8 @@
 #ifndef ENGINE_OPTIONS_H
 #define ENGINE_OPTIONS_H
 
-#define EO_PROJECT_MAIN         "MyGame.h"
+// Note: Include paths are relative to the File that is calling include
+#define EO_PROJECT_MAIN         "../example/include/MyGame.h"
 #define EO_PROJECT_MAIN_START   game_init()
 #define EO_PROJECT_MAIN_LOOP    game_loop()
 #define EO_PROJECT_MAIN_FREE    game_free()

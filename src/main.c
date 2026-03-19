@@ -1,5 +1,5 @@
-// WIN: gcc src/*.c -Iinclude -o 2DGameEngine -lgdi32
-// LINUX: gcc src/*.c -Iinclude -o 2DGameEngine -lxcb -lxcb-shm -lm
+// WIN: gcc src/*.c example/src/*.c -Iinclude -Iexample/include -o 2DGameEngine -lgdi32
+// LX: gcc src/*.c example/src/*.c -Iinclude -Iexample/include -o 2DGameEngine -lxcb -lxcb-shm -lm
 
 // TODO: ADDITION: GameObject Textures
 //
@@ -10,6 +10,8 @@
 //          Logs directory, filename dates
 //
 // TODO: Incorperate alpha param into Render algo
+//
+// TODO: Compile Example and Engine seperately
 //
 // Currently Implementing:
 //  Fix FB Issues
