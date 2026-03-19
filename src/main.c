@@ -2,20 +2,18 @@
 // LX: gcc src/*.c example/src/*.c -Iinclude -Iexample/include -o 2DGameEngine -lxcb -lxcb-shm -lm
 
 // TODO: ADDITION: GameObject Textures
-//
 // TODO: ADDITION: World Physics, Collisions, CollisionBoxes
-//
 // TODO: EDIT: Logging
 //          Can be cleaned up a bit, less verbose
 //          Logs directory, filename dates
-//
 // TODO: Incorperate alpha param into Render algo
-//
 // TODO: Compile Example and Engine seperately
 //
+// TODO: FIX Linux Framebuffer (flashing Game Objects at the front of the buffer)
+//      - DOUBLE BUFFERING should be the fix
+//
 // Currently Implementing:
-//  Fix FB Issues
-//  Windows Refactor
+// REWRITE ALL DOXYs
 
 #include "engine_options.h"
 #include "logger.h"
