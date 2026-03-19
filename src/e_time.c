@@ -12,7 +12,7 @@ void initialize_time_frequency() {
 uint64_t etime_ms() {
     LARGE_INTEGER current;
     QueryPerformanceCounter(&current);
-    return (float) current.QuadPart / (float) frequency.QuadPart;
+    return (uint64_t)((current.QuadPart * 1000) / frequency.QuadPart);
 }
 
 #else // POSIX, Linux
