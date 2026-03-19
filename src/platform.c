@@ -26,6 +26,11 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
             ValidateRect(hwnd, NULL);
             return 0;
         }
+
+        // case WM_SIZE: {
+        //     int width = LOWORD(lParam);
+        //     int height = HIWORD(lParam);
+        // }
     }
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
@@ -81,8 +86,8 @@ struct W32Window* platform_new_window(const char* windowName, struct Aspect wind
     }
 
     window->hwnd = hwnd;
-    window->config.framebuffer = malloc(resolution.height * resolution.width * sizeof(uint32_t));
-
+    
+    platform_set_window_resolution(window, resolution);
     ShowWindow(hwnd, SW_SHOWDEFAULT);
 
     logger_write(1, 0, "Updated Window Paramters", false);
@@ -127,7 +132,8 @@ bool platform_render(struct AWINDOW* window, float alpha) {
     // printf("here\n\n");
     render_clear(&window->config, EO_RENDER_CLEAR);
     // printf("here\n\n");
-    render_draw(&window->config, alpha);
+    // render_draw(&window->config, alpha);
+    render_test(&window->config);
     // printf("here\n\n");
 
     HDC hdc = GetDC(window->hwnd);

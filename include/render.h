@@ -19,4 +19,8 @@ void render_draw_shape(struct WindowConfig* config, struct Shape* shape, uint32_
 /// @brief Draw all active game objects attached to active World from World handler
 void render_draw(struct WindowConfig* config, float alpha);
 
+/// @brief Draws pixels onto the Framebuffer to see it update in realtime.
+/// @param config 
+void render_test(struct WindowConfig* config);
+
 #endif

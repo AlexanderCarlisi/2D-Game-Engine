@@ -3,6 +3,7 @@
 #include <iso646.h>
 #include <stdio.h>
 #include "render_algorithms.h"
+#include "color.h"
 
 void render_clear(struct WindowConfig* config, uint32_t color) {
   for (int y = 0; y < config->render_aspect.height; y++) {
@@ -65,4 +66,15 @@ void render_draw(struct WindowConfig* config, float alpha) {
     struct GameObject* object = world_pool_get_object(world, i);
     _draw_object(config, object, alpha);
   }
+}
+
+// actually really satisfying to watch
+void render_test(struct WindowConfig* config) {
+  static int iteration = 0;
+  uint32_t color = rgba(255, 0, 0, 255);
+
+  for (int i = 0; i < iteration; i++) {
+    config->framebuffer[i] = color;
+  }
+  iteration++;
 }
