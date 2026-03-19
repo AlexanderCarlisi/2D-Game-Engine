@@ -34,18 +34,25 @@ Windows have references to Worlds, so you can point to the same World object on 
 - And probably more
 
 ## How to Build and Run
-(Windows is broken right now)
-
-(If you're on Wayland I have literally no clue what will happen)
-
-I compile using gcc, if you can figure something else out you're more than welcome to do whatever you want.
+### Windows
+From root dir of project run:
 
 ```bash
-gcc src/*.c -Iinclude -o 2DGameEngine -lxcb -lxcb-shm -lm
+gcc src/*.c example/src/*.c -Iinclude -Iexample/include -o 2DGameEngine -lgdi32
 ```
 
-I didn't document how I downloaded the dependancies, so just google it because thats what I did :)
+### Linux
+Be on (or at least support) X11, I have literally no clue what will happen if you run this on Wayland.
+
+From root dir of project run:
+
+```bash
+gcc src/*.c example/src/*.c -Iinclude -Iexample/include -o 2DGameEngine -lxcb -lxcb-shm -lm
+```
+
+If you're having dependancy issues on Linux, google the dependancies GCC is saying you're missing ¯\_(ツ)_/¯
 
 Run using `./2DGameEngine 1`
 
-the extra parameter can be either 1 or 0, it dictates how logging is handled, don't worry about it.
+The extra parameter can be either 1 or 0, it dictates how logging is handled, don't worry about it.
+The program will yell at you if you forget the 1 or 0, the insult is not directed towards you but myself for debugging for like 10 minutes trying to figure out why nothing was happening.
