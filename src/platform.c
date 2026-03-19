@@ -14,6 +14,28 @@ static size_t window_configs_count = 0;
 #ifdef _WIN32
 
 
+bool _check_window(struct W32Window* window) {
+    return window != NULL && window->hwnd != NULL;
+}
+
+bool _set_window_size(HWND hwnd, struct Aspect size) {
+    return SetWindowPos(
+        hwnd,
+        HWND_TOP,
+        0, 0,
+        size.width, size.height,
+        SWP_NOMOVE | SWP_NOZORDER
+    );
+}
+
+bool _set_window_name(HWND hwnd, const char* name) {
+    if (strlen(name) > PLATFORM_MAX_WINDOW_NAME) {
+        logger_write(2, 1, "_set_window_name: name exceeds max length", true);
+        return false;
+    }
+    SetWindowText(hwnd, name);
+}
+
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_DESTROY: {
@@ -41,6 +63,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
         // case WM_SIZE: {
         //     int width = LOWORD(lParam);
         //     int height = HIWORD(lParam);
+        //     // _set_window_size(hwnd, (struct Aspect) {.width=width, .height=height});
+
+        //     return 0;
         // }
     }
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
@@ -108,18 +133,50 @@ struct W32Window* platform_new_window(const char* windowName, struct Aspect wind
 }
 
 bool platform_update_window(struct AWINDOW* window) {
-    return false;
+    if (!_check_window(window)) {
+        logger_write(2, 1, "platform_update_window: bad window param", true);
+        return false;
+    }
+    _set_window_name(window->hwnd, window->config.window_name);
+    _set_window_size(window->hwnd, window->config.window_aspect);
+    if (!platform_set_window_resolution(window, window->config.render_aspect)) return false;
+    return true;
 }
 
 bool platform_set_window_name(struct AWINDOW* window, const char* name) {
-    return false;
+    return _set_window_name(window->hwnd, name);
 }
 
 bool platform_set_window_size(struct AWINDOW* window, struct Aspect size) {
-    return false;
+    if (!_check_window(window)) {
+        logger_write(2, 1, "platform_set_window_size: Invalid Window Param", true);
+        return false;
+    }
+
+    // If theres a conflict, set Res to Window Size
+    if (window->config.render_aspect.height > size.height || window->config.render_aspect.width > size.width) {
+        window->config.render_aspect.width = size.width;
+        window->config.render_aspect.height = size.height;
+        platform_set_window_resolution(window, window->config.render_aspect);
+    }
+
+    window->config.window_aspect = size;
+    _set_window_size(window->hwnd, size);
+
+    return true;
 }
 
 bool platform_set_window_resolution(struct AWINDOW* window, struct Aspect res) {
+    if (res.width > window->config.window_aspect.width || res.height > window->config.window_aspect.height) {
+        logger_write(2, 1, "platform_update_resolution: Invalid Res Param", true);
+        return false;
+    }
+
+    if (!_check_window(window)) {
+        logger_write(2, 1, "platform_update_resolution: Invalid Window Param", true);
+        return false;
+    }
+
     window->config.render_aspect = res;
 
     BITMAPINFO bmi = {0};
@@ -175,7 +232,7 @@ bool platform_iterate(struct AWINDOW* window) {
 }
 
 void platform_free() {
-
+    
 }
 
 /// https://learn.microsoft.com/en-us/windows/win32/learnwin32/window-messages

@@ -109,10 +109,7 @@ void platform_free();
 typedef struct W32Window {
     struct WindowConfig config;
     HWND hwnd;
-    HDC hdc;
-    HBITMAP bitmap;
     BITMAPINFO bitmapInfo;
-    HBITMAP oldBitMap;
 } W32Window;
 
 #endif
