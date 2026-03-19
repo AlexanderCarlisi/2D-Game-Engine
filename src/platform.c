@@ -14,36 +14,45 @@ static size_t window_configs_count = 0;
 #ifdef _WIN32
 
 
-// Straight from docs
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-    switch (uMsg)
-    {
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        return 0;
-
-    case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hwnd, &ps);
-
-            // All painting occurs here, between BeginPaint and EndPaint.
-
-            FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
-
-            EndPaint(hwnd, &ps);
+    switch (uMsg) {
+        case WM_DESTROY: {
+            PostQuitMessage(0);
+            return 0;
         }
-        return 0;
 
+        case WM_PAINT: {
+            // IM HANDLING IT STOP YELLING AT ME
+            ValidateRect(hwnd, NULL);
+            return 0;
+        }
     }
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
 struct W32Window* platform_new_window(const char* windowName, struct Aspect windowSize, struct Aspect resolution, float fps) {
-    // just a mock window for testing right now
+    if (window_configs_count >= EO_WINDOWS_AMOUNT) {
+        logger_write(1, 0, "platform_new_window: attempted to exceed max windows allocated", true);
+        return NULL;
+    }
 
-    const char CLASS_NAME[] = "CLASS_NAME"; // USE ANSII
-    const char WINDOW_NAME[] = "WINDOW NAME";
+    struct W32Window* window = calloc(1, sizeof(struct W32Window));
+    if (window == NULL) {
+        logger_write(1, 0, "platform_new_window: Window alloc failed", true);
+        return NULL;
+    }
+
+    logger_write(1, 0, "Allocated new Window", false);
+
+    window->config = (struct WindowConfig) {
+        .window_aspect = windowSize,
+        .render_aspect = resolution,
+        .window_name = windowName,
+        .frames_per_second = fps
+    };
+
+    char CLASS_NAME[12 + (EO_WINDOWS_AMOUNT / 10)]; // USE ANSII (12 is CLASS_NAME-\0)
+    snprintf(CLASS_NAME, sizeof(CLASS_NAME), "CLASS_NAME-%d", window_configs_count);
 
     WNDCLASS wc = {0};
     wc.lpfnWndProc = WindowProc;
@@ -55,13 +64,14 @@ struct W32Window* platform_new_window(const char* windowName, struct Aspect wind
     HWND hwnd = CreateWindowEx(
         0,
         CLASS_NAME,
-        WINDOW_NAME,
+        windowName,
         WS_OVERLAPPEDWINDOW, // window style
 
         // Size and Position
-        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
-        NULL,
-        NULL,
+        CW_USEDEFAULT, CW_USEDEFAULT,
+        windowSize.width, windowSize.height,
+        NULL, // PARENT
+        NULL, // HMENU
         wc.hInstance,
         NULL
     );
@@ -70,33 +80,130 @@ struct W32Window* platform_new_window(const char* windowName, struct Aspect wind
         return 0;
     }
 
+    window->hwnd = hwnd;
+    window->config.framebuffer = malloc(resolution.height * resolution.width * sizeof(uint32_t));
+
     ShowWindow(hwnd, SW_SHOWDEFAULT);
 
-    MSG msg = { };
-    while (GetMessage(&msg, NULL, 0, 0) > 0) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-
-    return NULL;
+    logger_write(1, 0, "Updated Window Paramters", false);
+    window_configs[window_configs_count] = window;
+    window_configs_count++;
+    return window;
 }
 
+bool platform_update_window(struct AWINDOW* window) {
+    return false;
+}
 
-bool platform_update_window(struct AWINDOW* window) { return false; }
+bool platform_set_window_name(struct AWINDOW* window, const char* name) {
+    return false;
+}
 
-bool platform_set_window_name(struct AWINDOW* window, const char* name) { return false; }
+bool platform_set_window_size(struct AWINDOW* window, struct Aspect size) {
+    return false;
+}
 
-bool platform_set_window_size(struct AWINDOW* window, struct Aspect size) { return false; }
+bool platform_set_window_resolution(struct AWINDOW* window, struct Aspect res) {
+    window->config.render_aspect = res;
 
-bool platform_set_window_resolution(struct AWINDOW* window, struct Aspect res) { return false; }
+    BITMAPINFO bmi = {0};
+    bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    bmi.bmiHeader.biWidth = window->config.render_aspect.width;
+    bmi.bmiHeader.biHeight = -window->config.render_aspect.height; // Negative for top-down
+    bmi.bmiHeader.biPlanes = 1;
+    bmi.bmiHeader.biBitCount = 32;
+    bmi.bmiHeader.biCompression = BI_RGB;
+    window->bitmapInfo = bmi;
 
-bool platform_render(struct AWINDOW* window, float alpha) { return false; }
+    if (window->config.framebuffer != NULL) {
+        free(window->config.framebuffer);
+    }
+    window->config.framebuffer = malloc(res.height * res.width * sizeof(uint32_t));
 
-bool platform_iterate(struct AWINDOW* window) { return false; }
+    return true;
+}
 
-void platform_free() { }
+bool platform_render(struct AWINDOW* window, float alpha) {
+    // printf("here\n\n");
+    render_clear(&window->config, EO_RENDER_CLEAR);
+    // printf("here\n\n");
+    render_draw(&window->config, alpha);
+    // printf("here\n\n");
 
+    HDC hdc = GetDC(window->hwnd);
+    RECT rect;
+    GetClientRect(window->hwnd, &rect);
+    int window_width = rect.right - rect.left;
+    int window_height = rect.bottom - rect.top;
 
+    // copies FB into GPU every frame, this is high key fucking ass
+    StretchDIBits(
+        hdc,
+        0, 0, window_width, window_height,
+        0, 0, window->config.render_aspect.width,
+        window->config.render_aspect.height,
+        window->config.framebuffer,
+        &window->bitmapInfo,
+        DIB_RGB_COLORS,
+        SRCCOPY
+    );
+
+    ReleaseDC(window->hwnd, hdc);
+    return true;
+}
+
+bool platform_iterate(struct AWINDOW* window) {
+    world_handler_update_active(window->config.world_handler);
+    return true;
+}
+
+void platform_free() {
+
+}
+
+/// https://learn.microsoft.com/en-us/windows/win32/learnwin32/window-messages
+/// https://learn.microsoft.com/en-us/windows/win32/winmsg/about-messages-and-message-queues
+/// Why are the windows docs kinda peak tho
+void platform_initialize() {
+    initialize_time_frequency();
+    engine_start();
+    // bool bRet;
+    MSG msg = { };
+    while (engine_is_running()) {
+        // Messages are sent to the Application
+        // Messages reference the Window Handle they are responding to
+        // Therefore messages have their own check loop
+        // while ((bRet = PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) > 0) {
+        while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+            // Message error handling
+            // Peek doesnt do that, only Get, whoops
+            // if (bRet == -1) {
+            //     logger_write(1, 0, "Windows MSG Err", true);
+            //     engine_set_running(false);
+            //     break;
+            // }
+
+            if (msg.message == WM_QUIT) {
+                logger_write(1, 0, "App Close", false);
+                engine_set_running(false);
+                break;
+            }
+
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+
+        // Now loop through Engine logic for each window
+        for (size_t i = 0; i < window_configs_count; i++) {
+            // printf("here\n\n");
+            W32Window* window = window_configs[i];
+            if (window == NULL) continue;
+            engine_tick(window);
+        }
+    }
+    // printf("here\n\n");
+    engine_close();
+}
 
 #else
 #include <stdlib.h>

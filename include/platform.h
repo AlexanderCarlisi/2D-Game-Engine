@@ -8,6 +8,7 @@
 // W32:
 // https://learn.microsoft.com/en-us/windows/win32/
 // https://learn.microsoft.com/en-us/windows/win32/learnwin32/winmain--the-application-entry-point
+// https://learn.microsoft.com/en-us/windows/win32/learnwin32/managing-application-state-
 
 #include <stdint.h>
 #include <stdbool.h>
