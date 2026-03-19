@@ -132,37 +132,37 @@ void game_init() {
     60
   );
 
-  if (window == NULL) {
-    printf("\n>>> Window is NULL <<<\n");
-    return;
-  }
+  // if (window == NULL) {
+  //   printf("\n>>> Window is NULL <<<\n");
+  //   return;
+  // }
   
   // You should instantiate your worlds asap.
   // They wont actually be 'loaded' until you explictily call it to be.
   // To 'load' a world, you will implement what that means in a world's init function.
-  window->config.world_handler = world_handler_new();
+  // window->config.world_handler = world_handler_new();
   
-  if (window->config.world_handler == NULL) {
-    printf("\n>>> Handler is NULL <<<\n");
-    return;
-  }
+  // if (window->config.world_handler == NULL) {
+  //   printf("\n>>> Handler is NULL <<<\n");
+  //   return;
+  // }
 
-  WorldHandler* whand = window->config.world_handler;
+  // WorldHandler* whand = window->config.world_handler;
 
-  world_handler_new_world(whand, overworld_config);
-  world_handler_new_world(whand, neth_end_config); // configs are deepcopied
-  world_handler_new_world(whand, neth_end_config); // so they can be changed independantly later
+  // world_handler_new_world(whand, overworld_config);
+  // world_handler_new_world(whand, neth_end_config); // configs are deepcopied
+  // world_handler_new_world(whand, neth_end_config); // so they can be changed independantly later
   
-  // Store pointers to worlds if you want
-  overworld_ptr = &whand->worlds.data[WORLD_OVERWORLD];
+  // // Store pointers to worlds if you want
+  // overworld_ptr = &whand->worlds.data[WORLD_OVERWORLD];
 
   // Setup how worlds will operate
   // These functions are called automatically by the WorldHandler
-  overworld_ptr->init = overworld_init;       // 'load' the world, allocate memory
-  overworld_ptr->start = overworld_start;     // world is now active, do this
-  overworld_ptr->loop = overworld_loop;       // Called every frame
-  overworld_ptr->close = overworld_close;     // world is no longer active, do this
-  overworld_ptr->dealloc = overworld_dealloc; // deallocate ALL dynamic memory you owm
+  // overworld_ptr->init = overworld_init;       // 'load' the world, allocate memory
+  // overworld_ptr->start = overworld_start;     // world is now active, do this
+  // overworld_ptr->loop = overworld_loop;       // Called every frame
+  // overworld_ptr->close = overworld_close;     // world is no longer active, do this
+  // overworld_ptr->dealloc = overworld_dealloc; // deallocate ALL dynamic memory you owm
   
   // You have two main allocations of Memory for GameObjects in a World.
   // The Buffer, and the Pool.
@@ -175,46 +175,46 @@ void game_init() {
   // also you should be working with your memory all nice and bundled together because of how
   // the CPU cache actually caches through the cache line.
   // Lots more reason to have it be this way, then it be the other way.
-  Interval bufferInterval = (Interval) {.start=0, .end=1};
-  Interval poolInterval = (Interval) {.start = 0, .end=1};
+  // Interval bufferInterval = (Interval) {.start=0, .end=1};
+  // Interval poolInterval = (Interval) {.start = 0, .end=1};
 
   // Generally in the Buffer, you want to keep Object locations consitent, as
   // the purpose of the Buffer is to be persistent memory.
-  if (overworld_ptr == NULL) {
-    printf("\n>>> overworld is NULL <<<\n");
-    return;
-  }
-  GameObject* player = world_buffer_get_object(overworld_ptr, PLAYER_BUFFER_INDEX);
-  if (player == NULL) {
-    printf("\n>>> player is NULL <<<\n");
-    return;
-  }
+  // if (overworld_ptr == NULL) {
+  //   printf("\n>>> overworld is NULL <<<\n");
+  //   return;
+  // }
+  // GameObject* player = world_buffer_get_object(overworld_ptr, PLAYER_BUFFER_INDEX);
+  // if (player == NULL) {
+  //   printf("\n>>> player is NULL <<<\n");
+  //   return;
+  // }
   
   // Stay clean, its C, the safer I make it, the more verbose it gets
-  load_player(player);
-  pose_update_meters(&player->pose, PPM, 10, 10);
+  // load_player(player);
+  // pose_update_meters(&player->pose, PPM, 10, 10);
 
-  int floor_sprite = 0;
-  GameObject* floor = world_pool_get_object(overworld_ptr, floor_sprite);
-  gameobject_init(floor, &goc);
+  // int floor_sprite = 0;
+  // GameObject* floor = world_pool_get_object(overworld_ptr, floor_sprite);
+  // gameobject_init(floor, &goc);
   
-  // Set the invervals on the World, so it knows whats active.
-  // Active objects get rendered and have physics updates
-  // You an have a Object declared as STATIC if you want NO physics updates.
-  // You can also not give Objects 0 colliders. NOT NULL, 0
-  overworld_ptr->interval_buffer = bufferInterval;
-  overworld_ptr->interval_pool = poolInterval;
+  // // Set the invervals on the World, so it knows whats active.
+  // // Active objects get rendered and have physics updates
+  // // You an have a Object declared as STATIC if you want NO physics updates.
+  // // You can also not give Objects 0 colliders. NOT NULL, 0
+  // overworld_ptr->interval_buffer = bufferInterval;
+  // overworld_ptr->interval_pool = poolInterval;
   
-  // Set worlds as active
-  overworld_ptr->init(); // LOAD THE WORLD, YOU CALL THIS
-  world_handler_set_active(whand, overworld_ptr); // Calls START
+  // // Set worlds as active
+  // overworld_ptr->init(); // LOAD THE WORLD, YOU CALL THIS
+  // world_handler_set_active(whand, overworld_ptr); // Calls START
   // Now the world will be handled by the Handler.
   
   // So, how does the engine work its magic?
   // Done. All Windows will be iterated through and handled.
   // All WorldHandlers tied to windows will be iterated through and handled.
   // All ACTIVE worlds tied to WorldHandlers will iterated through and handled.
-  platform_initialize();
+  // platform_initialize();
 
   // Additional Notes:
   // Want Windows to use the same Worlds? WorldHandler is a Pointer for that very reason!

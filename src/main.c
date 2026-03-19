@@ -17,6 +17,7 @@
 
 #include "engine_options.h"
 #include "logger.h"
+#include "stdio.h"
 #include EO_PROJECT_MAIN
 
 /// args[0] = Filename, implicit
@@ -31,6 +32,7 @@ int main(int argc, char *argv[]) {
       logger_init(1);
     }
   } else {
+    printf("Include a 1 or 0 you fucking idiot");
     return 0;
   }
   EO_PROJECT_MAIN_START;

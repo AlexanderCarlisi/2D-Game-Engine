@@ -5,6 +5,10 @@
 // Read about x11: https://www.x.org/archive/X11R7.5/doc/libX11/libX11.html
 // Somewhat read a somewhat documented lib XCB: https://xcb.freedesktop.org/
 
+// W32:
+// https://learn.microsoft.com/en-us/windows/win32/
+// https://learn.microsoft.com/en-us/windows/win32/learnwin32/winmain--the-application-entry-point
+
 #include <stdint.h>
 #include <stdbool.h>
 #include "world_handler.h"
