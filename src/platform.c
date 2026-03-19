@@ -232,7 +232,28 @@ bool platform_iterate(struct AWINDOW* window) {
 }
 
 void platform_free() {
-    
+    for (size_t i = 0; i < window_configs_count; i++) {
+        struct W32Window* window = window_configs[i];
+        if (window == NULL) continue;
+
+        if (window->hwnd != NULL) {
+            DestroyWindow(window->hwnd);
+            logger_write(2, 1, "Destroyed Window Handle", false);
+        }
+
+        if (window->config.framebuffer != NULL) {
+            free(window->config.framebuffer);
+            logger_write(2, 1, "Dealloc framebuffer", false);
+        }
+        
+        if (window->config.world_handler != NULL) {
+            world_handler_free(window->config.world_handler);
+            logger_write(2, 1, "Deallocated world_handler", false);
+        }
+
+        free(window);
+        logger_write(2, 1, "Window Deallocated", false);
+    }
 }
 
 /// https://learn.microsoft.com/en-us/windows/win32/learnwin32/window-messages
