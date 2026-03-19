@@ -132,8 +132,8 @@ bool platform_render(struct AWINDOW* window, float alpha) {
     // printf("here\n\n");
     render_clear(&window->config, EO_RENDER_CLEAR);
     // printf("here\n\n");
-    // render_draw(&window->config, alpha);
-    render_test(&window->config);
+    render_draw(&window->config, alpha);
+    // render_test(&window->config);
     // printf("here\n\n");
 
     HDC hdc = GetDC(window->hwnd);
