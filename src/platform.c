@@ -27,6 +27,17 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
             return 0;
         }
 
+        // https://learn.microsoft.com/en-us/windows/win32/learnwin32/keyboard-input
+        case WM_KEYDOWN: {
+            input_kb_set_press(wParam);
+            return 0;
+        }
+
+        case WM_KEYUP: {
+            input_kb_set_release(wParam);
+            return 0;
+        }
+
         // case WM_SIZE: {
         //     int width = LOWORD(lParam);
         //     int height = HIWORD(lParam);
@@ -181,13 +192,6 @@ void platform_initialize() {
         // Therefore messages have their own check loop
         // while ((bRet = PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) > 0) {
         while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-            // Message error handling
-            // Peek doesnt do that, only Get, whoops
-            // if (bRet == -1) {
-            //     logger_write(1, 0, "Windows MSG Err", true);
-            //     engine_set_running(false);
-            //     break;
-            // }
 
             if (msg.message == WM_QUIT) {
                 logger_write(1, 0, "App Close", false);
