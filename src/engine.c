@@ -23,6 +23,7 @@ bool engine_tick(struct AWINDOW* window) {
     // Fixed Update
     while (window->config.accumulator >= fixedTimeStep) {
         // Update Game Logic
+        // printf("yo is the timer workng???\n\n");
         platform_iterate(window);
         EO_PROJECT_MAIN_LOOP;
         window->config.accumulator -= fixedTimeStep;
